@@ -14,22 +14,21 @@ Page({
   data: {
 
     chooseImgKey: '',
-
+    identity_card: '',
+    identity_card_back: '',
+    identity_card_front: '',
+    identity_card_hand: '',
     info: {
       real_name: '',
       bank_card: '',
       bank_name: '',
-      identity_card: '',
-      identity_card_back: '',
-      identity_card_front: '',
-      identity_card_hand: ''
     }
   },
 
   onSubmit: function (e) {
     const formData = e.detail.value;
     const validate = this.formValidate(formData);
-    const {identity_card_back, identity_card_front, identity_card_hand} = this.data.info;
+    const {identity_card_back, identity_card_front, identity_card_hand} = this.data;
     if (validate) {
       wx.showLoading();
       Promise.all([
@@ -107,11 +106,12 @@ Page({
   },
 
   chooseImageCard: function (e) {
+    console.log(typeof e)
     const chooseImgKey = e.currentTarget.dataset.key;
     this.setData({
       chooseImgKey
     });
-    this.chooseImage()
+    this.chooseImage({cropperType: 'personalCardType'})
   },
 
   /**
@@ -135,10 +135,7 @@ Page({
     this.getCropperImg().then(url => {
       if (url) {
         this.setData({
-          info: {
-            ...this.data.info,
-            [this.data.chooseImgKey]: url
-          },
+          [this.data.chooseImgKey]: url
         })
       }
     })

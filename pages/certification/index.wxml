@@ -32,13 +32,13 @@
         </view>
     </view>
     <view bindtap="chooseImageCard" data-key="identity_card_back" class="upload-row">
-        <block wx:if="{{info.identity_card_back}}">
-            <image src="{{info.identity_card_back}}" mode="widthFix" class="img-full-max upload-card-img" lazy-load="false"></image>
+        <view class="upload-label">
+            <text>上传身份证反面（头像）</text>
+        </view>
+        <block wx:if="{{identity_card_back}}">
+            <image src="{{identity_card_back}}" mode="widthFix" class="img-full-max upload-card-img" lazy-load="false"></image>
         </block>
         <block wx:else>
-            <view class="upload-label">
-                <text>上传身份证反面（头像）</text>
-            </view>
             <view class="upload-item">
                 <image class="upload-icon" src="/images/upload_plus.png" mode="widthFix" lazy-load="false"></image>
                 <view class="upload-title">
@@ -48,13 +48,13 @@
         </block>
     </view>
     <view bindtap="chooseImageCard" data-key="identity_card_front" class="upload-row">
-        <block wx:if="{{info.identity_card_front}}">
-            <image src="{{info.identity_card_front}}" mode="widthFix" class="img-full-max upload-card-img" lazy-load="false"></image>
+        <view class="upload-label">
+            <text>上传身份证正面（国徽）</text>
+        </view>
+        <block wx:if="{{identity_card_front}}">
+            <image src="{{identity_card_front}}" mode="widthFix" class="img-full-max upload-card-img" lazy-load="false"></image>
         </block>
         <block wx:else>
-            <view class="upload-label">
-                <text>上传身份证正面（国徽）</text>
-            </view>
             <view class="upload-item">
                 <image class="upload-icon" src="/images/upload_plus.png" mode="widthFix" lazy-load="false"></image>
                 <view class="upload-title">
@@ -64,13 +64,13 @@
         </block>
     </view>
     <view bindtap="chooseImageCard" data-key="identity_card_hand" class="upload-row">
-        <block wx:if="{{info.identity_card_hand}}">
-            <image src="{{info.identity_card_hand}}" mode="widthFix" class="img-full-max upload-card-img" lazy-load="false"></image>
+        <view class="upload-label">
+            <text>上传手持身份证正面（头像）</text>
+        </view>
+        <block wx:if="{{identity_card_hand}}">
+            <image src="{{identity_card_hand}}" mode="widthFix" class="img-full-max upload-card-img" lazy-load="false"></image>
         </block>
         <block wx:else>
-            <view class="upload-label">
-                <text>上传手持身份证正面（头像）</text>
-            </view>
             <view class="upload-item">
                 <image class="upload-icon" src="/images/upload_plus.png" mode="widthFix" lazy-load="false"></image>
                 <view class="upload-title">

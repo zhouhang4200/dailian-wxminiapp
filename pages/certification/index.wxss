@@ -28,14 +28,14 @@ page {
 
 .row-item .title {
     font-size: 31rpx;
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: #000;
     display: block;
 }
 
 .row-item input {
     flex: 1;
-    font-weight: bold;
+    /*font-weight: bold;*/
     text-align: right;
     padding-left: 20rpx;
     font-size: 31rpx;
@@ -49,11 +49,9 @@ page {
 
 .upload-row {
     padding: 0 30rpx;
+    padding-top: 10rpx;
     background-color: #fff;
     overflow: hidden;
-}
-.upload-card-img{
-    
 }
 
 .upload-label {
