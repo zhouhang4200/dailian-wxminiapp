@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/certification/index",
+    "pages/account/index",
+    "pages/home/index",
+    "pages/account/profile/index",
+    "pages/account/login/index",
+    "pages/goodsDetail/index",
+    "pages/order/index",
+    "pages/account/register/index",
+    "pages/order/negotiated/index",
+    "pages/order/details/index",
+    "pages/account/capital/pay/index",
+    "pages/search/index",
+    "pages/msg/leaveMessageList/details/index",
+    "pages/msg/leaveMessageList/index",
+    "pages/msg/index",
+    "pages/msg/announcement/details/index",
+    "pages/msg/withdraw/index",
+    "pages/msg/customerService/index",
+    "pages/msg/articleTemplate/index",
+    "pages/msg/announcement/index",
+    "pages/applyArbitration/index",
+    "pages/order/screenshot/index",
+    "components/cropper/cropper",
+    "components/goods/index",
+    "pages/help/index",
+    "pages/account/capital/index",
+    "pages/account/capital/details/index",
+    "pages/account/capital/list/index",
+    "pages/account/capital/cash/index",
+    "pages/account/password/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "丸子代练",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "backgroundColor": "#FFF",
+    "borderStyle": "white",
+    "selectedColor": "#198cff",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "images/index.png",
+        "selectedIconPath": "images/index_active.png"
+      },
+      {
+        "pagePath": "pages/msg/index",
+        "text": "消息",
+        "iconPath": "images/messages.png",
+        "selectedIconPath": "images/messages_active.png"
+      },
+      {
+        "pagePath": "pages/account/index",
+        "text": "我的",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user_active.png"
+      }
+    ]
+  }
+}

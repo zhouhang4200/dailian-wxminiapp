@@ -1,0 +1,2 @@
+/* pages/account/capital/cash/index.wxss */
+@import "../pay/index.wxss";

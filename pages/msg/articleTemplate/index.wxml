@@ -1,0 +1,21 @@
+<!--pages/msg/arcitleTemplate/index.wxml-->
+<view class="article-template">
+  <view class="item">
+    <view class="title">什么是安全保证金</view>
+    <view class="details">
+      <text>安全保证金是对玩家的游戏帐号安全进行一种保障，工作室代练前须预缴此金额，当工作室在代练中出现安全问题，即以此金额赔付给玩家。（安全问题包括：帐号/密码的安全信息、游戏内虚拟物品的安全、第三方软件使用带来的风险）</text>
+    </view>
+  </view>
+  <view class="item">
+    <view class="title">什么是效率保证金</view>
+    <view class="details">
+      <text>效率保证金是对玩家发布的代练要求进行一种效率保障，工作室代练前须预缴此金额，当工作室代练效率出现问题时（详情请见用户协议、交易规则），玩家即可要求赔偿此金额，效率保证金赔偿金额视订单的实际情况进行赔付。</text>
+    </view>
+  </view>
+  <view class="item">
+    <view class="title">什么是代练需求</view>
+    <view class="details">
+      <text>代练需求是玩家对所需代练游戏期望达到状态的信息，包括游戏角色的等级、装备、游戏币等以及价格、时间等的要求，工作室可针对此信息选择是否可为玩家提供所需服务。</text>
+    </view>
+  </view>
+</view>

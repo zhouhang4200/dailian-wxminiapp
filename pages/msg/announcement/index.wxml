@@ -1,0 +1,23 @@
+<!--pages/msg/announcement/index.wxml-->
+<navigator class="link-navigation" url="/pages/msg/customerService/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>客服工作时间调整</text>
+        </view>
+    </view>
+</navigator>
+<navigator class="link-navigation" url="/pages/msg/articleTemplate/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>丸子代练上线</text>
+        </view>
+    </view>
+</navigator>
+<navigator class="link-navigation" url="/pages/msg/withdraw/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>提现调整</text>
+        </view>
+    </view>
+</navigator>
+

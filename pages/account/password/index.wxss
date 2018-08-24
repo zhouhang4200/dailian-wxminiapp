@@ -1,0 +1,21 @@
+/* pages/account/password/index.wxss */
+@import "../login/index.wxss";
+
+.password-page .send-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.password-page .send-wrap input {
+    margin-right: 210rpx;
+}
+
+.password-page .send-btn {
+    position: absolute;
+    font-size: 31rpx;
+    color: #c7c7cd;
+    right: 0;
+    height: 100%;
+    padding: 35rpx 28rpx;
+    top: 0;
+}

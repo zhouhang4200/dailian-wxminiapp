@@ -1,0 +1,34 @@
+<!--pages/order/index.wxml-->
+<view class="row-item">
+    <navigator url="/pages/order/details/index" hover-class="none" class="row-head">
+        <text class="title">2018-07-25 10:53:28</text>
+        <text class="date">代练中</text>
+    </navigator>
+    <navigator url="/pages/order/details/index" hover-class="none" class="row-detail">
+        <view class="icon">
+            <image class="img-full-max" src="http://ammgg.com/images/2018/08/21/Pf8l.png" mode="widthFix"
+                   lazy-load="false"></image>
+        </view>
+        <view class="info">
+            <view class="ellipsis title">【排位】单双排 钻石3-钻石1 已有60胜战绩排 钻石3-钻石1 已排 钻石3-钻石1 已</view>
+            <view class="attr-row">游戏区服：英雄联盟/电信/黑色玫瑰</view>
+            <view class="attr-row">角色名称：欧拉琪雅</view>
+        </view>
+    </navigator>
+    <navigator url="/pages/order/details/index" hover-class="none" class="price-info">
+        <text>代练价格：</text>
+        <text class="size">￥75.00</text>
+    </navigator>
+    <view class="action-row">
+        <view bindtap="onMoreAction" class="action-btn none">
+            <text>更多</text>
+            <image class="action-more-icon" src="/images/small_arrow_down.png" mode="widthFix"
+                   lazy-load="false">
+            </image>
+        </view>
+        <navigator url="/pages/order/negotiated/index" hover-class="none" class="action-btn">协商撤销</navigator>
+        <navigator url="/pages/order/screenshot/index" hover-class="none" class="action-btn">申请仲裁</navigator>
+        <view bindtap="onSubmitComplete" class="action-btn primary">提交完成</view>
+    </view>
+</view>
+<view class="load-more">没有更多了...</view>

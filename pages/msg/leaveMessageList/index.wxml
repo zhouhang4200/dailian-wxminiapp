@@ -1,0 +1,14 @@
+<!--pages/msg/leaveMessageList/index.wxml-->
+<view class="leave-page">
+    <view class="row-item">
+        <view class="row-head">
+            <view class="title">代练留言</view>
+            <view class="date">2018年7月17日</view>
+        </view>
+        <view class="details-content">
+            <text>你好，账号登录不上，提示密码错误。请快点帮我解决 一下，谢谢啦...</text>
+        </view>
+        <navigator class="details-btn" url="/pages/msg/leaveMessageList/details/index" hover-class="none">查看详情
+        </navigator>
+    </view>
+</view>

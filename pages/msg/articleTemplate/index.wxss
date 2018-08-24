@@ -1,0 +1,21 @@
+/* pages/msg/arcitleTemplate/index.wxss */
+.article-template {
+    padding: 0 30rpx;
+    padding-top: 52rpx;
+}
+
+.article-template .title {
+    font-size: 36rpx;
+    color: #333;
+    padding-bottom: 38rpx;
+}
+
+.article-template .details {
+    font-size: 25rpx;
+    color: #333;
+    line-height: 1.8;
+}
+
+.article-template .item {
+    margin-bottom: 40rpx;
+}

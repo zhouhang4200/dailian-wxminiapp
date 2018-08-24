@@ -1,0 +1,22 @@
+.article-notice{
+    padding: 0 36rpx;
+}
+.article-notice .head-title {
+    font-size: 36rpx;
+    padding-top: 41rpx;
+    padding-bottom: 36rpx;
+    color: #222;
+}
+
+.article-notice .date-info {
+    font-size: 27rpx;
+    color: #b3b3b3;
+    padding-bottom: 51rpx;
+}
+
+.article-notice .details {
+    font-size: 29rpx;
+    color: #484848;
+    padding-bottom: 34rpx;
+    line-height: 1.5;
+}

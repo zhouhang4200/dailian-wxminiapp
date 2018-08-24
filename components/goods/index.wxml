@@ -1,0 +1,23 @@
+<!--components/goods/index.wxml-->
+<!--首页商品列表组件-->
+<navigator wx:key="index" url="/pages/goodsDetail/index?trade_no={{item.trade_no}}" wx:for="{{list}}" class="goods-item" hover-class="none">
+    <view class="goods-icon">
+        <image src="{{item.icon}}" mode="widthFix" lazy-load="true" class="img"></image>
+    </view>
+    <view class="goods-details">
+        <view class="title">{{item.title}}</view>
+        <view class="price-info">
+            <text class="rmb-symbol" decode="{{true}}}">￥</text>
+            <text class="size">{{item.amount}}</text>
+        </view>
+        <view class="attr-row">{{item.game_name}}/{{item.region_name}}/{{item.server_name}}</view>
+        <view class="attr-row" decode="{{true}}}">
+           <text decode="{{true}}">总保证金:{{((item.security_deposit*100+item.security_deposit*100)/100)+'0.00'}}元&emsp;&emsp;时限: {{item.day ? item.day+'天' :'' }}{{item.hour ? item.hour+'小时':''}}</text>
+        </view>
+        <view class="tag-row">
+            <view class="tag tag-official">官方</view>
+            <view class="tag">私有</view>
+            <view class="tag">信誉商家</view>
+        </view>
+    </view>
+</navigator>

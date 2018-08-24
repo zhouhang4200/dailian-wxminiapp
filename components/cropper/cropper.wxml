@@ -1,0 +1,13 @@
+<view class="cropper-wrapper" catchtouchmove="true">
+    <canvas
+        class="canvas"
+        disable-scroll="true"
+        bindtouchstart="touchStart"
+        bindtouchmove="touchMove"
+        bindtouchend="touchEnd"
+        style="width:{{cropperOpt.width}}px;height:{{cropperOpt.height}}px;"
+        canvas-id="{{cropperOpt.id}}">
+    </canvas>
+    <view class="ico ico-1" bindtap="closeModel"></view>
+    <view class="ico ico-2" bindtap="getCropperImage"></view>
+</view>

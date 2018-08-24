@@ -1,0 +1,89 @@
+<!--pages/home/index.wxml-->
+<!--搜索栏-->
+<view class="{{!isModalOverlayHidden ? 'is-overlay':''}}">
+    <navigator hover-class="none" hidden="{{isPageHidden}}" animation="{{animationPage}}" class="search-form"
+               url="/pages/search/index">
+        <view class="form">
+            <text class="form-input input-placeholder">输入关键字查询</text>
+        </view>
+    </navigator>
+    <!--排序栏-->
+    <view hidden="{{isPageHidden}}" animation="{{animationPage}}" class="sort-list">
+        <view class="sort-list-content">
+            <view wx:key="{{index}}" wx:for="{{sortTypeList}}" bindtap="onSortItem" data-sort="{{item.type}}"
+                  class="sort-item {{item.type===sortType ? 'is-selected':''}}">
+                <text>{{item.title}}</text>
+                <view class="icon"></view>
+            </view>
+        </view>
+        <!--游戏区服 dialog-->
+        <view bindtransitionend="onModalContentToggle" animation="{{sortType==='area' ? animationSortModal :''}}"
+              class="sort-modal-content-container">
+            <view class="sort-modal-content">
+                <view class="item-list">
+                    <view data-index="{{index}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect" data-key="game_id"
+                          data-value="{{item.id}}" wx:for="{{gameList}}"
+                          class="row-item ellipsis {{searchForm.game_id===item.id ? 'is-selected':''}}">
+                        {{item.name}}
+                    </view>
+                </view>
+                <view class="item-list">
+                    <view data-index="{{index}}" wx:for="{{regionList}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect"
+                          data-key="region_id" data-value="{{item.id}}"
+                          class="row-item ellipsis {{searchForm.region_id===item.id ? 'is-selected':''}}">
+                        {{item.name}}
+                    </view>
+                </view>
+                <view class="item-list">
+                    <view wx:for="{{serverList}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect"
+                          data-key="server_id" data-value="{{item.id}}"
+                          class="row-item ellipsis  {{searchForm.server_id===item.id ? 'is-selected':''}}">
+                        {{item.name}}
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--默认排序 dialog-->
+        <view bindtransitionend="onModalContentToggle" animation="{{sortType==='default' ? animationSortModal :''}}"
+              class="sort-modal-content-container">
+            <view class="sort-modal-content">
+                <view class="item-list">
+                    <view data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onSelectSort" data-key="sort"
+                          data-value="{{item.sort}}" wx:for="{{sortTypeList[1].list}}"
+                          class="row-item {{searchForm.sort===item.sort ? 'is-selected':''}}">
+                        {{item.title}}
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--价格 dialog-->
+        <view bindtransitionend="onModalContentToggle" animation="{{sortType==='price' ? animationSortModal :''}}"
+              class="sort-modal-content-container">
+            <view class="sort-modal-content">
+                <view class="item-list">
+                    <view data-sort="{{sortType}}" wx:key="{{index}}" data-key="amount" data-value="{{item.amount}}"
+                          bindtap="onSelectSort" wx:for="{{sortTypeList[2].list}}"
+                          class="row-item {{searchForm.amount===item.amount ? 'is-selected':''}}">
+                        {{item.title}}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--商品列表-->
+    <view bindtransitionend="onPageAnimationEnd" animation="{{animationPage}}" hidden="{{isPageHidden}}"
+          class="index-page">
+        <goods-item list="{{asyncData.list}}"></goods-item>
+        <!--底部加载更多-->
+        <view hidden="{{reachEndInfo.isHidden}}" class="load-more">
+            <text wx:if="{{reachEndInfo.isFail}}">加载失败，点击重试...</text>
+            <text wx:else>{{reachEndInfo.isMore ? "加载中...":"没有更多了"}}</text>
+        </view>
+    </view>
+    <!-- modal Overlay -->
+    <view data-sort="{{sortType}}" bindtap="onSortItem" hidden="{{isModalOverlayHidden}}"
+          bindtransitionend="onModalOverlayToggleEnd"
+          animation="{{animationModalOverlay}}"
+          class="modal-overlay">
+    </view>
+</view>

@@ -1,0 +1,36 @@
+<!--pages/help/index.wxml-->
+<navigator class="link-navigation" url="/pages/msg/customerService/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>新人指导</text>
+        </view>
+    </view>
+</navigator>
+<navigator class="link-navigation" url="/pages/msg/articleTemplate/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>如何维权</text>
+        </view>
+    </view>
+</navigator>
+<navigator class="link-navigation" url="/pages/msg/withdraw/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>名词说明</text>
+        </view>
+    </view>
+</navigator>
+<navigator class="link-navigation" url="/pages/msg/withdraw/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>玩家必读</text>
+        </view>
+    </view>
+</navigator>
+<navigator class="link-navigation" url="/pages/msg/withdraw/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>收费标准</text>
+        </view>
+    </view>
+</navigator>

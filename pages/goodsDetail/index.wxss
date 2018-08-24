@@ -1,0 +1,247 @@
+/* pages/goodsDetail/index.wxss */
+
+page {
+    padding-bottom: 87rpx;
+}
+
+.head-info {
+    padding: 30rpx;
+    color: #333;
+    line-height: 1.7;
+}
+
+.head-title {
+    font-weight: bold;
+    font-size: 40rpx;
+}
+
+.price-info {
+
+}
+
+.rmb-symbol {
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #ff6600;
+}
+
+.rmb-size {
+    font-size: 58rpx;
+    font-weight: bold;
+    color: #ff6600;
+}
+
+.area {
+    font-size: 24rpx;
+    color: #666;
+    /*padding-top: 25rpx;*/
+}
+
+.safe-price {
+    padding: 0 30rpx;
+    height: 74rpx;
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 24rpx;
+    background-color: #f8f8f8;
+}
+
+.safe-price .price-row {
+    display: flex;
+}
+
+.safe-price .size {
+    color: #ff6600;
+}
+
+.order-info-wrap {
+    padding: 0 30rpx;
+}
+
+.order-info {
+    padding-top: 28rpx;
+    display: flex;
+    font-size: 24rpx;
+}
+
+.order-info .title {
+    color: #333;
+}
+
+.order-info .value {
+    flex: 1;
+    color: #666;
+}
+
+.order-info .tag {
+    width: 78rpx;
+    height: 38rpx;
+    background-color: #fff5ee;
+    border-radius: 4rpx;
+    display: flex;
+    font-size: 24rpx;
+    align-items: center;
+    justify-content: center;
+    border: solid 1rpx #ffd6bb;
+}
+
+.remark-item {
+    padding: 58rpx 30rpx;
+    padding-bottom: 0;
+}
+
+.remark-item .tag {
+    padding-bottom: 22rpx;
+}
+
+.remark-item .tag-info {
+    display: inline-block;
+    height: 40rpx;
+    color: #fff;
+    font-size: 25rpx;
+    padding: 8rpx;
+    align-items: center;
+    background-color: #333333;
+}
+
+.remark-item .details {
+    padding-top: 10rpx;
+    font-size: 24rpx;
+    color: #666;
+    line-height: 1.7;
+}
+
+.receive-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between;
+    width: 100%;
+    height: 87rpx;
+    background-color: #fff;
+}
+
+.receive-title {
+    margin-left: 30rpx;
+    font-weight: bold;
+    font-size: 25rpx;
+    flex: 1;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.receive-title text {
+
+}
+
+.receive-title .size {
+    font-weight: bold;
+    font-size: 29rpx;
+    color: #ff6600;
+}
+
+.submit-btn {
+    width: 290rpx;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: 25rpx;
+    color: #fff;
+    font-weight: bold;
+    background-image: linear-gradient(-45deg, rgb(0, 156, 255) 0%, rgb(0, 134, 255) 100%);
+}
+
+.confirm-modal {
+    height: 170rpx;
+}
+
+.form-modal {
+    padding: 0 30rpx;
+}
+
+.modal-title {
+    text-align: center;
+    font-size: 33rpx;
+    padding-top: 54rpx;
+    padding-bottom: 35rpx;
+    color: #000;
+}
+
+.input-placeholder {
+    color: #ccc;
+}
+
+.forget-link {
+    font-size: 25rpx;
+    color: #999;
+    text-align: right;
+    padding-bottom: 16rpx;
+}
+
+.password-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 76rpx;
+}
+
+.password-input {
+    position: relative;
+    overflow: hidden;
+    height: 76rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 8rpx;
+    border: 1rpx solid #d2d3d5;
+    margin-bottom: 25rpx;
+    font-size: 25rpx;
+}
+
+.pay-password-input {
+    width: 0;
+    height: 0;
+    color: transparent;
+    font-size: 0;
+    opacity: 0;
+}
+
+.password-sigle-wrap {
+    position: absolute;
+    background-color: #fff;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 2;
+}
+
+.password-sigle {
+    flex: 1;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border-left: 1rpx solid #d2d3d5;
+    font-weight: bold;
+    color: #000;
+    height: 100%;
+}
+
+.password-sigle-show:after {
+    content: '';
+    position: absolute;
+    width: 24rpx;
+    height: 24rpx;
+    border-radius: 12rpx;
+    background-color: #000;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 45%;
+}

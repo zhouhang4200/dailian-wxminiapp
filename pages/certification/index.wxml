@@ -1,0 +1,85 @@
+<!--pages/certification/index.wxml-->
+<form bindsubmit="onSubmit">
+    <view class="row-item-group">
+        <view class="row-item">
+            <view class="row-bd">
+                <text class="title">姓名</text>
+                <input value="{{info.real_name}}" name="real_name" placeholder="请输入你的真实姓名" auto-focus=""/>
+            </view>
+        </view>
+        <view class="row-item">
+            <view class="row-bd">
+                <text class="title">开户银行卡号</text>
+                <input value="{{info.bank_card}}" name="bank_card" maxlength="19" placeholder="请输入您的银行卡号" type="number"/>
+            </view>
+        </view>
+        <view class="row-item">
+            <view class="row-bd">
+                <text class="title">开户银行名称</text>
+                <input value="{{info.bank_name}}" name="bank_name" placeholder="请输入您的银行名称"/>
+            </view>
+        </view>
+        <view class="row-item">
+            <view class="row-bd bb-0">
+                <text class="title">身份证号码</text>
+                <input value="{{info.identity_card}}" name="identity_card" type="idcard" placeholder="请输入18位居民身份号"/>
+            </view>
+        </view>
+    </view>
+    <view class="row-item">
+        <view class="row-bd">
+            <text class="title">上传证件照</text>
+        </view>
+    </view>
+    <view bindtap="chooseImageCard" data-key="identity_card_back" class="upload-row">
+        <block wx:if="{{info.identity_card_back}}">
+            <image src="{{info.identity_card_back}}" mode="widthFix" class="img-full-max upload-card-img" lazy-load="false"></image>
+        </block>
+        <block wx:else>
+            <view class="upload-label">
+                <text>上传身份证反面（头像）</text>
+            </view>
+            <view class="upload-item">
+                <image class="upload-icon" src="/images/upload_plus.png" mode="widthFix" lazy-load="false"></image>
+                <view class="upload-title">
+                    <text>拍摄人像页</text>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view bindtap="chooseImageCard" data-key="identity_card_front" class="upload-row">
+        <block wx:if="{{info.identity_card_front}}">
+            <image src="{{info.identity_card_front}}" mode="widthFix" class="img-full-max upload-card-img" lazy-load="false"></image>
+        </block>
+        <block wx:else>
+            <view class="upload-label">
+                <text>上传身份证正面（国徽）</text>
+            </view>
+            <view class="upload-item">
+                <image class="upload-icon" src="/images/upload_plus.png" mode="widthFix" lazy-load="false"></image>
+                <view class="upload-title">
+                    <text>拍摄国徽页</text>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view bindtap="chooseImageCard" data-key="identity_card_hand" class="upload-row">
+        <block wx:if="{{info.identity_card_hand}}">
+            <image src="{{info.identity_card_hand}}" mode="widthFix" class="img-full-max upload-card-img" lazy-load="false"></image>
+        </block>
+        <block wx:else>
+            <view class="upload-label">
+                <text>上传手持身份证正面（头像）</text>
+            </view>
+            <view class="upload-item">
+                <image class="upload-icon" src="/images/upload_plus.png" mode="widthFix" lazy-load="false"></image>
+                <view class="upload-title">
+                    <text>拍摄人像页</text>
+                </view>
+            </view>
+        </block>
+    </view>
+    <button formType="submit" class="submit-btn">
+        <text>提交</text>
+    </button>
+</form>

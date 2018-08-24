@@ -1,0 +1,44 @@
+/* pages/order/negotiated/index.wxss */
+@import "../../certification/index.wxss";
+
+.row-item .row-bd {
+    justify-content: flex-start;
+}
+
+.row-item .title {
+    width: 155rpx;
+}
+
+.row-item input {
+    text-align: left;
+}
+
+.modal-content .title {
+    font-size: 33rpx;
+    padding-top: 52rpx;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+}
+
+.modal-content .remark {
+    font-size: 27rpx;
+    color: #999;
+    padding: 20rpx 36rpx;
+    line-height: 1.5;
+}
+
+.modal-content .btn {
+    font-weight: bold;
+    display: flex;
+    font-size: 33rpx;
+    height: 90rpx;
+    color: #333;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #d2d3d5;
+}
+
+.modal-content .primary {
+    color: #198cff;
+}

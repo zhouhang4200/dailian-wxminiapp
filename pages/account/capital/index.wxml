@@ -1,0 +1,22 @@
+<!--pages/account/capital/index.wxml-->
+<navigator class="link-navigation" url="/pages/account/capital/list/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>资金明细</text>
+        </view>
+    </view>
+</navigator>
+<navigator class="link-navigation" url="/pages/account/capital/pay/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>充值</text>
+        </view>
+    </view>
+</navigator>
+<navigator class="link-navigation" url="/pages/account/capital/cash/index">
+    <view class="link-bd">
+        <view class="title">
+            <text>提现</text>
+        </view>
+    </view>
+</navigator>

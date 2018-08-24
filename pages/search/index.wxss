@@ -1,0 +1,12 @@
+/* pages/search/index.wxss */
+@import "../home/index.wxss";
+
+.search-page {
+    padding-top: 80rpx;
+}
+
+.cancel-btn {
+    color: #198cff;
+    font-size: 25rpx;
+    margin-right: 20rpx;
+}

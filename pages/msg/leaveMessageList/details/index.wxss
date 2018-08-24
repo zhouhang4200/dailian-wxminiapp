@@ -1,0 +1,57 @@
+/* pages/msg/leaveMessageList/details/index.wxss */
+page {
+    background-color: #f8f8f8;
+}
+
+.online-msg-page .histime {
+    text-align: center;
+    font-size: 18rpx;
+    display: block;
+    color: #bbb;
+    padding: 30rpx 0;
+}
+
+.online-msg-page .msg-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 21rpx;
+}
+
+.online-msg-page .msg-row.right-row {
+    flex-direction: row-reverse;
+}
+
+.online-msg-page .msg-row .user-icon-wrap {
+    width: 74rpx;
+    height: 74rpx;
+    border-radius: 37rpx;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.online-msg-page .msg-row .user-icon {
+    max-width: 100%;
+}
+
+.online-msg-page .msg-row .msg-content {
+    line-height: 1.8;
+    max-width: 553rpx;
+    padding: 14rpx 44rpx;
+    font-size: 27rpx;
+}
+
+.online-msg-page .msg-row.right-row .msg-content {
+    background-image: linear-gradient(90deg, #0086ff 0%, #009cff 100%), linear-gradient(#ffffff, #ffffff);
+    background-blend-mode: normal, normal;
+    border-radius: 36px 0px 36px 36px;
+    color: #fff;
+    margin-right: 17rpx;
+}
+
+.online-msg-page .msg-row.left-row .msg-content {
+    margin-left: 17rpx;
+    background-color: #ffffff;
+    box-shadow: 0px 7px 13px 1px rgba(237, 242, 247, 0.6);
+    border-radius: 0px 36px 36px 36px;
+    color: #333;
+}

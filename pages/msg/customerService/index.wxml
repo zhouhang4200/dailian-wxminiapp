@@ -1,0 +1,30 @@
+<!--pages/msg/customerService/index.wxml-->
+<view class="article-notice">
+    <view class="head-title">
+        <text>客服工作时间调整</text>
+    </view>
+    <view class="date-info">
+        <text class="date-info">2018年7月17日</text>
+    </view>
+    <view class="details">
+        <text>平台自01月15日起，平台客服在线时间更改为</text>
+    </view>
+    <view class="details">
+        <text>周一至周六：10:00--22:00</text>
+    </view>
+    <view class="details">
+        <text>周日时间为：13:00--22:00</text>
+    </view>
+    <view class="details">
+        <text>平台自01月15日起，提现客服在线时间更改为：</text>
+    </view>
+    <view class="details">
+        <text>每天：8:30--17:30</text>
+    </view>
+    <view class="details">
+        <text>客服不在线期间充值，咨询等问题可能会有延迟，给大家带来不便敬请谅解。</text>
+    </view>
+    <view class="details">
+        <text>真诚感谢您对我们工作一如既往的支持！</text>
+    </view>
+</view>

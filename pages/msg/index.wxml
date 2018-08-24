@@ -1,0 +1,20 @@
+<!--pages/msg/index.wxml-->
+<navigator class="link-navigation is-large" url="/pages/msg/announcement/index">
+    <view class="link-bd">
+        <view class="icon i-msg"></view>
+        <view class="title">
+            <text>公告中心</text>
+        </view>
+    </view>
+</navigator>
+<navigator class="link-navigation is-large" url="/pages/msg/leaveMessageList/index">
+    <view class="link-bd">
+        <view class="icon i-notice"></view>
+        <view class="title">
+            <text>留言消息</text>
+        </view>
+        <view class="total-tag">
+            <text>8</text>
+        </view>
+    </view>
+</navigator>

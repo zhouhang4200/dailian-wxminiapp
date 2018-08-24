@@ -1,0 +1,18 @@
+<!--pages/account/password/index.wxml-->
+<view class="user-account-page password-page">
+    <view class="form-item">
+        <input placeholder="请输入手机号码" type="number"/>
+    </view>
+    <view class="form-item">
+        <input placeholder="请新密码" password="{{true}}"/>
+    </view>
+    <view class="form-item send-wrap">
+        <input placeholder="验证码"/>
+        <text bindtap="verificationCode_onSendCode" class="send-btn">{{verificationCode.text}}</text>
+    </view>
+    <view class="form-item full-item bb-0">
+        <button disabled="{{true}}" class="submit-btn primary">
+            <text class="btn-title">登录</text>
+        </button>
+    </view>
+</view>

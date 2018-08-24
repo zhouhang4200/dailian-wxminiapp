@@ -1,0 +1,31 @@
+<!--pages/account/api_profile/page.wxml-->
+<form bindsubmit="onSubmitForm" hidden="{{isPageHidden}}">
+    <view bindtap="chooseImage" class="user-icon">
+        <image src="{{userInfo.avatar}}" class="img-full-max" mode="widthFix" lazy-load="false"></image>
+    </view>
+    <view class="row-item">
+        <view class="row-bd">
+            <text class="title">昵称</text>
+            <input name="name" value="{{userInfo.name}}" focus="{{true}}"/>
+        </view>
+    </view>
+    <view class="row-item">
+        <view class="row-bd">
+            <text class="title">联系QQ</text>
+            <input value="{{userInfo.qq}}" name="qq" placeholder="必填" type="number" maxlength="14"/>
+        </view>
+    </view>
+    <view class="row-item">
+        <view class="row-bd">
+            <text class="title">电子邮箱</text>
+            <input value="{{userInfo.email}}" name="email" placeholder="必填"/>
+        </view>
+    </view>
+    <view class="row-item">
+        <view class="row-bd">
+            <text class="title">个人签名</text>
+            <input value="{{userInfo.signature}}" name="signature" placeholder="必填"/>
+        </view>
+    </view>
+    <button formType="submit" class="submit-btn-primary">确定</button>
+</form>

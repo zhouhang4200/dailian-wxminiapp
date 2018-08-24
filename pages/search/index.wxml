@@ -1,0 +1,18 @@
+<!--pages/search/index.wxml-->
+<!--搜索栏-->
+<view class="search-form">
+    <view class="form">
+        <input bindconfirm="onInputSearch" confirm-type="search" auto-focus placeholder="输入关键字查询" class="form-input"/>
+    </view>
+    <navigator hidden="{{isCancelHidden}}" open-type="navigateBack" class="cancel-btn" hover-class="none">取消</navigator>
+</view>
+<!--商品列表-->
+<view class="index-page search-page">
+    <goods-item list="{{asyncData.list}}"></goods-item>
+    <!--底部加载更多-->
+    <view hidden="{{reachEndInfo.isHidden}}" class="load-more">
+        <text wx:if="{{reachEndInfo.isFail}}">加载失败，点击重试...</text>
+        <text wx:else>{{reachEndInfo.isMore ? "加载中...":"没有更多了"}}</text>
+    </view>
+</view>
+

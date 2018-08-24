@@ -1,0 +1,26 @@
+<!-- pages/applyArbitration/index.wxml -->
+<form bindsubmit="onSubmit" class="apply-arbitration">
+    <view class="module-item">
+        <text class="module-title">原因及要求</text>
+        <textarea name="remark" class="input" placeholder="请输入..." auto-focus />
+    </view>
+    <view class="module-item">
+        <text class="module-title">证据截图</text>
+        <view class="img-list">
+            <block wx:key="{{index}}" wx:for="{{imgList}}">
+                <block wx:if="{{item}}">
+                    <view class="screenshot is-img">
+                      <image data-url="{{item}}" bindtap="onPreviewImage" class="" src="{{item}}" mode="widthFix" lazy-load="false"></image>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view bindtap="onUploadImg" class="screenshot">
+                        <view class="icon"></view>
+                        <text class="title">添加图片</text>
+                    </view>
+                </block>
+            </block>
+        </view>
+    </view>
+    <button formType="submit" class="submit-btn">确定</button>
+</form>

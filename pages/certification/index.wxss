@@ -1,0 +1,99 @@
+/* pages/certification/index.wxss */
+page {
+    padding-bottom: 124rpx;
+    background-color: #f8f8f8;
+}
+
+.certification {
+
+}
+
+.row-item-group {
+    margin-bottom: 13rpx;
+}
+
+.row-item {
+    background-color: #fff;
+    padding-left: 30rpx;
+}
+
+.row-item .row-bd {
+    display: flex;
+    padding-right: 30rpx;
+    height: 100rpx;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.row-item .title {
+    font-size: 31rpx;
+    font-weight: bold;
+    color: #000;
+    display: block;
+}
+
+.row-item input {
+    flex: 1;
+    font-weight: bold;
+    text-align: right;
+    padding-left: 20rpx;
+    font-size: 31rpx;
+    color: #000;
+}
+
+.row-item .input-placeholder {
+    color: #c7c7cd;
+    font-weight: bold;
+}
+
+.upload-row {
+    padding: 0 30rpx;
+    background-color: #fff;
+    overflow: hidden;
+}
+.upload-card-img{
+    
+}
+
+.upload-label {
+    font-size: 25rpx;
+    color: #999;
+    line-height: 76rpx;
+}
+
+.upload-item {
+    height: 291rpx;
+    background-color: #628efb;
+    border-radius: 7rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-icon {
+    width: 99rpx;
+    height: 99rpx;
+    display: block;
+}
+
+.upload-title {
+    font-size: 25rpx;
+    color: #fff;
+    padding-top: 20rpx;
+}
+
+.submit-btn {
+    border-radius: 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    line-height: 87rpx;
+    width: 100%;
+    font-size: 25rpx;
+    color: #fff;
+    text-align: center;
+    background-image: linear-gradient(45deg, rgb(0, 156, 255) 0%, rgb(0, 134, 255) 100%);
+}
+

@@ -1,0 +1,16 @@
+<!--pages/account/capital/list/index.wxml-->
+<view class="row-item">
+    <text class="title">产生金额</text>
+    <view>
+        <text>10.00</text>
+    </view>
+</view>
+<view class="row-item">
+    <text class="title">流水说明</text>
+    <view>
+        <text>您代练的订单“ORD180321155138735766”
+            经友好协商已撤单，您需支付保证金0.0元，
+            返还押金10.0元
+        </text>
+    </view>
+</view>

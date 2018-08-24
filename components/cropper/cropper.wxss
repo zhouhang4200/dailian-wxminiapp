@@ -1,0 +1,7 @@
+.cropper-wrapper{position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.9);z-index:5;}
+.cropper-wrapper .canvas{position:fixed;top:40%;left:50%;transform:translate(-50%, -50%)}
+.cropper-wrapper .ico{width:120rpx;height:120rpx;position:absolute;bottom:30rpx;z-index:6;display: inline-block;
+background-size: 100% 100%;background-position: center center}
+.cropper-wrapper .ico-1{left:90rpx;background-image:url('http://t-admin.wzpeilian.com/icon/o-back.png');}
+.cropper-wrapper .ico-2{right:90rpx;background-image:url('http://t-admin.wzpeilian.com/icon/o-ok.png');}
+.cropper-hidden{top:-100%;left:-100%;display:none;}

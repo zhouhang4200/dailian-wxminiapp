@@ -1,0 +1,70 @@
+<!--pages/order/negotiated/index.wxml-->
+<view class="row-item">
+    <view class="row-bd">
+        <text class="title">订单价格</text>
+        <input disabled="{{true}}" value="10.00" auto-focus=""/>
+    </view>
+</view>
+<view class="row-item">
+    <view class="row-bd">
+        <text class="title">代练费</text>
+        <input maxlength="19" placeholder="请输入需玩家支付代练费" type="number"/>
+    </view>
+</view>
+<view class="row-item">
+    <view class="row-bd">
+        <text class="title">效率保证金</text>
+        <input placeholder="请输入效率保证金"/>
+    </view>
+</view>
+<view class="row-item">
+    <view class="row-bd">
+        <text class="title">安全保证金</text>
+        <input disabled="{{true}}" value="1.22"/>
+    </view>
+</view>
+<view class="row-item">
+    <view class="row-bd">
+        <text class="title">保证金</text>
+        <input type="idcard" placeholder="请输入需打手赔偿保证金"/>
+    </view>
+</view>
+<view class="row-item">
+    <view class="row-bd">
+        <text class="title">协商原因</text>
+        <input type="idcard" placeholder="请输入18位居民身份号"/>
+    </view>
+</view>
+<button bindtap="modalOverlayToggle" class="submit-btn">
+    <text>提交</text>
+</button>
+
+<!-- modal Overlay -->
+<view bindtap="modalOverlayToggle"
+      animation="{{animationModalOverlay}}"
+      hidden="{{isModalOverlayHidden}}"
+      bindtransitionend="onModalOverlayToggleEnd"
+      class="modal-overlay">
+</view>
+<!-- 操作选项 -->
+<view animation="{{animationModalOverlayContent}}"
+      hidden="{{isModalOverlayHidden}}"
+      class="modal-content">
+    <view class="title">
+        <text>确定同意撤销？</text>
+    </view>
+    <view class="remark">
+        <text>你（对方）进行操作【撤销】【你（对方）支付代练费1.00元，对方（你）支付保证金5.00元，原因：打手中途撤单】</text>
+    </view>
+    <view bindtap="onSelect" data-index="0" class="btn primary">
+        <text>同意</text>
+    </view>
+    <view bindtap="onSelect" data-index="1" class="btn">
+        <text>不同意</text>
+    </view>
+    <view bindtap="modalOverlayToggle" class="btn">
+        <text>取消</text>
+    </view>
+</view>
+
+

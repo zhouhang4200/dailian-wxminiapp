@@ -1,0 +1,60 @@
+/* pages/account/api_login/index.wxss */
+
+.user-account-page .full-item {
+    padding: 35rpx 28rpx;
+}
+
+.user-account-page .form-item {
+    border-bottom: 1rpx solid #eee;
+}
+
+.user-account-page .form-item .submit-btn {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.user-account-page .form-item input {
+    padding: 35rpx 28rpx;
+    font-size: 31rpx;
+    color: #333;
+}
+
+.user-account-page .input-placeholder {
+    color: #c7c7cd;
+}
+
+.user-account-page .submit-btn {
+    margin: 0 28rpx;
+    margin-bottom: 21rpx;
+    font-size: 29rpx;
+    line-height: 74rpx;
+    color: #333;
+}
+
+.user-account-page .submit-btn[disabled] .btn-title {
+    opacity: 0.3;
+}
+
+.user-account-page .submit-btn.primary {
+    background-color: #198cff;
+    color: #fff;
+}
+
+.login-page .action-type {
+    display: flex;
+    font-size: 22rpx;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-page .remember {
+    position: relative;
+    top: 2rpx;
+    color: #9b9b9b;
+    margin-top: 2rpx;
+}
+
+.login-page .forget-pwd {
+    font-size: 22rpx;
+    color: #6a7fa6;
+}

@@ -1,0 +1,36 @@
+/* pages/account/capital/details/index.wxss */
+.details-page {
+
+}
+
+.row-item {
+    height: 124rpx;
+    display: flex;
+    padding: 0 30rpx;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 36rpx;
+    color: #333;
+    border-bottom: 1px solid #eee;
+}
+
+.row-item .left-info{
+    
+}
+
+.row-item .title {
+    font-size: 29rpx;
+    display: block;
+}
+
+.row-item .date {
+    display: block;
+    font-size: 25rpx;
+    color: #999;
+}
+
+.row-item .money-plus {
+    font-size: 36rpx;
+    color: #ff6600;
+}
