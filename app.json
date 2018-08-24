@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/certification/index",
-    "pages/home/index",
     "pages/account/index",
+    "pages/home/index",
+    "pages/certification/index",
     "pages/account/profile/index",
     "pages/account/login/index",
     "pages/goodsDetail/index",

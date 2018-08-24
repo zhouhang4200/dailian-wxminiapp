@@ -115,26 +115,29 @@ Page({
     }
   },
 
+  cropperSize: function (cropperSize) {
+    const [cropperWidth, cropperHeight] = JSON.parse(cropperSize);
+    return {
+      cut: {
+        x: (windowWidth - cropperWidth) / 2,
+        y: (windowHeight - cropperHeight) / 2,
+        width: cropperWidth,
+        height: cropperHeight
+      }
+    }
+  },
+
   onLoad: function (options) {
+    debugger
     const {cropperSize, ratio, cropperType, url} = options;
     let setData = {
       name: 'cropperImg',
       url,
       cropperOpt: {
         ...this.data.cropperOpt,
-        ...cropperSize ? () => {
-          const [cropperWidth, cropperHeight] = cropperSize;
-          return {
-            cut: {
-              x: (windowWidth - cropperWidth) / 2,
-              y: (windowHeight - cropperHeight) / 2,
-              width: cropperWidth,
-              height: cropperHeight
-            }
-          }
-        } : {},
-        ...ratio ? this.ratioCropper(ratio) : {},
-        ...cropperType ? this[cropperType]() : {}
+        ...(cropperSize ? this.cropperSize(cropperSize) : {}),
+        ...(ratio ? this.ratioCropper(ratio) : {}),
+        ...(cropperType ? this[cropperType]() : {})
       },
     };
     this.setData(setData, () => this.initCropper());
