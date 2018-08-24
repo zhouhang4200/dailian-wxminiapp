@@ -1,7 +1,7 @@
 <!--pages/account/capital/details/index.wxml-->
 <navigator wx:key="{{index}}" wx:for="{{asyncData.list}}" url="/pages/account/capital/details/index" class="row-item">
     <view class="left-info">
-        <text class="title">{{item.tyoe}}</text>
+        <text class="title">{{item.name}}</text>
         <text class="date">{{item.created_at}}</text>
     </view>
     <text wx:if="{{item.type===1}}}">+{{item.amount}}</text>

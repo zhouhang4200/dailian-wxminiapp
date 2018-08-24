@@ -17,18 +17,29 @@ Page({
       bank_card: '',
       bank_name: '',
       identity_card: '',
-      identity_card_front: '',
       identity_card_back: '',
+      identity_card_front: '',
       identity_card_hand: ''
     }
   },
 
   onSubmit: function (e) {
-    const formData = e.detail.value;
-    const validate = this.formValidate(formData);
-    if (validate) {
-
-    }
+    // const formData = e.detail.value;
+    // const validate = this.formValidate(formData);
+    const {identity_card_back,identity_card_front,identity_card_hand} = this.data.info;
+    // if (validate) {
+      Promise.all([
+        Utils.files.uploadFile(identity_card_back),
+        // Utils.files.uploadFile(identity_card_front),
+        // Utils.files.uploadFile(identity_card_hand),
+      ]).then(result => {
+        const identity_card_back = result[0];
+        // const identity_card_back = result[1];
+        // const identity_card_hand = result[2];
+        console.log(identity_card_back)
+        // console.log(identity_card_front, identity_card_back, identity_card_hand)
+      })
+    // }
   },
 
   /**
