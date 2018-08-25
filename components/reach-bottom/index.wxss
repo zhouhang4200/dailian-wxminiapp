@@ -1,0 +1,7 @@
+/* components/reach-bottom/index.wxss */
+.load-more {
+    text-align: center;
+    padding: 20rpx 0;
+    color: #bbb;
+    font-size: 24rpx;
+}

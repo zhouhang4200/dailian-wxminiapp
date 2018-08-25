@@ -1,0 +1,5 @@
+<!--components/reach-bottom/index.wxml-->
+<view hidden="{{reachEndInfo.isHidden}}" class="load-more">
+    <text wx:if="{{reachEndInfo.isFail}}">加载失败，点击重试...</text>
+    <text wx:else>{{reachEndInfo.isMore ? "加载中...":"没有更多了"}}</text>
+</view>
