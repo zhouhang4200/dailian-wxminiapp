@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/account/capital/pay/index",
     "pages/home/index",
+    "pages/account/capital/pay/index",
     "pages/myComplaint/index",
     "pages/applyArbitration/index",
     "pages/order/screenshot/index",
