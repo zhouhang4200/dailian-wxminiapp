@@ -79,7 +79,6 @@
         <goods-item list="{{asyncData.list}}"/>
         <!--底部加载更多-->
         <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
-        <include src="../../template/reach-bottom.wxml"/>
     </view>
     <!-- modal Overlay -->
     <view data-sort="{{sortType}}" bindtap="onSortItem" hidden="{{isModalOverlayHidden}}"
