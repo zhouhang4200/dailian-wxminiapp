@@ -15,13 +15,30 @@ Page({
 
   data: {
     ...Utils.page.data,
-    userInfo: {}
+    isUserIconUpload: false, // 用户图片是否已上传
+    userInfo: {
+      avatar: '',
+      name: '',
+      email: '',
+      signature: ''
+    }
   },
 
   initFetch() {
     api_profile().then(userInfo => {
+      const {
+        avatar = '',
+        name = '',
+        email = '',
+        signature = ''
+      } = userInfo;
       this.setData({
-        userInfo
+        userInfo: {
+          avatar,
+          name,
+          email,
+          signature
+        }
       });
       this.pageEnd();
     })
@@ -30,16 +47,18 @@ Page({
   onSubmitForm: function (e) {
     const formData = e.detail.value;
     const validate = this.formValidate(formData);
+    const {isUserIconUpload} = this.data;
     if (validate) {
       wx.showLoading({title: '加载中', icon: 'none'});
-      Utils.files.uploadFile([this.data.userInfo.avatar]).then(avatar => {
-        api_profileUpdate(formData).then(() => {
-          wx.hideLoading();
-          wx.showToast({title: '修改成功'})
-        }, () => {
+      const uploadUserIconPromise = isUserIconUpload ? Promise.resolve(this.data.userInfo.avatar) : Utils.files.uploadFile([this.data.userInfo.avatar]);
+      uploadUserIconPromise()
+        .then(url => {
+          !isUserIconUpload && this.setData({'userInfo.avatar': url});
+          return api_profileUpdate(formData)
         })
-      }, () => {
-      })
+        .then(data => {
+          console.log(data)
+        })
     }
   },
 
@@ -92,6 +111,7 @@ Page({
     this.getCropperImg().then(url => {
       if (url) {
         this.setData({
+          isUserIconUpload: true,
           'userInfo.avatar': url
         })
       }

@@ -43,13 +43,9 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    const {searchForm} = this.data;
     this.setData({
-      searchForm: {
-        ...searchForm,
-        page: 1,
-        keyword: e.detail.value,
-      },
+      'searchForm.page': 1,
+      'searchForm.keyword': e.detail.value,
       asyncData: {
         list: [],
         totalRows: 0

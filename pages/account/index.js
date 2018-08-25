@@ -64,7 +64,11 @@ Page({
    */
   onShow: function () {
     if (wx.getStorageSync('token') && this.data.isLogin === false) {
-      this.pageLoad();
+      wx.showLoading({title: '加载中', icon: 'none'});
+      this.setData({
+        isLogin: '',
+        isPageHidden: true
+      }, () => this.pageLoad());
     }
   },
 

@@ -5,6 +5,11 @@ import {
   api_gameAllRegionServer
 } from '../../lib/api'
 
+/**
+ * 静态数据存储
+ * @type {{gameInfo: {gameList: Array, regionList: Array, serverList: Array}}}
+ */
+
 Page({
 
   ...Utils.page.action,
@@ -79,16 +84,13 @@ Page({
    */
   onSelectSort: function (e) {
     const {key, value} = e.currentTarget.dataset;
-    const {searchForm} = this.data;
     this.onSortItem(e);
     this.setData({
       actionAnimationSortSearch: () => {
+        const constKey = 'searchForm.' + key;
         this.setData({
-          searchForm: {
-            ...searchForm,
-            page: 1,
-            [key]: value
-          },
+          'searchForm.page': 1,
+          [constKey]: value,
           asyncData: {
             list: [],
             totalRows: 0
@@ -113,13 +115,11 @@ Page({
     if (isCurrentGameId || isCurrentRegionId || isCurrentServerId) return false;
     const isSelectGame = key === 'game_id';
     const isSelectRegion = key === 'region_id';
+    const constKey = 'searchForm.' + key;
     this.setData({
-      searchForm: {
-        ...searchForm,
-        server_id: (isSelectGame || isSelectRegion) ? '' : this.data.searchForm.server_id,
-        region_id: isSelectGame ? '' : this.data.searchForm.region_id,
-        [key]: value
-      },
+      'searchForm.server_id': (isSelectGame || isSelectRegion) ? '' : this.data.searchForm.server_id,
+      'searchForm.region_id': isSelectGame ? '' : this.data.searchForm.region_id,
+      [constKey]: value,
       regionList: isSelectGame ? gameList[index].regions : this.data.regionList,
       serverList: isSelectGame ? [] : isSelectRegion ? this.data.regionList[index].servers : this.data.serverList,
     }, () => {
@@ -203,34 +203,49 @@ Page({
    */
   fetchGameAllRegionServer: function (e) {
     wx.showLoading({title: '加载中...'});
-    api_gameAllRegionServer().then(data => {
-      let {games, regions, servers} = data;
-      for (let j = 0; j < regions.length; j++) {
-        let _regions = regions[j];
-        for (let k = 0; k < servers.length; k++) {
-          let _server = servers[k];
-          if (_regions.id === _server.region_id) {
-            regions[j]['servers'] = (regions[j]['servers'] || []).concat(_server);
-          }
-        }
-      }
-      for (let i = 0; i < games.length; i++) {
-        let _game = games[i];
-        for (let j = 0; j < regions.length; j++) {
-          let _regions = regions[j];
-          if (_game.id === _regions.game_id) {
-            games[i]['regions'] = (games[i]['regions'] || []).concat(_regions);
-          }
-        }
-      }
+    this.setGameRegionServer().then(() => {
       wx.hideLoading();
-      this.setData({
-        gameList: games,
-        regionList: games[0].regions,
-        serverList: games[0].regions[0].servers,
-      });
       this.onSortItem(e)
     });
+  },
+
+  /**
+   * 获取所有区服数据，在主页面核心数据显示之后，去辅助显示数据
+   * @returns {Promise<any>}
+   */
+  setGameRegionServer: function () {
+    return new Promise((resolve, reject) => {
+      api_gameAllRegionServer().then(data => {
+        let {games, regions, servers} = data;
+        for (let j = 0; j < regions.length; j++) {
+          let _regions = regions[j];
+          for (let k = 0; k < servers.length; k++) {
+            let _server = servers[k];
+            if (_regions.id === _server.region_id) {
+              regions[j]['servers'] = (regions[j]['servers'] || []).concat(_server);
+            }
+          }
+        }
+        for (let i = 0; i < games.length; i++) {
+          let _game = games[i];
+          for (let j = 0; j < regions.length; j++) {
+            let _regions = regions[j];
+            if (_game.id === _regions.game_id) {
+              games[i]['regions'] = (games[i]['regions'] || []).concat(_regions);
+            }
+          }
+        }
+        const _regions = games[0].regions;
+        this.setData({
+          gameList: games,
+          regionList: _regions,
+          serverList: _regions[0].servers
+        });
+        resolve();
+      }, (err) => {
+        reject(err);
+      });
+    })
   },
 
   /**
@@ -318,6 +333,7 @@ Page({
    */
   onLoad: function (options) {
     this.pageLoad();
+    this.setGameRegionServer()
   },
 
   /**
@@ -345,7 +361,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    console.log(':::onUnload:::')
   },
 
   /**
