@@ -21,14 +21,16 @@
               class="sort-modal-content-container">
             <view class="sort-modal-content">
                 <view class="item-list">
-                    <view data-index="{{index}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect" data-key="game_id"
+                    <view data-index="{{index}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect"
+                          data-key="game_id"
                           data-value="{{item.id}}" wx:for="{{gameList}}"
                           class="row-item ellipsis {{searchForm.game_id===item.id ? 'is-selected':''}}">
                         {{item.name}}
                     </view>
                 </view>
                 <view class="item-list">
-                    <view data-index="{{index}}" wx:for="{{regionList}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect"
+                    <view data-index="{{index}}" wx:for="{{regionList}}" data-sort="{{sortType}}" wx:key="{{index}}"
+                          bindtap="onGameSortSelect"
                           data-key="region_id" data-value="{{item.id}}"
                           class="row-item ellipsis {{searchForm.region_id===item.id ? 'is-selected':''}}">
                         {{item.name}}
@@ -73,12 +75,11 @@
     <!--商品列表-->
     <view bindtransitionend="onPageAnimationEnd" animation="{{animationPage}}" hidden="{{isPageHidden}}"
           class="index-page">
-        <goods-item list="{{asyncData.list}}"></goods-item>
+        <!--单个商品-->
+        <goods-item list="{{asyncData.list}}"/>
         <!--底部加载更多-->
-        <view hidden="{{reachEndInfo.isHidden}}" class="load-more">
-            <text wx:if="{{reachEndInfo.isFail}}">加载失败，点击重试...</text>
-            <text wx:else>{{reachEndInfo.isMore ? "加载中...":"没有更多了"}}</text>
-        </view>
+        <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
+        <include src="../../template/reach-bottom.wxml"/>
     </view>
     <!-- modal Overlay -->
     <view data-sort="{{sortType}}" bindtap="onSortItem" hidden="{{isModalOverlayHidden}}"

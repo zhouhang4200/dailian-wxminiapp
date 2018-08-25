@@ -8,12 +8,14 @@ import {
 Page({
 
   ...Utils.page.action,
+  ...Utils.reachBottom.action,
 
   /**
    * 页面的初始数据
    */
   data: {
     ...Utils.page.data,
+    ...Utils.reachBottom.data,
 
     isModalOverlayHidden: true,
     animationModalOverlay: {},
@@ -69,12 +71,6 @@ Page({
       game_id: '',
       region_id: '',
       server_id: ''
-    },
-    reachEndInfo: {
-      isHidden: true,
-      isMore: true,
-      isFail: false,
-      isLoading: false
     }
   },
 
@@ -168,7 +164,7 @@ Page({
         },
         searchForm: {
           ...searchForm,
-          page: params.page + 1,
+          page: params.page,
         }
       }, () => {
         this.pageShow();
@@ -179,27 +175,6 @@ Page({
         }
       })
     });
-  },
-
-  /**
-   * 设置更多加载信息
-   */
-  setReachEndInfo: function () {
-    let {
-      asyncData,
-      reachEndInfo,
-      searchForm
-    } = this.data;
-    let listTotal = asyncData.list.length;
-    let total = asyncData.total;
-    this.setData({
-      reachEndInfo: {
-        ...reachEndInfo,
-        isHidden: total < searchForm.page,
-        isMore: total > listTotal,
-        isLoading: false
-      }
-    })
   },
 
   /**
@@ -398,26 +373,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function (e) {
-    const {
-      reachEndInfo,
-      searchForm
-    } = this.data;
-    const {
-      isHidden,
-      isMore,
-      isLoading
-    } = reachEndInfo;
-    if (!isHidden && isMore && !isLoading) {
-      this.setData({
-        reachEndInfo: {
-          ...reachEndInfo,
-          isLoading: true
-        }
-      });
-      this.initFetch({
-        page: searchForm.page + 1
-      })
-    }
+    this._onReachBottom()
   },
 
   /**

@@ -1,0 +1,28 @@
+/**
+ * 计算总价
+ * @params sunAry { array } 参加的计算的金额数字
+ * @params fixedSize { number } 保留几位小数 默认 2
+ */
+var sumPrice = function (sunAry, fixedSize) {
+  var sum = 0;
+  for (var i = 0; i < sunAry.length; i++) {
+    var value = sunAry[i];
+    if (!isNaN(value)) {
+      sum += (value * 100)
+    }
+  }
+  return ((sum / 100).toFixed(fixedSize || 2))
+};
+
+/**
+ * 资金流水详情
+ */
+var capitalFormatText = function (type) {
+  var typeList = ['充值', '提现', '冻结', '解冻', '收入', '支出'];
+  return (typeList[type - 1] || '未知类型')
+};
+
+module.exports = {
+  sumPrice: sumPrice,
+  capitalFormatText: capitalFormatText
+};

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "goods-item": "/components/goods/index"
+    "goods-item": "/components/goods/index",
+    "reach-bottom": "/components/reach-bottom/index"
   }
 }

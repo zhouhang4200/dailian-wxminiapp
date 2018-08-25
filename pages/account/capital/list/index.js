@@ -7,6 +7,7 @@ import {
 Page({
 
   ...Utils.page.action,
+  ...Utils.reachBottom.action,
 
   /**
    * 页面的初始数据
@@ -14,8 +15,16 @@ Page({
   data: {
 
     ...Utils.page.data,
-    ...Utils.pullUpLoadMore.data
+    ...Utils.reachBottom.data,
 
+    asyncData: {
+      list: [],
+      total: 0
+    },
+    searchForm: {
+      page: 1,
+      page_size: 10
+    }
   },
 
   initFetch: function (opts) {
@@ -93,8 +102,8 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
+  onReachBottom: function (e) {
+    this._onReachBottom()
   },
 
   /**
@@ -104,6 +113,4 @@ Page({
 
   },
 
-
-  ...Utils.pullUpLoadMore.action
 })

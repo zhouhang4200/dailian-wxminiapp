@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/account/index",
     "pages/home/index",
+    "pages/account/capital/list/index",
+    "pages/account/capital/pay/index",
+    "pages/account/index",
     "pages/certification/index",
     "pages/account/profile/index",
     "pages/account/login/index",
@@ -10,7 +12,6 @@
     "pages/account/register/index",
     "pages/order/negotiated/index",
     "pages/order/details/index",
-    "pages/account/capital/pay/index",
     "pages/search/index",
     "pages/msg/leaveMessageList/details/index",
     "pages/msg/leaveMessageList/index",
@@ -27,7 +28,6 @@
     "pages/help/index",
     "pages/account/capital/index",
     "pages/account/capital/details/index",
-    "pages/account/capital/list/index",
     "pages/account/capital/cash/index",
     "pages/account/password/index"
   ],

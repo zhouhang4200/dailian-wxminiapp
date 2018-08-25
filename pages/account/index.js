@@ -30,8 +30,7 @@ Page({
           this.setData({
             isLogin: data.code === undefined,
             userInfo: {
-              ...data,
-              totalAmount: ((balance * 100 + frozen * 100) / 100).toFixed(2)
+              ...data
             }
           }, () => this.pageEnd())
         })
