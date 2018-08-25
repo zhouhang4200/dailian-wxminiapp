@@ -1,0 +1,107 @@
+<!-- pages/myComplaint/index.wxml -->
+<scroll-view class="my-complaint">
+    <view class="tab-head">
+        <view data-tab="tab1" bindtap="onSwitchTab" class="text-title-wrap {{tabName=='tab1' ? 'is-selected':''}}">
+            <text class="text-title">申诉详情</text>
+        </view>
+        <view data-tab="tab2" bindtap="onSwitchTab" class="text-title-wrap {{tabName=='tab2' ? 'is-selected':''}}">
+            <text class="text-title">补充留言</text>
+        </view>
+    </view>
+    <view class="page-content">
+        <view hidden="{{tabName=='tab2'}}">
+            <view class="module-content">
+                <view class="content-title">
+                    <text>申诉内容</text>
+                </view>
+                <image src="http://ammgg.com/images/2018/08/20/PeSE.png" mode="widthFix" class="line-img"></image>
+                <view class="reason-content">
+                    <text class="title">申诉原因</text>
+                    <text class="date">2018/05/25 10:53</text>
+                    <text class="remark">打手将账号弄封号</text>
+                </view>
+                <view class="evidence-screenshot">
+                    <text class="title">证据截图</text>
+                    <view class="img-list">
+                        <view class="item-img">
+                            <image class="img" src="http://ammgg.com/images/2018/08/20/Pzvu.png"
+                                   mode="widthFix"></image>
+                        </view>
+
+                        <view class="item-img">
+                            <image class="img" src="http://ammgg.com/images/2018/08/20/Pzvu.png"
+                                   mode="widthFix"></image>
+                        </view>
+                        <view class="item-img">
+                            <image class="img" src="http://ammgg.com/images/2018/08/20/Pzvu.png"
+                                   mode="widthFix"></image>
+                        </view>
+                        <view class="item-img">
+                            <image class="img" src="http://ammgg.com/images/2018/08/20/Pzvu.png"
+                                   mode="widthFix"></image>
+                        </view>
+                        <view class="item-img">
+                            <image class="img" src="http://ammgg.com/images/2018/08/20/Pzvu.png"
+                                   mode="widthFix"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="module-content">
+                <view class="content-title">
+                    <text>留言内容</text>
+                </view>
+                <image src="http://ammgg.com/images/2018/08/20/PeSE.png" mode="widthFix" class="line-img"></image>
+                <view class="message-content">
+                    <view class="row-item">
+                        <view class="user-icon-wrap">
+                            <image src="http://ammgg.com/images/2018/08/20/PNln.png" class="user-icon-img"
+                                   mode="widthFix"
+                                   lazy-load="true"></image>
+                        </view>
+                        <view class="details-wrap">
+                            <text class="nick-name">玩家猫大人</text>
+                            <text class="date">2018/05/25 10:53</text>
+                            <text class="remark-content">协商未果，打手报复</text>
+                            <image src="http://ammgg.com/images/2018/08/20/PRN5.png" class="user-icon-img"
+                                   mode="widthFix"
+                                   lazy-load="true"></image>
+                        </view>
+                    </view>
+                    <text class="none-confirm">没有更多了...</text>
+                </view>
+
+            </view>
+        </view>
+        <view hidden="{{tabName=='tab1'}}" class="module-content">
+            <form bindsubmit="onSubmit" class="apply-arbitration">
+                <view class="content-title">
+                    <text>补充留言</text>
+                </view>
+                <view class="module-item">
+                    <textarea name="remark" class="input" placeholder="请输入..." auto-focus></textarea>
+                </view>
+                <view class="module-item">
+                    <text class="module-title">证据截图</text>
+                    <view class="img-list">
+                        <block wx:key="index" wx:for="{{imgList}}">
+                            <block wx:if="{{item}}">
+                                <view class="screenshot is-img">
+                                    <image data-url="{{item}}" bindtap="onPreviewImage" class="" src="{{item}}"
+                                           mode="widthFix" lazy-load="true"></image>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <view bindtap="onUploadImg" class="screenshot">
+                                    <image class="icon" mode="widthFix" src="/images/add-img.png" lazy-load="false"></image>
+                                    <text class="title">添加图片</text>
+                                </view>
+                            </block>
+                        </block>
+                    </view>
+                </view>
+                <button formType="submit" class="submit-btn">确定</button>
+            </form>
+        </view>
+    </view>
+</scroll-view>

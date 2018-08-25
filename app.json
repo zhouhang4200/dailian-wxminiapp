@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/myComplaint/index",
     "pages/applyArbitration/index",
     "pages/order/screenshot/index",
     "pages/order/negotiated/index",

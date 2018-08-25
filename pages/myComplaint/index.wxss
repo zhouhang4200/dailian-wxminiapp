@@ -1,0 +1,192 @@
+/* pages/myComplaint/index.wxss */
+@import "../applyArbitration/index.wxss";
+
+page {
+    background-color: #f8f8f8;
+}
+
+.tab-head {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 87rpx;
+    border: 1rpx solid #eee;
+    font-size: 0;
+    display: flex;
+    background-color: #fff;
+    z-index: 2;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.tab-head .text-title-wrap {
+    position: relative;
+    font-size: 27rpx;
+    color: #666;
+    height: 87rpx;
+    line-height: 87rpx;
+    margin: 0 54rpx;
+    font-weight: bold;
+}
+
+.tab-head .text-title-wrap.is-selected {
+    color: #198cff;
+}
+
+.tab-head .text-title-wrap.is-selected:after {
+    content: '';
+    position: absolute;
+    bottom: 10rpx;
+    left: 50%;
+    margin-left: -20rpx;
+    width: 41rpx;
+    height: 6rpx;
+    background-color: #198cff;
+    border-radius: 3rpx;
+}
+
+.page-content {
+    padding-top: 87rpx;
+}
+
+.module-content {
+    background-color: #fff;
+    margin-bottom: 18rpx;
+}
+
+.content-title {
+    font-size: 29rpx;
+    color: #000;
+    display: block;
+    padding: 30rpx 0;
+    margin-left: 32rpx;
+}
+
+.line-img {
+    width: 100%;
+    display: block;
+}
+
+.reason-content {
+    margin: 0 32rpx;
+    padding-bottom: 36rpx;
+    border-bottom: 1rpx solid #eee;
+}
+
+.reason-content .title {
+    font-size: 25rpx;
+    color: #333;
+    padding-top: 32rpx;
+}
+
+.reason-content .date {
+    font-size: 18rpx;
+    color: #999;
+    padding-top: 11rpx;
+    display: block;
+}
+
+.reason-content .remark {
+    font-size: 29rpx;
+    color: #333;
+    padding-top: 19rpx;
+    display: block;
+}
+
+.evidence-screenshot {
+    padding: 0 32rpx;
+    padding-bottom: 18rpx;
+}
+
+.evidence-screenshot .title {
+    padding-top: 37rpx;
+    display: block;
+    padding-bottom: 21rpx;
+    font-size: 25rpx;
+    color: #333;
+}
+
+.evidence-screenshot .img-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -19rpx;
+}
+
+.evidence-screenshot .item-img {
+    width: 222rpx;
+    height: 222rpx;
+    font-size: 0;
+    line-height: 222rpx;
+    margin-left: 13rpx;
+    margin-bottom: 13rpx;
+}
+
+.evidence-screenshot .img {
+    width: 100%;
+}
+
+.message-content {
+    padding-top: 35rpx;
+}
+
+.message-content .row-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 35rpx;
+    padding: 0 29rpx;
+}
+
+.message-content .user-icon-wrap {
+    width: 66rpx;
+    height: 66rpx;
+    border-radius: 33rpx;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.message-content .user-icon-img {
+    width: 100%;
+}
+
+.message-content .details-wrap {
+    margin-left: 16rpx;
+    flex: 1;
+    padding-bottom: 35rpx;
+    border-bottom: 1rpx solid #eee;
+}
+
+.message-content .nick-name {
+    font-size: 25rpx;
+    color: #333;
+    display: block;
+}
+
+.message-content .date {
+    font-size: 18rpx;
+    color: #999;
+    padding-top: 10rpx;
+    padding-bottom: 28rpx;
+    display: block;
+}
+
+.message-content .remark-content {
+    font-size: 29rpx;
+    display: block;
+    color: #333;
+    padding-bottom: 20rpx;
+}
+
+.message-content .img {
+    display: block;
+    max-width: 100%;
+}
+
+.message-content .none-confirm {
+    display: block;
+    text-align: center;
+    font-size: 24rpx;
+    padding-bottom: 20rpx;
+    color: #bbb;
+}
