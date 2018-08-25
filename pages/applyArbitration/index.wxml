@@ -15,7 +15,7 @@
                 </block>
                 <block wx:else>
                     <view bindtap="onUploadImg" class="screenshot">
-                        <view class="icon"></view>
+                         <image class="icon" mode="widthFix" src="/images/add-img.png" lazy-load="false"></image>
                         <text class="title">添加图片</text>
                     </view>
                 </block>

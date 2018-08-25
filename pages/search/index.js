@@ -3,12 +3,20 @@ import {
   api_orderWait
 } from '../../lib/api'
 
+import Utils from '../../lib/utils'
+
 Page({
 
   /**
    * 页面的初始数据
    */
+
+  ...Utils.reachBottom.action,
+
   data: {
+
+    ...Utils.reachBottom.data,
+
     isCancelHidden: true,
     reachEndInfo: {
       isHidden: true,
@@ -35,7 +43,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    const {searchForm, reachEndInfo} = this.data;
+    const {searchForm} = this.data;
     this.setData({
       searchForm: {
         ...searchForm,
@@ -47,24 +55,20 @@ Page({
         totalRows: 0
       },
       isCancelHidden: true,
-      reachEndInfo: {
-        ...reachEndInfo,
-        isHidden: true
-      },
-    }, this.fetchSearch);
+      'reachEndInfo.isHidden': true,
+    }, this.initFetch);
   },
 
   /**
    *  搜索fetchFetch
    */
-  fetchSearch: function (opts) {
+  initFetch: function (opts) {
     let params = {
       ...this.data.searchForm,
       ...opts
     };
     api_orderWait(params).then(data => {
       let {
-        searchForm,
         asyncData
       } = this.data;
       this.setData({
@@ -72,10 +76,7 @@ Page({
           total: data.total,
           list: asyncData.list.concat(data.list)
         },
-        searchForm: {
-          ...searchForm,
-          page: searchForm.page + 1,
-        },
+        'searchForm.page': params.page,
         isCancelHidden: false
       }, () => {
         wx.hideLoading();
@@ -86,28 +87,6 @@ Page({
       })
     });
   },
-
-  /**
-   * 设置更多加载信息
-   */
-  setReachEndInfo: function () {
-    let {
-      asyncData,
-      reachEndInfo,
-      searchForm
-    } = this.data;
-    let listTotal = asyncData.list.length;
-    let total = asyncData.total;
-    this.setData({
-      reachEndInfo: {
-        ...reachEndInfo,
-        isHidden: total < searchForm.page,
-        isMore: total > listTotal,
-        isLoading: false
-      }
-    })
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -154,26 +133,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function (e) {
-    const {
-      reachEndInfo,
-      searchForm
-    } = this.data;
-    const {
-      isHidden,
-      isMore,
-      isLoading
-    } = reachEndInfo;
-    if (!isHidden && isMore && !isLoading) {
-      this.setData({
-        reachEndInfo: {
-          ...reachEndInfo,
-          isLoading: true
-        }
-      });
-      this.fetchSearch({
-        page: searchForm.page + 1
-      })
-    }
+    this._onReachBottom()
   },
 
   /**

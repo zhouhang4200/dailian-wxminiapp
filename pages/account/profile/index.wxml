@@ -1,6 +1,6 @@
 <!--pages/account/api_profile/page.wxml-->
 <form bindsubmit="onSubmitForm" hidden="{{isPageHidden}}">
-    <view data-croppersize="[135,135]" bindtap="chooseImage" class="user-icon">
+    <view data-croppersize="[135,135]" data-cropsize="[135,135]" bindtap="chooseImage" class="user-icon">
         <image src="{{userInfo.avatar}}" class="img-full-max" mode="widthFix" lazy-load="false"></image>
     </view>
     <view class="row-item">

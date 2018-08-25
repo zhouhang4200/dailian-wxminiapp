@@ -10,9 +10,6 @@
 <view class="index-page search-page">
     <goods-item list="{{asyncData.list}}"></goods-item>
     <!--底部加载更多-->
-    <view hidden="{{reachEndInfo.isHidden}}" class="load-more">
-        <text wx:if="{{reachEndInfo.isFail}}">加载失败，点击重试...</text>
-        <text wx:else>{{reachEndInfo.isMore ? "加载中...":"没有更多了"}}</text>
-    </view>
+    <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
 </view>
 

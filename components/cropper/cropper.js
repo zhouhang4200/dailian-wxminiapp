@@ -128,7 +128,6 @@ Page({
   },
 
   onLoad: function (options) {
-    debugger
     const {cropperSize, ratio, cropperType, url} = options;
     let setData = {
       name: 'cropperImg',

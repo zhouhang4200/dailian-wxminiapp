@@ -1,1 +1,5 @@
 /* pages/msg/index.wxss */
+.icon image {
+    width: 77rpx;
+    height: 77rpx;
+}

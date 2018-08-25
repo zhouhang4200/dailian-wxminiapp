@@ -33,7 +33,7 @@ Page({
     if (validate) {
       wx.showLoading({title: '加载中', icon: 'none'});
       Utils.files.uploadFile([this.data.userInfo.avatar]).then(avatar => {
-        api_profileUpdate({...formData}).then(() => {
+        api_profileUpdate(formData).then(() => {
           wx.hideLoading();
           wx.showToast({title: '修改成功'})
         }, () => {
@@ -89,15 +89,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const cropperImg = this.getCropperImg();
-    if (cropperImg) {
-      this.setData({
-        userInfo: {
-          ...this.data.userInfo,
-          avatar: cropperImg
-        }
-      })
-    }
+    this.getCropperImg().then(url => {
+      if (url) {
+        this.setData({
+          'userInfo.avatar': url
+        })
+      }
+    });
   },
 
   /**

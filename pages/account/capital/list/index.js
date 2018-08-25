@@ -34,7 +34,6 @@ Page({
     };
     api_financeFlows(params).then(data => {
       let {
-        searchForm,
         asyncData
       } = this.data;
       this.setData({
@@ -42,10 +41,7 @@ Page({
           total: data.total,
           list: asyncData.list.concat(data.list)
         },
-        searchForm: {
-          ...searchForm,
-          page: params.page + 1,
-        }
+        'searchForm.page':params.page
       }, () => {
         this.pageShow();
         wx.hideLoading();

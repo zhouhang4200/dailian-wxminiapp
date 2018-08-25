@@ -68,7 +68,7 @@ page {
     font-weight: bold;
 }
 
-.ask-icon {
-    overflow: hidden;
+.left-icon image {
     width: 35rpx;
+    height: 35rpx;
 }

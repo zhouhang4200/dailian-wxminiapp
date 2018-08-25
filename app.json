@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/applyArbitration/index",
+    "pages/order/screenshot/index",
+    "pages/order/negotiated/index",
     "pages/home/index",
     "pages/account/capital/list/index",
     "pages/account/capital/pay/index",
@@ -10,7 +13,6 @@
     "pages/goodsDetail/index",
     "pages/order/index",
     "pages/account/register/index",
-    "pages/order/negotiated/index",
     "pages/order/details/index",
     "pages/search/index",
     "pages/msg/leaveMessageList/details/index",
@@ -21,8 +23,6 @@
     "pages/msg/customerService/index",
     "pages/msg/articleTemplate/index",
     "pages/msg/announcement/index",
-    "pages/applyArbitration/index",
-    "pages/order/screenshot/index",
     "components/cropper/cropper",
     "components/goods/index",
     "pages/help/index",
