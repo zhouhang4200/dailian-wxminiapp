@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/home/index",
     "pages/myComplaint/index",
     "pages/applyArbitration/index",
     "pages/order/screenshot/index",
     "pages/order/negotiated/index",
-    "pages/home/index",
     "pages/account/capital/list/index",
     "pages/account/capital/pay/index",
     "pages/account/index",
