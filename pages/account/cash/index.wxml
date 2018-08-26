@@ -1,11 +1,15 @@
 <!--pages/account/capital/cash/index.wxml-->
-<text class="remark-title">提示：提现金额最低10元且必须为整数，提现将收取1%的手续费，提 现金额将在3个工作日（节假日顺延）转账到实名认证填写的银行卡</text>
+<text class="remark-title">提示：提现金额最低10元且必须为整数，提现将收取1%的手续费，提现金额将在3个工作日（节假日顺延）转账到实名认证填写的银行卡</text>
 <view class="pay-title">
-    <text>提现金额（收取1%手续费） </text>
+    <text>提现金额（收取1%手续费）</text>
 </view>
-<view class="pay-money">
-    <image src="/images/rmb.png" class="symbol-icon" mode="widthFix" lazy-load="false"></image>
-    <input confirm-type="done" type="digit" auto-focus="" class="price-input"/>
-</view>
-<text class="remark-title bb-0">可用余额 10.00 </text>
-<button class="submit-btn"><text class="btn-title">确认充值</text></button>
+<form bindsubmit="onSubmit">
+    <view class="pay-money">
+        <image src="/images/rmb.png" class="symbol-icon" mode="widthFix" lazy-load="false"></image>
+        <input name="amount" confirm-type="done" type="digit" focus="{{true}}" class="price-input"/>
+    </view>
+    <text class="remark-title bb-0">可用余额 10.00</text>
+    <button formType="submit" class="submit-btn">
+        <text class="btn-title">确认充值</text>
+    </button>
+</form>

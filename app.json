@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/account/cash/index",
     "pages/account/pay/index",
     "pages/account/login/index",
     "pages/home/index",
@@ -29,7 +30,6 @@
     "pages/help/index",
     "pages/account/capital/index",
     "pages/account/capital/details/index",
-    "pages/account/cash/index",
     "pages/account/password/index"
   ],
   "window": {

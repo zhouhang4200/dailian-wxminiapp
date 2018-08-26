@@ -1,7 +1,7 @@
 <!--pages/account/password/index.wxml-->
 <form bindsubmit="onFormSubmit" class="user-account-page password-page">
     <view class="form-item">
-        <input name="phone" bindinput="onPhoneInput" maxlength="11" placeholder="请输入手机号码" type="number"/>
+        <input focus="{{true}}" name="phone" bindinput="onPhoneInput" maxlength="11" placeholder="请输入手机号码" type="number"/>
     </view>
     <view class="form-item send-wrap">
         <input name="verification_code"  type="number" placeholder="验证码"/>
