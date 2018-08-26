@@ -199,7 +199,7 @@ button::after {
     margin: 0 28rpx;
     margin-bottom: 21rpx;
     font-size: 29rpx;
-    line-height: 74rpx;
+    line-height: 88rpx;
     background-color: #198cff;
     color: #fff;
 }

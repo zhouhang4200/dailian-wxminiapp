@@ -1,0 +1,16 @@
+<!--pages/account/pay/index.wxml-->
+<text class="remark-title">提示：最低充值1元，充值成功后，请等待1-5分钟</text>
+<view class="pay-title">
+    <text>充值金额</text>
+</view>
+<form bindsubmit="onSubmit">
+    <view bindsubmit="onSubmit" class="pay-money">
+        <image src="/images/rmb.png" class="symbol-icon" mode="widthFix" lazy-load="false"></image>
+        <input name="amount" confirm-type="done" type="digit" focus="{{true}}" class="price-input"/>
+    </view>
+    <view class="pay-type">
+        <view class="title">充值方式</view>
+        <image src="/images/pay_weixin.png" class="icon" mode="widthFix" lazy-load="false"></image>
+    </view>
+    <button formType="submit" class="submit-btn"><text class="btn-title">确认充值</text></button>
+</form>

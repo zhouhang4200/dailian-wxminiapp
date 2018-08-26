@@ -1,7 +1,8 @@
 {
   "pages": [
+    "pages/account/pay/index",
+    "pages/account/login/index",
     "pages/home/index",
-    "pages/account/capital/pay/index",
     "pages/myComplaint/index",
     "pages/applyArbitration/index",
     "pages/order/screenshot/index",
@@ -10,7 +11,6 @@
     "pages/account/index",
     "pages/certification/index",
     "pages/account/profile/index",
-    "pages/account/login/index",
     "pages/goodsDetail/index",
     "pages/order/index",
     "pages/account/register/index",
@@ -29,7 +29,7 @@
     "pages/help/index",
     "pages/account/capital/index",
     "pages/account/capital/details/index",
-    "pages/account/capital/cash/index",
+    "pages/account/cash/index",
     "pages/account/password/index"
   ],
   "window": {
