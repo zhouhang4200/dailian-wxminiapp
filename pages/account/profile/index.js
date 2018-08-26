@@ -15,7 +15,8 @@ Page({
 
   data: {
     ...Utils.page.data,
-    isUserIconUpload: false, // 用户图片是否已上传
+    selectUploadIcon: '',
+    uploadUrl: '',
     userInfo: {
       avatar: '',
       name: '',
@@ -47,14 +48,14 @@ Page({
   onSubmitForm: function (e) {
     const formData = e.detail.value;
     const validate = this.formValidate(formData);
-    const {isUserIconUpload} = this.data;
+    const {selectUploadIcon, uploadUrl, userInfo} = this.data;
     if (validate) {
       wx.showLoading({title: '加载中', icon: 'none'});
-      const uploadUserIconPromise = isUserIconUpload ? Promise.resolve(this.data.userInfo.avatar) : Utils.files.uploadFile([this.data.userInfo.avatar]);
-      uploadUserIconPromise()
+      let userIconUrl = () => selectUploadIcon ? Utils.files.uploadFile([selectUploadIcon]) : Promise.resolve(uploadUrl || userInfo.avatar);
+      userIconUrl()
         .then(url => {
-          !isUserIconUpload && this.setData({'userInfo.avatar': url});
-          return api_profileUpdate(formData)
+          this.setData({'selectUploadIcon': '', uploadUrl: url});
+          return api_profileUpdate({...formData, avatar: url})
         })
         .then(data => {
           console.log(data)
@@ -111,7 +112,7 @@ Page({
     this.getCropperImg().then(url => {
       if (url) {
         this.setData({
-          isUserIconUpload: true,
+          selectUploadIcon: url,
           'userInfo.avatar': url
         })
       }

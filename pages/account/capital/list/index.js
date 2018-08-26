@@ -41,7 +41,7 @@ Page({
           total: data.total,
           list: asyncData.list.concat(data.list)
         },
-        'searchForm.page':params.page
+        'searchForm.page': params.page
       }, () => {
         this.pageShow();
         wx.hideLoading();

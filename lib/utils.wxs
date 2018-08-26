@@ -22,7 +22,17 @@ var capitalFormatText = function (type) {
   return (typeList[type - 1] || '未知类型')
 };
 
+/**
+ * 支出还是收入
+ * @param type
+ * @returns {string|string}
+ */
+var isIncome = function (type) {
+  return [1, 5, 4].indexOf(type) !== -1;
+};
+
 module.exports = {
   sumPrice: sumPrice,
-  capitalFormatText: capitalFormatText
+  capitalFormatText: capitalFormatText,
+  isIncome: isIncome
 };

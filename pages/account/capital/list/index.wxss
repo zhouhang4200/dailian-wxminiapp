@@ -15,22 +15,22 @@
     border-bottom: 1px solid #eee;
 }
 
-.row-item .left-info{
-    
+.left-info {
+
 }
 
-.row-item .title {
+.title {
     font-size: 29rpx;
     display: block;
 }
 
-.row-item .date {
+.date {
     display: block;
     font-size: 25rpx;
     color: #999;
 }
 
-.row-item .money-plus {
+.money-plus {
     font-size: 36rpx;
     color: #ff6600;
 }

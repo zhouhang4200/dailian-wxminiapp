@@ -1,17 +1,23 @@
 /* pages/account/capital/list/index.wxss */
+page {
+    padding-top: 30rpx;
+}
+
 .row-item {
     padding: 0 30rpx;
-    paddding-top: 37rpx;
     font-size: 25rpx;
     display: flex;
     justify-content: space-between;
     color: #666;
     line-height: 1.8;
     font-weight: bold;
+    margin-bottom: 37rpx;
 }
+
 .row-item .title {
-     display: block;
+    display: block;
 }
+
 .row-item view {
     padding-left: 72rpx;
 }
