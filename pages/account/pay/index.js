@@ -20,7 +20,7 @@ Page({
 
   onSubmit: function (e) {
     const amount = e.detail.value.amount;
-    if (amount < 0) {
+    if (amount < 1) {
       return wx.showToast({title: '最低充值金额1元', icon: 'none'})
     }
     wx.showLoading();
