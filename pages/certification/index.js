@@ -1,5 +1,6 @@
 // pages/certification/index.js
 import Utils from '../../lib/utils'
+import BankCardInfo from '../../lib/bank.card.info'
 import {
   api_certificationProfile
 } from '../../lib/api'
@@ -14,7 +15,6 @@ Page({
   data: {
 
     chooseImgKey: '',
-    identity_card: '',
     identity_card_back: '',
     identity_card_front: '',
     identity_card_hand: '',
@@ -22,9 +22,32 @@ Page({
       real_name: '',
       bank_card: '',
       bank_name: '',
+      identity_card: '',
     }
   },
 
+  /**
+   * 格式化银行卡号
+   * @param e
+   */
+  onCardInput: function (e) {
+    const bank_card = e.detail.value;
+    this.setData({
+      'info.bank_card': Utils.format.bank_card(e.detail.value)
+    });
+    BankCardInfo.getBankBin(bank_card.replace(/ /g, '')).then(data => {
+      this.setData({
+        'info.bank_name': data.bankName
+      })
+    }, err => {
+
+    })
+  },
+
+  /**
+   * 提交验证
+   * @param e
+   */
   onSubmit: function (e) {
     const formData = e.detail.value;
     const validate = this.formValidate(formData);
@@ -55,18 +78,6 @@ Page({
    * @param formData {object} 表单数据
    */
   formValidate: function (formData) {
-    let {
-      real_name,
-      bank_card,
-      bank_name,
-      identity_card,
-      identity_card_front,
-      identity_card_back,
-      identity_card_hand
-    } = {
-      ...this.data.info,
-      ...formData
-    };
     const requiredValidate = {
       real_name: '请输入你的真实姓名',
       bank_card: '请输入您的银行卡号',
@@ -76,6 +87,13 @@ Page({
       identity_card_front: '请上传身份证正面照',
       identity_card_hand: '请上传手持身份证照',
     };
+    let {
+      real_name,
+      bank_card,
+      bank_name,
+      identity_card,
+    } = formData;
+    bank_card = bank_card.replace(/ /g, '');
     for (let key in formData) {
       if (formData[key] === '') {
         wx.showToast({title: requiredValidate[key], icon: 'none'});
@@ -85,13 +103,13 @@ Page({
     const regRexKey = [
       {
         value: bank_card,
-        msg: '请输入正确的身份证号',
-        reg: 'bankCardNo'
+        msg: '请输入正确银行卡号',
+        reg: 'bank_card'
       },
       {
         value: identity_card,
-        msg: '请输入正确银行卡号',
-        reg: 'cardNo'
+        msg: '请输入正确的身份证号',
+        reg: 'identity_card'
       }
     ];
     for (let i = 0; i < regRexKey.length; i++) {
@@ -99,6 +117,18 @@ Page({
       const value = validate.value;
       if (!(Utils.Regrex[validate.reg].test(value)) && value) {
         wx.showToast({title: validate.msg, icon: 'none'});
+        return false;
+      }
+    }
+    let {
+      identity_card_back,
+      identity_card_front,
+      identity_card_hand,
+    } = this.data;
+    let imgUploadFiles = {identity_card_back, identity_card_front, identity_card_hand};
+    for (let key in imgUploadFiles) {
+      if (imgUploadFiles[key] === '') {
+        wx.showToast({title: requiredValidate[key], icon: 'none'});
         return false;
       }
     }

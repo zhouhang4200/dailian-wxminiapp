@@ -10,7 +10,7 @@
         <view class="row-item">
             <view class="row-bd">
                 <text class="title">开户银行卡号</text>
-                <input value="{{info.bank_card}}" name="bank_card" maxlength="19" placeholder="请输入您的银行卡号" type="number"/>
+                <input bindblur="onCardBlur" value="{{info.bank_card}}" bindinput="onCardInput" name="bank_card" placeholder="请输入您的银行卡号" type="number"/>
             </view>
         </view>
         <view class="row-item">

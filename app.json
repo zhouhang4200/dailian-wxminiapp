@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/account/index",
     "pages/account/cash/index",
     "pages/account/pay/index",
     "pages/account/login/index",
@@ -9,7 +10,6 @@
     "pages/order/screenshot/index",
     "pages/order/negotiated/index",
     "pages/account/capital/list/index",
-    "pages/account/index",
     "pages/certification/index",
     "pages/account/profile/index",
     "pages/goodsDetail/index",
