@@ -57,7 +57,7 @@
             </view>
         </view>
     </navigator>
-    <navigator class="link-navigation" url="/pages/help/index">
+    <navigator class="link-navigation" url="/pages/account/setting/index">
         <view class="link-bd">
             <view class="left-icon">
                 <image src="/images/icon_3.png" class="img-full-max" mode="widthFix" lazy-load="false"></image>
