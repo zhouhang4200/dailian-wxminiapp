@@ -9,7 +9,7 @@
 <view class="row-item">
     <text class="title">收支类型</text>
     <view>
-        <text>{{ utils.capitalFormatText(userInfo.type) }}</text>
+        <text>{{ userInfo.type }}</text>
     </view>
 </view>
 <view class="row-item">

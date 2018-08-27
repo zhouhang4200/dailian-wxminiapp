@@ -21,19 +21,26 @@ Page({
     userInfo: {}
   },
 
+  /**
+   * 更新用户信息
+   */
+  updateUserInfo: function () {
+    api_profile().then(data => {
+      const {balance, frozen} = data;
+      this.setData({
+        isLogin: data.code === undefined,
+        userInfo: {
+          ...data
+        }
+      }, () => this.pageEnd())
+    })
+  },
+
   initFetch: function () {
     try {
       const token = wx.getStorageSync('token');
       if (token) {
-        api_profile().then(data => {
-          const {balance, frozen} = data;
-          this.setData({
-            isLogin: data.code === undefined,
-            userInfo: {
-              ...data
-            }
-          }, () => this.pageEnd())
-        })
+        this.updateUserInfo();
       }
       else {
         this.setData({
@@ -63,12 +70,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (wx.getStorageSync('token') && this.data.isLogin === false) {
-      wx.showLoading({title: '加载中', icon: 'none'});
-      this.setData({
-        isLogin: '',
-        isPageHidden: true
-      }, () => this.pageLoad());
+    if (wx.getStorageSync('token')) {
+      if (this.data.isLogin === false) {
+        wx.showLoading({title: '加载中', icon: 'none'});
+        this.setData({
+          isLogin: '',
+          isPageHidden: true
+        }, () => this.pageLoad());
+      }
+      else {
+        this.updateUserInfo();
+      }
     }
   },
 

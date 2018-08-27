@@ -16,10 +16,21 @@ Page({
   onLoad: function (options) {
     const setting = {
       update_login: {
-        title: '修改登录密码'
+        title: '修改登录密码',
+        form:[
+          {
+
+          }
+        ]
       },
       update_pay: {
         title: '修改支付密码'
+      },
+      forget_pay: {
+        title: '忘记支付密码'
+      },
+      setting_pay: {
+        title: '设置支付密码'
       }
     };
     wx.setNavigationBarTitle({

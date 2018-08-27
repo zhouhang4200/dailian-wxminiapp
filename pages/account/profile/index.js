@@ -30,6 +30,7 @@ Page({
       const {
         avatar = '',
         name = '',
+        qq = '',
         email = '',
         signature = ''
       } = userInfo;
@@ -38,7 +39,8 @@ Page({
           avatar,
           name,
           email,
-          signature
+          signature,
+          qq
         }
       });
       this.pageEnd();
@@ -58,7 +60,8 @@ Page({
           return api_profileUpdate({...formData, avatar: url})
         })
         .then(data => {
-          console.log(data)
+          wx.hideLoading();
+          wx.showToast({title: '修改成功', icon: 'none'})
         })
     }
   },

@@ -62,10 +62,11 @@ Page({
         const [identity_card_back, identity_card_front, identity_card_hand] = result;
         api_certificationProfile({
           ...this.data.info,
+          ...formData,
           identity_card_back,
           identity_card_front,
           identity_card_hand,
-          identity_card: formData.identity_card.replace(/ /g, '')
+          bank_card: formData.bank_card.replace(/ /g, '')
         }).then(data => {
           wx.hideLoading();
           wx.showToast({title: '实名认证提交成功', icon: 'none'})
