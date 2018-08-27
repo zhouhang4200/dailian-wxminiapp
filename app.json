@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/home/index",
+    "pages/order/index",
     "pages/account/index",
     "pages/account/cash/index",
     "pages/account/pay/index",
     "pages/account/login/index",
-    "pages/home/index",
     "pages/myComplaint/index",
     "pages/applyArbitration/index",
     "pages/order/screenshot/index",
@@ -12,8 +13,7 @@
     "pages/account/capital/list/index",
     "pages/certification/index",
     "pages/account/profile/index",
-    "pages/goodsDetail/index",
-    "pages/order/index",
+    "pages/waitOrderDetail/index",
     "pages/account/register/index",
     "pages/order/details/index",
     "pages/search/index",

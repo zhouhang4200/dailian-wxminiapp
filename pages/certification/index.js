@@ -64,7 +64,8 @@ Page({
           ...this.data.info,
           identity_card_back,
           identity_card_front,
-          identity_card_hand
+          identity_card_hand,
+          identity_card: formData.identity_card.replace(/ /g, '')
         }).then(data => {
           wx.hideLoading();
           wx.showToast({title: '实名认证提交成功', icon: 'none'})
@@ -136,7 +137,6 @@ Page({
   },
 
   chooseImageCard: function (e) {
-    console.log(typeof e)
     const chooseImgKey = e.currentTarget.dataset.key;
     this.setData({
       chooseImgKey

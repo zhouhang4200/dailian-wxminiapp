@@ -2,7 +2,7 @@
 
 import Utils from '../../lib/utils'
 import {
-  api_orderWaitDetail
+  api_orderWaitDetail,
 } from '../../lib/api'
 
 Page({
@@ -30,32 +30,16 @@ Page({
     isPayPasswordHidden: true,
     modalKey: '',
 
-    trade_no: '',
     info: {},
     payPassword: ''
   },
 
 
-  initFetch: function () {
-    let info = {
-      "trade_no": "2018082016035900002202",
-      "game_name": "决战平安京",
-      "region_name": "苹果",
-      "server_name": "网易手机账号",
-      "title": "tSMCvoGvUcA1LNIwEXy",
-      "game_leveling_type_name": "排位",
-      "security_deposit": "491.00",
-      "efficiency_deposit": "946.00",
-      "hour": 15,
-      "day": 27,
-      "amount": "387.00",
-      "explain": "900",
-      "requirement": "252",
-      "status_describe": "未接单"
-    };
-    this.setData({
-      info
-    }, () => this.pageHidden())
+  initFetch() {
+    api_orderWaitDetail({trade_no: this.options.trade_no}).then(info => {
+      this.pageEnd();
+      this.setData({info})
+    })
   },
 
   onInput: function (e) {
@@ -134,7 +118,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({trade_no: options.trade_no || '2018082016035900002202'});
     this.pageLoad();
   },
 

@@ -58,19 +58,22 @@ page {
 
 .row-detail .info {
     flex: 1;
-    padding-left: 22rpx;
+    padding-left: 14rpx;
     font-weight: bold;
     color: #333;
 }
 
 .row-detail .title {
     width: 539rpx;
+    padding-left: 8rpx;
     overflow: hidden;
+    margin-bottom: 10rpx;
     font-size: 27rpx;
 }
 
 .row-detail .attr-row {
     font-size: 20rpx;
+    padding-left: 4rpx;
     margin-bottom: 10rpx;
 }
 

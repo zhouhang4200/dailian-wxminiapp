@@ -32,7 +32,7 @@
 <view class="row-item">
     <view class="row-bd">
         <text class="title">协商原因</text>
-        <input type="idcard" placeholder="请输入18位居民身份号"/>
+        <input type="idcard" placeholder="请输入协商原因"/>
     </view>
 </view>
 <button bindtap="modalOverlayToggle" class="submit-btn">
@@ -40,8 +40,7 @@
 </button>
 
 <!-- modal Overlay -->
-<view bindtap="modalOverlayToggle"
-      animation="{{animationModalOverlay}}"
+<view  animation="{{animationModalOverlay}}"
       hidden="{{isModalOverlayHidden}}"
       bindtransitionend="onModalOverlayToggleEnd"
       class="modal-overlay">

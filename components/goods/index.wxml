@@ -1,12 +1,12 @@
 <!--components/goods/index.wxml-->
 <!--首页商品列表组件-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
-<navigator wx:key="index" url="/pages/goodsDetail/index?trade_no={{item.trade_no}}" wx:for="{{list}}" class="goods-item" hover-class="none">
+<navigator wx:key="index" url="/pages/waitOrderDetail/index?trade_no={{item.trade_no}}" wx:for="{{list}}" class="goods-item" hover-class="none">
     <view class="goods-icon">
         <image src="{{item.icon}}" mode="widthFix" lazy-load="true" class="img"></image>
     </view>
     <view class="goods-details">
-        <view class="title">{{item.title}}</view>
+        <view class="title">【{{item.game_leveling_type_name}}】{{item.title}}</view>
         <view class="price-info">
             <text class="rmb-symbol" decode="{{true}}}">￥</text>
             <text class="size">{{item.amount}}</text>

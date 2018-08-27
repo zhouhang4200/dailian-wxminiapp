@@ -1,16 +1,37 @@
 // pages/order/details/index.js
+import Utils from '../../../lib/utils'
+import {
+  api_selfOrderDetail
+} from "../../../lib/api";
+
 Page({
+
+  ...Utils.page.action,
 
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+
+    ...Utils.page.data,
+
+
+    info: {}
+
+  },
+
+  initFetch() {
+    api_selfOrderDetail({trade_no: this.options.trade_no}).then(info => {
+      this.pageEnd();
+      this.setData({info})
+    })
+  },
 
   /**
    * 复制内容到剪切板
    */
   onSetClipboardData: function (e) {
-    const data = e.currentTarget.data.copy;
+    const data = e.currentTarget.dataset.copy;
     wx.setClipboardData({
       data,
       success: function (res) {
@@ -23,7 +44,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.pageLoad();
   },
 
   /**

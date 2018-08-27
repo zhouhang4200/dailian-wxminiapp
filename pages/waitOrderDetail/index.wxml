@@ -1,7 +1,7 @@
 <!--pages/goodsDetail/index.wxml-->
 <view hidden="{{isPageHidden}}">
     <view class="head-info">
-        <view class="head-title">{{info.title}}</view>
+        <view class="head-title">【{{info.game_leveling_type_name}}】{{info.title}}</view>
         <view class="price-info">
             <text class="rmb-symbol">￥</text>
             <text class="rmb-size">{{info.amount}}</text>

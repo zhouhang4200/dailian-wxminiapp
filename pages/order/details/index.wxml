@@ -1,161 +1,142 @@
 <!--pages/order/details/index.wxml-->
-<view class="row-item">
-    <view class="row-title">
-        <text>收货信息</text>
-    </view>
-    <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
-    <view class="row-info row-title2">
-        <text>订单价格</text>
-        <text class="right price-size">¥10.00</text>
-    </view>
-    <view class="row-info">
-        <text>订单状态</text>
-        <text class="right"></text>
-    </view>
-    <view class="row-info">
-        <text>订单编号</text>
-        <view class="right">
-            <view class="copy-btn"  data-copy="" bindtap="onSetClipboardData">复制</view>
-            <text>2018032118120500000334 </text>
+<block hidden="isPageHidden">
+    <view class="row-item">
+        <view class="row-title">
+            <text>收货信息</text>
         </view>
-    </view>
-    <view class="row-info">
-        <text>发布时间</text>
-        <text class="right"></text>
-    </view>
-    <view class="row-info">
-        <text>接单时间</text>
-        <text class="right"></text>
-    </view>
-    <view class="row-info">
-        <text>完成时间</text>
-        <text class="right"></text>
-    </view>
-</view>
-<view class="row-item">
-    <view class="row-title">
-        <text>账号信息</text>
-    </view>
-    <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
-    <view class="row-info">
-        <text>游戏区服</text>
-        <text class="right"></text>
-    </view>
-    <view class="row-info">
-        <text>账号</text>
-        <view class="right">
-            <view class="copy-btn"  data-copy="" bindtap="onSetClipboardData">复制</view>
-            <text></text>
+        <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
+        <view class="row-info row-title2">
+            <text>订单价格</text>
+            <text class="right price-size">¥{{info.amount}}</text>
         </view>
-    </view>
-    <view class="row-info">
-        <text>密码</text>
-        <view class="right">
-            <view class="copy-btn"  data-copy="" bindtap="onSetClipboardData">复制</view>
-            <text></text>
+        <view class="row-info">
+            <text>订单状态</text>
+            <text class="right">{{info.status_describe}}</text>
         </view>
-    </view>
-</view>
-<view class="row-item">
-    <view class="row-title">
-        <text>代练信息</text>
-    </view>
-    <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
-    <view class="row-info">
-        <text>代练标题</text>
-        <text class="ellipsis right">【排位】单双排 钻石3-钻石1 已有60胜点单双
-            排钻石3-钻石1 已有60胜点单双排 钻石3-钻
-            石1...
-        </text>
-    </view>
-    <view class="row-info">
-        <text>代练类型</text>
-        <text class="right"></text>
-    </view>
-    <view class="row-info">
-        <text>代练价格</text>
-        <text class="right"></text>
-    </view>
-    <view class="row-info">
-        <text>安全保证金</text>
-        <text class="right"></text>
-    </view>
-    <view class="row-info">
-        <text>效率保证金</text>
-        <text class="right"></text>
-    </view>
-    <view class="row-info">
-        <text>代练时间(d)</text>
-        <text class="right"></text>
-    </view>
-    <view class="row-info">
-        <text>代练时间(h)</text>
-        <text class="right"></text>
-    </view>
-</view>
-<view class="row-item">
-    <view class="row-title">
-        <text>代练要求</text>
-    </view>
-    <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
-    <view class="row-article">
-        <view class="p">
-            <view class="info">
-                <text>(需要验证码或者密码错的) 方式是号主电话，自己问一下,态
-                    度好一点
-                </text>
+        <view class="row-info">
+            <text>订单编号</text>
+            <view class="right">
+                <view class="copy-btn" data-copy="{{info.trade_no}}" bindtap="onSetClipboardData">复制</view>
+                <text>{{info.trade_no}} </text>
             </view>
         </view>
-        <view class="p">
-            <text>1、</text>
-            <view class="info">
-                <text>接单后退单要扣效率保证金~(接单后,必须30分钟内上号开
-                    打)
-                </text>
+        <view class="row-info">
+            <text>发布时间</text>
+            <text class="right">{{info.created_at}}</text>
+        </view>
+        <view class="row-info">
+            <text>接单时间</text>
+            <text class="right">{{info.take_at}}</text>
+        </view>
+        <view class="row-info">
+            <text>完成时间</text>
+            <text class="right">{{info.complete_at}}</text>
+        </view>
+    </view>
+    <view class="row-item">
+        <view class="row-title">
+            <text>账号信息</text>
+        </view>
+        <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
+        <view class="row-info">
+            <text>游戏区服</text>
+            <text class="right">{{info.region_name}}/{{info.server_name}}</text>
+        </view>
+        <view class="row-info">
+            <text>账号</text>
+            <view class="right">
+                <view class="copy-btn" data-copy="{{info.game_account}}" bindtap="onSetClipboardData">复制</view>
+                <text>{{info.game_account}}</text>
             </view>
         </view>
-        <view class="p">
-            <text>2、</text>
-            <view class="info">
-                <text>指定英雄单，最低百分之55使用率，百分之60胜率，被ban
-                    被抢截图，完单时荣耀战力不能下降，违者撤销扣保证金
-                </text>
-            </view>
-        </view>
-        <view class="p">
-            <text>3、</text>
-            <view class="info">
-                <text>动用金币钻石铭文体验卡等必须先经过我同意之后才能使
-                    用,否则扣双金~
-                </text>
+        <view class="row-info">
+            <text>密码</text>
+            <view class="right">
+                <view class="copy-btn" data-copy="{{info.game_password}}" bindtap="onSetClipboardData">复制</view>
+                <text>{{info.game_password}}</text>
             </view>
         </view>
     </view>
-</view>
-<view class="row-item">
-    <view class="row-title">
-        <text>代练说明</text>
+    <view class="row-item">
+        <view class="row-title">
+            <text>代练信息</text>
+        </view>
+        <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
+        <view class="row-info">
+            <text>代练标题</text>
+            <text class="ellipsis right">【{{info.game_leveling_type_name}}】{{info.title}}</text>
+        </view>
+        <view class="row-info">
+            <text>代练类型</text>
+            <text class="right">{{info.game_leveling_type_name}}</text>
+        </view>
+        <view class="row-info">
+            <text>代练价格</text>
+            <text class="right">{{info.amount}}</text>
+        </view>
+        <view class="row-info">
+            <text>安全保证金</text>
+            <text class="right">{{info.security_deposit}}</text>
+        </view>
+        <view class="row-info">
+            <text>效率保证金</text>
+            <text class="right">{{info.efficiency_deposit}}</text>
+        </view>
+        <view class="row-info">
+            <text>代练时间(d)</text>
+            <text class="right">{{info.day}}</text>
+        </view>
+        <view class="row-info">
+            <text>代练时间(h)</text>
+            <text class="right">{{info.hour}}</text>
+        </view>
     </view>
-    <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
-    <view class="row-info">
-        <text>符文五套各150，英雄70+</text>
+    <view class="row-item">
+        <view class="row-title">
+            <text>代练要求</text>
+        </view>
+        <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
+        <view class="row-article">
+            <view class="p">
+                <view class="info">
+                    <text>{{info.requirement}}</text>
+                </view>
+            </view>
+            <!--<view class="p">-->
+            <!--<text>1、</text>-->
+            <!--<view class="info">-->
+            <!--<text>接单后退单要扣效率保证金~(接单后,必须30分钟内上号开-->
+            <!--打)-->
+            <!--</text>-->
+            <!--</view>-->
+            <!--</view>-->
+        </view>
     </view>
-</view>
-<view class="row-item">
-    <view class="row-title">
-        <text>联系信息</text>
+    <view class="row-item">
+        <view class="row-title">
+            <text>代练说明</text>
+        </view>
+        <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
+        <view class="row-info">
+            <text>{{info.explain}}</text>
+        </view>
     </view>
-    <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
-    <view class="row-info">
-        <text>联系人</text>
-        <text class="right"></text>
+    <view class="row-item">
+        <view class="row-title">
+            <text>联系信息</text>
+        </view>
+        <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
+        <view class="row-info">
+            <text>联系人</text>
+            <text class="right">{{info.player_name}}</text>
+        </view>
+        <view class="row-info">
+            <text>电话</text>
+            <text class="right">{{info.player_phone}}</text>
+        </view>
+        <view class="row-info">
+            <text>QQ</text>
+            <text class="right">{{info.player_qq}}</text>
+        </view>
     </view>
-    <view class="row-info">
-        <text>电话</text>
-        <text class="right"></text>
-    </view>
-    <view class="row-info">
-        <text>QQ</text>
-        <text class="right"></text>
-    </view>
-</view>
+</block>
