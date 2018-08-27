@@ -3,7 +3,12 @@
 import Utils from '../../lib/utils'
 import {
   api_orderWaitDetail,
+  api_operationOrder,
+  api_profile
 } from '../../lib/api'
+
+// 倒计时清除
+let intervalSuccess = '';
 
 Page({
 
@@ -20,18 +25,21 @@ Page({
 
     payPasswordFocus: false,
     payPasswordLength: 0,
+    pay_password: '',
+
+    actionName: '',
 
     orderPasswordFocus: false,
     orderPayPasswordFocus: false,
 
     isSettingPasswordHidden: true,
-    isReceiveOrderHidden: true,
+    isOrderSuccessHidden: true,
     isOrderPasswordHidden: true,
     isPayPasswordHidden: true,
     modalKey: '',
 
     info: {},
-    payPassword: ''
+    take_order_password: '',
   },
 
 
@@ -42,76 +50,255 @@ Page({
     })
   },
 
-  onInput: function (e) {
-    const payPassword = e.detail.value;
-    this.setData({
-      payPasswordLength: payPassword.length
-    })
-  },
-
-  modalOverlayShowHandle: function () {
-
-  },
-
-  modalOverlayCloseHandle: function () {
-    this.setData({
-      [this.data.modalKey]: true,
-      payPasswordFocus: false,
-      payPasswordLength: 0,
-
-      orderPasswordFocus: false,
-      orderPayPasswordFocus: false,
-    });
-  },
-
-  /**
-   * 设置支付密码
-   */
-  settingPayPassword: function () {
-    this.setData({
-      modalKey: 'isSettingPasswordHidden',
-      isSettingPasswordHidden: false,
-    })
-  },
-  /**
-   * 接单成功
-   */
-  orderReceiveSuccess: function () {
-    this.setData({
-      modalKey: 'isReceiveOrderHidden',
-      isReceiveOrderHidden: false
-    })
-  },
-  /**
-   * 接单输入密码(订单密码和支付密码)
-   */
-  setOrderPassword: function () {
-    this.setData({
-      orderPasswordFocus: true,
-      modalKey: 'isOrderPasswordHidden',
-      isOrderPasswordHidden: false
-    })
-  },
-  /**
-   * 输入支付密码
-   */
-  inputPayPassword: function () {
-    this.setData({
-      payPasswordFocus: true,
-      modalKey: 'isPayPasswordHidden',
-      isPayPasswordHidden: false
-    })
-  },
-
   /**
    * 立即接单
    */
   onReceiveSubmit: function () {
-    setTimeout(function () {
-      this.setData({
+    wx.showLoading({icon: 'none', title: '加载中'});
+    api_profile().then(data => {
+      wx.hideLoading();
+      const isSettingPayPassword = data.pay_password === 1;
+      const isPayOrderPassword = this.data.info.private === 1;
+      if (isSettingPayPassword) {
+        if (isPayOrderPassword) {
+          this.setOrderAndPayPasswordModal()
+        }
+        else {
+          this.setPayPasswordModal();
+        }
+      }
+      else {
+        this.settingPayPasswordModal();
+      }
+    })
+  },
 
-      },()=>this.modalOverlayToggle());
-    },1000)
+  /**
+   * 订单密码
+   * @param e
+   */
+  onInputOrderPassword: function (e) {
+    this.setData({
+      take_order_password: e.detail.value
+    })
+  },
+
+  /**
+   * 输入支付密码handle
+   * @param e
+   */
+  onInputPayPassword: function (e) {
+    const pay_password = e.detail.value;
+    this.setData({
+      pay_password,
+      payPasswordLength: pay_password.length
+    })
+  },
+
+  /**
+   * 窗口显示回调
+   */
+  modalOverlayShowHandle: function () {
+    const focus = {
+      isOrderPasswordHidden: 'orderPasswordFocus',
+      isPayPasswordHidden: 'payPasswordFocus'
+    };
+    const focusKey = focus[this.data.modalKey];
+    if (focusKey) {
+      this.setData({
+        [focusKey]: true
+      })
+    }
+    // 为成功弹窗的话，就要执行自动关闭弹窗
+    if (!this.data.isOrderSuccessHidden) {
+      this.autoCloseSuccessModal();
+    }
+  },
+
+  /**
+   * 关窗回调
+   */
+  modalOverlayCloseHandle: function () {
+    clearInterval(intervalSuccess);
+    const modalKey = this.data.modalKey;
+    this.setData({
+      [modalKey]: true,
+      payPasswordFocus: false,
+      payPasswordLength: 0,
+      pay_password: '',
+      take_order_password: '',
+      orderPasswordFocus: false,
+      orderPayPasswordFocus: false,
+    }, () => {
+      // 如果是成功弹窗关闭，就要跳转到详情页
+      if (modalKey === 'isOrderSuccessHidden') {
+        this.redirectToOrderDetails();
+      }
+    });
+  },
+
+  /**
+   * 设置支付密码焦点
+   */
+  setPayPasswordFocus: function () {
+    this.setData({
+      payPasswordFocus: true
+    })
+  },
+
+  /**
+   * 是否设置支付密码弹窗
+   */
+  settingPayPasswordModal: function () {
+    this.setData({
+      modalKey: 'isSettingPasswordHidden',
+      isSettingPasswordHidden: false,
+      actionName: 'onSettingPassword'
+    }, () => this.modalOverlayToggle())
+  },
+
+  /**
+   * 订单密码和支付密码 弹窗
+   */
+  setOrderAndPayPasswordModal: function () {
+    this.setData({
+      modalKey: 'isOrderPasswordHidden',
+      isOrderPasswordHidden: false,
+      actionName: 'onOrderPassword'
+    }, () => this.modalOverlayToggle())
+  },
+
+  /**
+   * 支付密码弹窗
+   */
+  setPayPasswordModal: function () {
+    this.setData({
+      modalKey: 'isPayPasswordHidden',
+      isPayPasswordHidden: false,
+      actionName: 'onPayPassword'
+    }, () => this.modalOverlayToggle())
+  },
+
+  /**
+   * 接单成功弹窗
+   */
+  setOrderSuccessModal: function () {
+    this.setData({
+      modalKey: 'isOrderSuccessHidden',
+      isOrderSuccessHidden: false,
+      actionName: 'onOrderSuccess'
+    }, () => this.modalOverlayToggle())
+  },
+
+  /**
+   * modal按钮提交
+   */
+  onModalSubmit: function (e) {
+    const actionName = e.currentTarget.dataset.action;
+    this[actionName]();
+  },
+
+  /**
+   * 提交输入的支付密码
+   */
+  onPayPassword: function () {
+    const pay_password = this.data.pay_password;
+    if (pay_password.length < 6) {
+      return wx.showToast({title: '请输入完整的支付密码', icon: 'none'});
+    }
+    this.modalOverlayToggle();
+    wx.showLoading({title: '加载中', icon: 'none'});
+    this.onOrderSubmitAsync({
+      pay_password,
+    }).then(data => {
+      wx.hideLoading();
+      if (data.code) {
+        wx.showToast({title: data.message, icon: 'none'});
+        this.setPayPasswordModal();
+      }
+      else {
+        this.setOrderSuccessModal();
+      }
+    })
+  },
+
+  /**
+   * 提交输入的支付和订单密码
+   */
+  onOrderPassword: function () {
+    const {pay_password, take_order_password} = this.data;
+    if (!take_order_password.length) {
+      return wx.showToast({title: '请输入订单密码', icon: 'none'});
+    }
+    if (pay_password.length < 6) {
+      return wx.showToast({title: '请输入支付密码', icon: 'none'});
+    }
+    this.modalOverlayToggle();
+    wx.showLoading({title: '加载中', icon: 'none'});
+    this.onOrderSubmitAsync({
+      pay_password,
+      take_order_password
+    }).then(data => {
+      wx.hideLoading();
+      if (data.code) {
+        wx.showToast({title: data.message, icon: 'none'});
+        this.setOrderAndPayPasswordModal();
+      }
+      else {
+        this.setOrderSuccessModal();
+      }
+    })
+  },
+
+  /**
+   *  提交 设置支付密码
+   */
+  onSettingPassword: function () {
+    // 设置完成之后，回来直接提交
+    wx.navigateTo({
+      url: '/pages/account/setting_pay?action=setting_pay&url=/pages/waitOrderDetail/index?action=onReceiveSubmit'
+    })
+  },
+
+  /**
+   * 订单提交
+   */
+  onOrderSubmitAsync: function (params) {
+    return api_operationOrder({
+      trade_no: this.data.info.trade_no,
+      ...params,
+    })
+  },
+
+  /**
+   * 订单提交成功，开始自动跳转
+   */
+  onOrderSuccess: function () {
+    this.modalOverlayToggle();
+  },
+
+  /**
+   * 自动关闭订单成功弹窗
+   */
+  autoCloseSuccessModal: function () {
+    let countDownTime = 3;
+    intervalSuccess = setInterval(() => {
+      countDownTime--;
+      if (countDownTime === 0) {
+        // 关闭弹窗，之后执行关闭弹窗回调
+        this.modalOverlayToggle();
+      }
+    }, 1000)
+  },
+
+  /**
+   * 跳转订单详情
+   */
+  redirectToOrderDetails: function () {
+    clearInterval(intervalSuccess);
+    wx.redirectTo({
+      url: '/pages/order/details/index?trade_no=' + this.data.info.trade_no
+    })
   },
 
   /**
@@ -139,7 +326,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    clearInterval(intervalSuccess);
   },
 
   /**

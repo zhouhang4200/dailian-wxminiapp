@@ -1,4 +1,5 @@
 <!--pages/goodsDetail/index.wxml-->
+<wxs src="../../lib/utils.wxs" module="utils"></wxs>
 <view hidden="{{isPageHidden}}">
     <view class="head-info">
         <view class="head-title">【{{info.game_leveling_type_name}}】{{info.title}}</view>
@@ -21,7 +22,7 @@
     <view class="order-info-wrap">
         <view class="order-info">
             <text class="title">账号状态：</text>
-            <view class="tag">{{info.status_describe}}</view>
+            <view class="tag">{{utils.orderStatusFormatTitle(info.status)}}</view>
         </view>
         <view class="order-info">
             <text class="title">订单编号：</text>
@@ -67,6 +68,7 @@
       hidden="{{isModalOverlayHidden}}"
       class="modal-overlay">
 </view>
+
 <!-- 操作选项 -->
 <view bindtransitionend="onModalOverlayToggleEnd"
       animation="{{animationModalOverlayContent}}"
@@ -79,7 +81,7 @@
     </view>
 
     <!--接单成功-->
-    <view hidden="{{isReceiveOrderHidden}}" class="modal-bd confirm-modal">
+    <view hidden="{{isOrderSuccessHidden}}" class="modal-bd confirm-modal">
         接单成功！3秒后前往订单详情
     </view>
 
@@ -87,10 +89,12 @@
     <view hidden="{{isOrderPasswordHidden}}" class="modal-bd form-modal">
         <view class="modal-title">请输入支付密码</view>
         <view class="password-input">
-            <input cursor-spacing="140" focus="{{orderPasswordFocus}}" placeholder="请输入订单密码" password="{{true}}"/>
+            <input confirm-type="next" cursor-spacing="160" value="{{take_order_password}}" data-key="take_order_password" bindinput="onInputOrderPassword"
+                   focus="{{orderPasswordFocus}}" placeholder="请输入订单密码" password="{{true}}"/>
         </view>
         <view class="password-input">
-            <input cursor-spacing="110" maxlength="6" type="number" focus="{{orderPayPasswordFocus}}" placeholder="请输入支付密码" password="{{true}}"/>
+            <input cursor-spacing="110" value="{{pay_password}}" data-key="pay_password" maxlength="6" bindinput="onInputPayPassword" type="number"
+                   focus="{{orderPayPasswordFocus}}" placeholder="请输入支付密码" password="{{true}}"/>
         </view>
         <navigator url="/pages/account/password/index?forget=1" class="forget-link" hover-class="none">忘记密码</navigator>
     </view>
@@ -100,10 +104,11 @@
         <view class="modal-title">请输入支付密码</view>
         <view class="password-input">
             <view class="pay-password-input">
-                <input cursor-spacing="120" type="number" focus="{{payPasswordFocus}}" bindinput="onInput"
+                <input cursor-spacing="120" type="number" value="{{pay_password}}" focus="{{payPasswordFocus}}"
+                       bindinput="onInputPayPassword"
                        class="pay-password-input" maxlength="6" password="{{true}}"/>
             </view>
-            <view bindtap="modalOverlayShowHandle" class="password-sigle-wrap">
+            <view bindtap="setPayPasswordFocus" class="password-sigle-wrap">
                 <view class="bl-0 password-sigle {{payPasswordLength>0 ? 'password-sigle-show':''}}"></view>
                 <view class="password-sigle {{payPasswordLength>1 ? 'password-sigle-show':''}}"></view>
                 <view class="password-sigle {{payPasswordLength>2 ? 'password-sigle-show':''}}"></view>
@@ -117,6 +122,6 @@
 
     <view class="modal-footer">
         <view bindtap="modalOverlayToggle" class="btn line">取消</view>
-        <view class="btn primary">确定</view>
+        <view data-action="{{actionName}}" bindtap="onModalSubmit" class="btn primary">确定</view>
     </view>
 </view>

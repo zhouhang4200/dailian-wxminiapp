@@ -1,6 +1,5 @@
 /* pages/certification/index.wxss */
 page {
-    padding-bottom: 124rpx;
     background-color: #f8f8f8;
 }
 
@@ -8,8 +7,48 @@ page {
 
 }
 
+.head-status {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    height: 65rpx;
+    display: flex;
+    align-items: center;
+    padding-left: 30rpx;
+    font-size: 26rpx;
+    color: #fff;
+}
+
+.status-icon {
+    height: 30rpx;
+    width: 30rpx;
+    margin-right: 20rpx;
+}
+
+.success-status {
+    background-color: #1ec254;
+}
+
+.fail-status {
+    background-color: #F56C6C;
+}
+
+.waiting-status {
+    background-color: #10aeff;
+}
+
 .row-item-group {
     margin-bottom: 13rpx;
+}
+
+.fixed-status-disabled {
+    padding-top: 65rpx;
+}
+
+.fixed-status-bottom {
+    padding-bottom: 124rpx;
 }
 
 .row-item {

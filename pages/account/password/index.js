@@ -17,20 +17,61 @@ Page({
     const setting = {
       update_login: {
         title: '修改登录密码',
-        form:[
+        type:'update_login',
+        action: 'updateLoginPassword',
+        form: [
           {
-
+            placeholder: '请输入旧登陆密码', type: 'password'
+          },
+          {
+            placeholder: '请输入新登陆密码', type: 'password'
+          },
+          {
+            placeholder: '请再次输入新密码', type: 'password'
           }
         ]
       },
       update_pay: {
-        title: '修改支付密码'
+        title: '修改支付密码',
+        action: 'update_pay',
+        form: [
+          {
+            placeholder: '请输入旧支付密码', type: 'password'
+          },
+          {
+            placeholder: '请输入新支付密码', type: 'password'
+          },
+          {
+            placeholder: '请再次输入新密码', type: 'password'
+          }
+        ]
       },
       forget_pay: {
-        title: '忘记支付密码'
+        title: '忘记支付密码',
+        action: 'forget_pay',
+        form: [
+          {
+            placeholder: '请输入手机号码', type: 'phone'
+          },
+          {
+            placeholder: '请输入新支付密码', type: 'password'
+          },
+          {
+            placeholder: '请输入验证码', type: 'phoneCode'
+          },
+        ]
       },
       setting_pay: {
-        title: '设置支付密码'
+        title: '设置支付密码',
+        action: 'setting_pay',
+        form: [
+          {
+            placeholder: '请输入手机号码', type: 'phone'
+          },
+          {
+            placeholder: '请再次输入新密码', type: 'password'
+          }
+        ]
       }
     };
     wx.setNavigationBarTitle({

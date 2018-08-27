@@ -70,18 +70,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (wx.getStorageSync('token')) {
-      if (this.data.isLogin === false) {
-        wx.showLoading({title: '加载中', icon: 'none'});
-        this.setData({
-          isLogin: '',
-          isPageHidden: true
-        }, () => this.pageLoad());
-      }
-      else {
-        this.updateUserInfo();
-      }
-    }
+    this.updateUserInfo();
   },
 
   /**

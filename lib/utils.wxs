@@ -31,8 +31,33 @@ var isIncome = function (type) {
   return [1, 5, 4].indexOf(type) !== -1;
 };
 
+/**
+ * 支出还是收入
+ * @param status
+ * @returns {string|string}
+ */
+var orderStatusFormatTitle = function (status) {
+  var orderStatus = {
+    code1: '未接单',
+    code2: '代练中',
+    code3: '待验收',
+    code4: '撤销中',
+    code5: '仲裁中',
+    code6: '异常',
+    code7: '锁定',
+    code8: '已撤销',
+    code9: '已仲裁',
+    code10: '已结算',
+    code11: '强制撤销',
+    code12: '已下架',
+    code13: '已撤单'
+  };
+  return orderStatus['code' + status] || '未知';
+};
+
 module.exports = {
   sumPrice: sumPrice,
   capitalFormatText: capitalFormatText,
-  isIncome: isIncome
+  isIncome: isIncome,
+  orderStatusFormatTitle: orderStatusFormatTitle
 };

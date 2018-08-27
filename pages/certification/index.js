@@ -2,28 +2,38 @@
 import Utils from '../../lib/utils'
 import BankCardInfo from '../../lib/bank.card.info'
 import {
-  api_certificationProfile
+  api_certificationProfile,
+  api_certificationDetail
 } from '../../lib/api'
 
 Page({
 
   ...Utils.img.action,
+  ...Utils.page.action,
 
   /**
    * 页面的初始数据
    */
   data: {
 
+    ...Utils.page.data,
+
     chooseImgKey: '',
+
+    checkInfo: {
+      title: '',
+      class: '',
+      icon: ''
+    },
+
+    status: 4,
+    real_name: '',
+    bank_card: '',
+    bank_name: '',
+    identity_card: '',
     identity_card_back: '',
     identity_card_front: '',
     identity_card_hand: '',
-    info: {
-      real_name: '',
-      bank_card: '',
-      bank_name: '',
-      identity_card: '',
-    }
   },
 
   /**
@@ -44,6 +54,7 @@ Page({
     })
   },
 
+
   /**
    * 提交验证
    * @param e
@@ -55,21 +66,29 @@ Page({
     if (validate) {
       wx.showLoading();
       Promise.all([
-        Utils.files.uploadFile(identity_card_back),
-        Utils.files.uploadFile(identity_card_front),
-        Utils.files.uploadFile(identity_card_hand),
+        identity_card_back.indexOf('.38sd.') !== -1 ? Promise.resolve(identity_card_back) : Utils.files.uploadFile(identity_card_back),
+        identity_card_front.indexOf('.38sd.') !== -1 ? Promise.resolve(identity_card_front) : Utils.files.uploadFile(identity_card_front),
+        identity_card_hand.indexOf('.38sd.') !== -1 ? Promise.resolve(identity_card_hand) : Utils.files.uploadFile(identity_card_hand),
       ]).then(result => {
         const [identity_card_back, identity_card_front, identity_card_hand] = result;
-        api_certificationProfile({
-          ...this.data.info,
-          ...formData,
+        const submitData = {
+          real_name: formData.real_name,
+          bank_card: formData.bank_card.replace(/ /g, ''),
+          bank_name: formData.bank_name,
+          identity_card: formData.identity_card,
           identity_card_back,
           identity_card_front,
           identity_card_hand,
-          bank_card: formData.bank_card.replace(/ /g, '')
-        }).then(data => {
+        };
+        api_certificationProfile(submitData).then(data => {
           wx.hideLoading();
-          wx.showToast({title: '实名认证提交成功', icon: 'none'})
+          this.setData({
+            status: 1,
+            checkInfo: this.getCheckInfo(1),
+            submitData,
+
+          });
+          wx.showToast({title: '实名认证提交成功,请等待审核', icon: 'none'})
         })
       })
     }
@@ -145,11 +164,43 @@ Page({
     this.chooseImage({cropperType: 'personalCardType'})
   },
 
+  initFetch: function () {
+    api_certificationDetail().then(data => {
+      this.setData({
+        ...this.data,
+        ...data,
+        checkInfo: this.getCheckInfo(data.status)
+      }, () => this.pageEnd())
+    })
+  },
+
+  getCheckInfo: function (status) {
+    const dataCheckInfo = this.data.status;
+    const checkInfo = {
+      1: {
+        class: 'waiting-status',
+        title: '已提交实名认证，工作人员会在3个工作日内审核',
+        icon: 'waiting'
+      },
+      2: {
+        class: 'success-status',
+        title: '实名认证已通过',
+        icon: 'right'
+      },
+      3: {
+        class: 'fail-status',
+        title: '认证审核不通过，请重新提交',
+        icon: 'err'
+      }
+    };
+    return status ? checkInfo[status] : dataCheckInfo
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.pageLoad();
   },
 
   /**

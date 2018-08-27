@@ -46,6 +46,10 @@
     align-items: center;
     justify-content: space-between;
 }
+.action-left {
+    display: flex;
+    align-items: center;
+}
 
 .login-page .remember {
     position: relative;
