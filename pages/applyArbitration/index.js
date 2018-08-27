@@ -15,6 +15,7 @@ Page({
 
     ...Utils.img.data,
 
+    trade_no: '',
     remark: '',
     images: []
   },
@@ -25,7 +26,7 @@ Page({
     const formData = e.detail.value;
     const validate = this.isValidateForm(formData);
     if (validate) {
-      this.uploadAryImages().then(images => {
+      Utils.files.arrayFiles(this.data.images).then(images => {
         api_orderOperationApplyComplain({
           trade_no: this.options.trade_no,
           images
@@ -40,19 +41,12 @@ Page({
     }
   },
 
+
   /**
-   * 上传图片
+   * 表单验证
+   * @param formData
+   * @returns {boolean}
    */
-  uploadAryImages: function () {
-    let PromiseUploadFiles = [];
-    const images = this.data.images;
-    images.forEach(value => {
-      PromiseUploadFiles.push(Utils.files.uploadFile(value))
-    });
-    return Promise.all(PromiseUploadFiles)
-  },
-
-
   isValidateForm: function (formData) {
     const {remark} = formData;
     if (!remark.length) {

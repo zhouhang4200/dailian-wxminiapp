@@ -1,6 +1,9 @@
 // pages/user/myOrder/Screenshot/index.js
 
 import Utils from '../../../lib/utils'
+import {
+  api_operationApplyCompleteImage
+} from '../../../lib/api'
 
 Page({
 
