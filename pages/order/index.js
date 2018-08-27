@@ -2,12 +2,14 @@
 
 import Utils from '../../lib/utils'
 import {
-  api_selfOrder
+  api_selfOrder,
+  api_orderOperationApplyComplete
 } from "../../lib/api";
 
 Page({
 
   ...Utils.page.action,
+  ...Utils.modal.action,
   ...Utils.reachBottom.action,
 
   /**
@@ -15,7 +17,11 @@ Page({
    */
   data: {
     ...Utils.page.data,
+    ...Utils.modal.data,
     ...Utils.reachBottom.data,
+
+    selectedTradeNo: '',
+    selectedTradeNoIndex: '',
 
     asyncData: {
       list: [],
@@ -25,6 +31,20 @@ Page({
       page: 1,
       page_size: 10
     }
+  },
+
+  /**
+   * 提交完成按钮
+   * @param e
+   */
+  setSelectedTradeNo: function (e) {
+    const {no, index} = e.currentTarget.dataset;
+    this.setData({
+      selectedTradeNo: no,
+      selectedTradeNoIndex: index
+    }, () => {
+      this.modalOverlayToggle();
+    })
   },
 
   /**
@@ -38,7 +58,7 @@ Page({
         wx.navigateTo({url: urls[res.tapIndex]})
       },
       fail: function (res) {
-        console.log(res.errMsg)
+
       }
     })
   },
@@ -70,6 +90,33 @@ Page({
         }
       })
     });
+  },
+
+  /**
+   * 提交完成
+   * @param e
+   */
+  onSubmitComplete: function (e) {
+    this.modalOverlayToggle();
+    wx.showLoading({title: '加载中', icon: 'none'});
+    const {selectedTradeNo, selectedTradeNoIndex} = this.data;
+    api_orderOperationApplyComplete({
+      trade_no: selectedTradeNo
+    }).then(data => {
+      wx.hideLoading();
+      if (data.code) {
+        return wx.showToast({title: data.message, icon: 'none'})
+      }
+      const selectData = this.data.asyncData.list[selectedTradeNoIndex];
+      // this.data.asyncData.list[selectedTradeNoIndex].status = 3;
+      const dataKey = 'asyncData.list[' + selectedTradeNoIndex + ']';
+      this.setData({
+        [dataKey]: {
+          ...selectData,
+          status: 3
+        }
+      })
+    })
   },
 
   /**
@@ -127,22 +174,4 @@ Page({
   onShareAppMessage: function () {
 
   },
-  /**
-   * 提交完成
-   * @param e
-   */
-  onSubmitComplete: function (e) {
-    wx.showModal({
-      title: '提交完成',
-      confirmColor: '#198cff',
-      content: '确定提交完成，给对方验收吗？',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })
-  }
 })

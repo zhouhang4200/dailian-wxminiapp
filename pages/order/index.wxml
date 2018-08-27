@@ -1,9 +1,10 @@
 <!--pages/order/index.wxml-->
+<wxs src="../../lib/utils.wxs" module="utils"></wxs>
 <block hidden="{{isPageHidden}}">
     <view wx:for="{{asyncData.list}}" wx:key="{{index}}" class="row-item">
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-head">
             <text class="title">{{item.created_at}}</text>
-            <text class="date">{{item.status_describe}}</text>
+            <text class="date">{{utils.orderStatusFormatTitle(item.status)}}</text>
         </navigator>
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-detail">
             <view class="icon">
@@ -20,17 +21,58 @@
             <text>代练价格：</text>
             <text class="size">￥{{item.amount}}</text>
         </navigator>
-        <view class="action-row">
+        <view class="action-row" wx:if="{{item.status<8}}">
+            <!--code1: '未接单',-->
+            <!--code2: '代练中',-->
+            <!--code3: '待验收',-->
+            <!--code4: '撤销中',-->
+            <!--code5: '仲裁中',-->
+            <!--code6: '异常',-->
+            <!--code7: '锁定',-->
+            <!--code8: '已撤销',-->
+            <!--code9: '已仲裁',-->
+            <!--code10: '已结算',-->
+            <!--code11: '强制撤销',-->
+            <!--code12: '已下架',-->
+            <!--code13: '已撤单'-->
             <view bindtap="onMoreAction" class="action-btn none">
                 <text>更多</text>
                 <image class="action-more-icon" src="/images/small_arrow_down.png" mode="widthFix"
                        lazy-load="false">
                 </image>
             </view>
-            <navigator url="/pages/order/negotiated/index" hover-class="none" class="action-btn">协商撤销</navigator>
-            <navigator url="/pages/applyArbitration/index" hover-class="none" class="action-btn">申请仲裁</navigator>
-            <view bindtap="onSubmitComplete" class="action-btn primary">提交完成</view>
+            <!--2,3,6,7-->
+            <navigator wx:if="{{[2,3,6,7].indexOf(item.status)!==-1}}" url="/pages/order/negotiated/index?trade_no={{item.trade_no}}&efficiency_deposit={{item.efficiency_deposit}}&security_deposit={{item.security_deposit}}&amount={{item.amount}}"
+                       hover-class="none" class="action-btn">协商撤销
+            </navigator>
+            <!--2,3-->
+            <navigator wx:if="{{[2,3].indexOf(item.status)!==-1}}" url="/pages/applyArbitration/index?trade_no={{item.trade_no}}"
+                       hover-class="none" class="action-btn">申请仲裁
+            </navigator>
+            <!--2-->
+            <view data-index="{{index}}" data-no="{{item.trade_no}}" wx:if="{{item.status===2}}" bindtap="setSelectedTradeNo" class="action-btn primary">提交完成</view>
         </view>
     </view>
     <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
 </block>
+
+<!-- modal Overlay -->
+<view animation="{{animationModalOverlay}}"
+      hidden="{{isModalOverlayHidden}}"
+      class="modal-overlay">
+</view>
+
+<!-- 操作选项 -->
+<view bindtransitionend="onModalOverlayToggleEnd"
+      animation="{{animationModalOverlayContent}}"
+      hidden="{{isModalContentHidden}}"
+      class="modal-content">
+    <view hidden="{{isSettingPasswordHidden}}" class="modal-bd confirm-modal">
+        <view class="modal-title">提交完成</view>
+        <view class="modal-title-confirm">确定提交完成，给对方验收吗？</view>
+    </view>
+    <view class="modal-footer">
+        <view bindtap="modalOverlayToggle" class="btn line">取消</view>
+        <view bindtap="onSubmitComplete" class="btn primary">确定</view>
+    </view>
+</view>

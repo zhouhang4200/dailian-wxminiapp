@@ -7,6 +7,14 @@
     border-bottom: 1rpx solid #f5f5f5;
 }
 
+.img-list-wrap {
+    margin-left: 0;
+}
+
+.img-list-wrap .module-title {
+    margin-left: 30rpx;
+}
+
 .module-title {
     display: block;
     font-size: 31rpx;
@@ -24,26 +32,38 @@
 .img-list {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.screenshot-img-icon {
+    width: 206rpx;
 }
 
 .screenshot {
     text-align: center;
-    width: 221rpx;
-    height: 221rpx;
+    width: 206rpx;
+    height: 206rpx;
     font-size: 24rpx;
     color: #aaa;
     position: relative;
     background-color: #f0f0f0;
     box-sizing: border-box;
-    margin-right: 10rpx;
+    margin-left: 30rpx;
     margin-bottom: 10rpx;
 }
 
-is-img {
-    line-height: 221rpx;
-    font-size: 0;
-    vertical-align: middle;
-    overflow: hidden;
+.screenshot-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.del-icon {
+    width: 64rpx;
+    height: 64rpx;
+    position: absolute;
+    right: -32rpx;
+    top: -32rpx;
 }
 
 .img {

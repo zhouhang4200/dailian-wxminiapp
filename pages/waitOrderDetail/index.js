@@ -9,6 +9,7 @@ import {
 
 // 倒计时清除
 let intervalSuccess = '';
+let countDownTime = 3;
 
 Page({
 
@@ -119,6 +120,7 @@ Page({
    * 关窗回调
    */
   modalOverlayCloseHandle: function () {
+    if(countDownTime===0) this.redirectToOrderDetails();
     clearInterval(intervalSuccess);
     const modalKey = this.data.modalKey;
     this.setData({
@@ -281,7 +283,6 @@ Page({
    * 自动关闭订单成功弹窗
    */
   autoCloseSuccessModal: function () {
-    let countDownTime = 3;
     intervalSuccess = setInterval(() => {
       countDownTime--;
       if (countDownTime === 0) {

@@ -1,7 +1,7 @@
 // pages/account/password/index.js
 import Utils from '../../../lib/utils'
 import {
-  api_sendPhoneCode,
+  api_sendRegisterPhoneCode,
   api_register
 } from '../../../lib/api'
 
@@ -92,7 +92,7 @@ Page({
     }
     this.verificationCodeSend();
     wx.showLoading();
-    api_sendPhoneCode({phone}).then(data => {
+    api_sendRegisterPhoneCode({phone}).then(data => {
       wx.hideLoading();
       if (data.code) {
         return this.verificationCodeFail(data.message);

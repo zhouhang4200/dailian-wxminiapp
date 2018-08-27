@@ -1,63 +1,81 @@
 // pages/applyArbitration/index.js
 import Utils from '../../lib/utils'
+import {
+  api_orderOperationApplyComplain
+} from '../../lib/api'
+
 Page({
+
+  ...Utils.img.action,
 
   /**
    * 页面的初始数据
    */
   data: {
+
+    ...Utils.img.data,
+
     remark: '',
-    imgList: ['']
+    images: []
   },
   /**
-  * 提交数据
-  */
-  onSubmit: function (e) {
-    let isValidate = () => {
-      let { remark } = e.detail.value;
-      let validate = true;
-      if (remark == '') {
-        validate = false;
-        wx.showToast({
-          title: '原因不能为空',
-          icon:'none'
-        });
-      }
-      return validate
-    }
-    if (isValidate()) {
-      wx.showLoading();
-      setTimeout(()=>{
-        // 异步api请求
-        wx.hideLoading();
-        wx.showToast({
-          title: '提交成功'
-        });
-      },2000)
-      
-    }
-  },
-  /**
-   * 图片预览
+   * 提交数据
    */
-  onPreviewImage: function (e) {
-    let url = e.currentTarget.dataset.url;
-    let urls = [];
-    const imgList = this.data.imgList
-    for (let i = 0; i < imgList.length; i++) {
-      urls.push(imgList[i].imgUrl);
+  onSubmit: function (e) {
+    const formData = e.detail.value;
+    const validate = this.isValidateForm(formData);
+    if (validate) {
+      this.uploadAryImages().then(images => {
+        api_orderOperationApplyComplain({
+          trade_no: this.options.trade_no,
+          images
+        }).then(data => {
+          if (data.code) {
+            return wx.showToast({title: data.message, icon: 'none'})
+          }
+          wx.showToast({title: '申请仲裁成功', icon: 'none'});
+          wx.navigateBack();
+        })
+      })
     }
-    wx.previewImage({
-      current: url, // 当前显示图片的http链接
-      urls // 需要预览的图片http链接列表
-    })
   },
 
   /**
-   * 上传截图
+   * 上传图片
    */
-  onUploadImg: function () {
-    Utils.chooseImage()
+  uploadAryImages: function () {
+    let PromiseUploadFiles = [];
+    const images = this.data.images;
+    images.forEach(value => {
+      PromiseUploadFiles.push(Utils.files.uploadFile(value))
+    });
+    return Promise.all(PromiseUploadFiles)
+  },
+
+
+  isValidateForm: function (formData) {
+    const {remark} = formData;
+    if (!remark.length) {
+      wx.showToast({title: '请输入原因及要求', icon: 'none'});
+      return false;
+    }
+    if (!this.data.images.length) {
+      wx.showToast({title: '请上传截图', icon: 'none'});
+      return false;
+    }
+    return true
+  },
+
+  /**
+   * 删除图片
+   * @param e
+   */
+  delImages: function (e) {
+    const index = e.currentTarget.dataset;
+    this.data.images.splice(index, 1);
+    this.setData({
+      images: this.data.images
+    })
   },
 
   /**
@@ -78,15 +96,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const imgUrl = wx.getStorageSync('cropperImg');
-    if (imgUrl) {
-      let imgList = this.data.imgList;
-      imgList[0] = imgUrl;
-      wx.removeStorageSync('cropperImg');
-      this.setData({
-        imgList
-      })
-    }
+    this.getCropperImg().then(url => {
+      if (url) {
+        this.data.images.push(url);
+        this.setData({
+          images: this.data.images
+        });
+      }
+    });
   },
 
   /**

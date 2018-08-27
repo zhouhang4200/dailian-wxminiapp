@@ -21,7 +21,7 @@
     </view>
     <view class="order-info-wrap">
         <view class="order-info">
-            <text class="title">账号状态：</text>
+            <text class="title">订单状态：</text>
             <view class="tag">{{utils.orderStatusFormatTitle(info.status)}}</view>
         </view>
         <view class="order-info">

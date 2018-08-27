@@ -1,14 +1,14 @@
 {
   "pages": [
+    "pages/applyArbitration/index",
+    "pages/order/index",
     "pages/home/index",
     "pages/account/index",
     "pages/certification/index",
-    "pages/order/index",
     "pages/account/cash/index",
     "pages/account/pay/index",
     "pages/account/login/index",
     "pages/myComplaint/index",
-    "pages/applyArbitration/index",
     "pages/order/screenshot/index",
     "pages/order/negotiated/index",
     "pages/account/capital/list/index",
