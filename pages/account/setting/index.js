@@ -1,4 +1,4 @@
-// pages/msg/withdraw/index.js
+// pages/account/capital/index.js
 Page({
 
   /**

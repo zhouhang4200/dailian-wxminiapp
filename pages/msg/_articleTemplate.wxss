@@ -4,6 +4,7 @@
 .article-notice .head-title {
     font-size: 36rpx;
     padding-top: 41rpx;
+    font-weight: bold;
     padding-bottom: 36rpx;
     color: #222;
 }
@@ -11,7 +12,7 @@
 .article-notice .date-info {
     font-size: 27rpx;
     color: #b3b3b3;
-    padding-bottom: 51rpx;
+    padding-bottom: 31rpx;
 }
 
 .article-notice .details {

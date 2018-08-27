@@ -1,0 +1,8 @@
+<!--pages/help/index.wxml-->
+<navigator wx:for="{{list}}" wx:key="{{index}}" class="link-navigation" url="/pages/msg/articleDetails/index?id={{item.id}}&action=api_noticeDetails&title={{item.name}}">
+    <view class="link-bd">
+        <view class="title">
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+</navigator>

@@ -1,5 +1,5 @@
 <!--pages/msg/index.wxml-->
-<navigator class="link-navigation is-large" url="/pages/msg/announcement/index">
+<navigator class="link-navigation is-large" url="/pages/msg/notice/index">
     <view class="link-bd">
         <view class="icon">
             <image src="/images/POF0.png" mode="widthFix" lazy-load="false"></image>

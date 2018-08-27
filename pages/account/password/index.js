@@ -14,10 +14,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const setting = {
+      update_login: {
+        title: '修改登录密码'
+      },
+      update_pay: {
+        title: '修改支付密码'
+      }
+    };
     wx.setNavigationBarTitle({
       title: '忘记密码'
     })
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

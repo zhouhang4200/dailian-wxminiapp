@@ -1,0 +1,15 @@
+<!--pages/account/capital/index.wxml-->
+<navigator class="link-navigation" url="/pages/account/password/index?action=update_login">
+    <view class="link-bd">
+        <view class="title">
+            <text>修改登录密码</text>
+        </view>
+    </view>
+</navigator>
+<navigator class="link-navigation" url="/pages/account/password/index?action=update_pay">
+    <view class="link-bd">
+        <view class="title">
+            <text>修改支付密码</text>
+        </view>
+    </view>
+</navigator>

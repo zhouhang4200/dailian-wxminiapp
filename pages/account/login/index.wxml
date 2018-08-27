@@ -9,7 +9,7 @@
     <view class="action-type full-item">
         <label>
             <checkbox style="zoom: 65%" value="记住密码" checked="{{item.checked}}"/>
-            <text class="remember">记住密码</text>
+            <navigator url="" class="remember"  hover-class="none">记住密码</navigator>
         </label>
         <navigator url="/pages/account/password/index?forget_password=1" class="forget-pwd">忘记密码</navigator>
     </view>

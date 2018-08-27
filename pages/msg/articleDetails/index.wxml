@@ -1,0 +1,12 @@
+<!--pages/msg/withdraw/index.wxml-->
+<view class="article-notice">
+    <view class="head-title">
+        <text>{{info.title}}</text>
+    </view>
+    <view class="date-info">
+        <text class="date-info">{{info.created_at}}</text>
+    </view>
+    <view class="details">
+        <text>{{info.content}}</text>
+    </view>
+</view>
