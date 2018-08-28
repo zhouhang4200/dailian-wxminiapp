@@ -17,13 +17,6 @@ Page({
     ...Utils.page.data,
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
   onSubmitForm: function () {
     const formData = e.detail.value;
     const isValidate = this.isValidateForm(formData);
@@ -33,7 +26,7 @@ Page({
   },
 
   isValidateForm: function (formData) {
-    const {phone, verification_code, password, confirmPassword} = formData;
+    const {amount, efficiency_deposit, security_deposit} = formData;
     const requiredValidate = {
       phone: '请输入手机号码',
       verification_code: '请输入验证码',
@@ -59,6 +52,13 @@ Page({
       return false;
     }
     return true
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.setData(options)
   },
 
   /**

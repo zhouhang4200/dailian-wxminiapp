@@ -1,12 +1,13 @@
 // pages/applyArbitration/index.js
-import Utils from '../../lib/utils'
+import Utils from '../../../lib/utils'
 import {
-  api_orderOperationApplyComplain
-} from '../../lib/api'
+  api_orderOperationApplyComplain, api_orderOperationApplyComplete
+} from '../../../lib/api'
 
 Page({
 
   ...Utils.img.action,
+  ...Utils.modal.action,
 
   /**
    * 页面的初始数据
@@ -14,32 +15,33 @@ Page({
   data: {
 
     ...Utils.img.data,
+    ...Utils.modal.data,
 
+    trade_no: '',
     images: []
   },
-  /**
-   * 提交数据
-   */
-  onSubmit: function (e) {
-    const formData = e.detail.value;
-    const validate = this.isValidateForm(formData);
-    if (validate) {
-      Utils.files.arrayFiles(this.data.images).then(images => {
-        api_orderOperationApplyComplain({
-          trade_no: this.options.trade_no,
-          images,
-          reason: formData.reason,
-        }).then(data => {
-          if (data.code) {
-            return wx.showToast({title: data.message, icon: 'none'})
-          }
-          wx.showToast({title: '申请仲裁成功', icon: 'none'});
-          wx.navigateBack();
-        })
-      })
-    }
-  },
 
+  /**
+   * 提交完成
+   * @param e
+   */
+  onSubmitComplete: function (e) {
+    this.modalOverlayToggle();
+    wx.showLoading({title: '加载中', icon: 'none'});
+    const {trade_no} = this.options;
+    Utils.files.arrayFiles(this.data.images).then(images => {
+      api_orderOperationApplyComplete({
+        trade_no,
+        images
+      }).then(data => {
+        wx.hideLoading();
+        if (data.code) {
+          return wx.showToast({title: data.message, icon: 'none'})
+        }
+        wx.navigateBack();
+      })
+    })
+  },
 
   /**
    * 表单验证
@@ -47,6 +49,11 @@ Page({
    * @returns {boolean}
    */
   isValidateForm: function (formData) {
+    const {remark} = formData;
+    if (!remark.length) {
+      wx.showToast({title: '请输入原因及要求', icon: 'none'});
+      return false;
+    }
     if (!this.data.images.length) {
       wx.showToast({title: '请上传截图', icon: 'none'});
       return false;

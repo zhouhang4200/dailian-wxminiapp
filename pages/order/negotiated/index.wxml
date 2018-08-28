@@ -3,37 +3,37 @@
     <view class="row-item">
         <view class="row-bd">
             <text class="title">订单价格</text>
-            <input disabled="{{true}}" value="10.00" auto-focus=""/>
+            <text>{{orderPrice}}</text>
         </view>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">代练费</text>
-            <input maxlength="19" placeholder="请输入需玩家支付代练费" type="number"/>
+            <input name="{{amount}}" placeholder="请输入需玩家支付代练费" type="digit"/>
         </view>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">效率保证金</text>
-            <input placeholder="请输入效率保证金"/>
+            <text>{{efficiency_deposit}}</text>
         </view>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">安全保证金</text>
-            <input disabled="{{true}}" value="1.22"/>
+            <text>{{security_deposit}}</text>
         </view>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">保证金</text>
-            <input type="idcard" placeholder="请输入需打手赔偿保证金"/>
+            <input name="{{deposit}}" type="idcard" placeholder="请输入需打手赔偿保证金"/>
         </view>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">协商原因</text>
-            <input type="idcard" placeholder="请输入协商原因"/>
+            <input name="{{reason}}" placeholder="请输入协商原因"/>
         </view>
     </view>
     <button formType="submit" bindtap="modalOverlayToggle" class="submit-btn">

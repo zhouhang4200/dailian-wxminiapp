@@ -3,7 +3,7 @@
 import Utils from '../../lib/utils'
 import {
   api_selfOrder,
-  api_orderOperationApplyComplete
+  api_selfOrderDetail,
 } from "../../lib/api";
 
 Page({
@@ -37,12 +37,16 @@ Page({
    * 提交完成按钮
    * @param e
    */
-  setSelectedTradeNo: function (e) {
-    this.setSelectedInfo(e, this.modalOverlayToggle);
+  onSubmitCheck: function (e) {
+    this.setSelectedInfo(e, () => {
+      wx.navigateTo({
+        url: `/pages/order/submitCheck/index?trade_no=${this.data.selectedTradeNo}`
+      })
+    });
   },
 
   /**
-   *
+   * 设置订单信息
    */
   setSelectedInfo: function (e, callBack) {
     const {no, index} = e.currentTarget.dataset;
@@ -87,41 +91,13 @@ Page({
         },
         'searchForm.page': params.page
       }, () => {
-      this.pageEnd();
-        wx.hideLoading();
+        this.pageEnd();
         this.setReachEndInfo();
         if (this.data.asyncData.total === 0) {
           wx.showToast({title: '暂无记录', icon: 'none'})
         }
       })
     });
-  },
-
-  /**
-   * 提交完成
-   * @param e
-   */
-  onSubmitComplete: function (e) {
-    this.modalOverlayToggle();
-    wx.showLoading({title: '加载中', icon: 'none'});
-    const {selectedTradeNo, selectedTradeNoIndex} = this.data;
-    api_orderOperationApplyComplete({
-      trade_no: selectedTradeNo
-    }).then(data => {
-      wx.hideLoading();
-      if (data.code) {
-        return wx.showToast({title: data.message, icon: 'none'})
-      }
-      const selectData = this.data.asyncData.list[selectedTradeNoIndex];
-      // this.data.asyncData.list[selectedTradeNoIndex].status = 3;
-      const dataKey = 'asyncData.list[' + selectedTradeNoIndex + ']';
-      this.setData({
-        [dataKey]: {
-          ...selectData,
-          status: 3
-        }
-      })
-    })
   },
 
   /**
@@ -142,7 +118,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 有可能一系列订单操作之后，订单如果改变状态就需要刷新当前订单数据
+    let {selectedTradeNo, selectedTradeNoIndex} = this.data;
+    let selectOrderData = this.data.asyncData.list[selectedTradeNoIndex];
+    if (selectedTradeNo) {
+      api_selfOrderDetail({trade_no: selectedTradeNo}).then(data => {
+        if (!data.code) {
+          const status = data.status;
+          if (selectOrderData.status !== status) {
+            this.data.asyncData.list.splice(selectedTradeNoIndex, 1, {
+              ...selectOrderData,
+              status
+            })
+          }
+          this.setData({
+            'asyncData.list': this.data.asyncData.list
+          })
+        }
+      })
+    }
   },
 
   /**

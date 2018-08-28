@@ -37,12 +37,12 @@
             <!--code13: '已撤单'-->
             <view data-index="{{index}}" data-no="{{item.trade_no}}" bindtap="onMoreAction" class="action-btn none">
                 <text>更多</text>
-                <image class="action-more-icon" src="/images/small_arrow_down.png" mode="widthFix"
+                <image class="action-more-icon" src="/images/small_arrow_down.png" mode="scaleToFill"
                        lazy-load="false">
                 </image>
             </view>
             <!--2,3,6,7-->
-            <navigator wx:if="{{[2,3,6,7].indexOf(item.status)!==-1}}" url="/pages/order/negotiated/index?trade_no={{item.trade_no}}&efficiency_deposit={{item.efficiency_deposit}}&security_deposit={{item.security_deposit}}&amount={{item.amount}}"
+            <navigator wx:if="{{[2,3,6,7].indexOf(item.status)!==-1}}" url="/pages/order/negotiated/index?trade_no={{item.trade_no}}&efficiency_deposit={{item.efficiency_deposit}}&security_deposit={{item.security_deposit}}&orderPrice={{item.amount}}"
                        hover-class="none" class="action-btn">协商撤销
             </navigator>
             <!--2,3-->
@@ -50,29 +50,8 @@
                        hover-class="none" class="action-btn">申请仲裁
             </navigator>
             <!--2-->
-            <view data-index="{{index}}" data-no="{{item.trade_no}}" wx:if="{{item.status===2}}" bindtap="setSelectedTradeNo" class="action-btn primary">提交完成</view>
+            <view data-index="{{index}}" data-no="{{item.trade_no}}" wx:if="{{item.status===2}}" bindtap="onSubmitCheck" class="action-btn primary">提交完成</view>
         </view>
     </view>
     <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
 </block>
-
-<!-- modal Overlay -->
-<view animation="{{animationModalOverlay}}"
-      hidden="{{isModalOverlayHidden}}"
-      class="modal-overlay">
-</view>
-
-<!-- 操作选项 -->
-<view bindtransitionend="onModalOverlayToggleEnd"
-      animation="{{animationModalOverlayContent}}"
-      hidden="{{isModalContentHidden}}"
-      class="modal-content">
-    <view hidden="{{isSettingPasswordHidden}}" class="modal-bd confirm-modal">
-        <view class="modal-title">提交完成</view>
-        <view class="modal-title-confirm">确定提交完成，给对方验收吗？</view>
-    </view>
-    <view class="modal-footer">
-        <view bindtap="modalOverlayToggle" class="btn line">取消</view>
-        <view bindtap="onSubmitComplete" class="btn primary">确定</view>
-    </view>
-</view>
