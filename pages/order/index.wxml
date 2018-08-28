@@ -35,23 +35,72 @@
             <!--code11: '强制撤销',-->
             <!--code12: '已下架',-->
             <!--code13: '已撤单'-->
+            <!-- initiator 发起人 1 发单方 2 接单方-->
+            <!-- consult_initiator 发起人 1 发单方 2 接单方   协商发起人>
+            <!-- complain_initiator 发起人 1 发单方 2 接单方   仲裁发起人 -->
             <view data-index="{{index}}" data-no="{{item.trade_no}}" bindtap="onMoreAction" class="action-btn none">
                 <text>更多</text>
                 <image class="action-more-icon" src="/images/small_arrow_down.png" mode="scaleToFill"
                        lazy-load="false">
                 </image>
             </view>
-            <!--2,3,6,7-->
-            <navigator wx:if="{{[2,3,6,7].indexOf(item.status)!==-1}}" url="/pages/order/negotiated/index?trade_no={{item.trade_no}}&efficiency_deposit={{item.efficiency_deposit}}&security_deposit={{item.security_deposit}}&orderPrice={{item.amount}}"
+
+            <!-- initiator 2 取消仲裁   取消撤销 -->
+            <view wx:if="{{ (item.status===4 || item.status===5) && item.initiator===2 && (item.consult_initiator ===2 || item.complain_initiator===2) }}"
+                  data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="onCancel"
+                  class="action-btn primary">取消{{item.status===4 ? '撤销':'仲裁'}}
+            </view>
+            <!-- initiator 2 同意仲裁   同意撤销 -->
+            <view wx:if="{{(item.status===4 || item.status===5) && item.initiator===2 && (item.consult_initiator===1 || item.complain_initiator===1) }}"
+                  data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="onCancelConfirm"
+                  class="action-btn primary">同意{{item.status===4 ? '撤销':''}}
+            </view>
+            <!--2,3,6,7 协商撤销 -->
+            <navigator data-index="{{index}}" data-no="{{item.trade_no}}" bindtap="setSelectedInfo" wx:if="{{ item.status===2 || item.status===3 || item.status===6 || item.status===7 }}"
+                       url="/pages/order/negotiated/index?trade_no={{item.trade_no}}&efficiency_deposit={{item.efficiency_deposit}}&security_deposit={{item.security_deposit}}&orderPrice={{item.amount}}"
                        hover-class="none" class="action-btn">协商撤销
             </navigator>
-            <!--2,3-->
-            <navigator wx:if="{{[2,3].indexOf(item.status)!==-1}}" url="/pages/applyArbitration/index?trade_no={{item.trade_no}}"
+            <!--2,3 申请仲裁 -->
+            <navigator data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="setSelectedInfo" wx:if="{{ item.status===2 || item.status===3 }}"
+                       url="/pages/applyArbitration/index?trade_no={{item.trade_no}}"
                        hover-class="none" class="action-btn">申请仲裁
             </navigator>
-            <!--2-->
-            <view data-index="{{index}}" data-no="{{item.trade_no}}" wx:if="{{item.status===2}}" bindtap="onSubmitCheck" class="action-btn primary">提交完成</view>
+            <!--6 取消异常 -->
+            <view data-index="{{index}}" data-no="{{item.trade_no}}" wx:if="{{item.status===6}}" bindtap="onCancelCatch"
+                  class="action-btn primary">取消异常
+            </view>
+            <!--2 提交完成 -->
+            <view data-index="{{index}}" data-no="{{item.trade_no}}" wx:if="{{item.status===2}}" bindtap="onSubmitCheck"
+                  class="action-btn primary">提交完成
+            </view>
         </view>
     </view>
     <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
 </block>
+
+<!-- modal Overlay -->
+<view animation="{{animationModalOverlay}}"
+      hidden="{{isModalOverlayHidden}}"
+      bindtransitionend="onModalOverlayToggleEnd"
+      class="modal-overlay">
+</view>
+<!-- 操作选项 -->
+<view animation="{{animationModalOverlayContent}}"
+      hidden="{{isModalOverlayHidden}}"
+      class="modal-content">
+    <view class="title">
+        <text>确定同意撤销？</text>
+    </view>
+    <view class="remark">
+        <text>你（对方）进行操作【撤销】【你（对方）支付代练费1.00元，对方（你）支付保证金5.00元，原因：打手中途撤单】</text>
+    </view>
+    <view bindtap="onSelect" data-index="0" class="btn primary">
+        <text>同意</text>
+    </view>
+    <view bindtap="onSelect" data-index="1" class="btn">
+        <text>不同意</text>
+    </view>
+    <view bindtap="modalOverlayToggle" class="btn">
+        <text>取消</text>
+    </view>
+</view>

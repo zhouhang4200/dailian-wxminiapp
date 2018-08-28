@@ -1,5 +1,5 @@
 <!-- pages/applyArbitration/index.wxml -->
-<form bindsubmit="modalOverlayToggle" class="apply-arbitration">
+<form bindsubmit="onValidateForm" class="apply-arbitration">
     <view class="module-item img-list-wrap">
         <text class="module-title">证据截图</text>
         <view class="img-list">
@@ -28,6 +28,7 @@
       animation="{{animationModalOverlayContent}}"
       hidden="{{isModalContentHidden}}"
       class="modal-content">
+    <!--确认提交弹窗-->
     <view hidden="{{isSettingPasswordHidden}}" class="modal-bd confirm-modal">
         <view class="modal-title">提交完成</view>
         <view class="modal-title-confirm">确定提交完成，给对方验收吗？</view>

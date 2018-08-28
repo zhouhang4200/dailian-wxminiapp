@@ -9,7 +9,7 @@
     width: 155rpx;
 }
 
-.row-item input {
+.row-item input,.row-item .input-value {
     text-align: left;
 }
 

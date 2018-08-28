@@ -21,6 +21,14 @@ Page({
     images: []
   },
 
+  onValidateForm:function(){
+    if (!this.data.images.length) {
+      wx.showToast({title: '请上传截图', icon: 'none'});
+      return false;
+    }
+    this.modalOverlayToggle();
+  },
+
   /**
    * 提交完成
    * @param e
@@ -32,33 +40,23 @@ Page({
     Utils.files.arrayFiles(this.data.images).then(images => {
       api_orderOperationApplyComplete({
         trade_no,
-        images
+        images: JSON.stringify(images)
       }).then(data => {
         wx.hideLoading();
         if (data.code) {
           return wx.showToast({title: data.message, icon: 'none'})
         }
-        wx.navigateBack();
+        wx.showModal({
+          showCancel: false,
+          content: '操作成功',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateBack();
+            }
+          }
+        });
       })
     })
-  },
-
-  /**
-   * 表单验证
-   * @param formData
-   * @returns {boolean}
-   */
-  isValidateForm: function (formData) {
-    const {remark} = formData;
-    if (!remark.length) {
-      wx.showToast({title: '请输入原因及要求', icon: 'none'});
-      return false;
-    }
-    if (!this.data.images.length) {
-      wx.showToast({title: '请上传截图', icon: 'none'});
-      return false;
-    }
-    return true
   },
 
   /**

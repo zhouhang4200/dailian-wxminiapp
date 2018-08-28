@@ -17,6 +17,7 @@ Page({
 
     images: []
   },
+
   /**
    * 提交数据
    */
@@ -24,22 +25,30 @@ Page({
     const formData = e.detail.value;
     const validate = this.isValidateForm(formData);
     if (validate) {
+      wx.showLoading({title: '加载中', icon: 'none'});
       Utils.files.arrayFiles(this.data.images).then(images => {
         api_orderOperationApplyComplain({
           trade_no: this.options.trade_no,
-          images,
+          images: JSON.stringify(images),
           reason: formData.reason,
         }).then(data => {
+          wx.hideLoading();
           if (data.code) {
             return wx.showToast({title: data.message, icon: 'none'})
           }
-          wx.showToast({title: '申请仲裁成功', icon: 'none'});
-          wx.navigateBack();
+          wx.showModal({
+            showCancel: false,
+            content: '操作成功',
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateBack();
+              }
+            }
+          });
         })
       })
     }
   },
-
 
   /**
    * 表单验证
@@ -47,6 +56,10 @@ Page({
    * @returns {boolean}
    */
   isValidateForm: function (formData) {
+    if (!formData.reason.length) {
+      wx.showToast({title: '请填写原因及要求', icon: 'none'});
+      return false;
+    }
     if (!this.data.images.length) {
       wx.showToast({title: '请上传截图', icon: 'none'});
       return false;

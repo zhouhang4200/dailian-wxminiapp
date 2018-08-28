@@ -3,69 +3,40 @@
     <view class="row-item">
         <view class="row-bd">
             <text class="title">订单价格</text>
-            <text>{{orderPrice}}</text>
+            <text class="input-value">{{orderPrice}}</text>
         </view>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">代练费</text>
-            <input name="{{amount}}" placeholder="请输入需玩家支付代练费" type="digit"/>
+            <input name="amount" placeholder="请输入代练费" type="digit"/>
         </view>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">效率保证金</text>
-            <text>{{efficiency_deposit}}</text>
+            <text class="input-value">{{efficiency_deposit}}</text>
         </view>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">安全保证金</text>
-            <text>{{security_deposit}}</text>
+            <text class="input-value">{{security_deposit}}</text>
         </view>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">保证金</text>
-            <input name="{{deposit}}" type="idcard" placeholder="请输入需打手赔偿保证金"/>
+            <input name="deposit" type="idcard" placeholder="请输入赔偿保证金"/>
         </view>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">协商原因</text>
-            <input name="{{reason}}" placeholder="请输入协商原因"/>
+            <input name="reason" placeholder="请输入协商原因"/>
         </view>
     </view>
-    <button formType="submit" bindtap="modalOverlayToggle" class="submit-btn">
+    <button formType="submit" class="submit-btn">
         <text>提交</text>
     </button>
 </form>
-
-<!-- modal Overlay -->
-<view  animation="{{animationModalOverlay}}"
-      hidden="{{isModalOverlayHidden}}"
-      bindtransitionend="onModalOverlayToggleEnd"
-      class="modal-overlay">
-</view>
-<!-- 操作选项 -->
-<view animation="{{animationModalOverlayContent}}"
-      hidden="{{isModalOverlayHidden}}"
-      class="modal-content">
-    <view class="title">
-        <text>确定同意撤销？</text>
-    </view>
-    <view class="remark">
-        <text>你（对方）进行操作【撤销】【你（对方）支付代练费1.00元，对方（你）支付保证金5.00元，原因：打手中途撤单】</text>
-    </view>
-    <view bindtap="onSelect" data-index="0" class="btn primary">
-        <text>同意</text>
-    </view>
-    <view bindtap="onSelect" data-index="1" class="btn">
-        <text>不同意</text>
-    </view>
-    <view bindtap="modalOverlayToggle" class="btn">
-        <text>取消</text>
-    </view>
-</view>
-
-

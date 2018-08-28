@@ -6,39 +6,53 @@ import {
 
 Page({
 
-  ...Utils.page.action,
   ...Utils.modal.action,
 
   /**
    * 页面的初始数据
    */
   data: {
-    ...Utils.modal.data,
-    ...Utils.page.data,
+    ...Utils.modal.data
   },
 
-  onSubmitForm: function () {
+  onSubmitForm: function (e) {
     const formData = e.detail.value;
     const isValidate = this.isValidateForm(formData);
     if (isValidate) {
       this.modalOverlayToggle();
+      wx.showLoading({title: '加载中', icon: 'none'});
+      api_orderOperationApplyConsult({
+        ...formData,
+        trade_no: this.options.trade_no
+      }).then(data => {
+        wx.hideLoading();
+        if (data.code) {
+          return wx.showToast({title: data.message, icon: 'none'})
+        }
+        wx.showModal({
+          showCancel: false,
+          content: '操作成功',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateBack();
+            }
+          }
+        });
+      })
     }
   },
 
   isValidateForm: function (formData) {
-    const {amount, efficiency_deposit, security_deposit} = formData;
+    const {amount, deposit, reason} = formData;
+    const {orderPrice, efficiency_deposit, security_deposit} = this.data;
+    const totalDeposit = (efficiency_deposit * 100 + security_deposit * 100) / 100;
     const requiredValidate = {
-      phone: '请输入手机号码',
-      verification_code: '请输入验证码',
-      password: '请输入密码',
-      confirmPassword: '请再次输入注册密码',
+      amount: '请输入代练费',
+      deposit: '请输入赔偿保证金',
+      reason: '请输入协商原因'
     };
-    if (!(/^[1][3,4,5,7,8][0-9]{9}$/.test(phone)) && phone) {
-      wx.showToast({title: '请输入正确的手机号码', icon: 'none'});
-      return false;
-    }
-    if (password.length < 6 && password) {
-      wx.showToast({title: '密码长度最低为6位', icon: 'none'});
+    if (amount * 100 > orderPrice * 100 && amount * 100) {
+      wx.showToast({title: '代练费用不能大于订单金额', icon: 'none'});
       return false;
     }
     for (let key in formData) {
@@ -47,8 +61,8 @@ Page({
         return false;
       }
     }
-    if (password !== confirmPassword) {
-      wx.showToast({title: '两次密码输入不一致，请检查', icon: 'none'});
+    if (deposit * 100 > totalDeposit * 100) {
+      wx.showToast({title: '赔偿保证金不能大于总保证金', icon: 'none'});
       return false;
     }
     return true
@@ -108,14 +122,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  /**
-   * 选择操作
-   * @param e
-   */
-  onSelect: function (e) {
-    this.modalOverlayToggle();
-    const index = e.currentTarget.dataset.index;
-    console.log(index)
   }
 })

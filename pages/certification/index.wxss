@@ -72,7 +72,7 @@ page {
     display: block;
 }
 
-.row-item input {
+.row-item input,.row-item .input-value {
     flex: 1;
     /*font-weight: bold;*/
     text-align: right;

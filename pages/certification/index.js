@@ -86,9 +86,8 @@ Page({
             status: 1,
             checkInfo: this.getCheckInfo(1),
             submitData,
-
           });
-          wx.showToast({title: '实名认证提交成功,请等待审核', icon: 'none'})
+          wx.showToast({title: '操作成功', icon: 'none'})
         })
       })
     }
@@ -175,7 +174,7 @@ Page({
   },
 
   getCheckInfo: function (status) {
-    const dataCheckInfo = this.data.status;
+    const dataCheckInfo = this.data.checkInfo;
     const checkInfo = {
       1: {
         class: 'waiting-status',

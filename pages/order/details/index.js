@@ -22,7 +22,7 @@ Page({
 
   initFetch() {
     api_selfOrderDetail({trade_no: this.options.trade_no}).then(info => {
-      this.pageEnd();
+      this.setData({info}, () => this.pageEnd());
     })
   },
 
