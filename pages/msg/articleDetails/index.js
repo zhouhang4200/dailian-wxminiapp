@@ -30,13 +30,12 @@ Page({
     const {id, action} = this.options;
     const api = {api_helpDetails, api_noticeDetails};
     api[action]({id}).then(info => {
-      wx.hideLoading();
       this.setData({
         info: {
           ...info,
           content: info.content.replace(/<\/?.+?>/g, "")
         }
-      })
+      },()=>this.pageEnd())
     })
   },
 

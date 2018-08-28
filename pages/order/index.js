@@ -87,7 +87,7 @@ Page({
         },
         'searchForm.page': params.page
       }, () => {
-        this.pageShow();
+      this.pageEnd();
         wx.hideLoading();
         this.setReachEndInfo();
         if (this.data.asyncData.total === 0) {

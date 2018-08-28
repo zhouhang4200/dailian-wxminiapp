@@ -23,10 +23,9 @@ Page({
 
   initFetch: function () {
     api_operationApplyCompleteImage({trade_no: this.options.trade_no}).then(images => {
-      this.pageEnd();
       this.setData({
         images
-      })
+      },()=>this.pageEnd())
     })
   },
 

@@ -21,8 +21,7 @@ Page({
 
   initFetch: function () {
     api_notice().then(list => {
-      wx.hideLoading();
-      this.setData({list})
+      this.setData({list},()=>this.pageEnd())
     })
   },
 

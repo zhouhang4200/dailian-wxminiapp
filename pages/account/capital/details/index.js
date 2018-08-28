@@ -26,10 +26,9 @@ Page({
 
   initFetch() {
     api_financeFlowsDetails({id: this.options.id}).then(userInfo => {
-      this.pageEnd();
       this.setData({
         userInfo
-      })
+      },()=>this.pageEnd())
     })
   },
 

@@ -1,6 +1,6 @@
 <!--pages/goodsDetail/index.wxml-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
-<view hidden="{{isPageHidden}}">
+<view animation="{{loadAnimationPage}}">
     <view class="head-info">
         <view class="head-title">【{{info.game_leveling_type_name}}】{{info.title}}</view>
         <view class="price-info">

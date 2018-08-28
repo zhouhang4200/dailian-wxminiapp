@@ -1,6 +1,6 @@
 <!--pages/order/index.wxml-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
-<block hidden="{{isPageHidden}}">
+<block animation="{{loadAnimationPage}}">
     <view wx:for="{{asyncData.list}}" wx:key="{{index}}" class="row-item">
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-head">
             <text class="title">{{item.created_at}}</text>

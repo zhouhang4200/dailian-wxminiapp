@@ -46,8 +46,7 @@ Page({
 
   initFetch() {
     api_orderWaitDetail({trade_no: this.options.trade_no}).then(info => {
-      this.pageEnd();
-      this.setData({info})
+      this.setData({info},()=>this.pageEnd())
     })
   },
 

@@ -138,6 +138,7 @@ button::after {
     padding-bottom: 30rpx;
     color: #000;
 }
+
 .modal-title-confirm {
     font-size: 27rpx;
     color: #999;
@@ -212,4 +213,8 @@ button::after {
     line-height: 88rpx;
     background-color: #198cff;
     color: #fff;
+}
+
+.load-page {
+    opacity: 0;
 }

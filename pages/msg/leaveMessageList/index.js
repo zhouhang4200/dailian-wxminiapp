@@ -20,7 +20,7 @@ Page({
 
   initFetch:function(){
     api_getOrderOperationGetMessage({trade_no:this.options.trade_no}).then(data=>{
-      wx.hideLoading();
+
     })
   },
 

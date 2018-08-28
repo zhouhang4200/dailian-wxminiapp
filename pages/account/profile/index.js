@@ -42,8 +42,7 @@ Page({
           signature,
           qq
         }
-      });
-      this.pageEnd();
+      },()=>this.pageEnd());
     })
   },
 

@@ -1,11 +1,11 @@
 <!--pages/certification/index.wxml-->
 <!--实名认证审核状态-->
-<view hidden="{{isPageHidden}}" class="{{ status==4 ? 'fixed-status-bottom': status<3 ? 'fixed-status-disabled':'fixed-status-bottom fixed-status-disabled'}}">
+<view animation="{{loadAnimationPage}}" class="{{ status==4 ? 'fixed-status-bottom': status<3 ? 'fixed-status-disabled':'fixed-status-bottom fixed-status-disabled'}}">
     <cover-view wx:if="{{checkInfo.title!==''}}" class="head-status {{ checkInfo.class }}">
         <cover-image src="/images/{{checkInfo.icon}}.png" mode="widthFix" lazy-load="false" class="status-icon"></cover-image>
         <cover-view>{{checkInfo.title}}</cover-view>
     </cover-view>
-    <form bindsubmit="onSubmit" hidden="{{isPageHidden}}">
+    <form bindsubmit="onSubmit" animation="{{loadAnimationPage}}">
         <view class="row-item-group">
             <view class="row-item">
                 <view class="row-bd">
