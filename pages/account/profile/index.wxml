@@ -1,12 +1,12 @@
 <!--pages/account/api_profile/page.wxml-->
 <form bindsubmit="onSubmitForm" animation="{{loadAnimationPage}}" class="load-page ">
     <view data-croppersize="[135,135]" data-cropsize="[135,135]" bindtap="chooseImage" class="user-icon">
-        <image src="{{userInfo.avatar}}" class="img-full-max" mode="widthFix" lazy-load="false"></image>
+        <image src="{{userInfo.avatar}}"  mode="scaleToFill" lazy-load="false"></image>
     </view>
     <view class="row-item">
         <view class="row-bd">
             <text class="title">昵称</text>
-            <input name="name" value="{{userInfo.name}}" focus="{{true}}"/>
+            <input name="name" value="{{userInfo.name}}"/>
         </view>
     </view>
     <view class="row-item">

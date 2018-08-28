@@ -8,18 +8,14 @@
 
 .goods-icon {
     width: 110rpx;
-    height: 109rpx;
+    height: 110rpx;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border-radius: 7rpx;
     margin-right: 18rpx;
 }
 
-.goods-icon .img {
-    max-width: 100%;
-}
 
 .goods-details {
     flex: 1;
