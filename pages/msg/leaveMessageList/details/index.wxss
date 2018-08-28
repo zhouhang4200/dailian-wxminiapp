@@ -27,10 +27,14 @@ page {
     border-radius: 37rpx;
     overflow: hidden;
     font-size: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 .online-msg-page .msg-row .user-icon {
-    max-width: 100%;
+    width: 74rpx;
+    height: 74rpx;
+    border-radius: 37rpx;
 }
 
 .online-msg-page .msg-row .msg-content {

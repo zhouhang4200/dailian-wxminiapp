@@ -1,14 +1,14 @@
 <!--pages/msg/leaveMessageList/details/index.wxml-->
-<scroll-view class='online-msg-page '>
-    <block wx:for="{{msgList}}" wx:key="{{index}}" wx:for-index="index" wx:for-item="item">
+<view animation="{{loadAnimationPage}}">
+    <block wx:for="{{list}}" wx:key="{{index}}" wx:for-index="{{index}}">
         <text class="histime">{{item.time}}</text>
-        <view class="msg-row {{item.user!==selfId ? 'right-row':'left-row'}} ">
+        <view class="msg-row {{item.initiator===2 ? 'right-row':'left-row'}} ">
             <view class='user-icon-wrap'>
-                <image lazy-load="{{true}}" mode='widthFix' class="user-icon" src="{{item.userIcon}}"></image>
+                <image lazy-load="{{true}}" mode='scaleToFill' class="user-icon" src="{{item.avatar}}"></image>
             </view>
             <view class="msg-content">
                 <text>{{item.content}}</text>
             </view>
         </view>
     </block>
-</scroll-view>
+</view>

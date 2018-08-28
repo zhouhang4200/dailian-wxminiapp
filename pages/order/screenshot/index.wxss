@@ -1,66 +1,79 @@
 /* pages/user/myOrder/Screenshot/index.wxss */
-.screenshot-pages{
-  padding-bottom: 100rpx;
+.screenshot-pages {
+    padding-bottom: 100rpx;
 }
-.print-item .histime{
-	text-align: center;
-	font-size: 18rpx;
-	display: block;
-	color: #bbb;
-	padding: 30rpx 0;
+
+.print-item .histime {
+    text-align: center;
+    font-size: 18rpx;
+    display: block;
+    color: #bbb;
+    padding: 30rpx 0;
 }
-.img-row{
-	display: flex;
-	align-items: flex-start;
-	padding: 0 21rpx;
+
+.img-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 21rpx;
 }
-.img-row.right-row{
-	flex-direction:row-reverse;
+
+.img-row.right-row {
+    flex-direction: row-reverse;
 }
-.img-row.right-row .print-img-wrap{
-	margin-left: 0;
-	margin-right: 15rpx;
+
+.img-row.right-row .print-img-wrap {
+    margin-left: 0;
+    margin-right: 15rpx;
 }
-.img-row .icon-wrap{
-	width: 74rpx;
-	height: 74rpx;
-  border-radius: 37rpx;
-	overflow: hidden;
-	font-size: 0;
+
+.img-row .icon-wrap {
+    width: 74rpx;
+    height: 74rpx;
+    border-radius: 37rpx;
+    overflow: hidden;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.img-row .user_icon{
-	max-width: 100%;
+
+.img-row .user_icon {
+    width: 74rpx;
+    height: 74rpx;
+    border-radius: 37rpx;
 }
-.img-row .print-img-wrap{
-	margin-left: 17rpx;
-	width: 407rpx;
-	background-color: #ffffff;
-	box-shadow: 0rpx 7rpx 13rpx 1rpx 
-		rgba(237, 242, 247, 0.6);
-	border-radius: 14rpx;
-	overflow: hidden;
-	vertical-align: top;
-	font-size: 0;
+
+.img-row .print-img-wrap {
+    margin-left: 17rpx;
+    width: 407rpx;
+    background-color: #ffffff;
+    box-shadow: 0rpx 7rpx 13rpx 1rpx rgba(237, 242, 247, 0.6);
+    border-radius: 14rpx;
+    overflow: hidden;
+    vertical-align: top;
+    font-size: 0;
 }
-.img-row .img{
-	max-width: 100%;
- }
-.upload-btn{
-	 position: fixed;
-	 left:0;
-	 bottom:0;
-	height: 87rpx;
-	line-height: 87rpx;
-	font-size: 25rpx;
-	color: #fff;
-	width:100%;
-	border-radius: 0;
-	background-image: linear-gradient(45deg, 
-		#009cff 0%, 
-		#0086ff 100%), 
-	linear-gradient(
-		#198cff, 
-		#198cff);
-	background-blend-mode: normal, 
-		normal;
- }
+
+.img-row .img {
+    max-width: 100%;
+}
+
+.upload-btn {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 87rpx;
+    line-height: 87rpx;
+    font-size: 25rpx;
+    color: #fff;
+    width: 100%;
+    border-radius: 0;
+    background-image: linear-gradient(45deg,
+    #009cff 0%,
+    #0086ff 100%),
+    linear-gradient(
+            #198cff,
+            #198cff);
+    background-blend-mode: normal,
+    normal;
+}

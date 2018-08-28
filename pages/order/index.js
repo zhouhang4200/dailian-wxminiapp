@@ -28,6 +28,9 @@ Page({
     selectedTradeNo: '',
     selectedTradeNoIndex: '',
 
+    selectedOrderAmount: '',
+    selectedOrderSecurityDeposit: '',
+
     asyncData: {
       list: [],
       total: 0
@@ -88,15 +91,16 @@ Page({
    * 设置订单信息
    */
   setSelectedInfo: function (e, callBack) {
-    const {no, index} = e.currentTarget.dataset;
+    const {no, index, status = ''} = e.currentTarget.dataset;
     this.setData({
       selectedTradeNo: no,
-      selectedTradeNoIndex: index
+      selectedTradeNoIndex: index,
+      status
     }, () => callBack && callBack());
   },
 
   /**
-   * 选择操作
+   * 同意协商确认弹窗 选择操作
    * @param e
    */
   onSelect: function (e) {
@@ -124,15 +128,73 @@ Page({
    */
   onMoreAction: function (e) {
     this.setSelectedInfo(e, () => {
-      const trade_no = this.data.selectedTradeNo;
+      const {selectedTradeNo,status} = this.data;
       wx.showActionSheet({
-        itemList: ['查看/上传截图', '查看/发送留言'],
+        itemList: ['查看我的申诉', '查看/上传截图', '查看/发送留言'],
         success: function (res) {
-          const urls = ['/pages/order/screenshot/index?trade_no=' + trade_no, '/pages/msg/leaveMessageList/details/index?trade_no=' + trade_no];
-          wx.navigateTo({url: urls[res.tapIndex]})
+          const params = `?trade_no=${selectedTradeNo}&status=${status}`;
+          const urls = [
+            '/pages/myComplaint/index',
+            '/pages/order/screenshot/index',
+            '/pages/msg/leaveMessageList/details/index'
+          ];
+          wx.navigateTo({url: urls[res.tapIndex] + params})
         }
       })
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    // 有可能一系列订单操作之后，订单如果改变状态就需要刷新当前订单数据
+    this.updateOrderStatus();
+  },
+
+  /**
+   * 取消异常
+   */
+  onCancelCatch: function (e) {
+    this.setSelectedInfo(e, () => {
+      api_orderOperationCancelAnomaly({
+        trade_no: this.data.selectedTradeNo
+      }).then(data => {
+        if (data.code) {
+          wx.hideLoading();
+          return wx.showToast({title: data.message, icon: 'none'})
+        }
+        this.updateOrderStatus(() => {
+          wx.showToast({title: '操作成功', icon: 'none'})
+        });
+      })
+    });
+  },
+
+  /**
+   * 更新订单状态
+   */
+  updateOrderStatus: function (callBack) {
+    let {selectedTradeNo, selectedTradeNoIndex} = this.data;
+    let selectOrderData = this.data.asyncData.list[selectedTradeNoIndex];
+    if (selectedTradeNo) {
+      api_selfOrderDetail({trade_no: selectedTradeNo}).then(data => {
+        if (!data.code) {
+          const status = data.status;
+          if (selectOrderData.status !== status) {
+            this.data.asyncData.list.splice(selectedTradeNoIndex, 1, {
+              ...selectOrderData,
+              status
+            })
+          }
+          this.setData({
+            'asyncData.list': this.data.asyncData.list
+          });
+          wx.hideLoading();
+          callBack && callBack();
+        }
+      })
+    }
   },
 
   /**
@@ -178,40 +240,6 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    // 有可能一系列订单操作之后，订单如果改变状态就需要刷新当前订单数据
-    this.updateOrderStatus();
-  },
-
-  /**
-   * 更新订单状态
-   */
-  updateOrderStatus: function (callBack) {
-    let {selectedTradeNo, selectedTradeNoIndex} = this.data;
-    let selectOrderData = this.data.asyncData.list[selectedTradeNoIndex];
-    if (selectedTradeNo) {
-      api_selfOrderDetail({trade_no: selectedTradeNo}).then(data => {
-        if (!data.code) {
-          const status = data.status;
-          if (selectOrderData.status !== status) {
-            this.data.asyncData.list.splice(selectedTradeNoIndex, 1, {
-              ...selectOrderData,
-              status
-            })
-          }
-          this.setData({
-            'asyncData.list': this.data.asyncData.list
-          });
-          wx.hideLoading();
-          callBack && callBack();
-        }
-      })
-    }
-  },
-
-  /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
@@ -223,25 +251,6 @@ Page({
    */
   onUnload: function () {
 
-  },
-
-  /**
-   * 取消异常
-   */
-  onCancelCatch: function (e) {
-    this.setSelectedInfo(e, () => {
-      api_orderOperationCancelAnomaly({
-        trade_no: this.data.selectedTradeNo
-      }).then(data => {
-        if (data.code) {
-          wx.hideLoading();
-          return wx.showToast({title: data.message, icon: 'none'})
-        }
-        this.updateOrderStatus(() => {
-          wx.showToast({title: '操作成功', icon: 'none'})
-        });
-      })
-    });
   },
 
   /**

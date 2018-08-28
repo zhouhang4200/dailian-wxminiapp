@@ -15,43 +15,18 @@ Page({
 
     ...Utils.page.data,
 
-    selfId: '1',
-    msgList: [
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        content: "我这边有点问题，想问你一下",
-        user: "1"
-      },
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        content: "你好，我现在有点事，等下就上号代练",
-        user: "2"
-      },
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        content: "好的，多长时间上号,好的，多长时间上号,好的，多长时间上号,好的，多长时间上号,好的，多长时间上号,好的，多长时间上号",
-        user: "1"
-      },
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        content: "20分钟",
-        user: "2"
-      },
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        content: "没问题",
-        user: "1"
-      }
-    ]
+    list: []
   },
 
-  initFetch:function(){
-    api_getOrderOperationGetMessage({})
+  initFetch: function () {
+    api_getOrderOperationGetMessage({
+      trade_no: this.options.trade_no
+    }).then(list => {
+      this.setData({list}, () => this.pageEnd());
+      if (!list.length) {
+        wx.showToast({title: '暂无留言', icon: 'none'})
+      }
+    })
   },
 
   /**

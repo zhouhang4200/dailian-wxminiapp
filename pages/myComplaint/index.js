@@ -1,16 +1,31 @@
 // pages/myComplaint/index.js
 import Utils from '../../lib/utils'
+import {
+  api_orderOperationComplainInfo,
+  api_orderOperationSendComplainMessage
+} from '../../lib/api'
+
 
 Page({
+
+  ...Utils.page.action,
+  ...Utils.img.action,
 
   /**
    * 页面的初始数据
    */
   data: {
+
+    ...Utils.page.data,
+    ...Utils.img.data,
+
     tabName: 'tab1',
     remark: '',
-    imgList: ['']
+    status: '',
+    image: '',
+    content: ''
   },
+
   /**
    * 切换tab
    */
@@ -23,11 +38,22 @@ Page({
     }
   },
 
+  initFetch: function () {
+    api_orderOperationComplainInfo({
+      trade_no: this.options.trade_no
+    }).then(info => {
+      this.setData({info}, () => this.pageEnd())
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.pageLoad();
+    this.setData({
+      status: options.status
+    })
   },
 
   /**
@@ -41,15 +67,40 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const imgUrl = wx.getStorageSync('cropperImg');
-    if (imgUrl) {
-      let imgList = this.data.imgList;
-      imgList[0] = imgUrl;
-      wx.removeStorageSync('cropperImg');
-      this.setData({
-        imgList
-      })
+    this.getCropperImg().then(image => {
+      if (image) {
+        this.setData({image})
+      }
+    })
+  },
+
+  /**
+   * 提交补充留言数据
+   */
+  onSubmitComplain: function (e) {
+    wx.showLoading({title: '加载中', icon: 'none'});
+    const content = e.detail.value.content;
+    if (!content.length) {
+      wx.showToast({title: '请填写内容', icon: 'none'});
+      return false;
     }
+    api_orderOperationSendComplainMessage({
+      image: this.data.image,
+      content: e.detail.value.content,
+      trade_no: this.options.trade_no
+    }).then(data => {
+      if (data.code) {
+        wx.showToast({title: data.message, icon: 'none'});
+        return false;
+      }
+      wx.showToast({title: '提交成功', icon: 'none'});
+      this.setData({
+        tabName: 'tab1',
+        image: '',
+        content: ''
+      });
+      this.initFetch();
+    });
   },
 
   /**
@@ -86,62 +137,4 @@ Page({
   onShareAppMessage: function () {
 
   },
-  /**
-   * 提交数据
-   */
-  onSubmit: function (e) {
-    wx.getUserInfo({
-      success: function () {
-
-      },
-      fail: function () {
-
-      }
-    });
-    let isValidate = () => {
-      let {remark} = e.detail.value;
-      let validate = true;
-      if (remark == '') {
-        validate = false;
-        wx.showToast({
-          title: '原因不能为空',
-          icon: 'none'
-        });
-      }
-      return validate
-    }
-    if (isValidate()) {
-      wx.showLoading();
-      setTimeout(() => {
-        // 异步api请求
-        wx.hideLoading();
-        wx.showToast({
-          title: '提交成功'
-        });
-      }, 2000)
-
-    }
-  },
-  /**
-   * 图片预览
-   */
-  onPreviewImage: function (e) {
-    let url = e.currentTarget.dataset.url;
-    let urls = [];
-    const imgList = this.data.imgList
-    for (let i = 0; i < imgList.length; i++) {
-      urls.push(imgList[i].imgUrl);
-    }
-    wx.previewImage({
-      current: url, // 当前显示图片的http链接
-      urls // 需要预览的图片http链接列表
-    })
-  },
-
-  /**
-   * 上传截图
-   */
-  onUploadImg: function () {
-    Utils.chooseImage()
-  }
 })

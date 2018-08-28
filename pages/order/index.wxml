@@ -38,7 +38,7 @@
             <!-- initiator 发起人 1 发单方 2 接单方-->
             <!-- consult_initiator 发起人 1 发单方 2 接单方   协商发起人>
             <!-- complain_initiator 发起人 1 发单方 2 接单方   仲裁发起人 -->
-            <view data-index="{{index}}" data-no="{{item.trade_no}}" bindtap="onMoreAction" class="action-btn none">
+            <view data-index="{{index}}" data-no="{{item.trade_no}}" data-status="{{item.status}}" bindtap="onMoreAction" class="action-btn none">
                 <text>更多</text>
                 <image class="action-more-icon" src="/images/small_arrow_down.png" mode="scaleToFill"
                        lazy-load="false">
@@ -50,7 +50,7 @@
                   data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="onCancel"
                   class="action-btn primary">取消{{item.status===4 ? '撤销':'仲裁'}}
             </view>
-            <!-- initiator 2 同意仲裁   同意撤销 -->
+            <!-- initiator 2 是否同意用户撤销订单? -->
             <view wx:if="{{(item.status===4 || item.status===5) && item.initiator===2 && (item.consult_initiator===1 || item.complain_initiator===1) }}"
                   data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="onCancelConfirm"
                   class="action-btn primary">同意{{item.status===4 ? '撤销':''}}
@@ -92,7 +92,7 @@
         <text>确定同意撤销？</text>
     </view>
     <view class="remark">
-        <text>你（对方）进行操作【撤销】【你（对方）支付代练费1.00元，对方（你）支付保证金5.00元，原因：打手中途撤单】</text>
+        <text>你（对方）进行操作【撤销】【你（对方）支付代练费{{selectedOrderAmount}}元，对方（你）支付保证金5.00元，原因：打手中途撤单】</text>
     </view>
     <view bindtap="onSelect" data-index="0" class="btn primary">
         <text>同意</text>

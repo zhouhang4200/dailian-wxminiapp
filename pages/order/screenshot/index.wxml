@@ -1,10 +1,10 @@
 <!-- pages/user/myOrder/Screenshot/index.wxml -->
 <view animation="{{loadAnimationPage}}" class="screenshot-pages load-page ">
-    <view wx:for="{{images}}" wx:key="{{index}}" wx:for-index="index" wx:for-item="img" class="print-item">
-        <text class="histime">{{img.user==selfId ? "我":"他"}} 在 {{img.created_at}} 上传此截图</text>
-        <view class="img-row {{img.user!==selfId ? 'right-row':''}} ">
+    <view wx:for="{{images}}" wx:key="{{index}}" wx:for-index="{{index}}" wx:for-item="img" class="print-item">
+        <text class="histime">{{img.created_at}} 上传此截图</text>
+        <view class="img-row">
             <view class='icon-wrap'>
-                <image lazy-load="{{true}}" mode='widthFix' class="user_icon" src="{{img.user_icon}}"></image>
+                <image lazy-load="{{true}}" mode='scaleToFill' class="user_icon" src="{{img.avatar}}"></image>
             </view>
             <view class="print-img-wrap">
                 <image lazy-load="{{true}}" data-url="{{img.path}}" data-urls="{{images}}" bindtap="previewImage" mode='widthFix'
@@ -12,5 +12,10 @@
             </view>
         </view>
     </view>
-    <button bindtap="chooseImage" class="upload-btn">上传截图</button>
+    <!--<button bindtap="chooseImage" class="upload-btn">上传截图</button>-->
 </view>
+<!--<text class="histime">{{img.user==selfId ? "我":"他"}} 在 {{img.created_at}} 上传此截图</text>-->
+<!--<view class="img-row {{img.user!==selfId ? 'right-row':''}} ">-->
+<!--<view class='icon-wrap'>-->
+<!--<image lazy-load="{{true}}" mode='widthFix' class="user_icon" src="{{img.user_icon}}"></image>-->
+<!--</view>-->

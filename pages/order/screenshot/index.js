@@ -22,7 +22,9 @@ Page({
   },
 
   initFetch: function () {
-    api_operationApplyCompleteImage({trade_no: this.options.trade_no}).then(images => {
+    api_operationApplyCompleteImage({
+      trade_no: this.options.trade_no
+    }).then(images => {
       this.setData({
         images
       },()=>this.pageEnd())
@@ -49,9 +51,7 @@ Page({
   onShow: function () {
     this.getCropperImg().then(path => {
       if (path) {
-        this.data.images.push({
-          path
-        });
+        this.data.images.push({path});
         this.setData({
           images: this.data.images
         })
