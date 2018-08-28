@@ -38,28 +38,33 @@ Page({
    * @param e
    */
   setSelectedTradeNo: function (e) {
+    this.setSelectedInfo(e, this.modalOverlayToggle);
+  },
+
+  /**
+   *
+   */
+  setSelectedInfo: function (e, callBack) {
     const {no, index} = e.currentTarget.dataset;
     this.setData({
       selectedTradeNo: no,
       selectedTradeNoIndex: index
-    }, () => {
-      this.modalOverlayToggle();
-    })
+    }, () => callBack && callBack());
   },
 
   /**
    * 更多操作
    */
-  onMoreAction: function () {
-    wx.showActionSheet({
-      itemList: ['查看/上传截图', '查看/发送留言'],
-      success: function (res) {
-        const urls = ['/pages/order/screenshot/index', '/pages/msg/leaveMessageList/details/index'];
-        wx.navigateTo({url: urls[res.tapIndex]})
-      },
-      fail: function (res) {
-
-      }
+  onMoreAction: function (e) {
+    this.setSelectedInfo(e, () => {
+      const trade_no = this.data.selectedTradeNo;
+      wx.showActionSheet({
+        itemList: ['查看/上传截图', '查看/发送留言'],
+        success: function (res) {
+          const urls = ['/pages/order/screenshot/index?trade_no=' + trade_no, '/pages/msg/leaveMessageList/details/index?trade_no=' + trade_no];
+          wx.navigateTo({url: urls[res.tapIndex]})
+        }
+      })
     })
   },
 

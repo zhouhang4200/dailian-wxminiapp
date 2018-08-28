@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/order/index",
-    "pages/applyArbitration/index",
     "pages/home/index",
+    "pages/applyArbitration/index",
     "pages/account/index",
     "pages/certification/index",
     "pages/account/cash/index",

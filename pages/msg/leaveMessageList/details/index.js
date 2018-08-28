@@ -1,10 +1,20 @@
 // pages/msg/leaveMessageList/details/index.js
+
+import Utils from '../../../../lib/utils'
+import {
+  api_getOrderOperationGetMessage
+} from '../../../../lib/api'
+
 Page({
+  ...Utils.page.action,
 
   /**
    * 页面的初始数据
    */
   data: {
+
+    ...Utils.page.data,
+
     selfId: '1',
     msgList: [
       {
@@ -40,11 +50,15 @@ Page({
     ]
   },
 
+  initFetch:function(){
+    api_getOrderOperationGetMessage({})
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.pageLoad();
   },
 
   /**

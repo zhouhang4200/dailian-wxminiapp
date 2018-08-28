@@ -1,14 +1,16 @@
 <!-- pages/user/myOrder/Screenshot/index.wxml -->
-<view wx:for="{{imgList}}" wx:key="{{index}}" wx:for-index="index" wx:for-item="img" class="print-item">
-    <text class="histime">{{img.user==selfId ? "我":"他"}} 在 {{img.time}} 上传此截图</text>
-    <view class="img-row {{img.user!==selfId ? 'right-row':''}} ">
-        <view class='icon-wrap'>
-            <image lazy-load="{{true}}" mode='widthFix' class="user_icon" src="{{img.userIcon}}"></image>
-        </view>
-        <view class="print-img-wrap">
-            <image lazy-load="{{true}}" data-url="{{img.imgUrl}}" bindtap="onPreviewImage" mode='widthFix'
-                   src="{{img.imgUrl}}" class="img"></image>
+<view hidden="{{isPageHidden}}" class="screenshot-pages">
+    <view wx:for="{{images}}" wx:key="{{index}}" wx:for-index="index" wx:for-item="img" class="print-item">
+        <text class="histime">{{img.user==selfId ? "我":"他"}} 在 {{img.created_at}} 上传此截图</text>
+        <view class="img-row {{img.user!==selfId ? 'right-row':''}} ">
+            <view class='icon-wrap'>
+                <image lazy-load="{{true}}" mode='widthFix' class="user_icon" src="{{img.user_icon}}"></image>
+            </view>
+            <view class="print-img-wrap">
+                <image lazy-load="{{true}}" data-url="{{img.path}}" data-urls="{{images}}" bindtap="previewImage" mode='widthFix'
+                       src="{{img.path}}" class="img"></image>
+            </view>
         </view>
     </view>
+    <button bindtap="chooseImage" class="upload-btn">上传截图</button>
 </view>
-<button bindtap="onUploadImg" class="upload-btn">上传截图</button>

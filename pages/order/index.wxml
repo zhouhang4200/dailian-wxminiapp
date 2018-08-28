@@ -35,7 +35,7 @@
             <!--code11: '强制撤销',-->
             <!--code12: '已下架',-->
             <!--code13: '已撤单'-->
-            <view bindtap="onMoreAction" class="action-btn none">
+            <view data-index="{{index}}" data-no="{{item.trade_no}}" bindtap="onMoreAction" class="action-btn none">
                 <text>更多</text>
                 <image class="action-more-icon" src="/images/small_arrow_down.png" mode="widthFix"
                        lazy-load="false">

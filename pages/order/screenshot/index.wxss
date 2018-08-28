@@ -2,36 +2,36 @@
 .screenshot-pages{
   padding-bottom: 100rpx;
 }
-.screenshot-pages .print-item .histime{
+.print-item .histime{
 	text-align: center;
 	font-size: 18rpx;
 	display: block;
 	color: #bbb;
 	padding: 30rpx 0;
 }
-.screenshot-pages .img-row{
+.img-row{
 	display: flex;
 	align-items: flex-start;
 	padding: 0 21rpx;
 }
-.screenshot-pages .img-row.right-row{
+.img-row.right-row{
 	flex-direction:row-reverse;
 }
-.screenshot-pages .img-row.right-row .print-img-wrap{
+.img-row.right-row .print-img-wrap{
 	margin-left: 0;
 	margin-right: 15rpx;
 }
-.screenshot-pages .img-row .icon-wrap{
+.img-row .icon-wrap{
 	width: 74rpx;
 	height: 74rpx;
   border-radius: 37rpx;
 	overflow: hidden;
 	font-size: 0;
 }
-.screenshot-pages .img-row .user_icon{
+.img-row .user_icon{
 	max-width: 100%;
 }
-.screenshot-pages .img-row .print-img-wrap{
+.img-row .print-img-wrap{
 	margin-left: 17rpx;
 	width: 407rpx;
 	background-color: #ffffff;
@@ -42,10 +42,10 @@
 	vertical-align: top;
 	font-size: 0;
 }
-.screenshot-pages .img-row .img{
+.img-row .img{
 	max-width: 100%;
  }
-.screenshot-pages .upload-btn{
+.upload-btn{
 	 position: fixed;
 	 left:0;
 	 bottom:0;

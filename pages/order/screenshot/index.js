@@ -7,56 +7,34 @@ import {
 
 Page({
 
+  ...Utils.page.action,
+  ...Utils.img.action,
+
   /**
    * 页面的初始数据
    */
   data: {
+
+    ...Utils.page.data,
+
     selfId: '1',
-    imgList: [
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        imgUrl: "http://thyrsi.com/t6/359/1534659629x-1404817850.png",
-        user: "1"
-      },
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        imgUrl: "http://thyrsi.com/t6/359/1534659629x-1404817850.png",
-        user: "1"
-      },
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        imgUrl: "http://thyrsi.com/t6/359/1534659629x-1404817850.png",
-        user: "2"
-      },
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        imgUrl: "http://thyrsi.com/t6/359/1534659629x-1404817850.png",
-        user: "1"
-      },
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        imgUrl: "http://thyrsi.com/t6/359/1534659629x-1404817850.png",
-        user: "2"
-      },
-      {
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        imgUrl: "http://thyrsi.com/t6/359/1534659629x-1404817850.png",
-        user: "2"
-      },
-    ]
+    images: []
+  },
+
+  initFetch: function () {
+    api_operationApplyCompleteImage({trade_no: this.options.trade_no}).then(images => {
+      this.pageEnd();
+      this.setData({
+        images
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     
+    this.pageLoad();
   },
 
   /**
@@ -70,20 +48,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const imgUrl = wx.getStorageSync('cropperImg');
-    if (imgUrl) {
-      let imgList = this.data.imgList;
-      imgList.push({
-        userIcon: "http://thyrsi.com/t6/359/1534638966x-1404817491.png",
-        time: '2018-08-19 20:20:23',
-        imgUrl,
-        user: "1"
-      },)
-      wx.removeStorageSync('cropperImg');
-      this.setData({
-        imgList
-      })
-    }
+    this.getCropperImg().then(path => {
+      if (path) {
+        this.data.images.push({
+          path
+        });
+        this.setData({
+          images: this.data.images
+        })
+      }
+    });
   },
 
   /**
@@ -135,11 +109,11 @@ Page({
       urls // 需要预览的图片http链接列表
     })
   },
-  
+
   /**
    * 上传截图
    */
-  onUploadImg:function(){
+  onUploadImg: function () {
     Utils.chooseImage()
   }
 })
