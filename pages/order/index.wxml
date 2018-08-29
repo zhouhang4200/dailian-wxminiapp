@@ -1,6 +1,6 @@
 <!--pages/order/index.wxml-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
-<block animation="{{loadAnimationPage}}" class="load-page  {{new_pay_password 'iphonex-page':''}}">
+<view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
     <view wx:for="{{asyncData.list}}" wx:key="{{index}}" class="row-item">
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-head">
             <text class="title">{{item.created_at}}</text>
@@ -76,7 +76,7 @@
         </view>
     </view>
     <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
-</block>
+</view>
 
 <!-- modal Overlay -->
 <view animation="{{animationModalOverlay}}"

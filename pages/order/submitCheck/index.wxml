@@ -16,7 +16,7 @@
                 </view>
             </view>
         </view>
-        <button formType="submit" class="submit-btn">确定</button>
+        <button formType="submit" class="submit-btn  {{isIpx ? 'fixed-iphonex-bottom':''}}">确定</button>
     </form>
 </view>
 

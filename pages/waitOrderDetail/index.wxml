@@ -1,5 +1,6 @@
 <!--pages/goodsDetail/index.wxml-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
 <view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
     <view class="head-info">
         <view class="head-title">【{{info.game_leveling_type_name}}】{{info.title}}</view>
@@ -127,4 +128,3 @@
         <view data-action="{{actionName}}" bindtap="onModalSubmit" class="btn primary">确定</view>
     </view>
 </view>
-<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>

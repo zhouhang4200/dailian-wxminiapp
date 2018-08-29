@@ -190,6 +190,8 @@ Page({
           }
           this.setData({
             'asyncData.list': this.data.asyncData.list
+          },()=>{
+            console.log('::::::::',this.data.asyncData.list)
           });
           wx.hideLoading();
           callBack && callBack();
