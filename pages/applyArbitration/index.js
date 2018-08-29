@@ -14,6 +14,7 @@ Page({
   data: {
 
     ...Utils.img.data,
+    ...Utils.globalData(),
 
     images: []
   },

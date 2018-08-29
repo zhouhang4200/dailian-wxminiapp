@@ -16,6 +16,7 @@ Page({
   data: {
 
     ...Utils.page.data,
+    ...Utils.globalData(),
 
     selfId: '1',
     images: []
@@ -24,10 +25,13 @@ Page({
   initFetch: function () {
     api_operationApplyCompleteImage({
       trade_no: this.options.trade_no
-    }).then(images => {
-      this.setData({
-        images
-      },()=>this.pageEnd())
+    }).then(data => {
+      if (!data.code) {
+        return this.setData({
+          images: data
+        }, () => this.pageEnd())
+      }
+      wx.showToast({title: data.message, icon: 'none'})
     })
   },
 

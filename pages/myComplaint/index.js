@@ -18,6 +18,7 @@ Page({
 
     ...Utils.page.data,
     ...Utils.img.data,
+    ...Utils.globalData(),
 
     tabName: 'tab1',
     remark: '',

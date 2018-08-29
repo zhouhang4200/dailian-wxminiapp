@@ -13,3 +13,4 @@
     <!--底部加载更多-->
     <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
 </view>
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>

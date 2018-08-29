@@ -1,5 +1,6 @@
 <!-- pages/user/myOrder/Screenshot/index.wxml -->
-<view animation="{{loadAnimationPage}}" class="screenshot-pages load-page ">
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
+<view animation="{{loadAnimationPage}}" class="screenshot-pages load-page  {{isIpx ? 'iphonex-page':''}}">
     <view wx:for="{{images}}" wx:key="{{index}}" wx:for-index="{{index}}" wx:for-item="img" class="print-item">
         <text class="histime">{{img.created_at}} 上传此截图</text>
         <view class="img-row">

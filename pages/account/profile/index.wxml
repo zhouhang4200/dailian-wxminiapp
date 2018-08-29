@@ -29,3 +29,4 @@
     </view>
     <button formType="submit" class="submit-btn-primary">确定</button>
 </form>
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>

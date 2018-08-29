@@ -16,3 +16,4 @@
         <button formType="submit" class="submit-btn"><text class="btn-title">确认充值</text></button>
     </form>
 </view>
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>

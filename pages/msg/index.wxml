@@ -24,3 +24,4 @@
         </view>
     </navigator>
 </view>
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>

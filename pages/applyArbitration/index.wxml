@@ -1,5 +1,5 @@
 <!-- pages/applyArbitration/index.wxml -->
-<form bindsubmit="onSubmit" class="apply-arbitration">
+<form bindsubmit="onSubmit" class="apply-arbitration {{isIpx ? 'iphonex-page':''}}">
     <view class="module-item">
         <text class="module-title">原因及要求</text>
         <textarea name="reason" class="input" placeholder="请输入..." auto-focus/>
@@ -18,5 +18,6 @@
             </view>
         </view>
     </view>
-    <button formType="submit" class="submit-btn">确定</button>
+    <button formType="submit" class="submit-btn {{isIpx ? 'fixed-iphonex-bottom':''}}">确定</button>
 </form>
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>

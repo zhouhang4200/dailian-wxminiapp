@@ -127,3 +127,4 @@
         <view data-action="{{actionName}}" bindtap="onModalSubmit" class="btn primary">确定</view>
     </view>
 </view>
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>

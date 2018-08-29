@@ -7,12 +7,15 @@ import {
 Page({
 
   ...Utils.modal.action,
+  ...Utils.page.action,
 
   /**
    * 页面的初始数据
    */
   data: {
-    ...Utils.modal.data
+    ...Utils.modal.data,
+    ...Utils.page.data,
+    ...Utils.globalData()
   },
 
   onSubmitForm: function (e) {
@@ -72,7 +75,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData(options)
+    this.pageLoad();
+    this.setData(options, () => this.pageEnd())
   },
 
   /**

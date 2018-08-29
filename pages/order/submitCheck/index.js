@@ -15,13 +15,14 @@ Page({
   data: {
 
     ...Utils.img.data,
+    ...Utils.globalData(),
     ...Utils.modal.data,
 
     trade_no: '',
     images: []
   },
 
-  onValidateForm:function(){
+  onValidateForm: function () {
     if (!this.data.images.length) {
       wx.showToast({title: '请上传截图', icon: 'none'});
       return false;

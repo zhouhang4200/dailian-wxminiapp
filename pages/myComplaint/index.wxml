@@ -1,5 +1,6 @@
 <!-- pages/myComplaint/index.wxml -->
-<view animation="{{loadAnimationPage}}" class="my-complaint">
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
+<view animation="{{loadAnimationPage}}" class="my-complaint load-page {{isIpx ? 'iphonex-page':''}}">
     <view class="tab-head">
         <view data-tab="tab1" bindtap="onSwitchTab" class="text-title-wrap {{tabName=='tab1' ? 'is-selected':''}}">
             <text class="text-title">申诉详情</text>
@@ -74,7 +75,7 @@
                         </view>
                     </view>
                 </view>
-                <button formType="submit" class="submit-btn">确定</button>
+                <button formType="submit" class="submit-btn {{isIpx ? 'fixed-iphonex-bottom':''}}">确定</button>
             </form>
             <block wx:else>
                 <view class="disabled-content">非仲裁中状态状态不能补充留言</view>

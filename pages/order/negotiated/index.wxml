@@ -1,42 +1,45 @@
 <!--pages/order/negotiated/index.wxml-->
-<form bindsubmit="onSubmitForm">
-    <view class="row-item">
-        <view class="row-bd">
-            <text class="title">订单价格</text>
-            <text class="input-value">{{orderPrice}}</text>
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
+<view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
+    <form bindsubmit="onSubmitForm">
+        <view class="row-item">
+            <view class="row-bd">
+                <text class="title">订单价格</text>
+                <text class="input-value">{{orderPrice}}</text>
+            </view>
         </view>
-    </view>
-    <view class="row-item">
-        <view class="row-bd">
-            <text class="title">代练费</text>
-            <input name="amount" placeholder="请输入代练费" type="digit"/>
+        <view class="row-item">
+            <view class="row-bd">
+                <text class="title">代练费</text>
+                <input name="amount" placeholder="请输入代练费" type="digit"/>
+            </view>
         </view>
-    </view>
-    <view class="row-item">
-        <view class="row-bd">
-            <text class="title">效率保证金</text>
-            <text class="input-value">{{efficiency_deposit}}</text>
+        <view class="row-item">
+            <view class="row-bd">
+                <text class="title">效率保证金</text>
+                <text class="input-value">{{efficiency_deposit}}</text>
+            </view>
         </view>
-    </view>
-    <view class="row-item">
-        <view class="row-bd">
-            <text class="title">安全保证金</text>
-            <text class="input-value">{{security_deposit}}</text>
+        <view class="row-item">
+            <view class="row-bd">
+                <text class="title">安全保证金</text>
+                <text class="input-value">{{security_deposit}}</text>
+            </view>
         </view>
-    </view>
-    <view class="row-item">
-        <view class="row-bd">
-            <text class="title">保证金</text>
-            <input name="deposit" type="idcard" placeholder="请输入赔偿保证金"/>
+        <view class="row-item">
+            <view class="row-bd">
+                <text class="title">保证金</text>
+                <input name="deposit" type="idcard" placeholder="请输入赔偿保证金"/>
+            </view>
         </view>
-    </view>
-    <view class="row-item">
-        <view class="row-bd">
-            <text class="title">协商原因</text>
-            <input name="reason" placeholder="请输入协商原因"/>
+        <view class="row-item">
+            <view class="row-bd">
+                <text class="title">协商原因</text>
+                <input name="reason" placeholder="请输入协商原因"/>
+            </view>
         </view>
-    </view>
-    <button formType="submit" class="submit-btn">
-        <text>提交</text>
-    </button>
-</form>
+        <button formType="submit" class="submit-btn {{isIpx ? 'fixed-iphonex-bottom':''}}">
+            <text>提交</text>
+        </button>
+    </form>
+</view>
