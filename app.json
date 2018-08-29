@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/account/setting/index",
     "pages/home/index",
+    "pages/account/login/index",
+    "pages/account/setting/index",
     "pages/order/index",
     "pages/applyArbitration/index",
     "pages/order/submitCheck/index",
@@ -9,7 +10,6 @@
     "pages/certification/index",
     "pages/account/cash/index",
     "pages/account/pay/index",
-    "pages/account/login/index",
     "pages/myComplaint/index",
     "pages/order/screenshot/index",
     "pages/order/negotiated/index",
