@@ -11,7 +11,7 @@
     <view animation="{{animationPage}}" class="sort-list">
         <view class="sort-list-content">
             <view wx:key="{{index}}" wx:for="{{sortTypeList}}" bindtap="onSortItem" data-sort="{{item.type}}"
-                  class="sort-item {{item.type===sortType ? 'is-selected':''}}">
+                  class="sort-item ellipsis {{item.type===sortType ? 'is-selected':''}}">
                 <text>{{item.title}}</text>
                 <view class="icon"></view>
             </view>
@@ -21,7 +21,7 @@
               class="sort-modal-content-container">
             <view class="sort-modal-content">
                 <view class="item-list">
-                    <view data-index="{{index}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect"
+                    <view data-sortIndex="0" data-name="{{item.name}}" data-index="{{index}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect"
                           data-key="game_id"
                           data-value="{{item.id}}" wx:for="{{gameList}}"
                           class="row-item ellipsis {{searchForm.game_id===item.id ? 'is-selected':''}}">
@@ -50,7 +50,7 @@
               class="sort-modal-content-container">
             <view class="sort-modal-content">
                 <view class="item-list">
-                    <view data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onSelectSort" data-key="sort"
+                    <view data-sortIndex="1" data-name="{{item.title}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onSelectSort" data-key="sort"
                           data-value="{{item.sort}}" wx:for="{{sortTypeList[1].list}}"
                           class="row-item {{searchForm.sort===item.sort ? 'is-selected':''}}">
                         {{item.title}}
@@ -63,7 +63,7 @@
               class="sort-modal-content-container">
             <view class="sort-modal-content">
                 <view class="item-list">
-                    <view data-sort="{{sortType}}" wx:key="{{index}}" data-key="amount" data-value="{{item.amount}}"
+                    <view data-sortIndex="2" data-name="{{item.title}}"  data-sort="{{sortType}}" wx:key="{{index}}" data-key="amount" data-value="{{item.amount}}"
                           bindtap="onSelectSort" wx:for="{{sortTypeList[2].list}}"
                           class="row-item {{searchForm.amount===item.amount ? 'is-selected':''}}">
                         {{item.title}}

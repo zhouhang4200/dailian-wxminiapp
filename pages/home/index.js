@@ -56,9 +56,9 @@ Page({
         list: [
           {title: '全部', amount: 0},
           {title: '10元以下', amount: 1},
-          {title: '10元-100元（含）', amount: 2},
-          {title: '100元-200元（含）', amount: 3},
-          {title: '100元-200元（含） ', amount: 4}
+          {title: '10元-100元(含)', amount: 2},
+          {title: '100元-200元(含)', amount: 3},
+          {title: '100元-200元(含)', amount: 4}
         ]
       }
     ],
@@ -85,15 +85,19 @@ Page({
    * 选择弹窗中条件进行查询
    */
   onSelectSort: function (e) {
-    const {key, value} = e.currentTarget.dataset;
+    const {key, value, sortindex, name} = e.currentTarget.dataset;
+    if (sortindex !== undefined) {
+      this.data.sortTypeList[sortindex].title = name;
+    }
     this.onSortItem(e);
     this.setData({
       actionAnimationSortSearch: () => {
         const constKey = 'searchForm.' + key;
         this.setData({
+          sortTypeList: this.data.sortTypeList,
           'searchForm.page': 1,
           [constKey]: value,
-          isNoneResultList:false,
+          isNoneResultList: false,
           asyncData: {
             list: [],
             totalRows: 0
@@ -108,23 +112,40 @@ Page({
   },
 
   onGameSortSelect: function (e) {
-    const {key, value, index} = e.currentTarget.dataset;
-    const {searchForm, gameList} = this.data;
-    const {game_id, region_id, server_id} = searchForm;
-    var isCurrentGameId = key === 'game_id' && value === game_id;
-    var isCurrentRegionId = key === 'region_id' && value === region_id;
-    var isCurrentServerId = key === 'server_id' && value === server_id;
-    // 相同选项忽略筛选，不做任何操作
-    if (isCurrentGameId || isCurrentRegionId || isCurrentServerId) return false;
+    const {key, value, index, sortindex, name} = e.currentTarget.dataset;
+    if (sortindex !== undefined) {
+      this.data.sortTypeList[sortindex].title = name;
+    }
+    const {gameList} = this.data;
     const isSelectGame = key === 'game_id';
+    const isSelectServer = key === 'server_id';
     const isSelectRegion = key === 'region_id';
+    let isSelectGameAll = (key === 'game_id' && value === 0);
+    let isSelectRegionAll = (key === 'region_id' && value === 0);
+    let isSearch = isSelectGameAll || isSelectRegionAll || isSelectServer;
     const constKey = 'searchForm.' + key;
+    if (key === 'game_id' && value !== 0) {
+      this.setData({
+        [constKey]: value,
+        regionList: [{id: 0, name: '全部'}].concat(gameList[index].regions),
+        serverList: [],
+      });
+    }
+    if (key === 'region_id' && value !== 0) {
+      this.setData({
+        [constKey]: value,
+        serverList: this.data.regionList[index].servers,
+      });
+    }
+    // 相同选项忽略筛选，不做任何操作
+    if (!isSearch) return false;
     this.setData({
       'searchForm.server_id': (isSelectGame || isSelectRegion) ? '' : this.data.searchForm.server_id,
       'searchForm.region_id': isSelectGame ? '' : this.data.searchForm.region_id,
       [constKey]: value,
-      regionList: isSelectGame ? gameList[index].regions : this.data.regionList,
-      serverList: isSelectGame ? [] : isSelectRegion ? this.data.regionList[index].servers : this.data.serverList,
+      sortTypeList: this.data.sortTypeList,
+      regionList: isSelectGameAll ? [] : isSelectGame ? gameList[index].regions : this.data.regionList,
+      serverList: (isSelectGame || isSelectRegionAll) ? [] : isSelectRegion ? this.data.regionList[index].servers : this.data.serverList,
     }, () => {
       const {regionList, serverList} = this.data;
       if ((regionList.length !== 0 && key === 'game_id') || (serverList.length !== 0 && key === 'region_id')) {
@@ -242,15 +263,15 @@ Page({
         }
         const _regions = games[0].regions;
         this.setData({
-          gameList: games,
-          regionList: _regions,
-          serverList: _regions[0].servers
+          gameList: [{id: 0, name: '全部'}].concat(games),
+          regionList: [{id: 0, name: '全部'}].concat(_regions),
+          serverList: [{id: 0, name: '全部'}].concat(_regions[0].servers)
         });
         resolve();
       }, (err) => {
         reject(err);
       });
-    })
+    }).catch()
   },
 
   /**
@@ -396,4 +417,5 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+
+});
