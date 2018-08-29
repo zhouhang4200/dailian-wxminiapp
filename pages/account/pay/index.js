@@ -3,6 +3,8 @@
 import {
   api_recharge
 } from '../../../lib/api'
+import {ENVIROMENT} from '../../../lib/config'
+import Utils from "../../../lib/utils";
 
 Page({
 
@@ -20,33 +22,13 @@ Page({
 
   onSubmit: function (e) {
     const amount = e.detail.value.amount;
-    if (amount < 1) {
+    if (amount < 0) {
       return wx.showToast({title: '最低充值金额1元', icon: 'none'})
     }
     wx.showLoading();
-    const onCancelHandle = errMsg => {
-      const isCancel = ['requestPayment:fail cancel', 'requestPayment:cancel'].indexOf(errMsg) !== -1;
-      if (isCancel) {
-        console.log('取消支付');
-        return true
-      }
-      return false;
-    };
-    api_recharge({amount}).then(payParams => {
-      wx.requestPayment({
-        ...payParams,
-        'success': function (res) {
-          console.log('支付成功');
-        },
-        'fail': function (res) {
-          if (!onCancelHandle(res)) {
-            console.log('支付失败:::')
-          }
-        },
-        // bug: 6.5.2 及之前版本中，用户取消支付不会触发 fail 回调，只会触发 complete 回调，回调 errMsg 为 'requestPayment:cancel'
-        'complete': onCancelHandle
-      })
-    })
+    Utils.wxPay({amount}).then(() => {
+      wx.hideLoading();
+    });
   },
 
   /**

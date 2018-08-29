@@ -28,6 +28,7 @@ Page({
           return wx.showToast({title: data.message, icon: 'none'})
         }
         Utils.user.storageToken(data).then(() => {
+          Utils.wxLogin(true);
           wx.navigateBack();
         });
       })
