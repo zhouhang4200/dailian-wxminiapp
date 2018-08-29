@@ -218,3 +218,10 @@ button::after {
 .load-page {
     opacity: 0;
 }
+
+.none-result {
+    font-size: 28rpx;
+    text-align: center;
+    color: #999;
+    padding: 20rpx 0;
+}

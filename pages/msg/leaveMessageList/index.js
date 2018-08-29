@@ -2,7 +2,7 @@
 
 import Utils from '../../../lib/utils'
 import {
-  api_getOrderOperationGetMessage
+  api_getMessageList
 } from '../../../lib/api'
 
 Page({
@@ -16,11 +16,15 @@ Page({
 
     ...Utils.page.data,
 
+    list: []
+
   },
 
-  initFetch:function(){
-    api_getOrderOperationGetMessage({trade_no:this.options.trade_no}).then(data=>{
-
+  initFetch: function () {
+    api_getMessageList().then(list => {
+      this.setData({
+        list
+      }, () => this.pageEnd())
     })
   },
 

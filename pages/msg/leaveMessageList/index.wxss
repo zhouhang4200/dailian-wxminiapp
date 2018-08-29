@@ -1,13 +1,11 @@
 /* pages/msg/leaveMessageList/index.wxss */
 page {
+    box-sizing: border-box;
     background-color: #f8f8f8;
-}
-
-.leave-page {
     padding: 35rpx;
 }
 
-.leave-page .row-item {
+.row-item {
     background-color: #ffff;
     border-radius: 14rpx;
     padding: 20rpx;
@@ -15,23 +13,23 @@ page {
     margin-bottom: 20rpx;
 }
 
-.leave-page .row-head {
+.row-head {
     display: flex;
     padding-bottom: 29rpx;
     justify-content: space-between;
 }
 
-.leave-page .row-head .title {
+.row-head .title {
     font-size: 33rpx;
     color: #222;
 }
 
-.leave-page .row-head .date {
+.row-head .date {
     font-size: 24rpx;
     color: #b3b3b3;
 }
 
-.leave-page .details-content {
+.details-content {
     line-height: 1.8;
     font-size: 25rpx;
     color: #333;
@@ -39,7 +37,7 @@ page {
     border-bottom: 1rpx solid #eee;
 }
 
-.leave-page .details-btn {
+.details-btn {
     border: 0;
     border-radius: 0;
     background-color: transparent;

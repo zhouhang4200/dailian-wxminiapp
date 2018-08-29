@@ -80,6 +80,7 @@
         <!--底部加载更多-->
         <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
     </view>
+    <view wx:if="{{!asyncData.list.length}}" class="none-result">没有更多了</view>
     <!-- modal Overlay -->
     <view data-sort="{{sortType}}" bindtap="onSortItem" hidden="{{isModalOverlayHidden}}"
           bindtransitionend="onModalOverlayToggleEnd"

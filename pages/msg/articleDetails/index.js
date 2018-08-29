@@ -33,9 +33,9 @@ Page({
       this.setData({
         info: {
           ...info,
-          content: info.content.replace(/<\/?.+?>/g, "")
+          content: info.content ? info.content.replace(/<\/?.+?>/g, "") : ''
         }
-      },()=>this.pageEnd())
+      }, () => this.pageEnd());
     })
   },
 

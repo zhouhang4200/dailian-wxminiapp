@@ -162,9 +162,6 @@ Page({
       }, () => {
         this.pageEnd();
         this.setReachEndInfo();
-        if (this.data.asyncData.total === 0) {
-          wx.showToast({title: '暂无记录', icon: 'none'})
-        }
       })
     });
   },
