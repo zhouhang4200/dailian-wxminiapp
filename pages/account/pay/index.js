@@ -1,9 +1,5 @@
 // pages/account/pay/index.js
 
-import {
-  api_recharge
-} from '../../../lib/api'
-import {ENVIROMENT} from '../../../lib/config'
 import Utils from "../../../lib/utils";
 
 Page({
@@ -25,9 +21,10 @@ Page({
     if (amount < 0) {
       return wx.showToast({title: '最低充值金额1元', icon: 'none'})
     }
-    wx.showLoading();
+    wx.showLoading({title: '加载中'});
     Utils.wxPay({amount}).then(() => {
       wx.hideLoading();
+      return wx.showToast({title: '充值成功', icon: 'none'})
     });
   },
 

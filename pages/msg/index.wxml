@@ -9,7 +9,7 @@
         </view>
     </view>
 </navigator>
-<navigator class="link-navigation is-large" url="/pages/msg/leaveMessageList/index">
+<navigator hidden="{{!isLogin}}" class="link-navigation is-large" url="/pages/msg/leaveMessageList/index">
     <view class="link-bd">
         <view class="icon">
             <image src="/images/PdsL.png" mode="widthFix" lazy-load="false"></image>
@@ -17,8 +17,8 @@
         <view class="title">
             <text>留言消息</text>
         </view>
-        <view class="total-tag">
-            <text>8</text>
+        <view hidden="{{total===0}}" class="total-tag">
+            <text>{{total}}</text>
         </view>
     </view>
 </navigator>

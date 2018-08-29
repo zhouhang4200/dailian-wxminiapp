@@ -1,4 +1,5 @@
 /* pages/account/pay/index.wxss */
+@import "../../waitOrderDetail/_modal_password.wxss";
 
 .remark-title {
     display: block;
@@ -8,7 +9,6 @@
     font-size: 23rpx;
     border-bottom: 1px solid #eee;
 }
-
 
 .pay-title {
     font-weight: bold;

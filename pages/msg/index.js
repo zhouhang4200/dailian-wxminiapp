@@ -1,5 +1,7 @@
 // pages/msg/index.js
-import Utils from '../../lib/utils'
+import {
+  api_totalMsg
+} from '../../lib/api'
 
 Page({
 
@@ -7,14 +9,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isLogin: null
+    isLogin: false,
+    total: 0
+  },
+
+  initFetch: function () {
+    api_totalMsg().then(data => {
+      if(!data.code){
+        this.setData({
+          isLogin: true,
+          total: data.total
+        })
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.pageLoad();
   },
 
   /**
@@ -28,7 +42,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (!this.data.isLogin) {
+      this.initFetch();
+    }
   },
 
   /**

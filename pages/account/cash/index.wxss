@@ -1,2 +1,10 @@
 /* pages/account/capital/cash/index.wxss */
+@import "../../waitOrderDetail/_modal_password.wxss";
 @import "../pay/index.wxss";
+
+.pay-title {
+    display: flex;
+    padding-right: 20rpx;
+    align-items: center;
+    justify-content: space-between;
+}

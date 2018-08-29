@@ -159,17 +159,6 @@ Page({
   },
 
   /**
-   * 订单密码和支付密码 弹窗
-   */
-  setOrderAndPayPasswordModal: function () {
-    this.setData({
-      modalKey: 'isOrderPasswordHidden',
-      isOrderPasswordHidden: false,
-      actionName: 'onOrderPassword'
-    }, () => this.modalOverlayToggle())
-  },
-
-  /**
    * 支付密码弹窗
    */
   setPayPasswordModal: function () {
@@ -177,6 +166,17 @@ Page({
       modalKey: 'isPayPasswordHidden',
       isPayPasswordHidden: false,
       actionName: 'onPayPassword'
+    }, () => this.modalOverlayToggle())
+  },
+
+  /**
+   * 订单密码和支付密码 弹窗
+   */
+  setOrderAndPayPasswordModal: function () {
+    this.setData({
+      modalKey: 'isOrderPasswordHidden',
+      isOrderPasswordHidden: false,
+      actionName: 'onOrderPassword'
     }, () => this.modalOverlayToggle())
   },
 

@@ -1,15 +1,63 @@
 <!--pages/account/capital/cash/index.wxml-->
-<text class="remark-title">提示：提现金额最低10元且必须为整数，提现将收取1%的手续费，提现金额将在3个工作日（节假日顺延）转账到实名认证填写的银行卡</text>
-<view class="pay-title">
-    <text>提现金额（收取1%手续费）</text>
-</view>
-<form bindsubmit="onSubmit">
-    <view class="pay-money">
-        <image src="/images/rmb.png" class="symbol-icon" mode="widthFix" lazy-load="false"></image>
-        <input name="amount" confirm-type="done" type="digit" focus="{{true}}" class="price-input"/>
+<wxs src="../../../lib/utils.wxs" module="utils"></wxs>
+<view animation="{{loadAnimationPage}}">
+    <text class="remark-title">{{info.tips}}</text>
+    <view class="pay-title">
+        <text>提现金额（收取{{info.rate*100+'%'}}手续费）</text>
+        <text hidden="{{serviceCharge===0}}">手续费 {{ utils.sumPrice([serviceCharge]) }}</text>
     </view>
-    <text class="remark-title bb-0">可用余额 10.00</text>
-    <button formType="submit" class="submit-btn">
-        <text class="btn-title">确认充值</text>
-    </button>
-</form>
+    <form bindsubmit="onSubmit">
+        <view class="pay-money">
+            <image src="/images/rmb.png" class="symbol-icon" mode="widthFix" lazy-load="false"></image>
+            <input name="amount" bindinput="onAmountInput" confirm-type="done" type="digit" focus="{{true}}" class="price-input"/>
+        </view>
+        <text class="remark-title bb-0">可用余额 {{utils.sumPrice([info.balance])}}</text>
+        <button formType="submit" class="submit-btn">
+            <text class="btn-title">确认充值</text>
+        </button>
+    </form>
+</view>
+
+<!-- modal Overlay -->
+<view animation="{{animationModalOverlay}}"
+      hidden="{{isModalOverlayHidden}}"
+      class="modal-overlay">
+</view>
+
+<!-- 操作选项 -->
+<view bindtransitionend="onModalOverlayToggleEnd"
+      animation="{{animationModalOverlayContent}}"
+      hidden="{{isModalOverlayHidden}}"
+      class="modal-content">
+
+    <!--设置支付密码-->
+    <view hidden="{{isSettingPasswordHidden}}" class="modal-bd confirm-modal">
+        您未设置支付密码，是否去设置支付密码？
+    </view>
+
+    <!--输入支付密码-->
+    <view hidden="{{isPayPasswordHidden}}" class="modal-bd form-modal">
+        <view class="modal-title">请输入支付密码</view>
+        <view class="password-input">
+            <view class="pay-password-input">
+                <input cursor-spacing="120" type="number" value="{{pay_password}}" focus="{{payPasswordFocus}}"
+                       bindinput="onInputPayPassword"
+                       class="pay-password-input" maxlength="6" password="{{true}}"/>
+            </view>
+            <view bindtap="setPayPasswordFocus" class="password-sigle-wrap">
+                <view class="bl-0 password-sigle {{payPasswordLength>0 ? 'password-sigle-show':''}}"></view>
+                <view class="password-sigle {{payPasswordLength>1 ? 'password-sigle-show':''}}"></view>
+                <view class="password-sigle {{payPasswordLength>2 ? 'password-sigle-show':''}}"></view>
+                <view class="password-sigle {{payPasswordLength>3 ? 'password-sigle-show':''}}"></view>
+                <view class="password-sigle {{payPasswordLength>4 ? 'password-sigle-show':''}}"></view>
+                <view class="password-sigle {{payPasswordLength>5 ? 'password-sigle-show':''}}"></view>
+            </view>
+        </view>
+        <navigator url="/pages/account/password/index?action=find_pay" class="forget-link" hover-class="none">忘记密码</navigator>
+    </view>
+
+    <view class="modal-footer">
+        <view bindtap="modalOverlayToggle" class="btn line">取消</view>
+        <view data-action="{{actionName}}" bindtap="onModalSubmit" class="btn primary">确定</view>
+    </view>
+</view>

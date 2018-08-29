@@ -1,4 +1,4 @@
-/* pages/goodsDetail/index.wxss */
+/* pages/waitOrderDetail/index.wxss */
 
 page {
     padding-bottom: 87rpx;
@@ -155,93 +155,4 @@ page {
     color: #fff;
     font-weight: bold;
     background-image: linear-gradient(-45deg, rgb(0, 156, 255) 0%, rgb(0, 134, 255) 100%);
-}
-
-.confirm-modal {
-    height: 170rpx;
-}
-
-.form-modal {
-    padding: 0 30rpx;
-}
-
-.modal-title {
-    text-align: center;
-    font-size: 33rpx;
-    padding-top: 54rpx;
-    padding-bottom: 35rpx;
-    color: #000;
-}
-
-.input-placeholder {
-    color: #ccc;
-}
-
-.forget-link {
-    font-size: 25rpx;
-    color: #999;
-    text-align: right;
-    padding-bottom: 16rpx;
-}
-
-.password-wrap {
-    position: relative;
-    overflow: hidden;
-    height: 76rpx;
-}
-
-.password-input {
-    position: relative;
-    overflow: hidden;
-    height: 76rpx;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffffff;
-    border-radius: 8rpx;
-    border: 1rpx solid #d2d3d5;
-    margin-bottom: 25rpx;
-    font-size: 25rpx;
-}
-
-.pay-password-input {
-    width: 0;
-    height: 0;
-    color: transparent;
-    font-size: 0;
-    opacity: 0;
-}
-
-.password-sigle-wrap {
-    position: absolute;
-    background-color: #fff;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    z-index: 2;
-}
-
-.password-sigle {
-    flex: 1;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    border-left: 1rpx solid #d2d3d5;
-    font-weight: bold;
-    color: #000;
-    height: 100%;
-}
-
-.password-sigle-show:after {
-    content: '';
-    position: absolute;
-    width: 24rpx;
-    height: 24rpx;
-    border-radius: 12rpx;
-    background-color: #000;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 45%;
 }

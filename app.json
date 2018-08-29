@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/account/cash/index",
     "pages/account/login/index",
     "pages/account/setting/index",
     "pages/order/index",
@@ -8,7 +9,6 @@
     "pages/order/submitCheck/index",
     "pages/account/index",
     "pages/certification/index",
-    "pages/account/cash/index",
     "pages/account/pay/index",
     "pages/myComplaint/index",
     "pages/order/screenshot/index",
