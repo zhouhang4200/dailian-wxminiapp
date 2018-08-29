@@ -1,11 +1,13 @@
 // pages/msg/index.js
+import Utils from '../../lib/utils'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    isLogin: null
   },
 
   /**

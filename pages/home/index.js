@@ -68,6 +68,7 @@ Page({
       list: [],
       total: 0
     },
+    isNoneResultList: false,
     searchForm: {
       page: 1,
       page_size: 10,
@@ -91,6 +92,7 @@ Page({
         this.setData({
           'searchForm.page': 1,
           [constKey]: value,
+          isNoneResultList:false,
           asyncData: {
             list: [],
             totalRows: 0
@@ -160,8 +162,14 @@ Page({
         },
         'searchForm.page': params.page
       }, () => {
+        wx.hideLoading();
         this.pageEnd();
         this.setReachEndInfo();
+        if (this.data.asyncData.total === 0) {
+          this.setData({
+            isNoneResultList: true
+          })
+        }
       })
     });
   },
