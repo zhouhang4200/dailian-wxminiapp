@@ -57,15 +57,15 @@ Page({
    */
   onReceiveSubmit: function () {
     wx.showLoading({icon: 'none', title: '加载中'});
-    if (!Utils.getUserToken()) {
-      wx.hideLoading();
-      wx.navigateTo({
-        url: '/pages/account/login/index'
-      });
-      this.setPageShowInterruptAction('onReceiveSubmit');
-      return false;
-    }
     api_profile().then(data => {
+      if (data.code === 1004) {
+        wx.hideLoading();
+        wx.navigateTo({
+          url: '/pages/account/login/index'
+        });
+        this.setPageShowInterruptAction('onReceiveSubmit');
+        return false;
+      }
       wx.hideLoading();
       const isSettingPayPassword = data.pay_password === 1;
       const isPayOrderPassword = this.data.info.private === 1;
