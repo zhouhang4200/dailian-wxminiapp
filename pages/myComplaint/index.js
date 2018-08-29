@@ -24,7 +24,8 @@ Page({
     remark: '',
     status: '',
     image: '',
-    content: ''
+    content: '',
+    isPageInfo: true
   },
 
   /**
@@ -43,7 +44,10 @@ Page({
     api_orderOperationComplainInfo({
       trade_no: this.options.trade_no
     }).then(info => {
-      this.setData({info}, () => this.pageEnd())
+      this.setData({
+        info,
+        isPageInfo: !info.code
+      }, () => this.pageEnd())
     })
   },
 
