@@ -1,7 +1,9 @@
 // pages/help/index.js
 
 import Utils from '../../../lib/utils'
-import {api_notice} from '../../../lib/api'
+import {
+  api_notice
+} from '../../../lib/api'
 
 Page({
 
