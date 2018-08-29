@@ -1,23 +1,24 @@
 import Utils from 'lib/utils'
 
 App({
-  onLaunch: function () {
-    Utils.wxLogin(true)
-    // wx.login({
-    //   success: function(res) {
-    //     console.log('：：：微信：：：res:::',res)
-    //     // if (res.code) {
-    //     //   //发起网络请求
-    //     //   wx.request({
-    //     //     url: 'https://test.com/onLogin',
-    //     //     data: {
-    //     //       code: res.code
-    //     //     }
-    //     //   })
-    //     // } else {
-    //     //   console.log('登录失败！' + res.errMsg)
-    //     // }
-    //   }
-    // });
+  onLaunch: function (options) {
+    Utils.wxLogin(true);
+    let that = this;
+    // 将获取的场景值保存到全局变量
+    that.globalData.sceneNum = options.scene;
+    // 获取手机信息
+    wx.getSystemInfo({
+      success: function (res) {
+        let model = res.model.substring(0, res.model.indexOf("X")) + "X";
+        if (model === 'iPhone X') {
+          that.globalData.isIpx = true  //判断是否为iPhone X 默认为值false，iPhone X 值为true
+        }
+      }
+    })
+  },
+  globalData: {
+    sceneNum: '',
+    isIpx: false,
+    isLogin: !!wx.getStorageSync('token')
   }
 });

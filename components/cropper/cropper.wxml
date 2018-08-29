@@ -1,4 +1,4 @@
-<view class="cropper-wrapper" catchtouchmove="true">
+<view class="cropper-wrapper  {{isIpx ? 'iphonex-page':''}}" catchtouchmove="true">
     <canvas
             class="canvas"
             disable-scroll="true"
@@ -9,7 +9,9 @@
             canvas-id="{{cropperOpt.id}}">
     </canvas>
     <block wx-if="{{isCanvasLoad}}">
-        <view class="ico ico-1" bindtap="closeModel"></view>
-        <view class="ico ico-2" bindtap="getCropperImage"></view>
+        <view class="action-btn-wrap  {{isIpx ? 'fixed-iphonex-bottom':''}}">
+            <view class="ico ico-1" bindtap="closeModel"></view>
+            <view class="ico ico-2" bindtap="getCropperImage"></view>
+        </view>
     </block>
 </view>

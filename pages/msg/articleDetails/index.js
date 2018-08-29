@@ -16,6 +16,7 @@ Page({
   data: {
 
     ...Utils.page.data,
+    ...Utils.globalData(),
 
     info: {
       "id": '',
@@ -30,13 +31,20 @@ Page({
     const {id, action} = this.options;
     const api = {api_helpDetails, api_noticeDetails};
     api[action]({id}).then(info => {
+      wx.setNavigationBarTitle({
+        title: info.title
+      });
       this.setData({
         info: {
           ...info,
-          content: info.content ? info.content.replace(/<\/?.+?>/g, "") : ''
+          content: info.content ? this.formatContent(info.content) : ''
         }
       }, () => this.pageEnd());
     })
+  },
+
+  formatContent: function (content) {
+    return content.replace(/<\/?.+?>/g, "")
   },
 
   /**

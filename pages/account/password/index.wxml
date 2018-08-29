@@ -3,7 +3,7 @@
 <!--找回登录密码-->
 <form wx:if="{{type==='find_login'}}" bindsubmit="onFindLoginPassword" class="user-account-page password-page">
     <view class="form-item">
-        <input placeholder="请输入手机号码" bindinput="onPhoneInput" maxlength="11" type="number" name="phone"/>
+        <input placeholder="请输入手机号码" maxlength="11"  bindinput="onPhoneInput" maxlength="11" type="number" name="phone"/>
     </view>
     <view class="form-item">
         <input placeholder="请输入新登录密码" name="new_password" password="{{true}}"/>
@@ -43,10 +43,10 @@
 <!--找回支付密码-->
 <form wx:if="{{type==='find_pay'}}" bindsubmit="onFindPayPassword" class="user-account-page password-page">
     <view class="form-item">
-        <input placeholder="请输入手机号码" type="number"/>
+        <input placeholder="请输入手机号码"  maxlength="11" bindinput="onPhoneInput" name="phone" type="number"/>
     </view>
     <view class="form-item">
-        <input placeholder="请输入新登录密码" name="new_pay_password" password="{{true}}"/>
+        <input placeholder="请输入新支付密码" name="new_pay_password" password="{{true}}"/>
     </view>
     <view class="form-item">
         <input placeholder="请再次输入新密码" name="confirm_password" password="{{true}}"/>

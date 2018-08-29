@@ -1,5 +1,5 @@
 <!--pages/account/api_profile/page.wxml-->
-<form bindsubmit="onSubmitForm" animation="{{loadAnimationPage}}" class="load-page ">
+<form bindsubmit="onSubmitForm" animation="{{loadAnimationPage}}" class="load-page  {{isIpx ? 'iphonex-page':''}}">
     <view data-croppersize="[135,135]" data-cropsize="[135,135]" bindtap="chooseImage" class="user-icon">
         <image src="{{userInfo.avatar}}"  mode="scaleToFill" lazy-load="false"></image>
     </view>

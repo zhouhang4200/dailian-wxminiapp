@@ -1,13 +1,15 @@
 <!--pages/account/capital/details/index.wxml-->
 <wxs src="../../../../lib/utils.wxs" module="utils"/>
-<navigator wx:key="{{index}}" wx:for="{{asyncData.list}}" url="/pages/account/capital/details/index?id={{item.id}}"
-           class="row-item">
-    <view class="left-info">
-        <text class="title">{{utils.capitalFormatText(item.type)}}</text>
-        <text class="date">{{item.created_at}}</text>
-    </view>
-    <text class="money-plus" wx:if="{{ utils.isIncome(item.type) }}">+{{item.amount}}</text>
-    <text wx:else>-{{item.amount}}</text>
-</navigator>
-<!--底部加载更多-->
-<reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
+<view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
+    <navigator wx:key="{{index}}" wx:for="{{asyncData.list}}" url="/pages/account/capital/details/index?id={{item.id}}"
+               class="row-item">
+        <view class="left-info">
+            <text class="title">{{utils.capitalFormatText(item.type)}}</text>
+            <text class="date">{{item.created_at}}</text>
+        </view>
+        <text class="money-plus" wx:if="{{ utils.isIncome(item.type) }}">+{{item.amount}}</text>
+        <text wx:else>-{{item.amount}}</text>
+    </navigator>
+    <!--底部加载更多-->
+    <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
+</view>

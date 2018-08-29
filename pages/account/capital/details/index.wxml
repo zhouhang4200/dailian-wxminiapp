@@ -1,24 +1,26 @@
 <!--pages/account/capital/list/index.wxml-->
 <wxs src="../../../../lib/utils.wxs" module="utils"/>
-<view class="row-item">
-    <text class="title">产生金额</text>
-    <view>
-        <text>{{userInfo.amount}}</text>
+<view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
+    <view class="row-item">
+        <text class="title">产生金额</text>
+        <view>
+            <text>{{userInfo.amount}}</text>
+        </view>
     </view>
-</view>
-<view class="row-item">
-    <text class="title">收支类型</text>
-    <view>
-        <text>{{ userInfo.type }}</text>
+    <view class="row-item">
+        <text class="title">收支类型</text>
+        <view>
+            <text>{{ userInfo.type }}</text>
+        </view>
     </view>
-</view>
-<view class="row-item">
-    <text class="title">产生时间</text>
-    <view>
-        <text>{{userInfo.created_at}}</text>
+    <view class="row-item">
+        <text class="title">产生时间</text>
+        <view>
+            <text>{{userInfo.created_at}}</text>
+        </view>
     </view>
-</view>
-<view class="row-item">
-    <text class="title">流水说明</text>
-    <text>{{userInfo.remark}}</text>
+    <view class="row-item">
+        <text class="title">流水说明</text>
+        <text>{{userInfo.remark}}</text>
+    </view>
 </view>

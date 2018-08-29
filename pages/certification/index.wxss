@@ -50,6 +50,9 @@ page {
 .fixed-status-bottom {
     padding-bottom: 124rpx;
 }
+.fixed-status-bottom.iphonex-page{
+    padding-bottom: 192rpx;
+}
 
 .row-item {
     background-color: #fff;

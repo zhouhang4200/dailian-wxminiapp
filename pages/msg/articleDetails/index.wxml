@@ -1,5 +1,5 @@
 <!--pages/msg/withdraw/index.wxml-->
-<view class="article-notice">
+<view animation="{{loadAnimationPage}}" class="article-notice load-page {{isIpx ? 'iphonex-page':''}}">
     <view class="head-title">
         <text>{{info.title}}</text>
     </view>
@@ -7,6 +7,6 @@
         <text class="date-info">{{info.created_at}}</text>
     </view>
     <view class="details">
-        <text>{{info.content}}</text>
+        {{info.content}}
     </view>
 </view>

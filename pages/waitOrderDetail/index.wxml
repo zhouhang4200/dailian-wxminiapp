@@ -1,6 +1,6 @@
 <!--pages/goodsDetail/index.wxml-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
-<view animation="{{loadAnimationPage}}" class="load-page ">
+<view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
     <view class="head-info">
         <view class="head-title">【{{info.game_leveling_type_name}}】{{info.title}}</view>
         <view class="price-info">
@@ -53,7 +53,7 @@
         </view>
         <view class="details">{{info.explain}}</view>
     </view>
-    <view class="receive-footer">
+    <view class="receive-footer {{isIpx ? 'fixed-iphonex-bottom':''}}">
         <view class="receive-title">
             <text>接单需冻结</text>
             <text class="size">50</text>
@@ -89,14 +89,16 @@
     <view hidden="{{isOrderPasswordHidden}}" class="modal-bd form-modal">
         <view class="modal-title">请输入支付密码</view>
         <view class="password-input">
-            <input confirm-type="next" cursor-spacing="160" value="{{take_order_password}}" data-key="take_order_password" bindinput="onInputOrderPassword"
+            <input confirm-type="next" cursor-spacing="160" value="{{take_order_password}}"
+                   data-key="take_order_password" bindinput="onInputOrderPassword"
                    focus="{{orderPasswordFocus}}" placeholder="请输入订单密码" password="{{true}}"/>
         </view>
         <view class="password-input">
-            <input cursor-spacing="110" value="{{pay_password}}" data-key="pay_password" maxlength="6" bindinput="onInputPayPassword" type="number"
+            <input cursor-spacing="110" value="{{pay_password}}" data-key="pay_password" maxlength="6"
+                   bindinput="onInputPayPassword" type="number"
                    focus="{{orderPayPasswordFocus}}" placeholder="请输入支付密码" password="{{true}}"/>
         </view>
-        <navigator url="/pages/account/password/index?action=find_pay" class="forget-link" hover-class="none">忘记密码</navigator>
+        <view bindtap="onSettingPassword" data-action="find_pay" class="forget-link">忘记密码</view>
     </view>
 
     <!--输入支付密码-->
@@ -117,7 +119,7 @@
                 <view class="password-sigle {{payPasswordLength>5 ? 'password-sigle-show':''}}"></view>
             </view>
         </view>
-        <navigator url="/pages/account/password/index?action=find_pay" class="forget-link" hover-class="none">忘记密码</navigator>
+        <view bindtap="onSettingPassword" data-action="find_pay" class="forget-link">忘记密码</view>
     </view>
 
     <view class="modal-footer">

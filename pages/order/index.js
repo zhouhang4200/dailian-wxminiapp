@@ -23,6 +23,7 @@ Page({
   data: {
     ...Utils.page.data,
     ...Utils.modal.data,
+    ...Utils.globalData(),
     ...Utils.reachBottom.data,
 
     selectedTradeNo: '',

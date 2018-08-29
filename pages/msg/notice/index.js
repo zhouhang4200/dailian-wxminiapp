@@ -16,6 +16,7 @@ Page({
   data: {
 
     ...Utils.page.data,
+    ...Utils.globalData(),
 
     list: []
 

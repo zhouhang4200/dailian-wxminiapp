@@ -19,6 +19,7 @@ Page({
   data: {
     ...Utils.page.data,
     ...Utils.modal.data,
+    ...Utils.globalData(),
 
     payPasswordFocus: false,
     payPasswordLength: 0,

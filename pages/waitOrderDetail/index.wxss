@@ -1,7 +1,8 @@
 /* pages/waitOrderDetail/index.wxss */
+@import "./_modal_password.wxss";
 
 page {
-    padding-bottom: 87rpx;
+    padding-bottom: 155rpx;
 }
 
 .head-info {

@@ -225,3 +225,19 @@ button::after {
     color: #999;
     padding: 20rpx 0;
 }
+
+.iphonex-page {
+    padding-bottom: 68rpx;
+}
+
+.fixed-iphonex-bottom {
+    bottom: 68rpx !important;
+}
+.fixed-iphonex-bottom::after {
+    content: ' ';
+    position: fixed;
+    bottom: 0!important;
+    height: 68rpx!important;
+    width: 100%;
+    background: #fff;
+}

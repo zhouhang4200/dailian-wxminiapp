@@ -15,6 +15,7 @@ Page({
 
   ...Utils.page.action,
   ...Utils.modal.action,
+  ...Utils.pageShowInterruptAction.action,
 
   /**
    * 页面的初始数据
@@ -23,10 +24,12 @@ Page({
 
     ...Utils.page.data,
     ...Utils.modal.data,
+    ...Utils.pageShowInterruptAction.data,
+    ...Utils.globalData(),
 
     payPasswordFocus: false,
-    payPasswordLength: 6,
-    pay_password: '123456',
+    payPasswordLength: 0,
+    pay_password: '',
 
     actionName: '',
 
@@ -43,10 +46,9 @@ Page({
     take_order_password: '',
   },
 
-
   initFetch() {
     api_orderWaitDetail({trade_no: this.options.trade_no}).then(info => {
-      this.setData({info},()=>this.pageEnd())
+      this.setData({info}, () => this.pageEnd())
     })
   },
 
@@ -55,6 +57,14 @@ Page({
    */
   onReceiveSubmit: function () {
     wx.showLoading({icon: 'none', title: '加载中'});
+    if (!Utils.getUserToken()) {
+      wx.hideLoading();
+      wx.navigateTo({
+        url: '/pages/account/login/index'
+      });
+      this.setPageShowInterruptAction('onReceiveSubmit');
+      return false;
+    }
     api_profile().then(data => {
       wx.hideLoading();
       const isSettingPayPassword = data.pay_password === 1;
@@ -72,6 +82,7 @@ Page({
       }
     })
   },
+
 
   /**
    * 订单密码
@@ -119,7 +130,7 @@ Page({
    * 关窗回调
    */
   modalOverlayCloseHandle: function () {
-    if(countDownTime===0) this.redirectToOrderDetails();
+    if (countDownTime === 0) this.redirectToOrderDetails();
     clearInterval(intervalSuccess);
     const modalKey = this.data.modalKey;
     this.setData({
@@ -252,13 +263,16 @@ Page({
   },
 
   /**
-   *  提交 设置支付密码
+   *  设置/忘记 支付密码
    */
-  onSettingPassword: function () {
+  onSettingPassword: function (e) {
+    const action = e === undefined ? 'setting_pay' : e.currentTarget.dataset.action;
     // 设置完成之后，回来直接提交
+    this.modalOverlayToggle();
     wx.navigateTo({
-      url: '/pages/account/password/index?action=setting_pay&url=/pages/waitOrderDetail/index?action=onReceiveSubmit'
-    })
+      url: '/pages/account/password/index?action=' + action
+    });
+    this.setPageShowInterruptAction('onReceiveSubmit');
   },
 
   /**
@@ -319,7 +333,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.evalPageShowInterruptAction();
   },
 
   /**

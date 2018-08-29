@@ -15,6 +15,7 @@ Page({
   data: {
 
     ...Utils.page.data,
+    ...Utils.globalData(),
     ...Utils.reachBottom.data,
 
     asyncData: {
@@ -43,8 +44,7 @@ Page({
         },
         'searchForm.page': params.page
       }, () => {
-        this.pageShow();
-        wx.hideLoading();
+        this.pageEnd();
         this.setReachEndInfo();
         if (this.data.asyncData.total === 0) {
           wx.showToast({title: '暂无记录', icon: 'none'})

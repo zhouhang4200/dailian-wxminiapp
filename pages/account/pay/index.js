@@ -7,7 +7,10 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    ...Utils.globalData()
+
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -25,7 +28,7 @@ Page({
     Utils.wxPay({amount}).then(() => {
       wx.hideLoading();
       return wx.showToast({title: '充值成功', icon: 'none'})
-    });
+    }).catch();
   },
 
   /**

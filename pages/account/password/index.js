@@ -11,34 +11,6 @@ import {
 } from '../../../lib/api'
 
 
-const setting = {
-  find_login: {
-    title: '找回登录密码',
-    type: 'find_login',
-    action: 'api_findLoginPassword'
-  },
-  update_login: {
-    title: '修改登录密码',
-    type: 'update_login',
-    action: 'api_updateLoginPassword'
-  },
-  find_pay: {
-    title: '找回支付密码',
-    type: 'find_pay',
-    action: 'api_findPayPassword'
-  },
-  update_pay: {
-    title: '修改支付密码',
-    type: 'update_pay',
-    action: 'api_updatePayPassword',
-  },
-  setting_pay: {
-    title: '设置支付密码',
-    type: 'setting_pay',
-    action: 'api_settingPayPassword'
-  }
-};
-
 Page({
 
   /**
@@ -171,18 +143,19 @@ Page({
    */
   onFindPayPassword: function (e) {
     const formData = e.detail.value;
-    const {phone, new_password, confirm_password, verification_code} = formData;
+    const {phone, new_pay_password, confirm_password, verification_code} = formData;
     const isValidateForm = function () {
       const requiredValidate = {
         phone: '请输入手机号码',
-        new_password: '请输入新登录密码',
+        new_pay_password: '请输入新支付密码',
         confirm_password: '请再次输入新密码',
+        verification_code: '请输入验证码',
       };
       if (!(Utils.Regrex.phone.test(phone)) && phone) {
         wx.showToast({title: '请输入正确的手机号码', icon: 'none'});
         return false;
       }
-      if (new_password.length < 6 && new_password) {
+      if (new_pay_password.length < 6 && new_pay_password) {
         wx.showToast({title: '密码长度最低为6位', icon: 'none'});
         return false;
       }
@@ -192,7 +165,7 @@ Page({
           return false;
         }
       }
-      if (new_password !== confirm_password) {
+      if (new_pay_password !== confirm_password) {
         wx.showToast({title: '两次密码输入不一致，请检查', icon: 'none'});
         return false;
       }
@@ -202,7 +175,7 @@ Page({
       wx.showLoading({title: '加载中', icon: 'none'});
       api_findPayPassword({
         phone,
-        new_password,
+        new_pay_password,
         verification_code
       }).then(data => {
         wx.hideLoading();
@@ -333,7 +306,7 @@ Page({
       return false;
     }
     this.verificationCodeSend();
-    wx.showLoading();
+    wx.showLoading({title: '加载中', icon: 'none'});
     let api = this.data.type === 'find_login' ? api_sendFindLoginPasswordPhoneCode : api_sendFindPayPasswordPhoneCode;
     api({phone}).then(data => {
       wx.hideLoading();
@@ -348,16 +321,44 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const setting = {
+      find_login: {
+        title: '找回登录密码',
+        type: 'find_login',
+        action: 'api_findLoginPassword'
+      },
+      update_login: {
+        title: '修改登录密码',
+        type: 'update_login',
+        action: 'api_updateLoginPassword'
+      },
+      find_pay: {
+        title: '找回支付密码',
+        type: 'find_pay',
+        action: 'api_findPayPassword'
+      },
+      update_pay: {
+        title: '修改支付密码',
+        type: 'update_pay',
+        action: 'api_updatePayPassword',
+      },
+      setting_pay: {
+        title: '设置支付密码',
+        type: 'setting_pay',
+        action: 'api_settingPayPassword'
+      }
+    };
     const action = options.action;
-    wx.setNavigationBarTitle({
-      title: '忘记密码'
-    });
     const settingValue = setting[action];
     if (setting[action]) {
+      const {action, type, title} = settingValue;
       this.setData({
-        action: settingValue.action,
-        type: settingValue.type,
-      })
+        action,
+        type,
+      });
+      wx.setNavigationBarTitle({
+        title
+      });
     }
   },
 

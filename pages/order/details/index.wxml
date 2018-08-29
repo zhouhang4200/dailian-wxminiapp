@@ -1,5 +1,6 @@
 <!--pages/order/details/index.wxml-->
-<block hidden="isPageHidden">
+<wxs src="../../../lib/utils.wxs" module="utils"></wxs>
+<view animation="{{loadAnimationPage}}"  class="load-page {{isIpx ? 'iphonex-page':''}}">
     <view class="row-item">
         <view class="row-title">
             <text>收货信息</text>
@@ -11,7 +12,7 @@
         </view>
         <view class="row-info">
             <text>订单状态</text>
-            <text class="right">{{info.status_describe}}</text>
+            <text class="right">{{utils.orderStatusFormatTitle(info.status)}}</text>
         </view>
         <view class="row-info">
             <text>订单编号</text>
@@ -28,7 +29,7 @@
             <text>接单时间</text>
             <text class="right">{{info.take_at}}</text>
         </view>
-        <view class="row-info">
+        <view wx:if="{{info.complete_at}}" class="row-info">
             <text>完成时间</text>
             <text class="right">{{info.complete_at}}</text>
         </view>
@@ -139,4 +140,4 @@
             <text class="right">{{info.player_qq}}</text>
         </view>
     </view>
-</block>
+</view>

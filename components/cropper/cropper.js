@@ -1,13 +1,15 @@
 import WeCropper from '../../lib/cropper.min.js'
-import Utils from '../../lib/cropper.min'
+import Utils from '../../lib/utils'
 
 const device = wx.getSystemInfoSync(); // 获取设备信息
 const windowWidth = device.windowWidth;
 const windowHeight = device.windowHeight;
 
-const app = getApp();
 Page({
   data: {
+
+    ...Utils.globalData(),
+
     isCanvasLoad: false,
     cropperOpt: {
       id: 'cropper',

@@ -1,8 +1,10 @@
 <!--pages/help/index.wxml-->
-<navigator wx:for="{{list}}" wx:key="{{index}}" class="link-navigation" url="/pages/msg/articleDetails/index?id={{item.id}}&action=api_noticeDetails&title={{item.name}}">
-    <view class="link-bd">
-        <view class="title">
-            <text>{{item.title}}</text>
+<view class="{{isIpx ? 'iphonex-page':''}}">
+    <navigator wx:for="{{list}}" wx:key="{{index}}" class="link-navigation" url="/pages/msg/articleDetails/index?id={{item.id}}&action=api_noticeDetails&title={{item.name}}">
+        <view class="link-bd">
+            <view class="title">
+                <text>{{item.title}}</text>
+            </view>
         </view>
-    </view>
-</navigator>
+    </navigator>
+</view>

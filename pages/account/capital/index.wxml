@@ -1,22 +1,24 @@
 <!--pages/account/capital/index.wxml-->
-<navigator class="link-navigation" url="/pages/account/capital/list/index">
-    <view class="link-bd">
-        <view class="title">
-            <text>资金明细</text>
+<view class="{{isIpx ? 'iphonex-page':''}}">
+    <navigator class="link-navigation" url="/pages/account/capital/list/index">
+        <view class="link-bd">
+            <view class="title">
+                <text>资金明细</text>
+            </view>
         </view>
-    </view>
-</navigator>
-<navigator class="link-navigation" url="/pages/account/pay/index">
-    <view class="link-bd">
-        <view class="title">
-            <text>充值</text>
+    </navigator>
+    <navigator class="link-navigation" url="/pages/account/pay/index">
+        <view class="link-bd">
+            <view class="title">
+                <text>充值</text>
+            </view>
         </view>
-    </view>
-</navigator>
-<navigator class="link-navigation" url="/pages/account/cash/index">
-    <view class="link-bd">
-        <view class="title">
-            <text>提现</text>
+    </navigator>
+    <navigator class="link-navigation" url="/pages/account/cash/index">
+        <view class="link-bd">
+            <view class="title">
+                <text>提现</text>
+            </view>
         </view>
-    </view>
-</navigator>
+    </navigator>
+</view>

@@ -15,6 +15,8 @@ Page({
 
   data: {
     ...Utils.page.data,
+    ...Utils.globalData(),
+
     selectUploadIcon: '',
     uploadUrl: '',
     userInfo: {

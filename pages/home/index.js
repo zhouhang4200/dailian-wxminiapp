@@ -20,6 +20,7 @@ Page({
    */
   data: {
     ...Utils.page.data,
+    ...Utils.globalData(),
     ...Utils.reachBottom.data,
 
     isModalOverlayHidden: true,
