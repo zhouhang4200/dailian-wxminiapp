@@ -13,7 +13,7 @@
         </view>
         <text class="remark-title bb-0">可用余额 {{utils.sumPrice([info.balance])}}</text>
         <button formType="submit" class="submit-btn">
-            <text class="btn-title">确认充值</text>
+            <text class="btn-title">提交</text>
         </button>
     </form>
 </view>

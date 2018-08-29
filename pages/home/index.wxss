@@ -68,7 +68,7 @@ page {
     z-index: 101;
     left: 0;
     top: 0;
-    height: 80rpx;
+    height: 90rpx;
     display: flex;
     align-items: center;
     width: 100%;

@@ -58,15 +58,14 @@ Page({
   onReceiveSubmit: function () {
     wx.showLoading({icon: 'none', title: '加载中'});
     api_profile().then(data => {
+      wx.hideLoading();
       if (data.code === 1004) {
-        wx.hideLoading();
         wx.navigateTo({
           url: '/pages/account/login/index'
         });
         this.setPageShowInterruptAction('onReceiveSubmit');
         return false;
       }
-      wx.hideLoading();
       const isSettingPayPassword = data.pay_password === 1;
       const isPayOrderPassword = this.data.info.private === 1;
       if (isSettingPayPassword) {
@@ -82,7 +81,6 @@ Page({
       }
     })
   },
-
 
   /**
    * 订单密码
@@ -195,6 +193,8 @@ Page({
    * 接单成功弹窗
    */
   setOrderSuccessModal: function () {
+    // 接单成功，首页准备刷新
+    Utils.setIsRefreshHome();
     this.setData({
       modalKey: 'isOrderSuccessHidden',
       isOrderSuccessHidden: false,

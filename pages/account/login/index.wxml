@@ -1,10 +1,10 @@
 <!--pages/account/api_login/index.wxml-->
 <form bindsubmit="onSubmitLogin" class="user-account-page login-page">
     <view class="form-item">
-        <input focus="{{true}}" name="phone" placeholder="请输入手机号码" maxlength="11" type="number"/>
+        <input focus="{{true}}" bindinput="onPhoneInput" name="phone" placeholder="请输入手机号码" maxlength="11" type="number"/>
     </view>
     <view class="form-item">
-        <input name="password" placeholder="请输入登录密码" password="{{true}}"/>
+        <input focus="{{passwordFocus}}" name="password" placeholder="请输入登录密码" password="{{true}}"/>
     </view>
     <view class="action-type full-item">
         <label class="action-left">

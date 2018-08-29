@@ -64,7 +64,7 @@
                     <text>补充留言</text>
                 </view>
                 <view class="module-item">
-                    <textarea value="{{content}}" name="content" class="input" placeholder="请输入..." auto-focus></textarea>
+                    <textarea value="{{content}}" name="content" class="input" placeholder="请输入..."></textarea>
                 </view>
                 <view class="module-item">
                     <text class="module-title">证据截图</text>

@@ -11,7 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    url: ''
+    url: '',
+    passwordFocus: false
   },
 
   /**
@@ -32,6 +33,15 @@ Page({
           wx.navigateBack();
         });
       })
+    }
+  },
+
+  /**
+   * 手机号输入
+   */
+  onPhoneInput: function (e) {
+    if (e.detail.value.length === 11) {
+      this.setData({passwordFocus: true})
     }
   },
 

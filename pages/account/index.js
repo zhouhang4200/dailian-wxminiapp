@@ -37,17 +37,14 @@ Page({
   },
 
   initFetch: function () {
-    try {
-      const token = wx.getStorageSync('token');
-      if (token) {
-        this.updateUserInfo();
-      }
-      else {
+    if (Utils.getUserToken() || this.data.isLogin === '') {
+      return Utils.getUserToken() ? this.updateUserInfo() : () => {
         this.setData({
           isLogin: false
         }, () => this.pageEnd())
-      }
-    } catch (e) {
+      };
+    }
+    else {
       this.pageEnd();
     }
   },

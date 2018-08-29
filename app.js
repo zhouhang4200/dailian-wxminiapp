@@ -19,6 +19,7 @@ App({
   globalData: {
     sceneNum: '',
     isIpx: false,
-    isLogin: !!wx.getStorageSync('token')
+    isLogin: !!wx.getStorageSync('token'),
+    isRefreshHome: false, // 通知刷新首页,因为订单被接
   }
 });

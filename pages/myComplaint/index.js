@@ -44,6 +44,11 @@ Page({
     api_orderOperationComplainInfo({
       trade_no: this.options.trade_no
     }).then(info => {
+      debugger;
+      if (info.code) {
+        wx.showToast({title: info.messahe, icon: 'none'});
+        return this.pageEnd()
+      }
       this.setData({
         info,
         isPageInfo: !info.code

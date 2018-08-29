@@ -173,6 +173,7 @@ Page({
       ...this.data.searchForm,
       ...opts
     };
+    const isRefresh = params.page === this.data.searchForm.page;
     api_orderWait(params).then(data => {
       let {
         asyncData
@@ -347,11 +348,13 @@ Page({
   onModalOverlayToggleEnd: function () {
     const {actionAnimationSortSearch, animationModalOverlay} = this.data;
     const opacity = animationModalOverlay.actions[0].animates[0].args[1];
-    !opacity && this.setData({
-      isModalOverlayHidden: true
-    }, () => {
-      actionAnimationSortSearch && actionAnimationSortSearch();
-    })
+    if (!opacity) {
+      this.setData({
+        isModalOverlayHidden: true
+      }, () => {
+        actionAnimationSortSearch && actionAnimationSortSearch();
+      })
+    }
   },
 
   /**
@@ -373,7 +376,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let app = getApp();
+    if (app.globalData.isRefreshHome) {
+      app.globalData.isRefreshHome = false;
+      wx.showLoading({title: '加载中'});
+      this.setData({
+        asyncData: {
+          list: [],
+          total: 0
+        },
+        isNoneResultList: false,
+        'searchForm.page': 1,
+        'searchForm.page_size': 10
+      });
+      this.initFetch();
+    }
   },
 
   /**
@@ -387,7 +404,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log(':::onUnload:::')
+
   },
 
   /**

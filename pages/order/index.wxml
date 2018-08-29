@@ -60,8 +60,9 @@
                        url="/pages/order/negotiated/index?trade_no={{item.trade_no}}&efficiency_deposit={{item.efficiency_deposit}}&security_deposit={{item.security_deposit}}&orderPrice={{item.amount}}"
                        hover-class="none" class="action-btn">协商撤销
             </navigator>
-            <!--2,3 申请仲裁 -->
-            <navigator data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="setSelectedInfo" wx:if="{{ item.status===2 || item.status===3 }}"
+            <!--2,3，4 申请仲裁 -->
+            <navigator data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="setSelectedInfo"
+                       wx:if="{{ item.status===2 || item.status===3 || item.status===4 }}"
                        url="/pages/applyArbitration/index?trade_no={{item.trade_no}}"
                        hover-class="none" class="action-btn">申请仲裁
             </navigator>
