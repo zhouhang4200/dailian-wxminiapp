@@ -96,7 +96,7 @@
             <input cursor-spacing="110" value="{{pay_password}}" data-key="pay_password" maxlength="6" bindinput="onInputPayPassword" type="number"
                    focus="{{orderPayPasswordFocus}}" placeholder="请输入支付密码" password="{{true}}"/>
         </view>
-        <navigator url="/pages/account/password/index?forget=1" class="forget-link" hover-class="none">忘记密码</navigator>
+        <navigator url="/pages/account/password/index?action=find_pay" class="forget-link" hover-class="none">忘记密码</navigator>
     </view>
 
     <!--输入支付密码-->
@@ -117,7 +117,7 @@
                 <view class="password-sigle {{payPasswordLength>5 ? 'password-sigle-show':''}}"></view>
             </view>
         </view>
-        <navigator url="/pages/account/password/index?forget=1" class="forget-link" hover-class="none">忘记密码</navigator>
+        <navigator url="/pages/account/password/index?action=find_pay" class="forget-link" hover-class="none">忘记密码</navigator>
     </view>
 
     <view class="modal-footer">
