@@ -103,14 +103,6 @@
                     <text>{{info.requirement}}</text>
                 </view>
             </view>
-            <!--<view class="p">-->
-            <!--<text>1、</text>-->
-            <!--<view class="info">-->
-            <!--<text>接单后退单要扣效率保证金~(接单后,必须30分钟内上号开-->
-            <!--打)-->
-            <!--</text>-->
-            <!--</view>-->
-            <!--</view>-->
         </view>
     </view>
     <view class="row-item">
