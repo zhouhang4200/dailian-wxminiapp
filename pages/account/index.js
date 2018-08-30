@@ -36,6 +36,9 @@ Page({
     })
   },
 
+  /**
+   * 退出登录
+   */
   onLoginOut: function () {
     // wx.showLoading({title: '', icon: 'none'});
     Utils.signOutStorage().then(data => {
