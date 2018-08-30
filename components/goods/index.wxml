@@ -2,9 +2,7 @@
 <!--首页商品列表组件-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
 <navigator wx:key="index" url="/pages/waitOrderDetail/index?trade_no={{item.trade_no}}" wx:for="{{list}}" class="goods-item" hover-class="none">
-    <view class="goods-icon-wrap">
-        <image src="{{item.icon}}" mode="widthFix" lazy-load="true" class="goods-icon"></image>
-    </view>
+    <image src="{{item.icon}}" mode="scaleToFill" lazy-load="true" class="goods-icon"></image>
     <view class="goods-details">
         <view class="title">【{{item.game_leveling_type_name}}】{{item.title}}</view>
         <view class="price-info">

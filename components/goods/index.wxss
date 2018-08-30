@@ -6,7 +6,7 @@
     border-bottom: 1rpx solid #eee;
 }
 
-.goods-icon-wrap {
+.goods-icon {
     width: 110rpx;
     height: 110rpx;
     display: flex;
@@ -15,10 +15,6 @@
     overflow: hidden;
     border-radius: 10rpx;
     margin-right: 18rpx;
-}
-
-.goods-icon {
-    width: 100%;
 }
 
 .goods-details {

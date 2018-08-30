@@ -34,7 +34,6 @@ Page({
 
   initFetch: function () {
     api_profile().then(data => {
-      const {balance, frozen} = data;
       this.setData({
         isLogin: data.code === undefined,
         userInfo: {
@@ -62,6 +61,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if (Utils.getUserToken() && this.data.isLogin === false) {
+      wx.showLoading({title: '', icon: 'none'})
+    }
     this.initFetch();
   },
 
