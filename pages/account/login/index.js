@@ -28,7 +28,7 @@ Page({
         if (data.code) {
           return wx.showToast({title: data.message, icon: 'none'})
         }
-        Utils.user.storageToken(data).then(() => {
+        Utils.signInStorage(data).then(() => {
           Utils.wxLogin(true);
           wx.navigateBack();
         });

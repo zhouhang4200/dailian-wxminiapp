@@ -1,6 +1,6 @@
 <!--pages/home/index.wxml-->
 <!--搜索栏-->
-<view bindtransitionend="loadAnimationPageTransitionEnd" animation="{{loadAnimationPage}}" class="load-page {{!isModalOverlayHidden ? 'is-overlay':''}}">
+<view animation="{{loadAnimationPage}}" class="load-page {{!isModalOverlayHidden ? 'is-overlay':''}}">
     <navigator hover-class="none" animation="{{animationPage}}" class="search-form"
                url="/pages/search/index">
         <view class="form">

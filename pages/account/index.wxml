@@ -76,7 +76,7 @@
             </view>
         </view>
     </navigator>
-    <view class="sign-out-btn">退出登录</view>
+    <view bindtap="onLoginOut" class="sign-out-btn">退出登录</view>
 </block>
 <block wx:if="{{isLogin===false}}">
     <navigator class="head-top arrow-right-icon" url="/pages/account/login/index">

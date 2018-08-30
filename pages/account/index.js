@@ -36,6 +36,15 @@ Page({
     })
   },
 
+  onLoginOut: function () {
+    // wx.showLoading({title: '', icon: 'none'});
+    Utils.signOutStorage().then(data => {
+      this.setData({
+        isLogin: false
+      })
+    });
+  },
+
   initFetch: function () {
     if (Utils.getUserToken() || this.data.isLogin === '') {
       return Utils.getUserToken() ? this.updateUserInfo() : () => {
