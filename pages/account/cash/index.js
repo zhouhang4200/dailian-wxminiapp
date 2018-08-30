@@ -33,6 +33,7 @@ Page({
     serviceCharge: 0,
     amount: 0,
 
+    isAmountFocus: false,
 
     info: {
       tips: '',
@@ -44,6 +45,12 @@ Page({
   initFetch: function () {
     api_cashInfo().then(info => {
       this.setData({info}, () => this.pageEnd())
+    })
+  },
+
+  loadPageTransitionEnd: function () {
+    this.setData({
+      isAmountFocus: true
     })
   },
 

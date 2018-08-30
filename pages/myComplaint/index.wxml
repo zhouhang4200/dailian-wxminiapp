@@ -69,11 +69,11 @@
                 <view class="module-item">
                     <text class="module-title">证据截图</text>
                     <view class="img-list">
-                        <view wx:if="{{image}}" class="screenshot is-img">
+                        <view wx:if="{{image}}" class="screenshot  screenshot-img">
                             <image data-url="{{item}}" bindtap="previewImage" class="" src="{{image}}"
                                    mode="widthFix" lazy-load="true"></image>
                         </view>
-                        <view wx:else bindtap="chooseImage" class="screenshot">
+                        <view wx:else data-cropperType="fullScreen" bindtap="chooseImage" class="screenshot">
                             <image class="icon" mode="widthFix" src="/images/add-img.png"
                                    lazy-load="false"></image>
                             <text class="title">添加图片</text>

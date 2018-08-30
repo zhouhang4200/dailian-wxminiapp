@@ -12,7 +12,7 @@
 
 .pay-title {
     font-weight: bold;
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #333;
     padding-left: 30rpx;
     padding-top: 40rpx;
@@ -42,7 +42,7 @@
 }
 
 .title {
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #333;
     display: block;
 }

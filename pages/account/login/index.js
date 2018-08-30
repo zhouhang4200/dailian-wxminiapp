@@ -12,7 +12,7 @@ Page({
    */
   data: {
     url: '',
-    passwordFocus: false
+    isPasswordFocus: false
   },
 
   /**
@@ -41,7 +41,7 @@ Page({
    */
   onPhoneInput: function (e) {
     if (e.detail.value.length === 11) {
-      this.setData({passwordFocus: true})
+      this.setData({isPasswordFocus: true})
     }
   },
 

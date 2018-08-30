@@ -31,7 +31,7 @@ page {
     display: flex;
     /*align-items: center;*/
     justify-content: space-between;
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #666;
 }
 
@@ -50,7 +50,7 @@ page {
 }
 
 .row-article {
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #666;
     line-height: 1.8;
     padding: 40rpx 30rpx;

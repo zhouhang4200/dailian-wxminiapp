@@ -2,5 +2,6 @@
   "usingComponents": {
     "goods-item": "/components/goods/index",
     "reach-bottom": "/components/reach-bottom/index"
-  }
+  },
+  "enablePullDownRefresh": true
 }

@@ -59,6 +59,6 @@
 }
 
 .login-page .forget-pwd {
-    font-size: 22rpx;
+    font-size: 26rpx;
     color: #6a7fa6;
 }

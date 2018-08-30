@@ -5,15 +5,11 @@ import {
   api_gameAllRegionServer
 } from '../../lib/api'
 
-/**
- * 静态数据存储
- * @type {{gameInfo: {gameList: Array, regionList: Array, serverList: Array}}}
- */
 
 Page({
 
   ...Utils.page.action,
-  ...Utils.reachBottom.action,
+  ...Utils.reachBottomPullDownRefresh.action,
 
   /**
    * 页面的初始数据
@@ -21,7 +17,7 @@ Page({
   data: {
     ...Utils.page.data,
     ...Utils.globalData(),
-    ...Utils.reachBottom.data,
+    ...Utils.reachBottomPullDownRefresh.data,
 
     isModalOverlayHidden: true,
     animationModalOverlay: {},
@@ -31,17 +27,19 @@ Page({
     actionAnimationSortContent: null, // 筛选内容的弹窗显示动画
     actionAnimationModalOverlay: null, // 遮罩动画
     actionAnimationNextSortContent: null, // 在当前遮罩情况切换sort
-    actionAnimationSortSearch: null, // 选择之后进行搜索
+    actionAnimationSortSearch: null, // 选择筛选之后的值进行搜索
 
     sortType: 'null',
     sortTypeList: [
       {
         title: '游戏区服',
-        type: 'area'
+        type: 'area',
+        alias: '游戏区服',
       },
       {
         title: '默认排序',
         type: 'default',
+        alias: '默认排序',
         list: [
           {title: '综合排序', sort: 0},
           {title: '价格从低到高', sort: 1},
@@ -53,6 +51,7 @@ Page({
       {
         title: '价格筛选',
         type: 'price',
+        alias: '价格筛选',
         list: [
           {title: '全部', amount: 0},
           {title: '10元以下', amount: 1},
@@ -69,12 +68,16 @@ Page({
       list: [],
       total: 0
     },
-    isNoneResultList: false,
     searchForm: {
       page: 1,
       page_size: 10,
       sort: 0,
       amount: 0,
+      game_id: '',
+      region_id: '',
+      server_id: ''
+    },
+    historySortValue: {  // 存储历史记录的选择值。在用户选择然后关闭遮罩之后是否进行筛选查询。
       game_id: '',
       region_id: '',
       server_id: ''
@@ -86,9 +89,7 @@ Page({
    */
   onSelectSort: function (e) {
     const {key, value, sortindex, name} = e.currentTarget.dataset;
-    if (sortindex !== undefined) {
-      this.data.sortTypeList[sortindex].title = name;
-    }
+    this.setSelectedSortTitle(sortindex, name);
     this.onSortItem(e);
     this.setData({
       actionAnimationSortSearch: () => {
@@ -97,7 +98,6 @@ Page({
           sortTypeList: this.data.sortTypeList,
           'searchForm.page': 1,
           [constKey]: value,
-          isNoneResultList: false,
           asyncData: {
             list: [],
             totalRows: 0
@@ -111,11 +111,24 @@ Page({
     });
   },
 
+  // 设置选择的的类型值
+  setSelectedSortTitle: function (sortIndex, name) {
+    if (sortIndex !== undefined) {
+      this.data.sortTypeList[sortIndex].title = name;
+      this.setData({
+        sortTypeList: this.data.sortTypeList
+      })
+    }
+  },
+
+  /**
+   * 游戏选择筛选
+   * @param e
+   * @returns {boolean}
+   */
   onGameSortSelect: function (e) {
     const {key, value, index, sortindex, name} = e.currentTarget.dataset;
-    if (sortindex !== undefined) {
-      this.data.sortTypeList[sortindex].title = name;
-    }
+    this.setSelectedSortTitle(sortindex, name);
     const {gameList} = this.data;
     const isSelectGame = key === 'game_id';
     const isSelectServer = key === 'server_id';
@@ -143,7 +156,6 @@ Page({
       'searchForm.server_id': (isSelectGame || isSelectRegion) ? '' : this.data.searchForm.server_id,
       'searchForm.region_id': isSelectGame ? '' : this.data.searchForm.region_id,
       [constKey]: value,
-      sortTypeList: this.data.sortTypeList,
       regionList: isSelectGameAll ? [] : isSelectGame ? gameList[index].regions : this.data.regionList,
       serverList: (isSelectGame || isSelectRegionAll) ? [] : isSelectRegion ? this.data.regionList[index].servers : this.data.serverList,
     }, () => {
@@ -173,27 +185,8 @@ Page({
       ...this.data.searchForm,
       ...opts
     };
-    const isRefresh = params.page === this.data.searchForm.page;
     api_orderWait(params).then(data => {
-      let {
-        asyncData
-      } = this.data;
-      this.setData({
-        asyncData: {
-          total: data.total,
-          list: asyncData.list.concat(data.list)
-        },
-        'searchForm.page': params.page
-      }, () => {
-        wx.hideLoading();
-        this.pageEnd();
-        this.setReachEndInfo();
-        if (this.data.asyncData.total === 0) {
-          this.setData({
-            isNoneResultList: true
-          })
-        }
-      })
+      this.updateReachBottomPullDownRefreshPageData({params, data})
     });
   },
 
@@ -201,17 +194,22 @@ Page({
    * 头部排序
    */
   onSortItem: function (e) {
+    const {game_id, region_id, server_id} = this.data.searchForm;
+    this.setData({
+      historySortValue: {game_id, region_id, server_id}
+    });
     const targetSortType = e.currentTarget.dataset.sort;
     const {sortType, isModalOverlayHidden, gameList} = this.data;
+    const isArea = targetSortType === 'area';
     // 选择 游戏区服 筛选需要单独处理
     // 先看游戏名称列表是否有,没有的话，需要异步去获取
-    if (!gameList.length && targetSortType === 'area') return this.fetchGameAllRegionServer(e);
+    if (!gameList.length && isArea) return this.fetchGameAllRegionServer(e);
     if (sortType === targetSortType || isModalOverlayHidden) {
       this.setData({
         actionAnimationSortContent: () => this.modalContentToggle(isModalOverlayHidden ? targetSortType : sortType),
         actionAnimationModalOverlay: this.modalOverlayToggle,
         actionAnimationNextSortContent: "",
-      }, this.onPageAnimation)
+      }, this.setListGoodsAnimationToggle)
     }
     else {
       this.setData({
@@ -279,7 +277,7 @@ Page({
    * 页面上推动画 toggle
    * @param callBack
    */
-  onPageAnimation: function (callBack) {
+  setListGoodsAnimationToggle: function (callBack) {
     const animationPage = this.data.animationPage;
     const translateY = animationPage.actions ? animationPage.actions[0].animates[0].args[0] : false;
     let animation = wx.createAnimation({
@@ -294,10 +292,29 @@ Page({
   /**
    * 页面上推动画结束
    */
-  onPageAnimationEnd: function () {
+  listGoodsTransitionEnd: function () {
     const {actionAnimationModalOverlay, actionAnimationSortContent} = this.data;
     actionAnimationModalOverlay && actionAnimationModalOverlay();
     actionAnimationSortContent && actionAnimationSortContent();
+  },
+
+  // 点击遮罩，判断游戏选项是否有变更
+  payloadSort: function (e) {
+    const targetSortType = e.currentTarget.dataset.sort;
+    const {searchForm, historySortValue, isModalOverlayHidden, sortType} = this.data;
+    const isPlayloadRefresh = searchForm.game_id !== historySortValue.game_id || searchForm.region_id !== historySortValue.region_id || searchForm.server_id !== historySortValue.server_id
+    this.setData({
+      actionAnimationSortContent: () => {
+        this.modalContentToggle(isModalOverlayHidden ? targetSortType : sortType)
+      },
+      actionAnimationModalOverlay: this.modalOverlayToggle,
+      actionAnimationNextSortContent: isPlayloadRefresh ? () => {
+        this.setData(this.getInitFetchParams(), () => {
+          wx.showLoading({title: '加载中', icon: 'none'});
+          this.initFetch();
+        });
+      } : '',
+    }, this.setListGoodsAnimationToggle)
   },
 
   /**
@@ -319,7 +336,7 @@ Page({
   /**
    * 筛选弹窗动画结束
    */
-  onModalContentToggle: function () {
+  modalContentTransitionEnd: function () {
     const {actionAnimationNextSortContent} = this.data;
     actionAnimationNextSortContent && actionAnimationNextSortContent();
   },
@@ -345,7 +362,7 @@ Page({
   /**
    * 弹窗遮罩动画结束
    */
-  onModalOverlayToggleEnd: function () {
+  modalOverlayTransitionEnd: function () {
     const {actionAnimationSortSearch, animationModalOverlay} = this.data;
     const opacity = animationModalOverlay.actions[0].animates[0].args[1];
     if (!opacity) {
@@ -379,17 +396,7 @@ Page({
     let app = getApp();
     if (app.globalData.isRefreshHome) {
       app.globalData.isRefreshHome = false;
-      wx.showLoading({title: '加载中'});
-      this.setData({
-        asyncData: {
-          list: [],
-          total: 0
-        },
-        isNoneResultList: false,
-        'searchForm.page': 1,
-        'searchForm.page_size': 10
-      });
-      this.initFetch();
+      wx.startPullDownRefresh();
     }
   },
 
@@ -411,7 +418,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.startPullDownRefresh();
   },
 
   /**
@@ -425,6 +432,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function (e) {
+    console.log(':::this.data.asyncData', this.data.asyncData);
     this._onReachBottom()
   },
 

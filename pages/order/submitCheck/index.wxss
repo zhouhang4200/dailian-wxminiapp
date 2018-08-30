@@ -92,7 +92,7 @@
     height: 87rpx;
     line-height: 87rpx;
     text-align: center;
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #fff;
     background-image: linear-gradient(45deg, #009cff 0%, #0086ff 100%),
     linear-gradient(#198cff, #198cff);

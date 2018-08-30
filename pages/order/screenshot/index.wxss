@@ -64,7 +64,7 @@
     bottom: 0;
     height: 87rpx;
     line-height: 87rpx;
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #fff;
     width: 100%;
     border-radius: 0;

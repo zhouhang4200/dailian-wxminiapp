@@ -2,7 +2,7 @@
 <form bindsubmit="onSubmit" class="apply-arbitration {{isIpx ? 'iphonex-page':''}}">
     <view class="module-item">
         <text class="module-title">原因及要求</text>
-        <textarea name="reason" class="input" placeholder="请输入..." auto-focus/>
+        <textarea name="reason" class="input" placeholder="请输入..." />
     </view>
     <view class="module-item img-list-wrap">
         <text class="module-title">证据截图</text>
@@ -12,8 +12,8 @@
                        src="{{item}}" mode="widthFix" lazy-load="false"></image>
                 <image bindtap="delImages" data-index="{{index}}" src="/images/del.png" class="del-icon"  mode="widthFix"></image>
             </view>
-            <view hidden="{{images.length>2}}" bindtap="chooseImage" class="screenshot">
-                <image class="icon" mode="widthFix" src="/images/add-img.png" lazy-load="false"></image>
+            <view hidden="{{images.length>2}}" data-cropperType="fullScreen" bindtap="chooseImage" class="screenshot">
+                <image class="icon" mode="scaleToFill" src="/images/add-img.png" lazy-load="false"></image>
                 <text class="title">添加图片</text>
             </view>
         </view>

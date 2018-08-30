@@ -6,16 +6,20 @@
     border-bottom: 1rpx solid #eee;
 }
 
-.goods-icon {
+.goods-icon-wrap {
     width: 110rpx;
     height: 110rpx;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border-radius: 10rpx;
     margin-right: 18rpx;
 }
 
+.goods-icon {
+    width: 100%;
+}
 
 .goods-details {
     flex: 1;

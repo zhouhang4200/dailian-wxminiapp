@@ -3,5 +3,5 @@
     text-align: center;
     padding: 20rpx 0;
     color: #bbb;
-    font-size: 24rpx;
+    font-size: 28rpx;
 }

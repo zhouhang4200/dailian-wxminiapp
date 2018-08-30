@@ -100,6 +100,22 @@ Page({
   },
 
   /**
+   * 全屏
+   */
+  fullScreen: function () {
+    const cut_width = windowWidth-10;
+    const cut_height = windowHeight-10;
+    return {
+      cut: {
+        x: (windowWidth - cut_width) / 2, // 裁剪框x轴起点
+        y: (windowHeight - cut_height) / 2, // 裁剪框y轴期起点
+        width: cut_width, // 裁剪框宽度
+        height: cut_height // 裁剪框高度
+      }
+    }
+  },
+
+  /**
    * 根据比例计算裁剪图片
    * @param ratio
    * @returns {{cut: {x: number, y: number, width: number, height: number}}}

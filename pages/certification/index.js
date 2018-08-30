@@ -21,6 +21,8 @@ Page({
 
     chooseImgKey: '',
 
+    isRealNameFocus: false,
+
     checkInfo: {
       title: '',
       class: '',
@@ -35,6 +37,12 @@ Page({
     identity_card_back: '',
     identity_card_front: '',
     identity_card_hand: '',
+  },
+
+  loadPageTransitionEnd: function () {
+    this.setData({
+      isRealNameFocus: true
+    })
   },
 
   /**

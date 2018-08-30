@@ -11,7 +11,7 @@
 }
 
 .article-template .details {
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #333;
     line-height: 1.8;
 }

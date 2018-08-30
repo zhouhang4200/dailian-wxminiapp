@@ -54,7 +54,7 @@ button::after {
 }
 
 .link-navigation .title {
-    font-size: 29rpx;
+    font-size: 30rpx;
     color: #222;
 }
 

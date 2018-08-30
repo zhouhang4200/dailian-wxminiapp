@@ -8,7 +8,7 @@
         </navigator>
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-detail">
             <view class="icon">
-                <image class="img-full-max" src="http://ammgg.com/images/2018/08/21/Pf8l.png" mode="widthFix"
+                <image src="http://ammgg.com/images/2018/08/21/Pf8l.png" mode="widthFix"
                        lazy-load="false"></image>
             </view>
             <view class="info">

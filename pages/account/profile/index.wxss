@@ -6,19 +6,17 @@ page {
 }
 
 .user-icon {
-    margin: 0 auto;
+    margin: 50rpx auto;
     width: 136rpx;
     height: 136rpx;
-    border-radius: 68rpx;
-    overflow: hidden;
-    margin-bottom: 68rpx;
 }
 
 .user-icon image {
     width: 135rpx;
     height: 135rpx;
+    border-radius: 68rpx;
 }
 
-.submit-btn-primary{
+.submit-btn-primary {
     margin-top: 40rpx;
 }

@@ -77,7 +77,7 @@ page {
 }
 
 .reason-content .title {
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #333;
     padding-top: 32rpx;
 }
@@ -105,7 +105,7 @@ page {
     padding-top: 37rpx;
     display: block;
     padding-bottom: 21rpx;
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #333;
 }
 
@@ -122,9 +122,10 @@ page {
     line-height: 222rpx;
     margin-left: 13rpx;
     margin-bottom: 13rpx;
+    overflow: hidden;
 }
 
-.evidence-screenshot .img {
+.evidence-screenshot image {
     width: 100%;
 }
 
@@ -167,7 +168,7 @@ page {
 }
 
 .message-content .nick-name {
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #333;
     display: block;
 }

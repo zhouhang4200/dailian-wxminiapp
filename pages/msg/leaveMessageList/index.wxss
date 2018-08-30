@@ -31,7 +31,7 @@ page {
 
 .details-content {
     line-height: 1.8;
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #333;
     padding-bottom: 20rpx;
     border-bottom: 1rpx solid #eee;
@@ -41,7 +41,7 @@ page {
     border: 0;
     border-radius: 0;
     background-color: transparent;
-    font-size: 25rpx;
+    font-size: 26rpx;
     padding: 32rpx 0;
     text-align: center;
     color: #198cff;

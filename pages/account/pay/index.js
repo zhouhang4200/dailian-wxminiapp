@@ -8,8 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ...Utils.globalData()
+    ...Utils.globalData(),
 
+    isAmountFocus:false
   },
 
   /**
@@ -17,6 +18,12 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+
+  loadPageTransitionEnd: function () {
+    this.setData({
+      isAmountFocus: true
+    })
   },
 
   onSubmit: function (e) {

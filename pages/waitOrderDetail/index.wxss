@@ -35,7 +35,7 @@ page {
 .area {
     font-size: 24rpx;
     color: #666;
-    /*padding-top: 25rpx;*/
+    /*padding-top: 26rpx;*/
 }
 
 .safe-price {
@@ -100,7 +100,7 @@ page {
     display: inline-block;
     height: 40rpx;
     color: #fff;
-    font-size: 25rpx;
+    font-size: 26rpx;
     padding: 8rpx;
     align-items: center;
     background-color: #333333;
@@ -129,7 +129,7 @@ page {
 .receive-title {
     margin-left: 30rpx;
     font-weight: bold;
-    font-size: 25rpx;
+    font-size: 26rpx;
     flex: 1;
     color: #333;
     display: flex;
@@ -152,7 +152,7 @@ page {
     height: 100%;
     align-items: center;
     justify-content: center;
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #fff;
     font-weight: bold;
     background-image: linear-gradient(-45deg, rgb(0, 156, 255) 0%, rgb(0, 134, 255) 100%);

@@ -2,5 +2,6 @@
   "navigationBarTitleText": "我的订单",
   "usingComponents": {
     "reach-bottom": "/components/reach-bottom/index"
-  }
+  },
+  "enablePullDownRefresh": true
 }

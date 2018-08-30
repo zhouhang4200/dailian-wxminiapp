@@ -97,7 +97,7 @@ page {
 }
 
 .upload-label {
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #999;
     line-height: 76rpx;
 }
@@ -119,7 +119,7 @@ page {
 }
 
 .upload-title {
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #fff;
     padding-top: 20rpx;
 }
@@ -131,7 +131,7 @@ page {
     bottom: 0;
     line-height: 87rpx;
     width: 100%;
-    font-size: 25rpx;
+    font-size: 26rpx;
     color: #fff;
     text-align: center;
     background-image: linear-gradient(45deg, rgb(0, 156, 255) 0%, rgb(0, 134, 255) 100%);

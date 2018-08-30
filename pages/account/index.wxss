@@ -17,8 +17,12 @@ page {
 .head-info .user-icon {
     width: 100rpx;
     height: 100rpx;
+}
+
+.user-icon image {
+    width: 100rpx;
+    height: 100rpx;
     border-radius: 50rpx;
-    overflow: hidden;
 }
 
 .head-info .title {
@@ -71,4 +75,17 @@ page {
 .left-icon image {
     width: 35rpx;
     height: 35rpx;
+}
+
+.sign-out-btn {
+    margin: 0 30rpx;
+    margin-top: 40rpx;
+    height: 80rpx;
+    border-radius: 40rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 26rpx;
+    background-color: #198cff;
 }

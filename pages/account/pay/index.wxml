@@ -7,7 +7,7 @@
     <form bindsubmit="onSubmit">
         <view bindsubmit="onSubmit" class="pay-money">
             <image src="/images/rmb.png" class="symbol-icon" mode="widthFix" lazy-load="false"></image>
-            <input name="amount" confirm-type="done" type="digit" focus="{{true}}" class="price-input"/>
+            <input name="amount" confirm-type="done" type="digit" focus="{{isAmountFocus}}" class="price-input"/>
         </view>
         <view class="pay-type">
             <view class="title">充值方式</view>

@@ -15,7 +15,7 @@ Page({
 
   ...Utils.page.action,
   ...Utils.modal.action,
-  ...Utils.reachBottom.action,
+  ...Utils.reachBottomPullDownRefresh.action,
 
   /**
    * 页面的初始数据
@@ -24,7 +24,7 @@ Page({
     ...Utils.page.data,
     ...Utils.modal.data,
     ...Utils.globalData(),
-    ...Utils.reachBottom.data,
+    ...Utils.reachBottomPullDownRefresh.data,
 
     selectedTradeNo: '',
     selectedTradeNoIndex: '',
@@ -129,7 +129,7 @@ Page({
    */
   onMoreAction: function (e) {
     this.setSelectedInfo(e, () => {
-      const {selectedTradeNo,status} = this.data;
+      const {selectedTradeNo, status} = this.data;
       wx.showActionSheet({
         itemList: ['查看我的申诉', '查看/上传截图', '查看/发送留言'],
         success: function (res) {
@@ -190,8 +190,8 @@ Page({
           }
           this.setData({
             'asyncData.list': this.data.asyncData.list
-          },()=>{
-            console.log('::::::::',this.data.asyncData.list)
+          }, () => {
+            console.log('::::::::', this.data.asyncData.list)
           });
           wx.hideLoading();
           callBack && callBack();
@@ -209,22 +209,7 @@ Page({
       ...opts
     };
     api_selfOrder(params).then(data => {
-      let {
-        asyncData
-      } = this.data;
-      this.setData({
-        asyncData: {
-          total: data.total,
-          list: asyncData.list.concat(data.list)
-        },
-        'searchForm.page': params.page
-      }, () => {
-        this.pageEnd();
-        this.setReachEndInfo();
-        if (this.data.asyncData.total === 0) {
-          wx.showToast({title: '暂无记录', icon: 'none'})
-        }
-      })
+      this.updateReachBottomPullDownRefreshPageData({params, data});
     });
   },
 
@@ -260,7 +245,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.startPullDownRefresh();
   },
 
   /**
