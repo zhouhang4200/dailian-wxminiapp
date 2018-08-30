@@ -22,21 +22,6 @@ Page({
   },
 
   /**
-   * 更新用户信息
-   */
-  updateUserInfo: function () {
-    api_profile().then(data => {
-      const {balance, frozen} = data;
-      this.setData({
-        isLogin: data.code === undefined,
-        userInfo: {
-          ...data
-        }
-      }, () => this.pageEnd())
-    })
-  },
-
-  /**
    * 退出登录
    */
   onLoginOut: function () {
@@ -48,16 +33,15 @@ Page({
   },
 
   initFetch: function () {
-    if (Utils.getUserToken() || this.data.isLogin === '') {
-      return Utils.getUserToken() ? this.updateUserInfo() : () => {
-        this.setData({
-          isLogin: false
-        }, () => this.pageEnd())
-      };
-    }
-    else {
-      this.pageEnd();
-    }
+    api_profile().then(data => {
+      const {balance, frozen} = data;
+      this.setData({
+        isLogin: data.code === undefined,
+        userInfo: {
+          ...data
+        }
+      }, () => this.pageEnd())
+    })
   },
 
   /**
@@ -78,7 +62,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.updateUserInfo();
+    this.initFetch();
   },
 
   /**

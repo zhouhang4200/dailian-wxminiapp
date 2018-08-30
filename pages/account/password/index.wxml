@@ -3,7 +3,7 @@
 <!--找回登录密码-->
 <form wx:if="{{type==='find_login'}}" bindsubmit="onFindLoginPassword" class="user-account-page password-page">
     <view class="form-item">
-        <input placeholder="请输入手机号码" maxlength="11"  bindinput="onPhoneInput" maxlength="11" type="number" name="phone"/>
+        <input placeholder="请输入手机号码" focus="{{true}}" maxlength="11"  bindinput="onPhoneInput" maxlength="11" type="number" name="phone"/>
     </view>
     <view class="form-item">
         <input placeholder="请输入新登录密码" name="new_password" password="{{true}}"/>
@@ -25,7 +25,7 @@
 <!--修改登录密码-->
 <form wx:if="{{type==='update_login'}}" bindsubmit="onUpdateLoginPassword" class="user-account-page password-page">
     <view class="form-item">
-        <input placeholder="请输入旧登录密码" name="old_password" password="{{true}}"/>
+        <input placeholder="请输入旧登录密码" focus="{{true}}" name="old_password" password="{{true}}"/>
     </view>
     <view class="form-item">
         <input placeholder="请输入新登录密码" name="new_password" password="{{true}}"/>
@@ -43,13 +43,13 @@
 <!--找回支付密码-->
 <form wx:if="{{type==='find_pay'}}" bindsubmit="onFindPayPassword" class="user-account-page password-page">
     <view class="form-item">
-        <input placeholder="请输入手机号码"  maxlength="11" bindinput="onPhoneInput" name="phone" type="number"/>
+        <input placeholder="请输入手机号码" focus="{{true}}"  maxlength="11" bindinput="onPhoneInput" name="phone" type="number"/>
     </view>
     <view class="form-item">
-        <input placeholder="请输入新支付密码" name="new_pay_password" password="{{true}}"/>
+        <input placeholder="请输入新支付密码" type="number" maxlength="6"  name="new_pay_password" password="{{true}}"/>
     </view>
     <view class="form-item">
-        <input placeholder="请再次输入新密码" name="confirm_password" password="{{true}}"/>
+        <input placeholder="请再次输入新密码" type="number" maxlength="6"  name="confirm_password" password="{{true}}"/>
     </view>
     <view class="form-item send-wrap">
         <input placeholder="验证码" name="verification_code"/>
@@ -65,13 +65,13 @@
 <!--修改支付密码-->
 <form wx:if="{{type==='update_pay'}}" bindsubmit="onUpdatePayPassword" class="user-account-page password-page">
     <view class="form-item">
-        <input placeholder="请输入旧支付密码" name="old_pay_password" password="{{true}}"/>
+        <input placeholder="请输入旧支付密码" type="number" maxlength="6"  focus="{{true}}" name="old_pay_password" password="{{true}}"/>
     </view>
     <view class="form-item">
-        <input placeholder="请输入新支付密码" name="new_pay_password" password="{{true}}"/>
+        <input placeholder="请输入新支付密码" type="number" maxlength="6"  name="new_pay_password" password="{{true}}"/>
     </view>
     <view class="form-item">
-        <input placeholder="请再次输入新密码" name="confirm_password" password="{{true}}"/>
+        <input placeholder="请再次输入新密码" type="number" maxlength="6"  name="confirm_password" password="{{true}}"/>
     </view>
     <view class="form-item full-item bb-0">
         <button formType="submit" class="submit-btn primary">
@@ -83,10 +83,10 @@
 <!--设置支付密码-->
 <form wx:if="{{type==='setting_pay'}}" bindsubmit="onSettingPayPassword" class="user-account-page password-page">
     <view class="form-item">
-        <input placeholder="请输入支付密码" name="pay_password" password="{{true}}"/>
+        <input placeholder="请输入支付密码" type="number" maxlength="6" focus="{{true}}" name="pay_password" password="{{true}}"/>
     </view>
     <view class="form-item">
-        <input placeholder="请再次输入新密码" name="confirm_password" password="{{true}}"/>
+        <input placeholder="请再次输入新密码" type="number" maxlength="6"  name="confirm_password" password="{{true}}"/>
     </view>
     <view class="form-item full-item bb-0">
         <button formType="submit" class="submit-btn primary">
