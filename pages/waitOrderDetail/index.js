@@ -28,8 +28,8 @@ Page({
     ...Utils.globalData(),
 
     payPasswordFocus: false,
-    payPasswordLength: 0,
-    pay_password: '',
+    payPasswordLength: 6,
+    pay_password: '123456',
 
     actionName: '',
 
