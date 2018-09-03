@@ -1,6 +1,7 @@
 // pages/order/index.js
 
 import Utils from '../../lib/utils'
+import WxParse from "../../lib/wxParse/wxParse.js";
 import {
   api_selfOrder,
   api_selfOrderDetail,
@@ -34,6 +35,8 @@ Page({
 
     selectedOrderAmount: '',
     selectedOrderSecurityDeposit: '',
+    isAgreeConsultHidden:true,
+    isRejectConsultHidden:true,
 
     asyncData: {
       list: [],
@@ -285,23 +288,92 @@ Page({
   },
 
   /**
-   * 同意撤销
+   * 同意撤销弹出层
    */
-  onAgreeConsult: function (e) {
+  onAgreeConsultModal: function (e) {
     this.setSelectedInfo(e, () => {
-      api_orderOperationAgreeConsult({
+      api_selfOrderDetail({
         trade_no: this.data.selectedTradeNo
       }).then(data => {
-        if (data.code) {
-          wx.hideLoading();
-          return wx.showToast({ title: data.message, icon: 'none' })
-        }
-        this.updateOrderStatus(() => {
-          wx.showToast({ title: '操作成功', icon: 'none' })
-        });
-      })
+          let modalHtml = data.consult_describe;
+          WxParse.wxParse('modalHtml', 'html', modalHtml, this,5);
+          this.setAgreeConsultModal(modalHtml);
+      });
     });
   },
+
+    /**
+     * 设置同意撤销弹窗
+     */
+    setAgreeConsultModal: function (data) {
+        this.setData({
+            modalKey: 'isAgreeConsultHidden',
+            isAgreeConsultHidden: false,
+            actionName: 'onAgreeConsult'
+        }, () => this.modalOverlayToggle())
+    },
+
+    /**
+     * 同意撤销
+     */
+    onAgreeConsult: function (e) {
+        api_orderOperationAgreeConsult({
+            trade_no: this.data.selectedTradeNo
+        }).then(data => {
+            if (data.code) {
+                wx.hideLoading();
+                return wx.showToast({ title: data.message, icon: 'none' })
+            }
+            this.updateOrderStatus(() => {
+                wx.showToast({ title: '操作成功', icon: 'none' })
+            });
+            this.modalOverlayToggle();
+        })
+    },
+
+    /**
+     * 同意撤销弹出层
+     */
+    onRejectConsultModal: function (e) {
+        this.setSelectedInfo(e, () => {
+            api_selfOrderDetail({
+                trade_no: this.data.selectedTradeNo
+            }).then(data => {
+                let modalHtml = data.consult_describe;
+                WxParse.wxParse('modalHtml', 'html', modalHtml, this,5);
+                this.setRejectConsultModal(modalHtml);
+            });
+        });
+    },
+
+    /**
+     * 设置同意撤销弹窗
+     */
+    setRejectConsultModal: function (data) {
+        this.setData({
+            modalKey: 'isRejectConsultHidden',
+            isAgreeConsultHidden: false,
+            actionName: 'onRejectConsult'
+        }, () => this.modalOverlayToggle())
+    },
+
+    /**
+     * 不同意撤销
+     */
+    onRejectConsult: function (e) {
+        api_orderOperationRejectConsult({
+            trade_no: this.data.selectedTradeNo
+        }).then(data => {
+            if (data.code) {
+                wx.hideLoading();
+                return wx.showToast({ title: data.message, icon: 'none' })
+            }
+            this.updateOrderStatus(() => {
+                wx.showToast({ title: '操作成功', icon: 'none' })
+            });
+            this.modalOverlayToggle();
+        })
+    },
 
   /**
    * 不同意撤销

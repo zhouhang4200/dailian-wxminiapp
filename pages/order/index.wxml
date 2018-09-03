@@ -1,5 +1,7 @@
 <!--pages/order/index.wxml-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
+<import src="../../lib/wxParse/wxParse.wxml"/>
+
 <view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
     <view wx:for="{{asyncData.list}}" wx:key="{{index}}" class="row-item">
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-head">
@@ -56,11 +58,11 @@
             </view>
             <!-- initiator 2 是否同意用户撤销订单? -->
             <view wx:if="{{ (item.status===4 || item.status===5) && item.initiator===2 && item.consult_initiator===1 }}"
-                  data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="onAgreeConsult"
+                  data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="onAgreeConsultModal"
                   class="action-btn primary">同意撤销
             </view>
             <view wx:if="{{ (item.status===4 || item.status===5) && item.initiator===2 && item.consult_initiator===1 }}"
-                  data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="onRefuseConsult"
+                  data-index="{{index}}" data-status="{{item.status}}" data-no="{{item.trade_no}}" bindtap="onRejectConsultModal"
                   class="action-btn primary">不同意撤销
             </view>
             <!--2,3,6,7 协商撤销 -->
@@ -100,23 +102,15 @@
 <view animation="{{animationModalOverlayContent}}"
       hidden="{{isModalOverlayHidden}}"
       class="modal-content">
-    <view class="title">
-        <text>确定同意撤销？</text>
-    </view>
-    <view class="remark">
-        <text>你（对方）进行操作【撤销】【你（对方）支付代练费{{selectedOrderAmount}}元，对方（你）支付保证金5.00元，原因：打手中途撤单】</text>
-    </view>
-    <view bindtap="onSelect" data-index="0" class="btn primary">
-        <text>同意</text>
-    </view>
-    <view bindtap="onSelect" data-index="1" class="btn">
-        <text>不同意</text>
-    </view>
-    <view bindtap="modalOverlayToggle" class="btn">
-        <text>取消</text>
-    </view>
-    <view data-index="{{index}}" data-no="{{item.trade_no}}" wx:if="{{item.status===2}}" bindtap="onAnomaly"
-                  class="action-btn primary">提交异常
-            </view>
+
+      <!--同意撤销-->
+      <view hidden="{{isAgreeConsultHidden}}" class="modal-bd form-modal">
+          <template is="wxParse" data="{{wxParseData:modalHtml.nodes}}"/>
+      </view>
+
+      <view class="modal-footer">
+          <view bindtap="modalOverlayToggle" class="btn line">取消</view>
+          <view data-action="{{actionName}}" bindtap="{{actionName}}" class="btn primary">确定</view>
+      </view>
 </view>
 <view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
