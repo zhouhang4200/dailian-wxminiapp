@@ -1,6 +1,7 @@
 // pages/order/index.js
 
 import Utils from '../../lib/utils'
+import WxParse from "../../lib/wxParse/wxParse.js";
 import {
   api_selfOrder,
   api_selfOrderDetail,
@@ -8,7 +9,10 @@ import {
   api_orderOperationCancelComplain,
   api_orderOperationCancelAnomaly,
   api_orderOperationAgreeConsult,
-  api_orderOperationRejectComplain
+  api_orderOperationRejectComplain,
+  api_cancelApplyComplete,
+  api_orderOperationRejectConsult,
+  api_orderOperationAnomaly
 } from "../../lib/api";
 
 Page({
@@ -31,6 +35,8 @@ Page({
 
     selectedOrderAmount: '',
     selectedOrderSecurityDeposit: '',
+    isAgreeConsultHidden:true,
+    isRejectConsultHidden:true,
 
     asyncData: {
       list: [],
@@ -260,5 +266,211 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 取消验收
+   */
+  onCancelComplete: function (e) {
+    this.setSelectedInfo(e, () => {
+      api_cancelApplyComplete({
+        trade_no: this.data.selectedTradeNo
+      }).then(data => {
+        if (data.code) {
+          wx.hideLoading();
+          return wx.showToast({ title: data.message, icon: 'none' })
+        }
+        this.updateOrderStatus(() => {
+          wx.showToast({ title: '操作成功', icon: 'none' })
+        });
+      })
+    });
+  },
+
+  /**
+   * 同意撤销弹出层
+   */
+  onAgreeConsultModal: function (e) {
+    this.setSelectedInfo(e, () => {
+      api_selfOrderDetail({
+        trade_no: this.data.selectedTradeNo
+      }).then(data => {
+          let modalHtml = data.consult_describe;
+          WxParse.wxParse('modalHtml', 'html', modalHtml, this,5);
+          this.setAgreeConsultModal(modalHtml);
+      });
+    });
+  },
+
+    /**
+     * 设置同意撤销弹窗
+     */
+    setAgreeConsultModal: function (data) {
+        this.setData({
+            modalKey: 'isAgreeConsultHidden',
+            isAgreeConsultHidden: false,
+            actionName: 'onAgreeConsult'
+        }, () => this.modalOverlayToggle())
+    },
+
+    /**
+     * 同意撤销
+     */
+    onAgreeConsult: function (e) {
+        api_orderOperationAgreeConsult({
+            trade_no: this.data.selectedTradeNo
+        }).then(data => {
+            if (data.code) {
+                wx.hideLoading();
+                return wx.showToast({ title: data.message, icon: 'none' })
+            }
+            this.updateOrderStatus(() => {
+                wx.showToast({ title: '操作成功', icon: 'none' })
+            });
+            this.modalOverlayToggle();
+        })
+    },
+
+    /**
+     * 同意撤销弹出层
+     */
+    onRejectConsultModal: function (e) {
+        this.setSelectedInfo(e, () => {
+            api_selfOrderDetail({
+                trade_no: this.data.selectedTradeNo
+            }).then(data => {
+                let modalHtml = data.consult_describe;
+                WxParse.wxParse('modalHtml', 'html', modalHtml, this,5);
+                this.setRejectConsultModal(modalHtml);
+            });
+        });
+    },
+
+    /**
+     * 设置同意撤销弹窗
+     */
+    setRejectConsultModal: function (data) {
+        this.setData({
+            modalKey: 'isRejectConsultHidden',
+            isAgreeConsultHidden: false,
+            actionName: 'onRejectConsult'
+        }, () => this.modalOverlayToggle())
+    },
+
+    /**
+     * 不同意撤销
+     */
+    onRejectConsult: function (e) {
+        api_orderOperationRejectConsult({
+            trade_no: this.data.selectedTradeNo
+        }).then(data => {
+            if (data.code) {
+                wx.hideLoading();
+                return wx.showToast({ title: data.message, icon: 'none' })
+            }
+            this.updateOrderStatus(() => {
+                wx.showToast({ title: '操作成功', icon: 'none' })
+            });
+            this.modalOverlayToggle();
+        })
+    },
+
+  /**
+   * 不同意撤销
+   */
+  onRefuseConsult: function (e) {
+    this.setSelectedInfo(e, () => {
+      api_orderOperationRejectConsult({
+        trade_no: this.data.selectedTradeNo
+      }).then(data => {
+        if (data.code) {
+          wx.hideLoading();
+          return wx.showToast({ title: data.message, icon: 'none' })
+        }
+        this.updateOrderStatus(() => {
+          wx.showToast({ title: '操作成功', icon: 'none' })
+        });
+      })
+    });
+  },
+
+  /**
+   * 取消撤销
+   */
+  onCancelConsult: function (e) {
+    this.setSelectedInfo(e, () => {
+      api_orderOperationCancelConsult({
+        trade_no: this.data.selectedTradeNo
+      }).then(data => {
+        if (data.code) {
+          wx.hideLoading();
+          return wx.showToast({ title: data.message, icon: 'none' })
+        }
+        this.updateOrderStatus(() => {
+          wx.showToast({ title: '操作成功', icon: 'none' })
+        });
+      })
+    });
+  },
+
+  /**
+   * 取消仲裁
+   */
+  onCancelComplain: function (e) {
+    this.setSelectedInfo(e, () => {
+      api_orderOperationCancelComplain({
+        trade_no: this.data.selectedTradeNo
+      }).then(data => {
+        if (data.code) {
+          wx.hideLoading();
+          return wx.showToast({ title: data.message, icon: 'none' })
+        }
+        this.updateOrderStatus(() => {
+          wx.showToast({ title: '操作成功', icon: 'none' })
+        });
+      })
+    });
+  },
+
+  /**
+   * 更多操作
+   */
+  onMoreAction: function (e) {
+    var more = this;
+    this.setSelectedInfo(e, () => {
+      const { selectedTradeNo, status } = this.data;
+      var arr = ['查看我的申诉', '查看/上传截图', '查看/发送留言'];
+      var uri = [
+        '/pages/myComplaint/index',
+        '/pages/order/screenshot/index',
+        '/pages/msg/leaveMessageList/details/index'
+      ];
+      if (status == 2) {
+        arr.push('提交异常');
+        uri.push();
+      }
+      wx.showActionSheet({
+        itemList: arr,
+        success: function (res) {
+          const params = `?trade_no=${selectedTradeNo}&status=${status}`;
+          const urls = uri;
+          if (arr[3]) {
+            api_orderOperationAnomaly({
+              trade_no: selectedTradeNo
+            }).then(data => {
+              if (data.code) {
+                wx.hideLoading();
+                return wx.showToast({ title: data.message, icon: 'none' })
+              }
+              more.updateOrderStatus(() => {
+                wx.showToast({ title: '操作成功', icon: 'none' })
+              });
+            })
+          } else {
+            wx.navigateTo({ url: urls[res.tapIndex] + params })
+          }
+        }
+      })
+    })
   },
 })
