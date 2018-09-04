@@ -20,9 +20,9 @@ Page({
     api_totalMsg().then(data => {
       if (!data.code) {
         this.setData({
-          isLogin: true,
           count: data.count
-        })
+        });
+        console.log(this.data.isLogin);
       }
     })
   },
@@ -31,7 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.initFetch();
   },
 
   /**
@@ -45,7 +45,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (!this.data.isLogin) {
+
+    this.setData({
+      isLogin: Utils.getUserToken(),
+    });
+
+    if (Utils.getUserToken()) {
       this.initFetch();
     }
   },

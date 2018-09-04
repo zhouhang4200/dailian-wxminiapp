@@ -18,7 +18,7 @@
             <view class="title">
                 <text>留言消息</text>
             </view>
-            <view hidden="{{total===0}}" class="total-tag">
+            <view hidden="{{count===0}}" class="total-tag">
                 <text>{{count}}</text>
             </view>
         </view>
