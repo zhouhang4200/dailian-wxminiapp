@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/account/index",
     "pages/home/index",
+    "pages/account/index",
     "pages/order/index",
     "pages/msg/notice/index",
     "pages/account/cash/index",
@@ -36,6 +36,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "backgroundColor": "#198cff",
+    "backgroundColorTop": "#198cff",
     "navigationBarBackgroundColor": "#198cff",
     "navigationBarTitleText": "丸子代练",
     "navigationBarTextStyle": "white"

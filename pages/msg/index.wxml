@@ -3,7 +3,7 @@
     <navigator class="link-navigation is-large" url="/pages/msg/notice/index">
         <view class="link-bd">
             <view class="icon">
-                <image src="/images/POF0.png" mode="widthFix" lazy-load="false"></image>
+                <image src="/images/POF0.png" mode="scaleToFill" lazy-load="false"></image>
             </view>
             <view class="title">
                 <text>公告中心</text>
@@ -13,7 +13,7 @@
     <navigator hidden="{{!isLogin}}" class="link-navigation is-large" url="/pages/msg/leaveMessageList/index">
         <view class="link-bd">
             <view class="icon">
-                <image src="/images/PdsL.png" mode="widthFix" lazy-load="false"></image>
+                <image src="/images/PdsL.png" mode="scaleToFill" lazy-load="false"></image>
             </view>
             <view class="title">
                 <text>留言消息</text>
