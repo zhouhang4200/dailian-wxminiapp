@@ -16,7 +16,8 @@ Page({
 
     ...Utils.page.data,
     ...Utils.globalData(),
-    ...Utils.reachBottom.data,
+    // ...Utils.reachBottom.data,
+    ...Utils.reachBottomPullDownRefresh.data,
 
     asyncData: {
       list: [],
@@ -47,7 +48,7 @@ Page({
         this.pageEnd();
         this.setReachEndInfo();
         if (this.data.asyncData.total === 0) {
-          wx.showToast({title: '暂无记录', icon: 'none'})
+          wx.showToast({ title: '暂无记录', icon: 'none' })
         }
       })
     });
