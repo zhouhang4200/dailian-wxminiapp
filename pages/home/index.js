@@ -400,6 +400,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    Utils.tabBarBadgeMsg();
     let app = getApp();
     if (app.globalData.isRefreshHome) {
       app.globalData.isRefreshHome = false;

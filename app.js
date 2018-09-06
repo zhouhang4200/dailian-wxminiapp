@@ -7,6 +7,7 @@ App({
     let that = this;
     // 将获取的场景值保存到全局变量
     that.globalData.sceneNum = options.scene;
+    Utils.tabBarBadgeMsg();
     // 首页数据优先获取策略，首页先进行获取
     api_orderWait({page_size: 10, page: 1}).then(data => {
       if (!data.code) {

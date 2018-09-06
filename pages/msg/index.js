@@ -11,19 +11,17 @@ Page({
    */
   data: {
     ...Utils.globalData(),
-
-    isLogin: false,
     total: 0
   },
 
   initFetch: function () {
-    api_totalMsg().then(data => {
+    Utils.tabBarBadgeMsg().then(data => {
       if (!data.code) {
         this.setData({
           count: data.count
         });
       }
-    })
+    });
   },
 
   /**
@@ -44,14 +42,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-    this.setData({
-      isLogin: Utils.getUserToken(),
-    });
-
-    if (Utils.getUserToken()) {
-      this.initFetch();
-    }
+    this.initFetch();
   },
 
   /**

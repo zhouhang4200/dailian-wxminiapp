@@ -64,6 +64,7 @@ Page({
     if (Utils.getUserToken() && this.data.isLogin === false) {
       wx.showLoading({title: '', icon: 'none'})
     }
+    Utils.tabBarBadgeMsg();
     this.initFetch();
   },
 
