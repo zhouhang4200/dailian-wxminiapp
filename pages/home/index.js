@@ -188,7 +188,7 @@ Page({
    */
   getDialogCreateAnimation: function () {
     return wx.createAnimation({
-      duration: platform === 'ios' ? 350 : 250,
+      duration: platform === 'ios' ? 330 : 250,
       timingFunction: platform === 'ios' ? 'ease-in-out' : 'linear',
     });
   },
@@ -297,7 +297,7 @@ Page({
     const animationPage = this.data.animationPage;
     const translateY = animationPage.actions ? animationPage.actions[0].animates[0].args[0] : false;
     let animation = wx.createAnimation({
-      duration: platform === 'ios' ? 200 : 100,
+      duration: platform === 'ios' ? 180 : 100,
       timingFunction: platform === 'ios' ? 'ease-in-out' : 'linear',
     }).translateY(!translateY ? -40 : 0).step();
     this.setData({
@@ -363,7 +363,7 @@ Page({
   modalOverlayToggle: function () {
     const isModalOverlayHidden = this.data.isModalOverlayHidden;
     let animation = wx.createAnimation({
-      duration: platform === 'ios' ? 200 : 100,
+      duration: platform === 'ios' ? 180 : 100,
       timingFunction: platform === 'ios' ? 'ease-in-out' : 'linear',
     }).opacity(isModalOverlayHidden ? 0.5 : 0).step();
     this.setData({

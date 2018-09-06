@@ -164,7 +164,6 @@ Page({
     let {selectedTradeNo, selectedTradeNoIndex} = this.data;
     let selectOrderData = this.data.asyncData.list[selectedTradeNoIndex];
     if (selectedTradeNo) {
-      wx.showLoading({title: '', icon: 'none'})
       api_selfOrderDetail({trade_no: selectedTradeNo}).then(data => {
         if (!data.code) {
           const status = data.status;
