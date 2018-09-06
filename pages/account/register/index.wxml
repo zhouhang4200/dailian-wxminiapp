@@ -14,7 +14,7 @@
         <input name="confirmPassword" placeholder="请再次输入注册密码" password="{{true}}"/>
     </view>
     <view class="login-submit-wrap">
-        <button formType="submit" class="submit-btn primary">
+        <button formType="submit" class="submit-btn primary-btn">
             <text class="btn-title">注册并登录</text>
         </button>
     </view>

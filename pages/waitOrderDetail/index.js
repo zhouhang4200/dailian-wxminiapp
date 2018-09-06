@@ -51,7 +51,6 @@ Page({
     api_orderWaitDetail({trade_no: this.options.trade_no}).then(info => {
       this.setData({info}, () => {
         this.pageEnd();
-        this.setOrderSuccessModal();
       })
     })
   },
@@ -154,8 +153,6 @@ Page({
    * 接单成功弹窗
    */
   setOrderSuccessModal: function () {
-    // 接单成功，首页准备刷新
-    Utils.setIsRefreshHome();
     this.setData({
       modalKey: 'isOrderSuccessHidden',
       isOrderSuccessHidden: false,

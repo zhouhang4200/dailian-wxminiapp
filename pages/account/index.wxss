@@ -1,91 +1,93 @@
 /* pages/account/index.wxss */
 page {
-    background-color: #f8f8f8;
+  background-color: #f8f8f8;
 }
 
 .head-top {
-    margin-bottom: 14rpx;
+  margin-bottom: 14rpx;
 }
 
 .head-info {
-    padding: 46rpx 38rpx 50rpx 38rpx;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
+  padding: 46rpx 38rpx 50rpx 38rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
 }
 
 .head-info .user-icon {
-    width: 100rpx;
-    height: 100rpx;
+  width: 100rpx;
+  height: 100rpx;
 }
 
 .user-icon image {
-    width: 100rpx;
-    height: 100rpx;
-    border-radius: 50rpx;
+  display: block;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
 }
 
 .head-info .title {
 
-    color: #222;
-    font-size: 44rpx;
-    display: block;
+  color: #222;
+  font-size: 44rpx;
+  display: block;
 }
 
 .head-info .remark {
-    font-size: 22rpx;
-    color: #bbb;
-    display: block;
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #bbb;
+  display: block;
 }
 
 .head-info .right {
-    flex: 1;
-    flex-direction: row;
-    margin-left: 19rpx;
+  flex: 1;
+  flex-direction: row;
+  margin-left: 19rpx;
 }
 
 .money-info {
-    display: flex;
-    background-color: #fff;
-    margin-bottom: 14rpx;
+  display: flex;
+  background-color: #fff;
+  margin-bottom: 14rpx;
 }
 
 .money-info .row-item {
-    flex: 1;
-    padding-bottom: 29rpx;
-    text-align: center;
+  flex: 1;
+  padding-bottom: 29rpx;
+  text-align: center;
 }
 
 .money-info .size {
-    display: block;
-    color: #333;
-    font-size: 33rpx;
-    text-align: center;
-    font-weight: bold;
+  display: block;
+  color: #333;
+  font-size: 33rpx;
+  text-align: center;
+  font-weight: bold;
 }
 
 .money-info .remark {
-    display: block;
-    padding-top: 10rpx;
-    color: #bbb;
-    font-size: 22rpx;
-    font-weight: bold;
+  display: block;
+  padding-top: 10rpx;
+  color: #bbb;
+  font-size: 22rpx;
+  font-weight: bold;
 }
 
 .left-icon image {
-    width: 35rpx;
-    height: 35rpx;
+  width: 35rpx;
+  height: 35rpx;
 }
 
 .sign-out-btn {
-    margin: 0 30rpx;
-    margin-top: 40rpx;
-    height: 80rpx;
-    border-radius: 40rpx;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 26rpx;
-    background-color: #198cff;
+  margin: 0 30rpx;
+  margin-top: 40rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 26rpx;
+  background-color: #198cff;
 }

@@ -105,7 +105,7 @@ Page({
           'reachEndInfo.isHidden': true,
           actionAnimationSortSearch: ''
         });
-        wx.showLoading({title: '加载中'});
+        wx.showLoading({title: '加载中', icon: 'none'});
         this.initFetch();
       }
     });
@@ -172,8 +172,8 @@ Page({
    */
   getDialogCreateAnimation: function () {
     return wx.createAnimation({
-      duration: 150,
-      timingFunction: 'linear',
+      duration: 300,
+      timingFunction: 'ease-in-out',
     });
   },
 
@@ -227,7 +227,7 @@ Page({
    * @param e
    */
   fetchGameAllRegionServer: function (e) {
-    wx.showLoading({title: '加载中...'});
+    wx.showLoading({title: '加载中...', icon: 'none'});
     this.setGameRegionServer().then(() => {
       wx.hideLoading();
       this.onSortItem(e)
@@ -282,7 +282,7 @@ Page({
     const translateY = animationPage.actions ? animationPage.actions[0].animates[0].args[0] : false;
     let animation = wx.createAnimation({
       duration: 150,
-      timingFunction: 'linear',
+      timingFunction: 'ease-in-out',
     }).translateY(!translateY ? -40 : 0).step();
     this.setData({
       animationPage: animation.export()
@@ -348,7 +348,7 @@ Page({
     const isModalOverlayHidden = this.data.isModalOverlayHidden;
     let animation = wx.createAnimation({
       duration: 200,
-      timingFunction: 'linear',
+      timingFunction: 'ease-in-out',
     }).opacity(isModalOverlayHidden ? 0.5 : 0).step();
     this.setData({
       isModalOverlayHidden: false // 先显示元素
@@ -378,14 +378,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let {globalData} = getApp();
-    if (globalData.rootPageData) {
-      this.updateReachBottomPullDownRefreshPageData({params: {}, data: globalData.rootPageData})
-    }
-    else {
-      this.pageLoad();
-    }
     this.pageLoad();
+    Utils.tabBarBadgeMsg();
     this.setGameRegionServer()
   },
 
@@ -400,12 +394,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    Utils.tabBarBadgeMsg();
-    let app = getApp();
-    if (app.globalData.isRefreshHome) {
-      app.globalData.isRefreshHome = false;
-      wx.startPullDownRefresh();
-    }
+
   },
 
   /**

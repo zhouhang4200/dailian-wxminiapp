@@ -73,7 +73,7 @@ Page({
     const validate = this.formValidate(formData);
     const {identity_card_back, identity_card_front, identity_card_hand} = this.data;
     if (validate) {
-      wx.showLoading();
+      wx.showLoading({title:'加载中',icon:'none'});
       Promise.all([
         identity_card_back.indexOf('.38sd.') !== -1 ? Promise.resolve(identity_card_back) : Utils.files.uploadFile(identity_card_back),
         identity_card_front.indexOf('.38sd.') !== -1 ? Promise.resolve(identity_card_front) : Utils.files.uploadFile(identity_card_front),

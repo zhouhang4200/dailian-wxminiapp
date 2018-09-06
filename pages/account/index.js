@@ -62,7 +62,7 @@ Page({
    */
   onShow: function () {
     if (Utils.getUserToken() && this.data.isLogin === false) {
-      wx.showLoading({title: '', icon: 'none'})
+      wx.showLoading({title: '加载中', icon: 'none'})
     }
     Utils.tabBarBadgeMsg();
     this.initFetch();

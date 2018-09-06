@@ -21,11 +21,17 @@ input {
     line-height: 74rpx;
     color: #333;
     font-weight: bold;
+    text-align: center;
 }
 
 .primary-btn {
     background-color: #198cff;
     color: #fff;
+}
+
+.register-btn {
+    background-color: #fbfafc;
+    color: #333;
 }
 
 .action-type {

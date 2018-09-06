@@ -1,22 +1,8 @@
-import Utils from 'lib/utils'
-import {api_orderWait} from 'lib/api'
-
 App({
   onLaunch: function (options) {
-    Utils.wxLogin(true);
     let that = this;
     // 将获取的场景值保存到全局变量
     that.globalData.sceneNum = options.scene;
-    Utils.tabBarBadgeMsg();
-    // 首页数据优先获取策略，首页先进行获取
-    api_orderWait({page_size: 10, page: 1}).then(data => {
-      if (!data.code) {
-        that.globalData.rootPageData = {
-          list: data.list,
-          total: data.total
-        }
-      }
-    });
     // 获取手机信息
     wx.getSystemInfo({
       success: function (res) {
@@ -28,10 +14,8 @@ App({
     })
   },
   globalData: {
-    rootPageData: null,
     sceneNum: '',
     isIpx: false,
     isLogin: !!wx.getStorageSync('token'),
-    isRefreshHome: false, // 通知刷新首页,因为订单被接
   }
 });

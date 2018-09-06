@@ -40,9 +40,7 @@ Page({
    * @param
    */
   onInputSearch: function (e) {
-    wx.showLoading({
-      title: '加载中',
-    });
+    wx.showLoading({title: '加载中',icon:'none'});
     this.setData({
       'searchForm.page': 1,
       'searchForm.keyword': e.detail.value,

@@ -52,6 +52,10 @@ button::after {
   margin-right: 22rpx;
 }
 
+.link-navigation image {
+  display: block;
+}
+
 .link-navigation .title {
   font-size: 30rpx;
   color: #222;
