@@ -58,7 +58,7 @@ Page({
     const formData = e.detail.value;
     const validate = this.isValidateForm(formData);
     if (validate) {
-      wx.showLoading({title: '加载中',icon:'none'});
+      wx.showLoading({title: '注册中', icon: 'none'});
       api_register({
         phone: formData.phone,
         password: formData.password,
@@ -91,7 +91,7 @@ Page({
       return false;
     }
     this.verificationCodeSend();
-    wx.showLoading({title:'加载中',icon:'none'});
+    wx.showLoading({title: '加载中', icon: 'none'});
     api_sendRegisterPhoneCode({phone}).then(data => {
       wx.hideLoading();
       if (data.code) {

@@ -10,7 +10,7 @@ Page({
   data: {
     ...Utils.globalData(),
 
-    isAmountFocus:false
+    isAmountFocus: false
   },
 
   /**
@@ -31,7 +31,7 @@ Page({
     if (amount < 0) {
       return wx.showToast({title: '最低充值金额1元', icon: 'none'})
     }
-    wx.showLoading({title: '加载中',icon:'none'});
+    wx.showLoading({title: '支付中', icon: 'none'});
     Utils.wxPay({amount}).then(() => {
       wx.hideLoading();
       return wx.showToast({title: '充值成功', icon: 'none'})

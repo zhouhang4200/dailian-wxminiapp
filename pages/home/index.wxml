@@ -22,7 +22,7 @@
 <view bindtransitionend="listGoodsTransitionEnd" animation="{{animationPage}}"
       class="index-page page-top-fixed}}">
     <!--单个商品-->
-    <view wx:key="index" url="/pages/waitOrderDetail/index?trade_no={{item.trade_no}}" wx:for="{{asyncData.list}}" class="goods-item">
+    <view wx:key="index" bindtap="goodsDetailNavigator" data-url="/pages/waitOrderDetail/index?trade_no={{item.trade_no}}" wx:for="{{asyncData.list}}" class="goods-item">
         <image src="{{item.icon}}" mode="scaleToFill" lazy-load="true" class="goods-item_goods-icon"></image>
         <view class="goods-item_goods-details">
             <view class="goods-item_title">【{{item.game_leveling_type_name}}】{{item.title}}</view>

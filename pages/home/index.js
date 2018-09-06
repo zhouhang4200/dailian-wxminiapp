@@ -115,6 +115,17 @@ Page({
     });
   },
 
+  /**
+   * 商品详情页
+   * @param sortIndex
+   * @param name
+   */
+  goodsDetailNavigator: function (e) {
+    wx.navigateTo({
+      url: e.currentTarget.dataset.url
+    })
+  },
+
   // 设置选择的的类型值
   setSelectedSortTitle: function (sortIndex, name) {
     if (sortIndex !== undefined) {
@@ -176,7 +187,7 @@ Page({
    */
   getDialogCreateAnimation: function () {
     return wx.createAnimation({
-      duration: 300,
+      duration: 350,
       timingFunction: 'ease-in-out',
     });
   },
@@ -285,7 +296,7 @@ Page({
     const animationPage = this.data.animationPage;
     const translateY = animationPage.actions ? animationPage.actions[0].animates[0].args[0] : false;
     let animation = wx.createAnimation({
-      duration: 150,
+      duration: 200,
       timingFunction: 'ease-in-out',
     }).translateY(!translateY ? -40 : 0).step();
     this.setData({

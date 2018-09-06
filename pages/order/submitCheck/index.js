@@ -36,7 +36,7 @@ Page({
    */
   onSubmitComplete: function (e) {
     this.modalOverlayToggle();
-    wx.showLoading({title: '加载中', icon: 'none'});
+    wx.showLoading({title: '提交中', icon: 'none'});
     const {trade_no} = this.options;
     Utils.files.arrayFiles(this.data.images).then(images => {
       api_orderOperationApplyComplete({

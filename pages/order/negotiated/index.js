@@ -23,7 +23,7 @@ Page({
     const isValidate = this.isValidateForm(formData);
     if (isValidate) {
       this.modalOverlayToggle();
-      wx.showLoading({title: '加载中', icon: 'none'});
+      wx.showLoading({title: '提交中', icon: 'none'});
       api_orderOperationApplyConsult({
         ...formData,
         trade_no: this.options.trade_no

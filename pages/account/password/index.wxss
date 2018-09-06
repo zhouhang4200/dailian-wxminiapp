@@ -2,22 +2,23 @@
 @import "../login/index.wxss";
 
 .send-wrap {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .verification-code-input {
-    margin-right: 210rpx;
+  margin-right: 210rpx;
 }
 
 .send-btn {
-    position: absolute;
-    font-size: 31rpx;
-    color: #c7c7cd;
-    box-sizing: border-box;
-    font-weight: bold;
-    right: 0;
-    height: 100%;
-    padding: 35rpx 28rpx;
-    top: 0;
+  position: absolute;
+  z-index: 2;
+  font-size: 31rpx;
+  color: #c7c7cd;
+  box-sizing: border-box;
+  font-weight: bold;
+  right: 0;
+  height: 100%;
+  padding: 35rpx 28rpx;
+  top: 0;
 }

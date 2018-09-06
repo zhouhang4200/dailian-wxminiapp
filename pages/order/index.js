@@ -54,7 +54,7 @@ Page({
   onCancel: function (e) {
     const status = e.currentTarget.dataset.status;
     this.setSelectedInfo(e, () => {
-      wx.showLoading({title: '加载中', icon: 'none'});
+      wx.showLoading({title: '提交中', icon: 'none'});
       // status === 4 打手取消自己发起的撤销订单
       // status === 5 打手取消自己发起的仲裁订单
       const api = status === 4 ? api_orderOperationCancelConsult : api_orderOperationCancelComplain;
@@ -77,7 +77,7 @@ Page({
    */
   onCancelConfirm: function (e) {
     this.setSelectedInfo(e, () => {
-      wx.showLoading({title: '加载中', icon: 'none'});
+      wx.showLoading({title: '提交中', icon: 'none'});
       this.modalOverlayToggle();
     });
   },
@@ -115,7 +115,7 @@ Page({
     const index = parseInt(e.currentTarget.dataset.index);
     // index === 0 同意
     // index === 1 不同意
-    wx.showLoading({title: '加载中', icon: 'none'});
+    wx.showLoading({title: '提交中', icon: 'none'});
     const api = index === 0 ? api_orderOperationAgreeConsult : api_orderOperationRejectComplain;
     api({
       trade_no: this.data.selectedTradeNo
@@ -164,7 +164,7 @@ Page({
     let {selectedTradeNo, selectedTradeNoIndex} = this.data;
     let selectOrderData = this.data.asyncData.list[selectedTradeNoIndex];
     if (selectedTradeNo) {
-      wx.showLoading({title: '加载中', icon: 'none'})
+      wx.showLoading({title: '', icon: 'none'})
       api_selfOrderDetail({trade_no: selectedTradeNo}).then(data => {
         if (!data.code) {
           const status = data.status;
@@ -431,7 +431,7 @@ Page({
           const tapIndex = res.tapIndex;
           // 提交异常
           if (tapIndex === 3) {
-            wx.showLoading({title: '加载中', icon: 'none'})
+            wx.showLoading({title: '提交中', icon: 'none'})
             return api_orderOperationAnomaly({
               trade_no: selectedTradeNo
             }).then(data => {

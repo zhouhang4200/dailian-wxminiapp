@@ -22,7 +22,7 @@ Page({
     const formData = e.detail.value;
     const validate = this.formValidate(formData);
     if (validate) {
-      wx.showLoading({title: '加载中', icon: 'none'});
+      wx.showLoading({title: '登录中', icon: 'none'});
       api_login(formData).then(data => {
         wx.hideLoading();
         if (data.code) {

@@ -59,7 +59,7 @@ Page({
    * 立即接单
    */
   onReceiveSubmit: function () {
-    wx.showLoading({icon: 'none', title: '加载中'});
+    wx.showLoading({title: '接单中', icon: 'none'});
     api_profile().then(data => {
       wx.hideLoading();
       if (data.code === 1004) {
@@ -177,7 +177,7 @@ Page({
       return wx.showToast({title: '请输入完整的支付密码', icon: 'none'});
     }
     this.modalOverlayToggle();
-    wx.showLoading({title: '加载中', icon: 'none'});
+    wx.showLoading({title: '提交中', icon: 'none'});
     this.onOrderSubmitAsync({
       pay_password,
     }).then(data => {
@@ -204,7 +204,7 @@ Page({
       return wx.showToast({title: '请输入支付密码', icon: 'none'});
     }
     this.modalOverlayToggle();
-    wx.showLoading({title: '加载中', icon: 'none'});
+    wx.showLoading({title: '提交中', icon: 'none'});
     this.onOrderSubmitAsync({
       pay_password,
       take_order_password
@@ -230,7 +230,7 @@ Page({
     wx.navigateTo({
       url: '/pages/account/password/index?action=' + action
     });
-    this.setPageShowInterruptAction('onReceiveSubmit');
+    // this.setPageShowInterruptAction('onReceiveSubmit');
   },
 
   /**

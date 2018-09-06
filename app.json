@@ -35,9 +35,10 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "backgroundColor": "#198cff",
+    "backgroundColor": "#f8f8f8",
     "backgroundColorTop": "#198cff",
     "navigationBarBackgroundColor": "#198cff",
+    "backgroundColorBottom": "#f8f8f8",
     "navigationBarTitleText": "丸子代练",
     "navigationBarTextStyle": "white"
   },
