@@ -3,5 +3,6 @@
     "goods-item": "/components/goods/index",
     "reach-bottom": "/components/reach-bottom/index"
   },
+  "onReachBottomDistance": 160,
   "enablePullDownRefresh": true
 }
