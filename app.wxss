@@ -1,4 +1,3 @@
-@import "/lib/wxParse/wxParse.wxss";
 Page {
     /*font: PingFang SC*/
 }
