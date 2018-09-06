@@ -24,7 +24,12 @@ Page({
 
   initFetch: function () {
     api_notice().then(list => {
-      this.setData({list},()=>this.pageEnd())
+      this.setData({list}, () => {
+        this.pageEnd()
+        if (!this.data.list.length) {
+          wx.showToast({title: '暂无新公告', icon: 'none'})
+        }
+      })
     })
   },
 

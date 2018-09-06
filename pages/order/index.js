@@ -35,8 +35,8 @@ Page({
 
     selectedOrderAmount: '',
     selectedOrderSecurityDeposit: '',
-    isAgreeConsultHidden:true,
-    isRejectConsultHidden:true,
+    isAgreeConsultHidden: true,
+    isRejectConsultHidden: true,
 
     asyncData: {
       list: [],
@@ -131,27 +131,6 @@ Page({
   },
 
   /**
-   * 更多操作
-   */
-  onMoreAction: function (e) {
-    this.setSelectedInfo(e, () => {
-      const {selectedTradeNo, status} = this.data;
-      wx.showActionSheet({
-        itemList: ['查看我的申诉', '查看/上传截图', '查看/发送留言'],
-        success: function (res) {
-          const params = `?trade_no=${selectedTradeNo}&status=${status}`;
-          const urls = [
-            '/pages/myComplaint/index',
-            '/pages/order/screenshot/index',
-            '/pages/msg/leaveMessageList/details/index'
-          ];
-          wx.navigateTo({url: urls[res.tapIndex] + params})
-        }
-      })
-    })
-  },
-
-  /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
@@ -196,8 +175,6 @@ Page({
           }
           this.setData({
             'asyncData.list': this.data.asyncData.list
-          }, () => {
-            console.log('::::::::', this.data.asyncData.list)
           });
           wx.hideLoading();
           callBack && callBack();
@@ -278,10 +255,10 @@ Page({
       }).then(data => {
         if (data.code) {
           wx.hideLoading();
-          return wx.showToast({ title: data.message, icon: 'none' })
+          return wx.showToast({title: data.message, icon: 'none'})
         }
         this.updateOrderStatus(() => {
-          wx.showToast({ title: '操作成功', icon: 'none' })
+          wx.showToast({title: '操作成功', icon: 'none'})
         });
       })
     });
@@ -295,85 +272,85 @@ Page({
       api_selfOrderDetail({
         trade_no: this.data.selectedTradeNo
       }).then(data => {
-          let modalHtml = data.consult_describe;
-          WxParse.wxParse('modalHtml', 'html', modalHtml, this,5);
-          this.setAgreeConsultModal(modalHtml);
+        let modalHtml = data.consult_describe;
+        WxParse.wxParse('modalHtml', 'html', modalHtml, this, 5);
+        this.setAgreeConsultModal(modalHtml);
       });
     });
   },
 
-    /**
-     * 设置同意撤销弹窗
-     */
-    setAgreeConsultModal: function (data) {
-        this.setData({
-            modalKey: 'isAgreeConsultHidden',
-            isAgreeConsultHidden: false,
-            actionName: 'onAgreeConsult'
-        }, () => this.modalOverlayToggle())
-    },
+  /**
+   * 设置同意撤销弹窗
+   */
+  setAgreeConsultModal: function (data) {
+    this.setData({
+      modalKey: 'isAgreeConsultHidden',
+      isAgreeConsultHidden: false,
+      actionName: 'onAgreeConsult'
+    }, () => this.modalOverlayToggle())
+  },
 
-    /**
-     * 同意撤销
-     */
-    onAgreeConsult: function (e) {
-        api_orderOperationAgreeConsult({
-            trade_no: this.data.selectedTradeNo
-        }).then(data => {
-            if (data.code) {
-                wx.hideLoading();
-                return wx.showToast({ title: data.message, icon: 'none' })
-            }
-            this.updateOrderStatus(() => {
-                wx.showToast({ title: '操作成功', icon: 'none' })
-            });
-            this.modalOverlayToggle();
-        })
-    },
+  /**
+   * 同意撤销
+   */
+  onAgreeConsult: function (e) {
+    api_orderOperationAgreeConsult({
+      trade_no: this.data.selectedTradeNo
+    }).then(data => {
+      if (data.code) {
+        wx.hideLoading();
+        return wx.showToast({title: data.message, icon: 'none'})
+      }
+      this.updateOrderStatus(() => {
+        wx.showToast({title: '操作成功', icon: 'none'})
+      });
+      this.modalOverlayToggle();
+    })
+  },
 
-    /**
-     * 同意撤销弹出层
-     */
-    onRejectConsultModal: function (e) {
-        this.setSelectedInfo(e, () => {
-            api_selfOrderDetail({
-                trade_no: this.data.selectedTradeNo
-            }).then(data => {
-                let modalHtml = data.consult_describe;
-                WxParse.wxParse('modalHtml', 'html', modalHtml, this,5);
-                this.setRejectConsultModal(modalHtml);
-            });
-        });
-    },
+  /**
+   * 同意撤销弹出层
+   */
+  onRejectConsultModal: function (e) {
+    this.setSelectedInfo(e, () => {
+      api_selfOrderDetail({
+        trade_no: this.data.selectedTradeNo
+      }).then(data => {
+        let modalHtml = data.consult_describe;
+        WxParse.wxParse('modalHtml', 'html', modalHtml, this, 5);
+        this.setRejectConsultModal(modalHtml);
+      });
+    });
+  },
 
-    /**
-     * 设置同意撤销弹窗
-     */
-    setRejectConsultModal: function (data) {
-        this.setData({
-            modalKey: 'isRejectConsultHidden',
-            isAgreeConsultHidden: false,
-            actionName: 'onRejectConsult'
-        }, () => this.modalOverlayToggle())
-    },
+  /**
+   * 设置同意撤销弹窗
+   */
+  setRejectConsultModal: function (data) {
+    this.setData({
+      modalKey: 'isRejectConsultHidden',
+      isAgreeConsultHidden: false,
+      actionName: 'onRejectConsult'
+    }, () => this.modalOverlayToggle())
+  },
 
-    /**
-     * 不同意撤销
-     */
-    onRejectConsult: function (e) {
-        api_orderOperationRejectConsult({
-            trade_no: this.data.selectedTradeNo
-        }).then(data => {
-            if (data.code) {
-                wx.hideLoading();
-                return wx.showToast({ title: data.message, icon: 'none' })
-            }
-            this.updateOrderStatus(() => {
-                wx.showToast({ title: '操作成功', icon: 'none' })
-            });
-            this.modalOverlayToggle();
-        })
-    },
+  /**
+   * 不同意撤销
+   */
+  onRejectConsult: function (e) {
+    api_orderOperationRejectConsult({
+      trade_no: this.data.selectedTradeNo
+    }).then(data => {
+      if (data.code) {
+        wx.hideLoading();
+        return wx.showToast({title: data.message, icon: 'none'})
+      }
+      this.updateOrderStatus(() => {
+        wx.showToast({title: '操作成功', icon: 'none'})
+      });
+      this.modalOverlayToggle();
+    })
+  },
 
   /**
    * 不同意撤销
@@ -385,10 +362,10 @@ Page({
       }).then(data => {
         if (data.code) {
           wx.hideLoading();
-          return wx.showToast({ title: data.message, icon: 'none' })
+          return wx.showToast({title: data.message, icon: 'none'})
         }
         this.updateOrderStatus(() => {
-          wx.showToast({ title: '操作成功', icon: 'none' })
+          wx.showToast({title: '操作成功', icon: 'none'})
         });
       })
     });
@@ -404,10 +381,10 @@ Page({
       }).then(data => {
         if (data.code) {
           wx.hideLoading();
-          return wx.showToast({ title: data.message, icon: 'none' })
+          return wx.showToast({title: data.message, icon: 'none'})
         }
         this.updateOrderStatus(() => {
-          wx.showToast({ title: '操作成功', icon: 'none' })
+          wx.showToast({title: '操作成功', icon: 'none'})
         });
       })
     });
@@ -423,10 +400,10 @@ Page({
       }).then(data => {
         if (data.code) {
           wx.hideLoading();
-          return wx.showToast({ title: data.message, icon: 'none' })
+          return wx.showToast({title: data.message, icon: 'none'})
         }
         this.updateOrderStatus(() => {
-          wx.showToast({ title: '操作成功', icon: 'none' })
+          wx.showToast({title: '操作成功', icon: 'none'})
         });
       })
     });
@@ -438,14 +415,14 @@ Page({
   onMoreAction: function (e) {
     var more = this;
     this.setSelectedInfo(e, () => {
-      const { selectedTradeNo, status } = this.data;
-      var arr = ['查看我的申诉', '查看/上传截图', '查看/发送留言'];
-      var uri = [
+      const {selectedTradeNo, status} = this.data;
+      let arr = ['查看我的申诉', '查看/上传截图', '查看/发送留言'];
+      let uri = [
         '/pages/myComplaint/index',
         '/pages/order/screenshot/index',
         '/pages/msg/leaveMessageList/details/index'
       ];
-      if (status == 2) {
+      if (status === 2) {
         arr.push('提交异常');
         uri.push();
       }
@@ -453,21 +430,20 @@ Page({
         itemList: arr,
         success: function (res) {
           const params = `?trade_no=${selectedTradeNo}&status=${status}`;
-          const urls = uri;
           if (arr[3]) {
             api_orderOperationAnomaly({
               trade_no: selectedTradeNo
             }).then(data => {
               if (data.code) {
                 wx.hideLoading();
-                return wx.showToast({ title: data.message, icon: 'none' })
+                return wx.showToast({title: data.message, icon: 'none'})
               }
               more.updateOrderStatus(() => {
-                wx.showToast({ title: '操作成功', icon: 'none' })
+                wx.showToast({title: '操作成功', icon: 'none'})
               });
             })
           } else {
-            wx.navigateTo({ url: urls[res.tapIndex] + params })
+            wx.navigateTo({url: uri[res.tapIndex] + params})
           }
         }
       })

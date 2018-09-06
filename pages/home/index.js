@@ -378,13 +378,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // let {globalData} = getApp();
-    // if (globalData.rootPageData) {
-    //   this.updateReachBottomPullDownRefreshPageData({params: {}, data: globalData.rootPageData})
-    // }
-    // else {
-    //   this.pageLoad();
-    // }
+    let {globalData} = getApp();
+    if (globalData.rootPageData) {
+      this.updateReachBottomPullDownRefreshPageData({params: {}, data: globalData.rootPageData})
+    }
+    else {
+      this.pageLoad();
+    }
     this.pageLoad();
     this.setGameRegionServer()
   },
@@ -439,7 +439,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function (e) {
-    console.log(':::this.data.asyncData', this.data.asyncData);
     this._onReachBottom()
   },
 

@@ -22,7 +22,6 @@ Page({
         this.setData({
           count: data.count
         });
-        console.log(this.data.isLogin);
       }
     })
   },
