@@ -8,6 +8,7 @@ App({
       success: function (res) {
         that.globalData.windowWidth = res.windowWidth
         that.globalData.ratio = res.pixelRatio
+        that.globalData.platform = res.platform
         let model = res.model.substring(0, res.model.indexOf("X")) + "X";
         if (model === 'iPhone X') {
           that.globalData.isIpx = true  //判断是否为iPhone X 默认为值false，iPhone X 值为true
@@ -18,6 +19,7 @@ App({
   globalData: {
     sceneNum: '',
     windowWidth: '',
+    platform: '',
     ratio: '',
     isIpx: false,
     isLogin: !!wx.getStorageSync('token'),
