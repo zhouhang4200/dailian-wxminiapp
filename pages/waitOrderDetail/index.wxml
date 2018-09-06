@@ -53,7 +53,7 @@
     <view class="receive-footer {{isIpx ? 'fixed-iphonex-bottom':''}}">
         <view class="receive-title">
             <text>接单需冻结</text>
-            <text class="size">50</text>
+            <text class="size">{{utils.sumPrice([info.security_deposit,info.efficiency_deposit])}}</text>
             <text>元保证金</text>
         </view>
         <view bindtap="onReceiveSubmit" class="submit-btn">立即接单</view>

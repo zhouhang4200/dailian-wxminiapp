@@ -10,7 +10,7 @@
             <text class="size">{{item.amount}}</text>
         </view>
         <text class="ellipsis attr-row">{{item.game_name}}/{{item.region_name}}/{{item.server_name}}</text>
-        <text class="ellipsis attr-row" decode="{{true}}">总保证金:{{ utils.sumPrice([item.security_deposit,item.security_deposit]) }}元&emsp;&emsp;时限: {{item.day ? item.day+'天' :'' }}{{item.hour ? item.hour+'小时':''}}</text>
+        <text class="ellipsis attr-row" decode="{{true}}">总保证金:{{ utils.sumPrice([item.security_deposit,item.efficiency_deposit]) }}元&emsp;&emsp;时限: {{item.day ? item.day+'天' :'' }}{{item.hour ? item.hour+'小时':''}}</text>
         <view class="tag-row">
             <view class="tag tag-official">官方</view>
             <view class="tag">私有</view>
