@@ -22,6 +22,7 @@ Page({
     userInfo: {
       avatar: '',
       name: '',
+      contact_phone: '',
       email: '',
       signature: ''
     }
@@ -32,6 +33,7 @@ Page({
       const {
         avatar = '',
         name = '',
+        contact_phone = '',
         qq = '',
         email = '',
         signature = ''
@@ -40,11 +42,12 @@ Page({
         userInfo: {
           avatar,
           name,
+          contact_phone,
           email,
           signature,
           qq
         }
-      },()=>this.pageEnd());
+      }, () => this.pageEnd());
     })
   },
 
@@ -72,13 +75,17 @@ Page({
    * @param formData {object} 表单数据
    */
   formValidate: function (formData) {
-    const {name, qq, email, signature} = formData;
+    const {name, contact_phone, qq, email} = formData;
     const requiredValidate = {
       name: '昵称不能为空',
+      contact_phone: '联系电话不能为空',
       qq: 'QQ不能为空',
-      email: '邮箱不能为空',
       signature: '个人签名不能为空',
     };
+    if (!(Utils.Regrex.phone.test(contact_phone)) && contact_phone) {
+      wx.showToast({title: '请输入正确格式的手机号', icon: 'none'});
+      return false;
+    }
     if (!(Utils.Regrex.qq.test(qq)) && qq) {
       wx.showToast({title: '请输入正确格式的QQ号', icon: 'none'});
       return false;
@@ -87,7 +94,7 @@ Page({
       wx.showToast({title: '请输入正确格式的邮箱', icon: 'none'});
       return false;
     }
-    for (let key in formData) {
+    for (let key in {name, contact_phone, qq}) {
       if (formData[key] === '') {
         wx.showToast({title: requiredValidate[key], icon: 'none'});
         return false;

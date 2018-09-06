@@ -7,18 +7,23 @@ import {
   api_updatePayPassword,
   api_settingPayPassword,
   api_sendFindLoginPasswordPhoneCode,
-  api_sendFindPayPasswordPhoneCode
+  api_sendFindPayPasswordPhoneCode,
+  api_profile
 } from '../../../lib/api'
 
 
 Page({
+
+  ...Utils.verificationCode.action,
+  ...Utils.page.action,
 
   /**
    * 页面的初始数据
    */
   data: {
     ...Utils.verificationCode.data,
-
+    ...Utils.page.data,
+    ...Utils.globalData(),
     action: '',
     type: '',
     phone: ''
@@ -29,12 +34,13 @@ Page({
    */
   onFindLoginPassword: function (e) {
     const formData = e.detail.value;
-    const {phone, new_password, confirm_password, verification_code} = formData;
+    let {phone = this.data.phone, new_password, confirm_password, verification_code} = formData;
     const isValidateForm = function () {
       const requiredValidate = {
         phone: '请输入手机号码',
         new_password: '请输入新登录密码',
         confirm_password: '请再次输入新密码',
+        verification_code: '请输入验证码',
       };
       if (!(Utils.Regrex.phone.test(phone)) && phone) {
         wx.showToast({title: '请输入正确的手机号码', icon: 'none'});
@@ -143,18 +149,13 @@ Page({
    */
   onFindPayPassword: function (e) {
     const formData = e.detail.value;
-    const {phone, new_pay_password, confirm_password, verification_code} = formData;
+    const {new_pay_password, confirm_password, verification_code} = formData;
     const isValidateForm = function () {
       const requiredValidate = {
-        phone: '请输入手机号码',
         new_pay_password: '请输入新支付密码',
         confirm_password: '请再次输入新密码',
         verification_code: '请输入验证码',
       };
-      if (!(Utils.Regrex.phone.test(phone)) && phone) {
-        wx.showToast({title: '请输入正确的手机号码', icon: 'none'});
-        return false;
-      }
       if (new_pay_password.length < 6 && new_pay_password) {
         wx.showToast({title: '密码长度最低为6位', icon: 'none'});
         return false;
@@ -174,7 +175,6 @@ Page({
     if (isValidateForm()) {
       wx.showLoading({title: '加载中', icon: 'none'});
       api_findPayPassword({
-        phone,
         new_pay_password,
         verification_code
       }).then(data => {
@@ -297,11 +297,11 @@ Page({
    * @returns {boolean}
    */
   sendPhoneCode: function () {
-    const phone = this.data.phone;
+    let phone = this.data.phone;
     if (this.data.verificationCode.disabled) {
       return false;
     }
-    if (!(/^[1][3,4,5,7,8][0-9]{9}$/.test(phone))) {
+    if (!Utils.Regrex.phone.test(phone)) {
       wx.showToast({title: '请输入正确的手机号码', icon: 'none'});
       return false;
     }
@@ -360,6 +360,19 @@ Page({
         title
       });
     }
+    this.pageLoad();
+  },
+
+  // 获取用户最新手机号
+  initFetch: function () {
+    Utils.getUserProfile().then(data => {
+      if (data) {
+        this.setData({
+          phone: data.phone
+        })
+      }
+      this.pageEnd();
+    })
   },
 
   /**
@@ -409,9 +422,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  /**
-   * 获取验证码
-   */
-  ...Utils.verificationCode.action
+  }
 });

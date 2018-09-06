@@ -22,52 +22,41 @@
     padding-right: 58rpx;
 }
 
-.goods-details .title {
+.title {
     width: 539rpx;
     font-size: 29rpx;
     color: #333;
     font-weight: bold;
 }
 
-.goods-details .title text {
-    display: block;
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.goods-details .price-info {
+.price-info {
     padding: 12rpx 0;
 }
 
-.goods-details .rmb-symbol {
+.rmb-symbol {
     color: #ff6600;
     font-size: 27rpx;
 }
 
-.goods-details .size {
+.size {
     color: #ff6600;
     font-size: 36rpx;
     font-weight: bold;
 }
 
-.goods-details .attr-row {
+.attr-row {
     display: block;
     color: #666;
     font-size: 22rpx;
     font-weight: bold;
     margin-bottom: 12rpx;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
-.goods-details .tag-row {
+.tag-row {
     font-size: 0;
 }
 
-.goods-details .tag {
+.tag {
     display: inline-block;
     padding: 7rpx;
     align-items: center;
@@ -80,7 +69,7 @@
     margin-right: 10rpx;
 }
 
-.goods-details .tag-official {
+.tag-official {
     background-image: linear-gradient(45deg, #009cff 0%, #0086ff 100%), linear-gradient(#198cff, #198cff);
     background-blend-mode: normal, normal;
     color: #fff;

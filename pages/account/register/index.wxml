@@ -1,5 +1,5 @@
 <!--pages/account/password/index.wxml-->
-<form bindsubmit="onFormSubmit" class="user-account-page password-page">
+<form bindsubmit="onFormSubmit">
     <view class="form-item">
         <input focus="{{true}}" name="phone" bindinput="onPhoneInput" maxlength="11" placeholder="请输入手机号码" type="number"/>
     </view>
@@ -13,7 +13,7 @@
     <view class="form-item">
         <input name="confirmPassword" placeholder="请再次输入注册密码" password="{{true}}"/>
     </view>
-    <view class="form-item full-item bb-0">
+    <view class="login-submit-wrap">
         <button formType="submit" class="submit-btn primary">
             <text class="btn-title">注册并登录</text>
         </button>

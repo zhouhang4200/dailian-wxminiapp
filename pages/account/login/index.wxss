@@ -1,22 +1,14 @@
 /* pages/account/api_login/index.wxss */
 
-.full-item {
-    padding: 35rpx 28rpx;
-}
-
 .form-item {
     border-bottom: 1rpx solid #eee;
 }
 
-.form-item .submit-btn {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.form-item input {
+input {
     padding: 35rpx 28rpx;
     font-size: 31rpx;
     color: #333;
+    font-weight: bold;
 }
 
 .input-placeholder {
@@ -24,41 +16,45 @@
 }
 
 .submit-btn {
-    margin: 0 28rpx;
     margin-bottom: 21rpx;
     font-size: 29rpx;
     line-height: 74rpx;
     color: #333;
+    font-weight: bold;
 }
 
-.submit-btn[disabled] .btn-title {
-    opacity: 0.3;
-}
-
-.submit-btn.primary {
+.primary-btn {
     background-color: #198cff;
     color: #fff;
 }
 
-.login-page .action-type {
+.action-type {
     display: flex;
     font-size: 22rpx;
     align-items: center;
+    padding-right: 28rpx;
     justify-content: space-between;
-}
-.action-left {
-    display: flex;
-    align-items: center;
+    padding-top: 28rpx;
 }
 
-.login-page .remember {
+.remember {
     position: relative;
     top: 2rpx;
     color: #9b9b9b;
     margin-top: 2rpx;
 }
 
-.login-page .forget-pwd {
+.login-submit-wrap {
+    padding: 35rpx 28rpx;
+}
+
+.action-left {
+    display: flex;
+    align-items: center;
+}
+
+.forget-pwd {
     font-size: 26rpx;
     color: #6a7fa6;
+    font-weight: bold;
 }

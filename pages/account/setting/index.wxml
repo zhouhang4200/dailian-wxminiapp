@@ -1,15 +1,26 @@
 <!--pages/account/capital/index.wxml-->
-<navigator class="link-navigation" url="/pages/account/password/index?action=update_login">
-    <view class="link-bd">
-        <view class="title">
-            <text>修改登录密码</text>
+<view animation="{{loadAnimationPage}}" class="load-page">
+    <navigator class="link-navigation" url="/pages/account/password/index?action=update_login">
+        <view class="link-bd">
+            <view class="title">
+                <text>修改登录密码</text>
+            </view>
         </view>
-    </view>
-</navigator>
-<navigator class="link-navigation" url="/pages/account/password/index?action=update_pay">
-    <view class="link-bd">
-        <view class="title">
-            <text>修改支付密码</text>
+    </navigator>
+    <!--已设置支付密码，显示修改支付密码-->
+    <navigator wx:if="{{isSettingPayPassword}}" class="link-navigation" url="/pages/account/password/index?action=update_pay">
+        <view class="link-bd">
+            <view class="title">
+                <text>修改支付密码</text>
+            </view>
         </view>
-    </view>
-</navigator>
+    </navigator>
+    <!--未设置支付密码，显示设置支付密码-->
+    <navigator class="link-navigation" url="/pages/account/password/index?action=setting_pay">
+        <view class="link-bd">
+            <view class="title">
+                <text>设置支付密码</text>
+            </view>
+        </view>
+    </navigator>
+</view>

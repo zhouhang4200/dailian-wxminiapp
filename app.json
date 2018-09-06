@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/account/capital/list/index",
+    "pages/account/setting/index",
     "pages/account/index",
+    "pages/account/capital/list/index",
     "pages/order/index",
     "pages/msg/notice/index",
     "pages/account/cash/index",
     "pages/account/login/index",
-    "pages/account/setting/index",
     "pages/applyArbitration/index",
     "pages/order/submitCheck/index",
     "pages/certification/index",
