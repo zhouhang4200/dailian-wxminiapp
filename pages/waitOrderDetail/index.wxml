@@ -79,7 +79,7 @@
 
     <!--接单成功-->
     <view hidden="{{isOrderSuccessHidden}}" class="modal-bd confirm-modal">
-        接单成功！3秒后前往订单详情
+        接单成功！{{countDownTime}}秒后前往订单详情
     </view>
 
     <!--接单密码输入-->

@@ -45,8 +45,8 @@ Page({
       trade_no: this.options.trade_no
     }).then(info => {
       if (info.code) {
-        wx.showToast({title: info.messahe, icon: 'none'});
-        return this.pageEnd()
+        wx.showToast({title: info.message, icon: 'none'});
+        return false;
       }
       this.setData({
         info,

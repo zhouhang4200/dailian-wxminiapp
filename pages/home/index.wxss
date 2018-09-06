@@ -140,7 +140,7 @@
 }
 
 .goods-title {
-  width: 180rpx;
+  max-width: 180rpx;
 }
 
 .icon {

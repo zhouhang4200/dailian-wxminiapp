@@ -9,7 +9,6 @@ import {
 
 // 倒计时清除
 let intervalSuccess = '';
-let countDownTime = 3;
 
 Page({
 
@@ -31,6 +30,8 @@ Page({
     payPasswordLength: 0,
     pay_password: '',
 
+    countDownTime: 3, // 倒计时时间
+
     actionName: '',
 
     orderPasswordFocus: false,
@@ -48,7 +49,10 @@ Page({
 
   initFetch() {
     api_orderWaitDetail({trade_no: this.options.trade_no}).then(info => {
-      this.setData({info}, () => this.pageEnd())
+      this.setData({info}, () => {
+        this.pageEnd();
+        this.setOrderSuccessModal();
+      })
     })
   },
 
@@ -102,49 +106,6 @@ Page({
       pay_password,
       payPasswordLength: pay_password.length
     })
-  },
-
-  /**
-   * 窗口显示回调
-   */
-  modalOverlayShowHandle: function () {
-    const focus = {
-      isOrderPasswordHidden: 'orderPasswordFocus',
-      isPayPasswordHidden: 'payPasswordFocus'
-    };
-    const focusKey = focus[this.data.modalKey];
-    if (focusKey) {
-      this.setData({
-        [focusKey]: true
-      })
-    }
-    // 为成功弹窗的话，就要执行自动关闭弹窗
-    if (!this.data.isOrderSuccessHidden) {
-      this.autoCloseSuccessModal();
-    }
-  },
-
-  /**
-   * 关窗回调
-   */
-  modalOverlayCloseHandle: function () {
-    if (countDownTime === 0) this.redirectToOrderDetails();
-    clearInterval(intervalSuccess);
-    const modalKey = this.data.modalKey;
-    this.setData({
-      [modalKey]: true,
-      payPasswordFocus: false,
-      payPasswordLength: 0,
-      pay_password: '',
-      take_order_password: '',
-      orderPasswordFocus: false,
-      orderPayPasswordFocus: false,
-    }, () => {
-      // 如果是成功弹窗关闭，就要跳转到详情页
-      if (modalKey === 'isOrderSuccessHidden') {
-        this.redirectToOrderDetails();
-      }
-    });
   },
 
   /**
@@ -293,15 +254,66 @@ Page({
   },
 
   /**
+   * 窗口显示回调
+   */
+  modalOverlayShowHandle: function () {
+    const focus = {
+      isOrderPasswordHidden: 'orderPasswordFocus',
+      isPayPasswordHidden: 'payPasswordFocus'
+    };
+    const focusKey = focus[this.data.modalKey];
+    if (focusKey) {
+      this.setData({
+        [focusKey]: true
+      })
+    }
+    // 为成功弹窗的话，就要执行自动关闭弹窗
+    if (!this.data.isOrderSuccessHidden) {
+      this.autoCloseSuccessModal();
+    }
+  },
+
+  /**
+   * 关窗回调
+   */
+  modalOverlayCloseHandle: function () {
+    const modalKey = this.data.modalKey;
+    this.setData({
+      [modalKey]: true,
+      payPasswordFocus: false,
+      payPasswordLength: 0,
+      pay_password: '',
+      take_order_password: '',
+      orderPasswordFocus: false,
+      orderPayPasswordFocus: false,
+    }, () => {
+      // 如果是成功弹窗关闭，就要跳转到详情页
+      if (modalKey === 'isOrderSuccessHidden') {
+        this.setData({
+          countDownTime: 3
+        })
+        clearInterval(intervalSuccess);
+        this.redirectToOrderDetails();
+      }
+    });
+  },
+
+  /**
    * 自动关闭订单成功弹窗
    */
   autoCloseSuccessModal: function () {
+    let countDownTime = this.data.countDownTime;
     intervalSuccess = setInterval(() => {
       countDownTime--;
-      if (countDownTime === 0) {
-        // 关闭弹窗，之后执行关闭弹窗回调
-        this.modalOverlayToggle();
-      }
+      this.setData({
+        countDownTime
+      }, () => {
+        if (this.data.countDownTime === 1) {
+          clearInterval(intervalSuccess)
+          // 关闭弹窗，之后执行关闭弹窗回调
+          this.modalOverlayToggle();
+        }
+      })
     }, 1000)
   },
 
@@ -347,7 +359,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    clearInterval(intervalSuccess);
   },
 
   /**

@@ -3,7 +3,7 @@
 <view animation="{{loadAnimationPage}}"  class="load-page {{isIpx ? 'iphonex-page':''}}">
     <view class="row-item">
         <view class="row-title">
-            <text>收货信息</text>
+            <text>订单信息</text>
         </view>
         <image class="line" src="/images/line.png" mode="widthFix" lazy-load="false"></image>
         <view class="row-info row-title2">
@@ -55,6 +55,12 @@
             <view class="right">
                 <view class="copy-btn" data-copy="{{info.game_password}}" bindtap="onSetClipboardData">复制</view>
                 <text>{{info.game_password}}</text>
+            </view>
+        </view>
+        <view class="row-info">
+            <text>角色</text>
+            <view class="right">
+                <text>{{info.game_role}}</text>
             </view>
         </view>
     </view>

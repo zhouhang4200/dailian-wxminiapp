@@ -164,6 +164,7 @@ Page({
     let {selectedTradeNo, selectedTradeNoIndex} = this.data;
     let selectOrderData = this.data.asyncData.list[selectedTradeNoIndex];
     if (selectedTradeNo) {
+      wx.showLoading({title: '加载中', icon: 'none'})
       api_selfOrderDetail({trade_no: selectedTradeNo}).then(data => {
         if (!data.code) {
           const status = data.status;
@@ -417,21 +418,21 @@ Page({
     this.setSelectedInfo(e, () => {
       const {selectedTradeNo, status} = this.data;
       let arr = ['查看我的申诉', '查看/上传截图', '查看/发送留言'];
+      if (status === 2) arr.push('提交异常');
       let uri = [
         '/pages/myComplaint/index',
         '/pages/order/screenshot/index',
         '/pages/msg/leaveMessageList/details/index'
       ];
-      if (status === 2) {
-        arr.push('提交异常');
-        uri.push();
-      }
       wx.showActionSheet({
         itemList: arr,
         success: function (res) {
           const params = `?trade_no=${selectedTradeNo}&status=${status}`;
-          if (arr[3]) {
-            api_orderOperationAnomaly({
+          const tapIndex = res.tapIndex;
+          // 提交异常
+          if (tapIndex === 3) {
+            wx.showLoading({title: '加载中', icon: 'none'})
+            return api_orderOperationAnomaly({
               trade_no: selectedTradeNo
             }).then(data => {
               if (data.code) {
@@ -442,9 +443,8 @@ Page({
                 wx.showToast({title: '操作成功', icon: 'none'})
               });
             })
-          } else {
-            wx.navigateTo({url: uri[res.tapIndex] + params})
           }
+          wx.navigateTo({url: uri[res.tapIndex] + params})
         }
       })
     })
