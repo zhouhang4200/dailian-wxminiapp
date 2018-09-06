@@ -11,9 +11,9 @@
     <view animation="{{animationPage}}" class="sort-list">
         <view class="sort-list-content">
             <view wx:key="{{index}}" wx:for="{{sortTypeList}}" bindtap="onSortItem" data-sort="{{item.type}}"
-                  class="sort-item ellipsis {{item.type===sortType ? 'is-selected':''}}">
-                <text wx:if="{{(item.type==='price' || item.type==='area')  && item.title==='全部'}}">{{item.alias}}</text>
-                <text wx:else>{{item.title}}</text>
+                  class="sort-item {{item.type===sortType ? 'is-selected':''}}">
+                <text class="ellipsis goods-title" wx:if="{{(item.type==='price' || item.type==='area')  && item.title==='全部'}}">{{item.alias}}</text>
+                <text class="ellipsis goods-title" wx:else>{{item.title}}</text>
                 <view class="icon"></view>
             </view>
         </view>

@@ -17,7 +17,7 @@ page {
 }
 
 .price-info {
-
+    font-weight: bold;
 }
 
 .rmb-symbol {
@@ -35,21 +35,19 @@ page {
 .area {
     font-size: 24rpx;
     color: #666;
-    /*padding-top: 26rpx;*/
+    font-weight: bold;
 }
 
 .safe-price {
     padding: 0 30rpx;
     height: 74rpx;
+    font-weight: bold;
     display: flex;
     align-items: center;
     color: #333;
     font-size: 24rpx;
     background-color: #f8f8f8;
-}
-
-.safe-price .price-row {
-    display: flex;
+    border-bottom: 1px solid #eee;
 }
 
 .safe-price .size {
@@ -63,11 +61,13 @@ page {
 .order-info {
     padding-top: 28rpx;
     display: flex;
+    align-items: center;
     font-size: 24rpx;
 }
 
 .order-info .title {
     color: #333;
+    font-weight: bold;
 }
 
 .order-info .value {
@@ -77,6 +77,8 @@ page {
 
 .order-info .tag {
     width: 78rpx;
+    font-weight: bold;
+    color: #ff6600;
     height: 38rpx;
     background-color: #fff5ee;
     border-radius: 4rpx;
@@ -97,6 +99,7 @@ page {
 }
 
 .remark-item .tag-info {
+    font-weight: bold;
     display: inline-block;
     height: 40rpx;
     color: #fff;
@@ -124,6 +127,7 @@ page {
     width: 100%;
     height: 87rpx;
     background-color: #fff;
+    box-shadow: 0px -1px 0px 0px #eee;
 }
 
 .receive-title {
@@ -134,10 +138,6 @@ page {
     color: #333;
     display: flex;
     align-items: center;
-}
-
-.receive-title text {
-
 }
 
 .receive-title .size {

@@ -15,6 +15,7 @@
         <input placeholder="验证码" name="verification_code"/>
         <text bindtap="sendPhoneCode" class="send-btn">{{verificationCode.text}}</text>
     </view>
+    <navigator url="/pages/account/password/index?action=find_login" class="forget-pwd  full-item">忘记密码</navigator>
     <view class="form-item full-item bb-0">
         <button formType="submit" class="submit-btn primary">
             <text class="btn-title">确定</text>

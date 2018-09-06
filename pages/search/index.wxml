@@ -3,7 +3,7 @@
 <view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
 <view class="search-form">
     <view class="form">
-        <input bindconfirm="onInputSearch" confirm-type="search" focus="{{true}}" placeholder="输入关键字查询" class="form-input"/>
+        <input bindconfirm="onInputSearch" confirm-type="search" focus="{{true}}" placeholder="搜索" class="form-input"/>
     </view>
     <navigator hidden="{{isCancelHidden}}" open-type="navigateBack" class="cancel-btn" hover-class="none">取消</navigator>
 </view>

@@ -11,14 +11,10 @@
         <view class="area">{{info.game_name}}/{{info.region_name}}/{{info.server_name}}</view>
     </view>
     <view class="safe-price">
-        <view class="price-row">
-            <view class="">安全保证金：</view>
-            <view class="size">{{info.security_deposit}}</view>
-        </view>
-        <view class="price-row">
-            <text decode="{{true}}">&emsp;&emsp;效率保证金：</text>
-            <view class="size">{{info.efficiency_deposit}}</view>
-        </view>
+        <view>安全保证金：</view>
+        <view class="size">{{info.security_deposit}}</view>
+        <text decode="{{true}}">&emsp;&emsp;效率保证金：</text>
+        <view class="size">{{info.efficiency_deposit}}</view>
     </view>
     <view class="order-info-wrap">
         <view class="order-info">
