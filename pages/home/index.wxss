@@ -1,10 +1,14 @@
 /* pages/home/index.wxss */
+@import "goods.list.wxss";
 
 .index-page {
   position: relative;
   height: 100%;
   box-sizing: border-box;
   width: 100%;
+}
+
+.page-top-fixed {
   padding-top: 160rpx;
 }
 
@@ -15,6 +19,19 @@
   top: 80rpx;
 }
 
+.head-top {
+  position: relative;
+  z-index: 102;
+  background-color: #fff;
+}
+
+.head-top-fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
 /* 列表弹窗 */
 
 .sort-modal-content {
@@ -22,7 +39,7 @@
 }
 
 .sort-modal-content-container {
-  position: absolute;
+  position: fixed;
   z-index: 101;
   left: 0;
   top: 80rpx;
@@ -59,14 +76,10 @@
 
 /*搜索*/
 .search-form {
-  position: fixed;
-  z-index: 101;
-  left: 0;
-  top: 0;
   height: 90rpx;
   display: flex;
+  z-index: 102;
   align-items: center;
-  width: 100%;
   background-color: #fff;
 }
 
@@ -109,20 +122,9 @@
 }
 
 /*排序*/
-.sort-list {
-  position: fixed;
-  left: 0;
-  z-index: 100;
-  top: 80rpx;
-  background-color: #fff;
-  width: 100%;
-  height: 70rpx;
-}
-
 .sort-list-content {
-  position: relative;
+  height: 70rpx;
   display: flex;
-  height: 100%;
   align-items: center;
   justify-content: center;
   z-index: 102;

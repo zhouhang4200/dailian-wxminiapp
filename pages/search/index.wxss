@@ -2,7 +2,7 @@
 @import "../home/index.wxss";
 
 .search-page {
-    padding-top: 80rpx;
+    padding-top: 40rpx;
 }
 
 .cancel-btn {

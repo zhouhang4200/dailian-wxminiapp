@@ -2,19 +2,19 @@
 <!--首页商品列表组件-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
 <navigator wx:key="index" url="/pages/waitOrderDetail/index?trade_no={{item.trade_no}}" wx:for="{{list}}" class="goods-item" hover-class="none">
-    <image src="{{item.icon}}" mode="scaleToFill" lazy-load="true" class="goods-icon"></image>
-    <view class="goods-details">
-        <view class="title">【{{item.game_leveling_type_name}}】{{item.title}}</view>
-        <view class="price-info">
-            <text class="rmb-symbol" decode="{{true}}}">￥</text>
-            <text class="size">{{item.amount}}</text>
+    <image src="{{item.icon}}" mode="scaleToFill" lazy-load="true" class="goods-item_goods-icon"></image>
+    <view class="goods-item_goods-details">
+        <view class="goods-item_title">【{{item.game_leveling_type_name}}】{{item.title}}</view>
+        <view class="goods-item_price-info">
+            <text class="goods-item_rmb-symbol" decode="{{true}}}">￥</text>
+            <text class="goods-item_size">{{item.amount}}</text>
         </view>
-        <text class="ellipsis attr-row">{{item.game_name}}/{{item.region_name}}/{{item.server_name}}</text>
-        <text class="ellipsis attr-row" decode="{{true}}">总保证金:{{ utils.sumPrice([item.security_deposit,item.efficiency_deposit]) }}元&emsp;&emsp;时限: {{item.day ? item.day+'天' :'' }}{{item.hour ? item.hour+'小时':''}}</text>
-        <view class="tag-row">
-            <view class="tag tag-official">官方</view>
-            <view class="tag">私有</view>
-            <view class="tag">信誉商家</view>
+        <text class="ellipsis goods-item_attr-row">{{item.game_name}}/{{item.region_name}}/{{item.server_name}}</text>
+        <text class="ellipsis goods-item_attr-row" decode="{{true}}">总保证金:{{ utils.sumPrice([item.security_deposit,item.efficiency_deposit]) }}元&emsp;&emsp;时限: {{item.day ? item.day+'天' :'' }}{{item.hour ? item.hour+'小时':''}}</text>
+        <view class="goods-item_tag-row">
+            <view class="goods-item_tag goods-item_tag-official">官方</view>
+            <view class="goods-item_tag">私有</view>
+            <view class="goods-item_tag">信誉商家</view>
         </view>
     </view>
 </navigator>

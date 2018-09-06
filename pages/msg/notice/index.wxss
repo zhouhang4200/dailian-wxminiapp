@@ -1,2 +1,2 @@
 /* pages/msg/withdraw/index.wxss */
-@import "../_articleTemplate.wxss";
+@import "../article.template.wxss";

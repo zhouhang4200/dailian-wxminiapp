@@ -1,5 +1,5 @@
 /* pages/account/capital/cash/index.wxss */
-@import "../../waitOrderDetail/_modal_password.wxss";
+@import "../../waitOrderDetail/modal.password.wxss";
 @import "../pay/index.wxss";
 
 .pay-title {

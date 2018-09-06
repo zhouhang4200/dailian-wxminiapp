@@ -22,6 +22,10 @@ Page({
     isModalOverlayHidden: true,
     animationModalOverlay: {},
 
+    isHeadTopFixed: false,
+    headTopHeight: 0,
+    animationHeadTop: {},
+
     animationPage: {},
     animationSortModal: {},
     actionAnimationSortContent: null, // 筛选内容的弹窗显示动画
@@ -379,6 +383,11 @@ Page({
    */
   onLoad: function (options) {
     this.pageLoad();
+    const windowWidth = this.data.windowWidth;
+    let headTopHeight = 160 / ((windowWidth * 2) / windowWidth);
+    this.setData({
+      headTopHeight
+    })
     Utils.tabBarBadgeMsg();
     this.setGameRegionServer()
   },
@@ -422,7 +431,19 @@ Page({
    * 页面滚动
    */
   onPageScroll: function (params) {
-
+    // 160
+    const headTopHeight = this.data.headTopHeight;
+    const scrollTop = params.scrollTop;
+    if (headTopHeight - scrollTop < 10 && !this.data.isHeadTopFixed) {
+      this.setData({
+        isHeadTopFixed: true
+      })
+    }
+    if (scrollTop === 0 && this.data.isHeadTopFixed) {
+      this.setData({
+        isHeadTopFixed: false
+      })
+    }
   },
 
   /**

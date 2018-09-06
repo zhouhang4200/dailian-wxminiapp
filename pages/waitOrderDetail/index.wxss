@@ -1,5 +1,5 @@
 /* pages/waitOrderDetail/index.wxss */
-@import "./_modal_password.wxss";
+@import "modal.password.wxss";
 
 page {
     padding-bottom: 155rpx;

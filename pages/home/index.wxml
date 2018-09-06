@@ -1,6 +1,7 @@
 <!--pages/home/index.wxml-->
-<!--搜索栏-->
-<view animation="{{loadAnimationPage}}" class="load-page {{!isModalOverlayHidden ? 'is-overlay':''}}">
+<!--顶部-->
+<view animation="{{animationPage}}" class="head-top head-top-fixed">
+    <!--搜索栏-->
     <navigator hover-class="none" animation="{{animationPage}}" class="search-form"
                url="/pages/search/index">
         <view class="form">
@@ -8,83 +9,97 @@
         </view>
     </navigator>
     <!--排序栏-->
-    <view animation="{{animationPage}}" class="sort-list">
-        <view class="sort-list-content">
-            <view wx:key="{{index}}" wx:for="{{sortTypeList}}" bindtap="onSortItem" data-sort="{{item.type}}"
-                  class="sort-item {{item.type===sortType ? 'is-selected':''}}">
-                <text class="ellipsis goods-title" wx:if="{{(item.type==='price' || item.type==='area')  && item.title==='全部'}}">{{item.alias}}</text>
-                <text class="ellipsis goods-title" wx:else>{{item.title}}</text>
-                <view class="icon"></view>
-            </view>
+    <view class="sort-list-content">
+        <view wx:key="{{index}}" wx:for="{{sortTypeList}}" bindtap="onSortItem" data-sort="{{item.type}}"
+              class="sort-item {{item.type===sortType ? 'is-selected':''}}">
+            <text class="ellipsis goods-title" wx:if="{{(item.type==='price' || item.type==='area')  && item.title==='全部'}}">{{item.alias}}</text>
+            <text class="ellipsis goods-title" wx:else>{{item.title}}</text>
+            <view class="icon"></view>
         </view>
-        <!--游戏区服 dialog-->
-        <view bindtransitionend="modalContentTransitionEnd" animation="{{sortType==='area' ? animationSortModal :''}}"
-              class="sort-modal-content-container">
-            <view class="sort-modal-content">
-                <view class="item-list">
-                    <view data-sortIndex="0" data-name="{{item.name}}" data-index="{{index}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect"
-                          data-key="game_id"
-                          data-value="{{item.id}}" wx:for="{{gameList}}"
-                          class="row-item ellipsis {{searchForm.game_id===item.id ? 'is-selected':''}}">
-                        {{item.name}}
-                    </view>
-                </view>
-                <view class="item-list">
-                    <view data-index="{{index}}" wx:for="{{regionList}}" data-sort="{{sortType}}" wx:key="{{index}}"
-                          bindtap="onGameSortSelect"
-                          data-key="region_id" data-value="{{item.id}}"
-                          class="row-item ellipsis {{searchForm.region_id===item.id ? 'is-selected':''}}">
-                        {{item.name}}
-                    </view>
-                </view>
-                <view class="item-list">
-                    <view wx:for="{{serverList}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect"
-                          data-key="server_id" data-value="{{item.id}}"
-                          class="row-item ellipsis  {{searchForm.server_id===item.id ? 'is-selected':''}}">
-                        {{item.name}}
-                    </view>
-                </view>
+    </view>
+</view>
+<!--商品列表-->
+<view bindtransitionend="listGoodsTransitionEnd" animation="{{animationPage}}"
+      class="index-page page-top-fixed}}">
+    <!--单个商品-->
+    <view wx:key="index" url="/pages/waitOrderDetail/index?trade_no={{item.trade_no}}" wx:for="{{asyncData.list}}" class="goods-item">
+        <image src="{{item.icon}}" mode="scaleToFill" lazy-load="true" class="goods-item_goods-icon"></image>
+        <view class="goods-item_goods-details">
+            <view class="goods-item_title">【{{item.game_leveling_type_name}}】{{item.title}}</view>
+            <view class="goods-item_price-info">
+                <text class="goods-item_rmb-symbol" decode="{{true}}}">￥</text>
+                <text class="goods-item_size">{{item.amount}}</text>
             </view>
-        </view>
-        <!--默认排序 dialog-->
-        <view bindtransitionend="modalContentTransitionEnd" animation="{{sortType==='default' ? animationSortModal :''}}"
-              class="sort-modal-content-container">
-            <view class="sort-modal-content">
-                <view class="item-list">
-                    <view data-sortIndex="1" data-name="{{item.title}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onSelectSort" data-key="sort"
-                          data-value="{{item.sort}}" wx:for="{{sortTypeList[1].list}}"
-                          class="row-item {{searchForm.sort===item.sort ? 'is-selected':''}}">
-                        {{item.title}}
-                    </view>
-                </view>
-            </view>
-        </view>
-        <!--价格 dialog-->
-        <view bindtransitionend="modalContentTransitionEnd" animation="{{sortType==='price' ? animationSortModal :''}}"
-              class="sort-modal-content-container">
-            <view class="sort-modal-content">
-                <view class="item-list">
-                    <view data-sortIndex="2" data-name="{{item.title}}"  data-sort="{{sortType}}" wx:key="{{index}}" data-key="amount" data-value="{{item.amount}}"
-                          bindtap="onSelectSort" wx:for="{{sortTypeList[2].list}}"
-                          class="row-item {{searchForm.amount===item.amount ? 'is-selected':''}}">
-                        {{item.title}}
-                    </view>
-                </view>
+            <text class="ellipsis goods-item_attr-row">{{item.game_name}}/{{item.region_name}}/{{item.server_name}}</text>
+            <text class="ellipsis goods-item_attr-row" decode="{{true}}">总保证金:{{ utils.sumPrice([item.security_deposit,item.efficiency_deposit]) }}元&emsp;&emsp;时限: {{item.day ? item.day+'天' :'' }}{{item.hour ? item.hour+'小时':''}}</text>
+            <view class="goods-item_tag-row">
+                <view class="goods-item_tag goods-item_tag-official">官方</view>
+                <view class="goods-item_tag">私有</view>
+                <view class="goods-item_tag">信誉商家</view>
             </view>
         </view>
     </view>
-    <!--商品列表-->
-    <view bindtransitionend="listGoodsTransitionEnd" animation="{{animationPage}}"
-          class="index-page">
-        <!--单个商品-->
-        <goods-item list="{{asyncData.list}}"/>
-        <!--底部加载更多-->
-        <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
+    <!--底部加载更多-->
+    <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
+</view>
+<!-- modal Overlay -->
+<view catchtouchmove="move"  data-sort="{{sortType}}" bindtap="payloadSort" hidden="{{isModalOverlayHidden}}"
+      bindtransitionend="modalOverlayTransitionEnd"
+      animation="{{animationModalOverlay}}"
+      class="modal-overlay">
+</view>
+<!--游戏区服 dialog-->
+<view bindtransitionend="modalContentTransitionEnd" animation="{{sortType==='area' ? animationSortModal :''}}"
+      class="sort-modal-content-container">
+    <view class="sort-modal-content">
+        <view class="item-list">
+            <view data-sortIndex="0" data-name="{{item.name}}" data-index="{{index}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect"
+                  data-key="game_id"
+                  data-value="{{item.id}}" wx:for="{{gameList}}"
+                  class="row-item ellipsis {{searchForm.game_id===item.id ? 'is-selected':''}}">
+                {{item.name}}
+            </view>
+        </view>
+        <view class="item-list">
+            <view data-index="{{index}}" wx:for="{{regionList}}" data-sort="{{sortType}}" wx:key="{{index}}"
+                  bindtap="onGameSortSelect"
+                  data-key="region_id" data-value="{{item.id}}"
+                  class="row-item ellipsis {{searchForm.region_id===item.id ? 'is-selected':''}}">
+                {{item.name}}
+            </view>
+        </view>
+        <view class="item-list">
+            <view wx:for="{{serverList}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onGameSortSelect"
+                  data-key="server_id" data-value="{{item.id}}"
+                  class="row-item ellipsis  {{searchForm.server_id===item.id ? 'is-selected':''}}">
+                {{item.name}}
+            </view>
+        </view>
     </view>
-    <!-- modal Overlay -->
-    <view catchtouchmove="move"  data-sort="{{sortType}}" bindtap="payloadSort" hidden="{{isModalOverlayHidden}}"
-          bindtransitionend="modalOverlayTransitionEnd"
-          animation="{{animationModalOverlay}}"
-          class="modal-overlay">
+</view>
+<!--默认排序 dialog-->
+<view bindtransitionend="modalContentTransitionEnd" animation="{{sortType==='default' ? animationSortModal :''}}"
+      class="sort-modal-content-container">
+    <view class="sort-modal-content">
+        <view class="item-list">
+            <view data-sortIndex="1" data-name="{{item.title}}" data-sort="{{sortType}}" wx:key="{{index}}" bindtap="onSelectSort" data-key="sort"
+                  data-value="{{item.sort}}" wx:for="{{sortTypeList[1].list}}"
+                  class="row-item {{searchForm.sort===item.sort ? 'is-selected':''}}">
+                {{item.title}}
+            </view>
+        </view>
+    </view>
+</view>
+<!--价格 dialog-->
+<view bindtransitionend="modalContentTransitionEnd" animation="{{sortType==='price' ? animationSortModal :''}}"
+      class="sort-modal-content-container">
+    <view class="sort-modal-content">
+        <view class="item-list">
+            <view data-sortIndex="2" data-name="{{item.title}}"  data-sort="{{sortType}}" wx:key="{{index}}" data-key="amount" data-value="{{item.amount}}"
+                  bindtap="onSelectSort" wx:for="{{sortTypeList[2].list}}"
+                  class="row-item {{searchForm.amount===item.amount ? 'is-selected':''}}">
+                {{item.title}}
+            </view>
+        </view>
     </view>
 </view>
