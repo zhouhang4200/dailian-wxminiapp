@@ -15,8 +15,7 @@ Page({
 
   data: {
     ...Utils.page.data,
-
-    isLogin: '',
+    ...Utils.globalData(),
 
     userInfo: {}
   },
@@ -47,7 +46,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.pageLoad();
+    Utils.isLogin() ? this.pageLoad() : this.setData({isLogin: false});
   },
 
   /**
@@ -61,9 +60,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (Utils.getUserToken() && this.data.isLogin === false) {
-      wx.showLoading({title: '加载中', icon: 'none'})
-    }
     Utils.tabBarBadgeMsg();
     this.initFetch();
   },

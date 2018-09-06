@@ -6,12 +6,15 @@ import {
 
 Page({
 
+  ...Utils.page.action,
+
   /**
    * 页面的初始数据
    */
   data: {
+    ...Utils.page.data,
     ...Utils.globalData(),
-    total: 0
+    count: 0
   },
 
   initFetch: function () {
@@ -19,7 +22,7 @@ Page({
       if (!data.code) {
         this.setData({
           count: data.count
-        });
+        }, () => this.pageEnd());
       }
     });
   },
@@ -28,7 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.initFetch();
+    Utils.isLogin() ? this.pageLoad() : '';
   },
 
   /**
@@ -42,6 +45,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({isLogin: Utils.isLogin()})
+    Utils.tabBarBadgeMsg();
     this.initFetch();
   },
 
