@@ -1,6 +1,7 @@
 /* pages/applyArbitration/index.wxss */
 
 .module-item {
+    padding-top: 36rpx;
     margin: 0 30rpx;
     margin-bottom: 36rpx;
     padding-bottom: 45rpx;
@@ -11,11 +12,8 @@
     margin-left: 0;
 }
 
-.img-list-wrap .module-title {
-    margin-left: 30rpx;
-}
-
 .module-title {
+    margin-left: 30rpx;
     display: block;
     font-size: 31rpx;
     padding-bottom: 51rpx;

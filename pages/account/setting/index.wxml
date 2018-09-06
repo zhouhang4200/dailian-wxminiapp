@@ -16,7 +16,7 @@
         </view>
     </navigator>
     <!--未设置支付密码，显示设置支付密码-->
-    <navigator class="link-navigation" url="/pages/account/password/index?action=setting_pay">
+    <navigator wx:else class="link-navigation" url="/pages/account/password/index?action=setting_pay">
         <view class="link-bd">
             <view class="title">
                 <text>设置支付密码</text>
