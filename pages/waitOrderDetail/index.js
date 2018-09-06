@@ -101,10 +101,13 @@ Page({
    */
   onInputPayPassword: function (e) {
     const pay_password = e.detail.value;
-    this.setData({
-      pay_password,
-      payPasswordLength: pay_password.length
-    })
+    const payPasswordLength = this.data.payPasswordLength
+    if (payPasswordLength !== 6) {
+      this.setData({
+        pay_password,
+        payPasswordLength: pay_password.length
+      })
+    }
   },
 
   /**

@@ -1,9 +1,13 @@
 <!--pages/search/index.wxml-->
 <!--搜索栏-->
 <view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
-<view class="search-form">
-    <view class="form">
-        <input bindconfirm="onInputSearch" confirm-type="search" focus="{{true}}" placeholder="搜索" class="form-input"/>
+<!--顶部-->
+<view class="head-top head-top-fixed">
+    <view class="search-form">
+        <view class="form">
+            <input bindconfirm="onInputSearch" confirm-type="search" focus="{{true}}" placeholder="搜索"
+                   class="form-input"/>
+        </view>
     </view>
     <navigator hidden="{{isCancelHidden}}" open-type="navigateBack" class="cancel-btn" hover-class="none">取消</navigator>
 </view>

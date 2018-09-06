@@ -1,5 +1,6 @@
 <!--pages/home/index.wxml-->
 <!--顶部-->
+<wxs src="../../lib/utils.wxs" module="utils"></wxs>
 <view animation="{{animationPage}}" class="head-top head-top-fixed">
     <!--搜索栏-->
     <navigator hover-class="none" animation="{{animationPage}}" class="search-form"

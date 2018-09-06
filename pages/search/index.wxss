@@ -1,8 +1,16 @@
 /* pages/search/index.wxss */
 @import "../home/index.wxss";
 
+.head-top{
+  display: flex;
+  align-items: center;
+}
+
 .search-page {
-    padding-top: 40rpx;
+    padding-top: 80rpx;
+}
+.search-form{
+  flex: 1;
 }
 
 .cancel-btn {
