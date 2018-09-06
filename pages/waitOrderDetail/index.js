@@ -59,16 +59,16 @@ Page({
    * 立即接单
    */
   onReceiveSubmit: function () {
+    if (!Utils.isLogin()) {
+      wx.navigateTo({
+        url: '/pages/account/login/index'
+      });
+      this.setPageShowInterruptAction('onReceiveSubmit');
+      return false;
+    }
     wx.showLoading({title: '接单中', icon: 'none'});
     api_profile().then(data => {
       wx.hideLoading();
-      if (data.code === 1004) {
-        wx.navigateTo({
-          url: '/pages/account/login/index'
-        });
-        this.setPageShowInterruptAction('onReceiveSubmit');
-        return false;
-      }
       const isSettingPayPassword = data.pay_password === 1;
       const isPayOrderPassword = this.data.info.private === 1;
       if (isSettingPayPassword) {
