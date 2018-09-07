@@ -13,8 +13,8 @@
         <text class="ellipsis goods-item_attr-row" decode="{{true}}">总保证金:{{ utils.sumPrice([item.security_deposit,item.efficiency_deposit]) }}元&emsp;&emsp;时限: {{item.day ? item.day+'天' :'' }}{{item.hour ? item.hour+'小时':''}}</text>
         <view class="goods-item_tag-row">
             <view class="goods-item_tag goods-item_tag-official">官方</view>
-            <view class="goods-item_tag">私有</view>
-            <view class="goods-item_tag">信誉商家</view>
+            <view wx:if="{{item.private===1}}" class="goods-item_tag">私有</view>
+            <view wx:if="{{item.top===1}}" class="goods-item_tag">顶</view>
         </view>
     </view>
 </navigator>

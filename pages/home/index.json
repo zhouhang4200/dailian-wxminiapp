@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "goods-item": "/components/goods/index",
+    "none-result": "/components/none-result/index",
     "reach-bottom": "/components/reach-bottom/index"
   },
   "onReachBottomDistance": 160,

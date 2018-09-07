@@ -23,23 +23,9 @@
 <view bindtransitionend="listGoodsTransitionEnd" animation="{{animationPage}}"
       class="index-page page-top-fixed}}">
     <!--单个商品-->
-    <view wx:key="index" bindtap="goodsDetailNavigator" data-url="/pages/waitOrderDetail/index?trade_no={{item.trade_no}}" wx:for="{{asyncData.list}}" class="goods-item">
-        <image src="{{item.icon}}" mode="scaleToFill" lazy-load="true" class="goods-item_goods-icon"></image>
-        <view class="goods-item_goods-details">
-            <view class="goods-item_title">【{{item.game_leveling_type_name}}】{{item.title}}</view>
-            <view class="goods-item_price-info">
-                <text class="goods-item_rmb-symbol" decode="{{true}}}">￥</text>
-                <text class="goods-item_size">{{item.amount}}</text>
-            </view>
-            <text class="ellipsis goods-item_attr-row">{{item.game_name}}/{{item.region_name}}/{{item.server_name}}</text>
-            <text class="ellipsis goods-item_attr-row" decode="{{true}}">总保证金:{{ utils.sumPrice([item.security_deposit,item.efficiency_deposit]) }}元&emsp;&emsp;时限: {{item.day ? item.day+'天' :'' }}{{item.hour ? item.hour+'小时':''}}</text>
-            <view class="goods-item_tag-row">
-                <view class="goods-item_tag goods-item_tag-official">官方</view>
-                <view class="goods-item_tag">私有</view>
-                <view class="goods-item_tag">信誉商家</view>
-            </view>
-        </view>
-    </view>
+    <goods-item list="{{asyncData.list}}"></goods-item>
+    <!--无内容-->
+    <none-result page-none-result="{{pageNoneResult}}"></none-result>
     <!--底部加载更多-->
     <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
 </view>

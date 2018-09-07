@@ -73,6 +73,10 @@ Page({
       list: [],
       total: 0
     },
+    pageNoneResult: {
+      isHidden: true,
+      title: '暂时没有内容呢',
+    },
     searchForm: {
       page: 1,
       page_size: 10,
@@ -202,6 +206,10 @@ Page({
       ...opts
     };
     api_orderWait(params).then(data => {
+      // data.list = [];
+      // data.page_size = 10;
+      // data.page = 1;
+      // data.total = 0;
       this.updateReachBottomPullDownRefreshPageData({params, data})
     });
   },

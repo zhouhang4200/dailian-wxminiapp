@@ -1,0 +1,19 @@
+/* components/reach-bottom/index.wxss */
+.none-page {
+    background-color: #fff;
+    flex: 1;
+}
+
+.none-icon {
+    width: 267rpx;
+    display: block;
+    height: 169rpx;
+}
+
+.title {
+    padding-top: 31rpx;
+    font-size: 25rpx;
+    color: #ccc;
+    font-weight: bold;
+    text-align: center;
+}

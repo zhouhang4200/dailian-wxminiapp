@@ -1,0 +1,5 @@
+<!--components/reach-bottom/index.wxml-->
+<view hidden="{{pageNoneResult.isHidden}}" class="none-page">
+    <image src="/images/none_content.png" lazy-load="false" class="none-icon"></image>
+    <view class="title">{{pageNoneResult.title}}</view>
+</view>
