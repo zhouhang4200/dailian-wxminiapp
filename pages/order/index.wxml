@@ -5,23 +5,20 @@
 <view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
     <view wx:for="{{asyncData.list}}" wx:key="{{index}}" class="row-item">
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-head">
-            <text class="title">{{item.created_at}}</text>
-            <text class="date">{{utils.orderStatusFormatTitle(item.status)}}</text>
+            <text class="row-head_title">{{item.created_at}}</text>
+            <text class="row-head_date">{{utils.orderStatusFormatTitle(item.status)}}</text>
         </navigator>
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-detail">
-            <view class="icon">
-                <image src="http://ammgg.com/images/2018/08/21/Pf8l.png" mode="widthFix"
-                       lazy-load="false"></image>
-            </view>
-            <view class="info">
-                <view class="ellipsis title">【{{item.game_leveling_type_name}}】{{item.title}}</view>
-                <view class="attr-row">游戏区服：{{item.game_name}}/{{item.region_name}}/{{item.server_name}}</view>
-                <view class="attr-row">角色名称：{{item.game_role}}</view>
+            <image class="row-detail_icon" src="{{item.icon}}" mode="widthFix"  lazy-load="false"></image>
+            <view class="row-detail_info">
+                <view class="ellipsis row-detail_title">【{{item.game_leveling_type_name}}】{{item.title}}</view>
+                <view class="row-detail_attr-row">游戏区服：{{item.game_name}}/{{item.region_name}}/{{item.server_name}}</view>
+                <view class="row-detail_attr-row">角色名称：{{item.game_role}}</view>
             </view>
         </navigator>
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="price-info">
             <text>代练价格：</text>
-            <text class="size">￥{{item.amount}}</text>
+            <text class="price-info_size">￥{{item.amount}}</text>
         </navigator>
         <view class="action-row" wx:if="{{item.status<8}}">
             <!--code1: '未接单',-->

@@ -56,7 +56,7 @@ page {
     position: absolute;
     width: 24rpx;
     height: 25rpx;
-    background: url('http://ammgg.com/images/2018/08/21/PrQP.png') no-repeat center;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAZCAMAAAAc9R5vAAAAdVBMVEUAAABmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmaX/Y6XAAAAJnRSTlMA+gS1CfKL1s65fi0h45736cOtbWdhWkU3GBLaycCmmZF2TT7dce/C7+EAAADgSURBVCjPbZHrFoIgEIQXyHtWmuWlq1q8/yM2gNRybP7ssN9Z2FFyku2zepXp/byhQFOiF0U5Q3KnmdLtt69so6wyN3fw5Kkh1Rm7jffwibtthhVHP16UOMbW3uDeqJ5EWu97M23eI6YcjRH1iHrmYBBaZ6gPgIG4KiyGohCKAplUKDXeWoPlqj4AV3dVA9Dwfm/iLuteJAMxGjavclG9ZoFtBhtVGOJn2gin3EeFUvuLurvxifztB4lLEmnnTvzzeIWku/le2WQBoWKsr6mKW0kbSwpayZGJ/pFaKB451AcCRh4mbtF49AAAAABJRU5ErkJggg==') no-repeat center;
     background-size: 100% 100%;
     transform: translate(-50%, -50%);
     left: 20px;
@@ -149,7 +149,7 @@ page {
     margin-left: 12rpx;
     width: 14rpx;
     height: 10rpx;
-    background: url('http://thyrsi.com/t6/360/1534840881x-1404793423.png') no-repeat center center;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAKCAYAAACE2W/HAAAAoElEQVQokZXOLwoCURAH4M+HyZsInsADeADBIGrXIBisZoMIYvEA9g1Gb6BF8AgiFpvIBkGw7MKy+Gf9pZl58w2vFEVRA3NUFMsNgzJ6qBVEaZoBM8R/oAuWAUf0C6IYTZxDMlhj9QM90cYOQuZhhP0XOMYmbbLwgRaub9AKi+wg5BZO6CbfSrPBMH8pD2GLSVIf0Mkd+ghhiirquL9beAHyRx1Cb8DALwAAAABJRU5ErkJggg==') no-repeat center center;
     background-size: 100% 100%;
 }
 
@@ -158,5 +158,5 @@ page {
 }
 
 .is-selected .icon {
-    background-image: url('http://ammgg.com/images/2018/08/21/PjwY.png');
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAKCAYAAACE2W/HAAAAl0lEQVQokZXPPQ4BQRiA4Wc3qxGiUmxPwgk0riHiBuh0TiCRqHVUKgmNxFH0boGGwko2m/H3dpP5npl8Ubq4C5RigzOGuBUHkgAqYYtudr5gXByKA3CeQzDC9BvsYRJ4bIb+O9jGOoAgyu46RVjFDpU3EMo4oJGHq+zHb9VxRC3GwHO3X2tiGeP6B3p1T7BHy+f98t1wegDqBxVJabMjWgAAAABJRU5ErkJggg==');
 }

@@ -594,7 +594,7 @@ let modalOverlayAnimation = wx.createAnimation({
 });
 // 弹窗筛选条件动画
 let sortModalAnimation = wx.createAnimation({
-  duration: platform === 'ios' ? 330 : 250,
+  duration: platform === 'ios' ? 230 : 180,
   timingFunction,
 });
 
@@ -620,7 +620,7 @@ Page({
     headTopHeight: 0,
 
     animationSlideUpDown: {}, // 页面上推 or 下推动画
-    animationSlideUpDownDirection: 'up', // 上推和下推方向
+    slideUpDownDirection: 'up', // 上推和下推方向
     animationSortModal: {},
 
     sortType: 'null',
@@ -795,23 +795,23 @@ Page({
     else {
       this.setData({sortType: targetSortType}, () => {
         // 当前已经下的状态表示是当前筛选条件进行，不进行变化
-        this.data.animationSlideUpDownDirection !== 'down' && this.slideUpDownAnimationToggle();
+        this.data.slideUpDownDirection !== 'down' && this.slideUpDownAnimationToggle();
       })
     }
   },
 
   // 页面  上推/下推 动画切换
   slideUpDownAnimationToggle: function () {
-    const animationSlideUpDownDirection = this.data.animationSlideUpDownDirection;
-    if (animationSlideUpDownDirection === 'up') {
+    const slideUpDownDirection = this.data.slideUpDownDirection;
+    if (slideUpDownDirection === 'up') {
       this.setData({
-        animationSlideUpDownDirection: 'up',
+        slideUpDownDirection: 'up',
         animationSlideUpDown: slideUpDownAnimation.translateY(-40).step().export()
       })
     }
     else {
       this.setData({
-        animationSlideUpDownDirection: 'down',
+        slideUpDownDirection: 'down',
         animationSlideUpDown: slideUpDownAnimation.translateY(0).step().export(),
         // 因为有间隔40的空隙，因此弹窗筛选内容和筛选条件一起下移
         animationSortModal: slideUpDownAnimation.translateY(40).step().export()
@@ -821,15 +821,15 @@ Page({
 
   // 页面 上推/下推 动画结束
   slideUpDownAnimationTransitionEnd: function () {
-    const animationSlideUpDownDirection = this.data.animationSlideUpDownDirection;
+    const slideUpDownDirection = this.data.slideUpDownDirection;
     // 上推结束
     // 遮罩 && 筛选弹窗 内容一起显示
-    if (animationSlideUpDownDirection === 'up') {
+    if (slideUpDownDirection === 'up') {
       this.setData({
         isModalOverlayHidden: false // 先显示遮罩元素
       }, () => {
         this.setData({
-          animationSlideUpDownDirection: "down",
+          slideUpDownDirection: "down",
           animationSortModal: sortModalAnimation.translateY(0).step().export(),
           animationModalOverlay: modalOverlayAnimation.opacity(0.5).step().export()
         })
@@ -840,7 +840,7 @@ Page({
     else {
       this.setData({
         isHeadTopFixed: true,
-        animationSlideUpDownDirection: "up",
+        slideUpDownDirection: "up",
         animationSortModal: sortModalAnimation.translateY('-100%').step().export(),
         animationModalOverlay: modalOverlayAnimation.opacity(0).step().export()
       })
@@ -851,9 +851,8 @@ Page({
    * 筛选 上推/下推 内容动画结束
    */
   animationSortModalTransitionEnd: function () {
-    const animationSlideUpDownDirection = this.data.animationSlideUpDownDirection;
-    console.log('animationSlideUpDownDirection:::', animationSlideUpDownDirection)
-    if (animationSlideUpDownDirection === 'up') {
+    const slideUpDownDirection = this.data.slideUpDownDirection;
+    if (slideUpDownDirection === 'up') {
       this.payloadRefresh()
       this.setData({
         isHeadTopFixed: false,

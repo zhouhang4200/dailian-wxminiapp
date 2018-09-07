@@ -19,12 +19,12 @@ page {
     font-weight: bold;
 }
 
-.row-head .title {
+.row-head_title {
     font-size: 26rpx;
     color: #333;
 }
 
-.row-head .date {
+.row-head_date {
     font-size: 24rpx;
     color: #ff6600;
 }
@@ -35,15 +35,11 @@ page {
     padding: 20rpx 30rpx;
 }
 
-.row-detail .icon {
+.row-detail_icon {
     width: 110rpx;
     height: 110rpx;
     border-radius: 7rpx;
     overflow: hidden;
-}
-
-.row-detail image {
-    width: 100%;
 }
 
 .price-info {
@@ -57,18 +53,18 @@ page {
     border-bottom: 1px solid #eee;
 }
 
-.price-info .size {
+.price-info_size {
     font-size: 28rpx;
 }
 
-.row-detail .info {
+.row-detail_info {
     flex: 1;
     padding-left: 14rpx;
     font-weight: bold;
     color: #333;
 }
 
-.row-detail .title {
+.row-detail_title {
     width: 539rpx;
     padding-left: 8rpx;
     overflow: hidden;
@@ -76,7 +72,7 @@ page {
     font-size: 27rpx;
 }
 
-.row-detail .attr-row {
+.row-detail_attr-row {
     font-size: 20rpx;
     padding-left: 4rpx;
     margin-bottom: 10rpx;
@@ -102,12 +98,12 @@ page {
     justify-content: center;
 }
 
-.action-btn.primary {
+.primary {
     border-color: #198cff;
     color: #198cff;
 }
 
-.action-btn.none {
+.none {
     border-color: transparent;
 }
 
