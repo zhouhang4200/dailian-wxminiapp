@@ -20,7 +20,7 @@
                     <view class="reason-content">
                         <text class="title">申诉原因</text>
                         <text class="date">{{info.created_at}}</text>
-                        <text class="remark">{{info.reason}}</text>
+                        <text class="remark">{{info.reas.user-icon-imgon}}</text>
                     </view>
                     <view class="module-item img-list-wrap">
                         <text class="module-title">证据截图</text>

@@ -2,7 +2,7 @@
 <form bindsubmit="onSubmit" class="apply-arbitration {{isIpx ? 'iphonex-page':''}}">
     <view class="module-item top-head-item">
         <text class="module-title">原因及要求</text>
-        <textarea name="reason" class="input" placeholder="请输入..." />
+        <textarea name="reason" class="input" placeholder="请输入..."/>
     </view>
     <view class="module-item img-list-wrap">
         <text class="module-title">证据截图</text>
