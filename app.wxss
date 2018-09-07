@@ -139,6 +139,7 @@ button::after {
 }
 
 .modal-title {
+  text-align: center;
   font-size: 32rpx;
   padding-bottom: 30rpx;
   color: #000;

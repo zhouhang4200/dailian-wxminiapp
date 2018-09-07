@@ -105,6 +105,7 @@
 
       <!--同意撤销-->
       <view hidden="{{isAgreeConsultHidden}}" class="modal-bd form-modal">
+          <view class="modal-title">确定同意撤销？</view>
           <template is="wxParse" data="{{wxParseData:modalHtml.nodes}}"/>
       </view>
 

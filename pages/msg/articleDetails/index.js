@@ -31,9 +31,6 @@ Page({
     const {id, action} = this.options;
     const api = {api_helpDetails, api_noticeDetails};
     api[action]({id}).then(info => {
-      wx.setNavigationBarTitle({
-        title: info.title
-      });
       this.setData({
         info: {
           ...info,
@@ -52,9 +49,6 @@ Page({
    */
   onLoad: function (options) {
     this.pageLoad();
-    wx.setNavigationBarTitle({
-      title: options.title
-    })
   },
 
   /**

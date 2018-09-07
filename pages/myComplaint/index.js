@@ -23,7 +23,7 @@ Page({
     tabName: 'tab1',
     remark: '',
     status: '',
-    image: '',
+    images: [],
     content: '',
     isPageInfo: true
   },
@@ -73,19 +73,11 @@ Page({
   },
 
   chooseImageHandle: function () {
-    this.chooseImage({}, image => {
-      this.setData({image})
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.getCropperImg().then(image => {
-      if (image) {
-        this.setData({image})
-      }
+    this.chooseImage({}, url => {
+      this.data.images.push(url);
+      this.setData({
+        images: this.data.images
+      });
     })
   },
 
@@ -100,7 +92,7 @@ Page({
       return false;
     }
     api_orderOperationSendComplainMessage({
-      image: this.data.image,
+      image: this.data.images[0],
       content: e.detail.value.content,
       trade_no: this.options.trade_no
     }).then(data => {
@@ -116,6 +108,18 @@ Page({
       });
       this.initFetch();
     });
+  },
+
+  /**
+   * 删除图片
+   * @param e
+   */
+  delImages: function (e) {
+    const index = e.currentTarget.dataset;
+    this.data.images.splice(index, 1);
+    this.setData({
+      images: this.data.images
+    })
   },
 
   /**

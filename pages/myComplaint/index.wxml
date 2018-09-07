@@ -44,15 +44,13 @@
                     <view class="message-content">
                         <block wx:if="{{info.messages.length}}">
                             <view wx:key="{{index}}" wx:for="{{info.messages}}" class="row-item">
-                                <view class="user-icon-wrap">
-                                    <image src="{{item.avatar}}" class="user-icon-img" mode="aspectFit"
-                                           lazy-load="true"></image>
-                                </view>
+                                <image src="{{item.avatar}}" class="user-icon-img" mode="aspectFit" lazy-load="true"></image>
                                 <view class="details-wrap">
                                     <text class="nick-name">{{item.name}}</text>
                                     <text class="date">{{item.created_at}}</text>
                                     <text class="remark-content">{{item.content}}</text>
-                                    <image bindtap="previewImage" data-url="{{item.path}}" src="{{item.path}}" class="user-icon-img" mode="widthFix"
+                                    <image bindtap="previewImage" data-list="{{info.messages}}"
+                                           data-key="path" data-url="{{item.path}}" src="{{item.path}}" class="user-upload-img" mode="aspectFit"
                                            lazy-load="true"></image>
                                 </view>
                             </view>
@@ -76,17 +74,15 @@
                 <view class="module-item img-list-wrap">
                     <text class="module-title">证据截图</text>
                     <view class="img-list">
-                        <view wx:if="{{image}}" class="screenshot">
+                        <view wx:key="{{index}}" wx:for="{{images}}" class="screenshot">
                             <view class="screenshot-img-wrap">
-                                <image data-url="{{item}}" bindtap="previewImage" class="screenshot-img-icon"
-                                       src="{{image}}"
-                                       mode="aspectFit" lazy-load="true">
-                                </image>
+                                <image data-url="{{item}}" data-list="{{images}}" bindtap="previewImage" class="screenshot-img-icon"
+                                       src="{{item}}" mode="aspectFit" lazy-load="false"></image>
                             </view>
+                            <image bindtap="delImages" data-index="{{index}}" src="/images/del.png" class="del-icon"></image>
                         </view>
-                        <view wx:else bindtap="chooseImageHandle" class="screenshot">
-                            <image class="icon" mode="widthFix" src="/images/add-img.png"
-                                   lazy-load="false"></image>
+                        <view hidden="{{images.length>0}}" bindtap="chooseImageHandle" class="screenshot">
+                            <image class="icon" mode="scaleToFill" src="/images/add-img.png" lazy-load="false"></image>
                             <text class="title">添加图片</text>
                         </view>
                     </view>
