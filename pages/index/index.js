@@ -776,8 +776,9 @@ Page({
    */
   onSortItem: function (e) {
     const {game_id, region_id, server_id, amount, sort} = this.data.searchForm;
-    // 保存历史数据
+    // 保存数据快照历史数据
     this.setData({
+      isHeadTopFixed: true,
       payload: {game_id, region_id, server_id, amount, sort}
     });
     const targetSortType = e.currentTarget.dataset.sort;
@@ -838,6 +839,7 @@ Page({
     // 遮罩 && 筛选弹窗 内容一起隐藏,恢复初始状态
     else {
       this.setData({
+        isHeadTopFixed: true,
         animationSlideUpDownDirection: "up",
         animationSortModal: sortModalAnimation.translateY('-100%').step().export(),
         animationModalOverlay: modalOverlayAnimation.opacity(0).step().export()
@@ -854,6 +856,7 @@ Page({
     if (animationSlideUpDownDirection === 'up') {
       this.payloadRefresh()
       this.setData({
+        isHeadTopFixed: false,
         sortType: null
       })
     }
@@ -985,6 +988,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.setData({
+      isHeadTopFixed: false
+    })
     this.startPullDownRefresh();
   },
 
@@ -995,16 +1001,9 @@ Page({
     // 160
     const headTopHeight = this.data.headTopHeight;
     const scrollTop = params.scrollTop;
-    if (headTopHeight - scrollTop < 10 && !this.data.isHeadTopFixed) {
-      this.setData({
-        isHeadTopFixed: true
-      })
-    }
-    if (scrollTop === 0 && this.data.isHeadTopFixed) {
-      this.setData({
-        isHeadTopFixed: false
-      })
-    }
+    this.setData({
+      isHeadTopFixed: scrollTop > 0.1
+    })
   },
 
   /**
