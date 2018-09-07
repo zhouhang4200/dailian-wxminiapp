@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/home/index",
+    "pages/index/index",
     "pages/order/index",
     "pages/account/index",
     "pages/account/setting/index",
@@ -27,11 +27,11 @@
     "pages/msg/index",
     "pages/msg/customerService/index",
     "pages/msg/articleDetails/index",
-    "pages/home/detail/index",
-    "pages/home/search/index",
-    "components/cropper/cropper",
-    "components/goods/index"
+    "pages/index/detail/index",
+    "pages/index/search/index",
+    "components/cropper/cropper"
   ],
+  "workers": "workers",
   "window": {
     "backgroundTextStyle": "light",
     "backgroundColor": "#198cff",
@@ -48,7 +48,7 @@
     "selectedColor": "#198cff",
     "list": [
       {
-        "pagePath": "pages/home/index",
+        "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "images/index.png",
         "selectedIconPath": "images/index_active.png"

@@ -4,7 +4,7 @@
 <view bindtransitionend="slideUpDownAnimationTransitionEnd" class="head-top head-top-fixed" animation="{{animationSlideUpDown}}">
     <!--搜索栏-->
     <navigator hover-class="none" class="search-form"
-               url="/pages/home/search/index">
+               url="/pages/index/search/index">
         <view class="form">
             <text class="form-input input-placeholder">输入关键字查询</text>
         </view>

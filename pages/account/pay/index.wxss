@@ -1,5 +1,5 @@
 /* pages/account/pay/index.wxss */
-@import "../../home/detail/modal.password.wxss";
+@import "../../index/detail/modal.password.wxss";
 
 .remark-title {
     display: block;
