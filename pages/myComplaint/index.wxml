@@ -20,7 +20,7 @@
                     <view class="reason-content">
                         <text class="title">申诉原因</text>
                         <text class="date">{{info.created_at}}</text>
-                        <text class="remark">{{info.reas.user-icon-imgon}}</text>
+                        <text class="remark">{{info.reason}}</text>
                     </view>
                     <view class="module-item img-list-wrap">
                         <text class="module-title">证据截图</text>
@@ -28,7 +28,7 @@
                             <view  wx:key="{{index}}" wx:for="{{info.images}}" class="screenshot">
                                 <view class="screenshot-img-wrap">
                                     <image data-list="{{info.images}}" data-url="{{item}}" bindtap="previewImage" class="screenshot-img-icon"
-                                           src="{{image}}"
+                                           src="{{item}}"
                                            mode="aspectFit" lazy-load="true">
                                     </image>
                                 </view>
@@ -52,7 +52,7 @@
                                     <text class="nick-name">{{item.name}}</text>
                                     <text class="date">{{item.created_at}}</text>
                                     <text class="remark-content">{{item.content}}</text>
-                                    <image src="{{item.path}}" class="user-icon-img" mode="widthFix"
+                                    <image bindtap="previewImage" data-url="{{item.path}}" src="{{item.path}}" class="user-icon-img" mode="widthFix"
                                            lazy-load="true"></image>
                                 </view>
                             </view>

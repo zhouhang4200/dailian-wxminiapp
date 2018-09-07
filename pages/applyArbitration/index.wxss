@@ -16,6 +16,7 @@
 }
 
 .img-list-wrap .module-title {
+    padding-top: 20rpx;
     margin-left: 30rpx;
 }
 

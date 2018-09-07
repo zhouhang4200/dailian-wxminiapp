@@ -143,6 +143,7 @@ Page({
    */
   onCancelCatch: function (e) {
     this.setSelectedInfo(e, () => {
+      wx.showLoading({title: '取消中', icon: 'none'})
       api_orderOperationCancelAnomaly({
         trade_no: this.data.selectedTradeNo
       }).then(data => {
@@ -357,6 +358,7 @@ Page({
    */
   onRefuseConsult: function (e) {
     this.setSelectedInfo(e, () => {
+      wx.showLoading({title: '提交中', icon: 'none'})
       api_orderOperationRejectConsult({
         trade_no: this.data.selectedTradeNo
       }).then(data => {
@@ -376,6 +378,7 @@ Page({
    */
   onCancelConsult: function (e) {
     this.setSelectedInfo(e, () => {
+      wx.showLoading({title: '取消中', icon: 'none'})
       api_orderOperationCancelConsult({
         trade_no: this.data.selectedTradeNo
       }).then(data => {
@@ -395,6 +398,7 @@ Page({
    */
   onCancelComplain: function (e) {
     this.setSelectedInfo(e, () => {
+      wx.showLoading({title: '取消中', icon: 'none'})
       api_orderOperationCancelComplain({
         trade_no: this.data.selectedTradeNo
       }).then(data => {
@@ -416,22 +420,26 @@ Page({
     var more = this;
     this.setSelectedInfo(e, () => {
       const {selectedTradeNo, status} = this.data;
-      let arr = ['查看我的申诉', '查看/上传截图', '查看/发送留言'];
-      if (status === 2) arr.push('提交异常');
-      let uri = [
-        '/pages/myComplaint/index',
-        '/pages/order/screenshot/index',
-        '/pages/msg/leaveMessageList/details/index'
+      let itemList = ['查看我的申诉', '查看/上传截图', '查看/发送留言', '提交异常']
+      let navigateToUrls = [
+        {title: '查看我的申诉', url: '/pages/myComplaint/index'},
+        {title: '查看/上传截图', url: '/pages/order/screenshot/index'},
+        {title: '查看/发送留言', url: '/pages/msg/leaveMessageList/details/index'}
       ];
+      //  代练中 不能显示提交异常
+      if (status === 2) itemList.splice(3, 1);
+      //  非 仲裁中  不能存在查看我的申诉选项
+      if (status !== 5) itemList.splice(0, 1);
       wx.showActionSheet({
-        itemList: arr,
+        itemList,
         success: function (res) {
           const params = `?trade_no=${selectedTradeNo}&status=${status}`;
           const tapIndex = res.tapIndex;
+          const title = itemList[tapIndex];
           // 提交异常
-          if (tapIndex === 3) {
-            wx.showLoading({title: '提交中', icon: 'none'})
-            return api_orderOperationAnomaly({
+          if (title.indexOf('异常') !== -1) {
+            wx.showLoading({title: "提交中", icon: "none"});
+            api_orderOperationAnomaly({
               trade_no: selectedTradeNo
             }).then(data => {
               if (data.code) {
@@ -443,7 +451,9 @@ Page({
               });
             })
           }
-          wx.navigateTo({url: uri[res.tapIndex] + params})
+          else {
+            wx.navigateTo({url: navigateToUrls[status !== 5 ? tapIndex + 1 : tapIndex].url + params})
+          }
         }
       })
     })

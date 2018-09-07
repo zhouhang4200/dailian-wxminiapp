@@ -86,18 +86,13 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.getCropperImg().then(url => {
-      if (url) {
-        this.data.images.push(url);
-        this.setData({
-          images: this.data.images
-        });
-      }
-    });
+  chooseImageHandle:function(){
+    this.chooseImage({},url=>{
+      this.data.images.push(url);
+      this.setData({
+        images: this.data.images
+      });
+    })
   },
 
   /**
