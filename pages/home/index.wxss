@@ -1,6 +1,7 @@
 /* pages/home/index.wxss */
 @import "goods.list.wxss";
-page{
+
+page {
     position: relative;
     height: 100%;
 }
@@ -12,17 +13,20 @@ page{
     width: 100%;
     overflow: hidden;
 }
-.index-page-fixed{
+
+.index-page-fixed {
     padding-top: 160rpx;
 }
-.head-top{
+
+.head-top {
     z-index: 103;
     background-color: #fff;
-    left:0;
-    top:0;
+    left: 0;
+    top: 0;
     width: 100%;
 }
-.head-top-fixed{
+
+.head-top-fixed {
     position: fixed;
 }
 
