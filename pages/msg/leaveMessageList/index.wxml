@@ -2,6 +2,7 @@
 <view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
     <navigator wx:for="{{list}}"
                class="row-item"
+               wx:key="{{index}}"
                url="/pages/order/details/index?trade_no={{item.game_leveling_order_trade_no}}"
                hover-class="none">
         <view class="row-head">

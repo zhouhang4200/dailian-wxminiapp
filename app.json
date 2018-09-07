@@ -24,7 +24,6 @@
     "pages/msg/leaveMessageList/index",
     "pages/msg/index",
     "pages/msg/customerService/index",
-    "pages/msg/articleTemplate/index",
     "pages/msg/articleDetails/index",
     "components/cropper/cropper",
     "components/goods/index",

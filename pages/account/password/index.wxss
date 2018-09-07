@@ -3,22 +3,24 @@
 
 .send-wrap {
   position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .verification-code-input {
-  margin-right: 210rpx;
+  flex: 1;
 }
 
 .send-btn {
-  position: absolute;
   z-index: 2;
   font-size: 31rpx;
   color: #c7c7cd;
   box-sizing: border-box;
   font-weight: bold;
-  right: 0;
   height: 100%;
-  padding: 35rpx 28rpx;
-  top: 0;
+  display: flex;
+  width: 180rpx;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 28rpx;
 }

@@ -4,7 +4,7 @@
         <input focus="{{true}}" name="phone" bindinput="onPhoneInput" maxlength="11" placeholder="请输入手机号码" type="number"/>
     </view>
     <view class="form-item send-wrap">
-        <input name="verification_code"  type="number" placeholder="验证码"/>
+        <input name="verification_code" class="verification-code-input"  type="number" placeholder="验证码"/>
         <text bindtap="sendPhoneCode" class="send-btn">{{verificationCode.text}}</text>
     </view>
     <view class="form-item">
