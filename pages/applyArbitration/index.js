@@ -52,6 +52,18 @@ Page({
   },
 
   /**
+   * 选择上传图片
+   */
+  chooseImageHandle: function () {
+    this.chooseImage({}, url => {
+      this.data.images.push(url);
+      this.setData({
+        images: this.data.images
+      });
+    })
+  },
+
+  /**
    * 表单验证
    * @param formData
    * @returns {boolean}
@@ -92,20 +104,6 @@ Page({
    */
   onReady: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.getCropperImg().then(url => {
-      if (url) {
-        this.data.images.push(url);
-        this.setData({
-          images: this.data.images
-        });
-      }
-    });
   },
 
   /**

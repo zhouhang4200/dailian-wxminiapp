@@ -22,11 +22,16 @@
                         <text class="date">{{info.created_at}}</text>
                         <text class="remark">{{info.reason}}</text>
                     </view>
-                    <view class="evidence-screenshot">
-                        <text class="title">证据截图</text>
+                    <view class="module-item img-list-wrap">
+                        <text class="module-title">证据截图</text>
                         <view class="img-list">
-                            <view class="item-img" wx:key="{{index}}" wx:for="{{info.images}}">
-                                <image data-url="{{item}}" bindtap="previewImage" data-urls="{{info.images}}" class="img" src="{{item}}" mode="widthFix"></image>
+                            <view  wx:key="{{index}}" wx:for="{{info.images}}" class="screenshot">
+                                <view class="screenshot-img-wrap">
+                                    <image data-list="{{info.images}}" data-url="{{item}}" bindtap="previewImage" class="screenshot-img-icon"
+                                           src="{{image}}"
+                                           mode="aspectFit" lazy-load="true">
+                                    </image>
+                                </view>
                             </view>
                         </view>
                     </view>
@@ -40,13 +45,15 @@
                         <block wx:if="{{info.messages.length}}">
                             <view wx:key="{{index}}" wx:for="{{info.messages}}" class="row-item">
                                 <view class="user-icon-wrap">
-                                    <image src="{{item.avatar}}" class="user-icon-img" mode="widthFix" lazy-load="true"></image>
+                                    <image src="{{item.avatar}}" class="user-icon-img" mode="aspectFit"
+                                           lazy-load="true"></image>
                                 </view>
                                 <view class="details-wrap">
                                     <text class="nick-name">{{item.name}}</text>
                                     <text class="date">{{item.created_at}}</text>
                                     <text class="remark-content">{{item.content}}</text>
-                                    <image src="{{item.path}}" class="user-icon-img" mode="widthFix" lazy-load="true"></image>
+                                    <image src="{{item.path}}" class="user-icon-img" mode="widthFix"
+                                           lazy-load="true"></image>
                                 </view>
                             </view>
                         </block>
@@ -66,14 +73,18 @@
                 <view class="module-item">
                     <textarea value="{{content}}" name="content" class="input" placeholder="请输入..."></textarea>
                 </view>
-                <view class="module-item">
+                <view class="module-item img-list-wrap">
                     <text class="module-title">证据截图</text>
                     <view class="img-list">
-                        <view wx:if="{{image}}" class="screenshot  screenshot-img">
-                            <image data-url="{{item}}" bindtap="previewImage" class="" src="{{image}}"
-                                   mode="widthFix" lazy-load="true"></image>
+                        <view wx:if="{{image}}" class="screenshot">
+                            <view class="screenshot-img-wrap">
+                                <image data-url="{{item}}" bindtap="previewImage" class="screenshot-img-icon"
+                                       src="{{image}}"
+                                       mode="aspectFit" lazy-load="true">
+                                </image>
+                            </view>
                         </view>
-                        <view wx:else data-cropperType="fullScreen" bindtap="chooseImage" class="screenshot">
+                        <view wx:else bindtap="chooseImageHandle" class="screenshot">
                             <image class="icon" mode="widthFix" src="/images/add-img.png"
                                    lazy-load="false"></image>
                             <text class="title">添加图片</text>

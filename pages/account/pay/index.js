@@ -1,6 +1,7 @@
 // pages/account/pay/index.js
 
 import Utils from "../../../lib/utils";
+import {ENVIROMENT} from "../../../lib/config";
 
 Page({
 
@@ -28,7 +29,7 @@ Page({
 
   onSubmit: function (e) {
     const amount = e.detail.value.amount;
-    if (amount < 0) {
+    if (amount < (ENVIROMENT === 'developer' ? 0 : 1)) {
       return wx.showToast({title: '最低充值金额1元', icon: 'none'})
     }
     wx.showLoading({title: '支付中', icon: 'none'});

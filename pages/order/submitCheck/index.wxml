@@ -3,15 +3,17 @@
 <view class="{{isIpx ? 'iphonex-page':''}}">
     <form bindsubmit="onValidateForm" class="apply-arbitration">
         <view class="module-item img-list-wrap">
-            <text class="module-title ">证据截图</text>
+            <text class="module-title">证据截图</text>
             <view class="img-list">
-                <view wx:key="{{index}}" wx:for="{{images}}" class="screenshot screenshot-img">
-                    <image data-url="{{item}}" data-list="{{images}}" bindtap="previewImage" class="screenshot-img-icon"
-                           src="{{item}}" mode="widthFix" lazy-load="false"></image>
-                    <image bindtap="delImages" data-index="{{index}}" src="/images/del.png" class="del-icon"  mode="widthFix"></image>
+                <view wx:key="{{index}}" wx:for="{{images}}" class="screenshot">
+                    <view class="screenshot-img-wrap">
+                        <image data-url="{{item}}" data-list="{{images}}" bindtap="previewImage" class="screenshot-img-icon"
+                               src="{{item}}" mode="aspectFit" lazy-load="false"></image>
+                    </view>
+                    <image bindtap="delImages" data-index="{{index}}" src="/images/del.png" class="del-icon"></image>
                 </view>
-                <view hidden="{{images.length>2}}"  data-cropperType="fullScreen" bindtap="chooseImage" class="screenshot">
-                    <image class="icon" mode="widthFix" src="/images/add-img.png" lazy-load="false"></image>
+                <view hidden="{{images.length>2}}" bindtap="chooseImageHandle" class="screenshot">
+                    <image class="icon" mode="scaleToFill" src="/images/add-img.png" lazy-load="false"></image>
                     <text class="title">添加图片</text>
                 </view>
             </view>

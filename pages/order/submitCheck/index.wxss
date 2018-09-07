@@ -50,12 +50,6 @@
     margin-bottom: 10rpx;
 }
 
-.screenshot-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .del-icon {
     width: 64rpx;
     height: 64rpx;

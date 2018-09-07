@@ -6,7 +6,8 @@
     padding-bottom: 45rpx;
     border-bottom: 1rpx solid #f5f5f5;
 }
-.top-head-item{
+
+.top-head-item {
     padding-top: 36rpx;
 }
 
@@ -38,8 +39,18 @@
     align-items: center;
 }
 
+.screenshot-img-wrap {
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    overflow: hidden;
+}
+
 .screenshot-img-icon {
-    width: 206rpx;
+    width: 100%;
+    vertical-align: middle;
 }
 
 .screenshot {
@@ -53,19 +64,14 @@
     box-sizing: border-box;
     margin-left: 30rpx;
     margin-bottom: 10rpx;
-    overflow: hidden;
-}
-
-.screenshot-img image {
-   width: 100%;
 }
 
 .del-icon {
-    width: 64rpx;
-    height: 64rpx;
+    width: 44rpx;
+    height: 44rpx;
     position: absolute;
-    right: -32rpx;
-    top: -32rpx;
+    right: -22rpx;
+    top: -22rpx;
 }
 
 .img {

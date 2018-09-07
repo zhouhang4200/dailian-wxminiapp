@@ -169,7 +169,7 @@ Page({
     this.setData({
       chooseImgKey
     });
-    this.chooseImage({cropperType: 'personalCardType'})
+    this.chooseImageCropper({cropperType: 'personalCardType'})
   },
 
   initFetch: function () {

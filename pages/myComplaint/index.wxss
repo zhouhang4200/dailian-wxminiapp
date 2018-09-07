@@ -96,39 +96,6 @@ page {
     display: block;
 }
 
-.evidence-screenshot {
-    padding: 0 32rpx;
-    padding-bottom: 18rpx;
-}
-
-.evidence-screenshot .title {
-    padding-top: 37rpx;
-    display: block;
-    padding-bottom: 21rpx;
-    font-size: 26rpx;
-    color: #333;
-}
-
-.evidence-screenshot .img-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -19rpx;
-}
-
-.evidence-screenshot .item-img {
-    width: 222rpx;
-    height: 222rpx;
-    font-size: 0;
-    line-height: 222rpx;
-    margin-left: 13rpx;
-    margin-bottom: 13rpx;
-    overflow: hidden;
-}
-
-.evidence-screenshot image {
-    width: 100%;
-}
-
 .disabled-content {
     text-align: center;
     padding: 20rpx;

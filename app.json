@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/account/setting/index",
-    "pages/account/index",
-    "pages/account/capital/list/index",
     "pages/order/index",
+    "pages/account/index",
+    "pages/account/setting/index",
+    "pages/account/capital/list/index",
     "pages/msg/notice/index",
     "pages/account/cash/index",
     "pages/account/login/index",

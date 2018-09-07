@@ -111,12 +111,5 @@ Page({
       current: url, // 当前显示图片的http链接
       urls // 需要预览的图片http链接列表
     })
-  },
-
-  /**
-   * 上传截图
-   */
-  onUploadImg: function () {
-    Utils.chooseImage()
   }
 })

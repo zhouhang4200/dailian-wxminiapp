@@ -2,7 +2,7 @@
 <view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
 <view animation="{{loadAnimationPage}}" class="load-page  {{isIpx ? 'iphonex-page':''}}">
     <form bindsubmit="onSubmitForm">
-        <view data-croppersize="[135,135]" bindtap="chooseImage" class="user-icon">
+        <view data-croppersize="[135,135]" bindtap="chooseImageCropper" class="user-icon">
             <image src="{{userInfo.avatar}}"  mode="scaleToFill" lazy-load="false"></image>
         </view>
         <view class="row-item">

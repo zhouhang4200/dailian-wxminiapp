@@ -14,33 +14,34 @@ page {
   align-items: center;
 }
 
-.head-info .user-icon {
+.user-icon {
   width: 100rpx;
   height: 100rpx;
+  margin-right: 20rpx;
 }
 
-.user-icon image {
+.user-icon_image {
   display: block;
   width: 100rpx;
   height: 100rpx;
   border-radius: 50rpx;
 }
 
-.head-info .title {
+.title {
 
   color: #222;
   font-size: 44rpx;
   display: block;
 }
 
-.head-info .remark {
+.remark {
   font-size: 22rpx;
   font-weight: bold;
   color: #bbb;
   display: block;
 }
 
-.head-info .right {
+right {
   flex: 1;
   flex-direction: row;
   margin-left: 19rpx;
@@ -52,13 +53,13 @@ page {
   margin-bottom: 14rpx;
 }
 
-.money-info .row-item {
+.row-item {
   flex: 1;
   padding-bottom: 29rpx;
   text-align: center;
 }
 
-.money-info .size {
+.size {
   display: block;
   color: #333;
   font-size: 33rpx;
@@ -66,7 +67,7 @@ page {
   font-weight: bold;
 }
 
-.money-info .remark {
+.remark {
   display: block;
   padding-top: 10rpx;
   color: #bbb;
@@ -74,7 +75,7 @@ page {
   font-weight: bold;
 }
 
-.left-icon image {
+.left-icon_image {
   width: 35rpx;
   height: 35rpx;
 }
