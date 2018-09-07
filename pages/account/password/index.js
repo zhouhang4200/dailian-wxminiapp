@@ -11,7 +11,6 @@ import {
   api_profile
 } from '../../../lib/api'
 
-
 Page({
 
   ...Utils.verificationCode.action,
@@ -23,7 +22,6 @@ Page({
   data: {
     ...Utils.verificationCode.data,
     ...Utils.page.data,
-    ...Utils.globalData(),
     action: '',
     type: '',
     phone: ''
@@ -386,7 +384,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      isLogin: Utils.isLogin(),
+    })
   },
 
   /**

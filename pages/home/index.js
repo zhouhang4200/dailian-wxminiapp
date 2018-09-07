@@ -5,7 +5,26 @@ import {
   api_gameAllRegionServer
 } from '../../lib/api'
 
-let {platform} = getApp().globalData
+let {platform} = getApp().globalData;
+
+// 动画内容
+let timingFunction = platform === 'ios' ? 'ease-in-out' : 'linear';
+
+// 上推和下推动画
+let slideUpDownAnimation = wx.createAnimation({
+  duration: platform === 'ios' ? 180 : 100,
+  timingFunction,
+});
+// 遮罩动画
+let modalOverlayAnimation = wx.createAnimation({
+  duration: platform === 'ios' ? 180 : 100,
+  timingFunction,
+});
+// 弹窗筛选条件动画
+let sortModalAnimation = wx.createAnimation({
+  duration: platform === 'ios' ? 330 : 250,
+  timingFunction,
+});
 
 Page({
 
@@ -25,14 +44,10 @@ Page({
 
     isHeadTopFixed: false,
     headTopHeight: 0,
-    animationHeadTop: {},
 
-    animationPage: {},
+    animationSlideUpDown: {}, // 页面上推 or 下推动画
+    animationSlideUpDownDirection: 'up', // 上推和下推方向
     animationSortModal: {},
-    actionAnimationSortContent: null, // 筛选内容的弹窗显示动画
-    actionAnimationModalOverlay: null, // 遮罩动画
-    actionAnimationNextSortContent: null, // 在当前遮罩情况切换sort
-    actionAnimationSortSearch: null, // 选择筛选之后的值进行搜索
 
     sortType: 'null',
     sortTypeList: [
@@ -73,10 +88,6 @@ Page({
       list: [],
       total: 0
     },
-    pageNoneResult: {
-      isHidden: true,
-      title: '暂时没有内容呢',
-    },
     searchForm: {
       page: 1,
       page_size: 10,
@@ -86,7 +97,8 @@ Page({
       region_id: '',
       server_id: ''
     },
-    historySortValue: {  // 存储历史记录的选择值。在用户选择然后关闭遮罩之后是否进行筛选查询。
+    payload: {  // 存储历史记录的选择值。在用户选择然后关闭遮罩之后是否进行筛选查询。
+      amount: 0,
       game_id: '',
       region_id: '',
       server_id: ''
@@ -99,25 +111,10 @@ Page({
   onSelectSort: function (e) {
     const {key, value, sortindex, name} = e.currentTarget.dataset;
     this.setSelectedSortTitle(sortindex, name);
-    this.onSortItem(e);
+    const constKey = 'searchForm.' + key;
     this.setData({
-      actionAnimationSortSearch: () => {
-        const constKey = 'searchForm.' + key;
-        this.setData({
-          sortTypeList: this.data.sortTypeList,
-          'searchForm.page': 1,
-          [constKey]: value,
-          asyncData: {
-            list: [],
-            totalRows: 0
-          },
-          'reachEndInfo.isHidden': true,
-          actionAnimationSortSearch: ''
-        });
-        wx.showLoading({title: '加载中', icon: 'none'});
-        this.initFetch();
-      }
-    });
+      [constKey]: value
+    }, () => this.slideUpDownAnimationToggle());
   },
 
   /**
@@ -142,49 +139,39 @@ Page({
   },
 
   /**
-   * 游戏选择筛选
-   * @param e
-   * @returns {boolean}
+   *  选择游戏名称
    */
-  onGameSortSelect: function (e) {
-    const {key, value, index, sortindex, name} = e.currentTarget.dataset;
+  onSortGameOption: function (e) {
+    const {value, index, sortindex, name} = e.currentTarget.dataset;
+    const isCurrent = value === this.data.searchForm.game_id;
+    const gameList = this.data.gameList;
     this.setSelectedSortTitle(sortindex, name);
-    const {gameList} = this.data;
-    const isSelectGame = key === 'game_id';
-    const isSelectServer = key === 'server_id';
-    const isSelectRegion = key === 'region_id';
-    let isSelectGameAll = (key === 'game_id' && value === 0);
-    let isSelectRegionAll = (key === 'region_id' && value === 0);
-    let isSearch = isSelectGameAll || isSelectRegionAll || isSelectServer;
-    const constKey = 'searchForm.' + key;
-    if (key === 'game_id' && value !== 0) {
+    if (!isCurrent) {
       this.setData({
-        [constKey]: value,
+        'searchForm.game_id': value,
         regionList: [{id: 0, name: '全部'}].concat(gameList[index].regions),
         serverList: [],
       });
     }
-    if (key === 'region_id' && value !== 0) {
+  },
+
+  /**
+   *  选择游戏区
+   */
+  onSortGameRegion: function (e) {
+    const {value, index, sortindex, name} = e.currentTarget.dataset;
+    const isCurrent = value === this.data.searchForm.region_id;
+    if (value === 0 || isCurrent) {
+      this.setSelectedSortTitle(sortindex, name);
+      this.slideUpDownAnimationToggle();
+      return false;
+    }
+    if (!isCurrent) {
       this.setData({
-        [constKey]: value,
+        'searchForm.region_id': value,
         serverList: this.data.regionList[index].servers,
       });
     }
-    // 相同选项忽略筛选，不做任何操作
-    if (!isSearch) return false;
-    this.setData({
-      'searchForm.server_id': (isSelectGame || isSelectRegion) ? '' : this.data.searchForm.server_id,
-      'searchForm.region_id': isSelectGame ? '' : this.data.searchForm.region_id,
-      [constKey]: value,
-      regionList: isSelectGameAll ? [] : isSelectGame ? gameList[index].regions : this.data.regionList,
-      serverList: (isSelectGame || isSelectRegionAll) ? [] : isSelectRegion ? this.data.regionList[index].servers : this.data.serverList,
-    }, () => {
-      const {regionList, serverList} = this.data;
-      if ((regionList.length !== 0 && key === 'game_id') || (serverList.length !== 0 && key === 'region_id')) {
-        return false;
-      }
-      this.onSelectSort(e);
-    });
   },
 
   /**
@@ -206,10 +193,6 @@ Page({
       ...opts
     };
     api_orderWait(params).then(data => {
-      // data.list = [];
-      // data.page_size = 10;
-      // data.page = 1;
-      // data.total = 0;
       this.updateReachBottomPullDownRefreshPageData({params, data})
     });
   },
@@ -218,31 +201,117 @@ Page({
    * 头部排序
    */
   onSortItem: function (e) {
-    const {game_id, region_id, server_id} = this.data.searchForm;
+    const {game_id, region_id, server_id, amount, sort} = this.data.searchForm;
+    // 保存历史数据
     this.setData({
-      historySortValue: {game_id, region_id, server_id}
+      payload: {game_id, region_id, server_id, amount, sort}
     });
     const targetSortType = e.currentTarget.dataset.sort;
-    const {sortType, isModalOverlayHidden, gameList} = this.data;
-    const isArea = targetSortType === 'area';
+    const {sortType, gameList} = this.data;
     // 选择 游戏区服 筛选需要单独处理
     // 先看游戏名称列表是否有,没有的话，需要异步去获取
-    if (!gameList.length && isArea) return this.fetchGameAllRegionServer(e);
-    if (sortType === targetSortType || isModalOverlayHidden) {
+    if (!gameList.length && targetSortType === 'area') return this.fetchGameAllRegionServer(e);
+    // 当前切换
+    // 1.先把页面动画推下去
+    if (sortType === targetSortType) {
+      this.slideUpDownAnimationToggle();
+    }
+    // 新的切换
+    else {
+      this.setData({sortType: targetSortType}, () => {
+        // 当前已经下的状态表示是当前筛选条件进行，不进行变化
+        this.data.animationSlideUpDownDirection !== 'down' && this.slideUpDownAnimationToggle();
+      })
+    }
+  },
+
+  // 页面  上推/下推 动画切换
+  slideUpDownAnimationToggle: function () {
+    const animationSlideUpDownDirection = this.data.animationSlideUpDownDirection;
+    if (animationSlideUpDownDirection === 'up') {
       this.setData({
-        actionAnimationSortContent: () => this.modalContentToggle(isModalOverlayHidden ? targetSortType : sortType),
-        actionAnimationModalOverlay: this.modalOverlayToggle,
-        actionAnimationNextSortContent: "",
-      }, this.setListGoodsAnimationToggle)
+        animationSlideUpDownDirection: 'up',
+        animationSlideUpDown: slideUpDownAnimation.translateY(-40).step().export()
+      })
     }
     else {
       this.setData({
-        actionAnimationNextSortContent: () => {
-          this.setData({
-            sortType: 'null'
-          }, () => this.modalContentToggle(targetSortType))
-        }
-      }, () => this.modalContentToggle(sortType))
+        animationSlideUpDownDirection: 'down',
+        animationSlideUpDown: slideUpDownAnimation.translateY(0).step().export(),
+        // 因为有间隔40的空隙，因此弹窗筛选内容和筛选条件一起下移
+        animationSortModal: slideUpDownAnimation.translateY(40).step().export()
+      })
+    }
+  },
+
+  // 页面 上推/下推 动画结束
+  slideUpDownAnimationTransitionEnd: function () {
+    const animationSlideUpDownDirection = this.data.animationSlideUpDownDirection;
+    // 上推结束
+    // 遮罩 && 筛选弹窗 内容一起显示
+    if (animationSlideUpDownDirection === 'up') {
+      this.setData({
+        isModalOverlayHidden: false // 先显示遮罩元素
+      }, () => {
+        this.setData({
+          animationSlideUpDownDirection: "down",
+          animationSortModal: sortModalAnimation.translateY(0).step().export(),
+          animationModalOverlay: modalOverlayAnimation.opacity(0.5).step().export()
+        })
+      })
+    }
+    // 下推结束
+    // 遮罩 && 筛选弹窗 内容一起隐藏,恢复初始状态
+    else {
+      this.setData({
+        animationSlideUpDownDirection: "up",
+        animationSortModal: sortModalAnimation.translateY('-100%').step().export(),
+        animationModalOverlay: modalOverlayAnimation.opacity(0).step().export()
+      })
+    }
+  },
+
+  /**
+   * 筛选 上推/下推 内容动画结束
+   */
+  animationSortModalTransitionEnd: function () {
+    const animationSlideUpDownDirection = this.data.animationSlideUpDownDirection;
+    console.log('animationSlideUpDownDirection:::', animationSlideUpDownDirection)
+    if (animationSlideUpDownDirection === 'up') {
+      this.payloadRefresh()
+      this.setData({
+        sortType: null
+      })
+    }
+  },
+
+  // 查看筛选条件是否有更新，然后进行查询
+  payloadRefresh: function () {
+    const {searchForm, payload} = this.data;
+    const isPayloadRefresh =searchForm.sort !== payload.sort || searchForm.amount !== payload.amount || searchForm.game_id !== payload.game_id || searchForm.region_id !== payload.region_id || searchForm.server_id !== payload.server_id
+    if (isPayloadRefresh) {
+      wx.showLoading({title: '筛选中', icon: 'none'});
+      this.setData({
+        'searchForm.page': 1,
+        asyncData: {
+          list: [],
+          totalRows: 0
+        },
+        'reachEndInfo.isHidden': true,
+      }, () => this.initFetch());
+    }
+  },
+
+  /**
+   * 弹窗遮罩动画结束
+   */
+  modalOverlayTransitionEnd: function () {
+    const animationModalOverlay = this.data.animationModalOverlay;
+    const opacity = animationModalOverlay.actions[0].animates[0].args[1];
+    if (!opacity) {
+      this.setData({
+        isModalOverlayHidden: true
+      })
     }
   },
 
@@ -284,118 +353,16 @@ Page({
             }
           }
         }
-        const _regions = games[0].regions;
         this.setData({
-          gameList: [{id: 0, name: '全部'}].concat(games),
-          regionList: [{id: 0, name: '全部'}].concat(_regions),
-          serverList: [{id: 0, name: '全部'}].concat(_regions[0].servers)
+          gameList: [{id: '', name: '全部'}].concat(games),
+          regionList: [],
+          serverList: []
         });
         resolve();
       }, (err) => {
         reject(err);
       });
     }).catch()
-  },
-
-  /**
-   * 页面上推动画 toggle
-   * @param callBack
-   */
-  setListGoodsAnimationToggle: function (callBack) {
-    const animationPage = this.data.animationPage;
-    const translateY = animationPage.actions ? animationPage.actions[0].animates[0].args[0] : false;
-    let animation = wx.createAnimation({
-      duration: platform === 'ios' ? 180 : 100,
-      timingFunction: platform === 'ios' ? 'ease-in-out' : 'linear',
-    }).translateY(!translateY ? -40 : 0).step();
-    this.setData({
-      animationPage: animation.export()
-    }, callBack)
-  },
-
-  /**
-   * 页面上推动画结束
-   */
-  listGoodsTransitionEnd: function () {
-    const {actionAnimationModalOverlay, actionAnimationSortContent} = this.data;
-    actionAnimationModalOverlay && actionAnimationModalOverlay();
-    actionAnimationSortContent && actionAnimationSortContent();
-  },
-
-  // 点击遮罩，判断游戏选项是否有变更
-  payloadSort: function (e) {
-    const targetSortType = e.currentTarget.dataset.sort;
-    const {searchForm, historySortValue, isModalOverlayHidden, sortType} = this.data;
-    const isPlayloadRefresh = searchForm.game_id !== historySortValue.game_id || searchForm.region_id !== historySortValue.region_id || searchForm.server_id !== historySortValue.server_id
-    this.setData({
-      actionAnimationSortContent: () => {
-        this.modalContentToggle(isModalOverlayHidden ? targetSortType : sortType)
-      },
-      actionAnimationModalOverlay: this.modalOverlayToggle,
-      actionAnimationNextSortContent: isPlayloadRefresh ? () => {
-        this.setData(this.getInitFetchParams(), () => {
-          wx.showLoading({title: '加载中', icon: 'none'});
-          this.initFetch();
-        });
-      } : '',
-    }, this.setListGoodsAnimationToggle)
-  },
-
-  /**
-   * 筛选弹窗动画
-   * @param sortType {string}
-   */
-  modalContentToggle: function (sortType) {
-    let animate = this.getDialogCreateAnimation();
-    const dataSortType = this.data.sortType;
-    const isCurrent = dataSortType === sortType;
-    this.setData({
-      sortType,
-      animationSortModal: animate.translateY(isCurrent ? '-100%' : 0).step().export()
-    }, () => {
-      isCurrent && this.setData({sortType: ''})
-    })
-  },
-
-  /**
-   * 筛选弹窗动画结束
-   */
-  modalContentTransitionEnd: function () {
-    const {actionAnimationNextSortContent} = this.data;
-    actionAnimationNextSortContent && actionAnimationNextSortContent();
-  },
-
-  /**
-   * 弹窗遮罩动画 toggle
-   */
-  modalOverlayToggle: function () {
-    const isModalOverlayHidden = this.data.isModalOverlayHidden;
-    let animation = wx.createAnimation({
-      duration: platform === 'ios' ? 180 : 100,
-      timingFunction: platform === 'ios' ? 'ease-in-out' : 'linear',
-    }).opacity(isModalOverlayHidden ? 0.5 : 0).step();
-    this.setData({
-      isModalOverlayHidden: false // 先显示元素
-    }, () => {
-      this.setData({
-        animationModalOverlay: animation.export()
-      })
-    })
-  },
-
-  /**
-   * 弹窗遮罩动画结束
-   */
-  modalOverlayTransitionEnd: function () {
-    const {actionAnimationSortSearch, animationModalOverlay} = this.data;
-    const opacity = animationModalOverlay.actions[0].animates[0].args[1];
-    if (!opacity) {
-      this.setData({
-        isModalOverlayHidden: true
-      }, () => {
-        actionAnimationSortSearch && actionAnimationSortSearch();
-      })
-    }
   },
 
   /**
