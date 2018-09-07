@@ -36,7 +36,7 @@
             </view>
         </view>
     </navigator>
-    <navigator class="link-navigation" url="/pages/certification/index">
+    <navigator class="link-navigation" url="/pages/account/certification/index">
         <view class="link-bd">
             <view class="left-icon">
                 <image class="left-icon_image" src="/images/icon_1.png" mode="scaleToFill" lazy-load="false"></image>
@@ -66,7 +66,7 @@
             </view>
         </view>
     </navigator>
-    <navigator class="link-navigation" url="/pages/help/index">
+    <navigator class="link-navigation" url="/pages/account/help/index">
         <view class="link-bd">
             <view class="left-icon">
                 <image class="left-icon_image" src="/images/icon_4.png" mode="scaleToFill" lazy-load="false"></image>
@@ -90,7 +90,7 @@
             </view>
         </view>
     </navigator>
-    <navigator class="link-navigation" url="/pages/help/index">
+    <navigator class="link-navigation" url="/pages/account/help/index">
         <view class="link-bd bb-0">
             <view class="left-icon">
                 <image class="left-icon_image" src="/images/icon_4.png" mode="scaleToFill" lazy-load="false"></image>

@@ -1,8 +1,8 @@
 // pages/applyArbitration/index.js
-import Utils from '../../lib/utils'
+import Utils from '../../../lib/utils'
 import {
   api_orderOperationApplyComplain
-} from '../../lib/api'
+} from '../../../lib/api'
 
 Page({
 

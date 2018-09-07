@@ -1,5 +1,5 @@
 /* pages/order/negotiated/index.wxss */
-@import "../../certification/index.wxss";
+@import "../../account/certification/index.wxss";
 
 .row-item .row-bd {
     justify-content: flex-start;

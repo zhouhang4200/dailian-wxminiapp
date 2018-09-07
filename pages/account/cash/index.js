@@ -85,7 +85,7 @@ Page({
   onSettingPassword: function () {
     // 设置完成之后，回来直接提交
     wx.navigateTo({
-      url: '/pages/account/password/index?action=setting_pay&url=/pages/waitOrderDetail/index?action=onReceiveSubmit'
+      url: '/pages/account/password/index?action=setting_pay'
     })
   },
   /**

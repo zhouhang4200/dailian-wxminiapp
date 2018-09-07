@@ -1,10 +1,10 @@
 // pages/certification/index.js
-import Utils from '../../lib/utils'
-import BankCardInfo from '../../lib/bank.card.info'
+import Utils from '../../../lib/utils'
+import BankCardInfo from '../../../lib/bank.card.info'
 import {
   api_certificationProfile,
   api_certificationDetail
-} from '../../lib/api'
+} from '../../../lib/api'
 
 Page({
 

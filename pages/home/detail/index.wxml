@@ -1,5 +1,5 @@
 <!--pages/goodsDetail/index.wxml-->
-<wxs src="../../lib/utils.wxs" module="utils"></wxs>
+<wxs src="../../../lib/utils.wxs" module="utils"></wxs>
 <view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
 <view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
     <view class="head-info">

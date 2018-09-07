@@ -1,2 +1,2 @@
 /* pages/applyArbitration/index.wxss */
-@import "../../applyArbitration/index.wxss";
+@import "../applyArbitration/index.wxss";

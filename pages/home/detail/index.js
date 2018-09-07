@@ -1,11 +1,11 @@
 // pages/goodsDetail/index.js
 
-import Utils from '../../lib/utils'
+import Utils from '../../../lib/utils'
 import {
   api_orderWaitDetail,
   api_operationOrder,
   api_profile
-} from '../../lib/api'
+} from '../../../lib/api'
 
 // 倒计时清除
 let intervalSuccess = '';

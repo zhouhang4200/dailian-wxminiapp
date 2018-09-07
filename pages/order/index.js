@@ -422,7 +422,7 @@ Page({
       const {selectedTradeNo, status} = this.data;
       let itemList = ['查看我的申诉', '查看/上传截图', '查看/发送留言', '提交异常']
       let navigateToUrls = [
-        {title: '查看我的申诉', url: '/pages/myComplaint/index'},
+        {title: '查看我的申诉', url: '/pages/order/myComplaint/index'},
         {title: '查看/上传截图', url: '/pages/order/screenshot/index'},
         {title: '查看/发送留言', url: '/pages/msg/leaveMessageList/details/index'}
       ];

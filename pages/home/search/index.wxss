@@ -1,5 +1,5 @@
 /* pages/search/index.wxss */
-@import "../home/index.wxss";
+@import "../index.wxss";
 
 .head-top {
     display: flex;

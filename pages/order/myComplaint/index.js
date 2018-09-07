@@ -1,9 +1,9 @@
 // pages/myComplaint/index.js
-import Utils from '../../lib/utils'
+import Utils from '../../../lib/utils'
 import {
   api_orderOperationComplainInfo,
   api_orderOperationSendComplainMessage
-} from '../../lib/api'
+} from '../../../lib/api'
 
 
 Page({

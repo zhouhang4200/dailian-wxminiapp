@@ -1,9 +1,9 @@
 // pages/search/index.js
 import {
   api_orderWait
-} from '../../lib/api'
+} from '../../../lib/api'
 
-import Utils from '../../lib/utils'
+import Utils from '../../../lib/utils'
 
 Page({
 
