@@ -3,12 +3,13 @@
     <block wx:for="{{list}}" wx:key="{{index}}" wx:for-index="{{index}}">
         <text class="histime">{{item.time}}</text>
         <view class="msg-row {{item.initiator===2 ? 'right-row':'left-row'}} ">
-            <view class='user-icon-wrap'>
-                <image lazy-load="{{true}}" mode='scaleToFill' class="user-icon" src="{{item.avatar}}"></image>
-            </view>
+            <image lazy-load="{{true}}" mode='scaleToFill' class="user-icon" src="{{item.avatar}}"></image>
             <view class="msg-content">
                 <text>{{item.content}}</text>
             </view>
         </view>
     </block>
+</view>
+<view class="msg-form">
+    <input placeholder="请输入聊天内容..." class="msg-input" />
 </view>
