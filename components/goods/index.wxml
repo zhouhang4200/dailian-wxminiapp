@@ -1,7 +1,7 @@
 <!--components/goods/index.wxml-->
 <!--首页商品列表组件-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
-<navigator wx:key="index" url="/pages/home/detail/index?trade_no={{item.trade_no}}" wx:for="{{list}}" class="goods-item" hover-class="none">
+<navigator wx:key="index" url="/pages/index/detail/index?trade_no={{item.trade_no}}" wx:for="{{list}}" class="goods-item" hover-class="none">
     <image src="{{item.icon}}" mode="scaleToFill" lazy-load="true" class="goods-item_goods-icon"></image>
     <view class="goods-item_goods-details">
         <view class="goods-item_title">【{{item.game_leveling_type_name}}】{{item.title}}</view>
