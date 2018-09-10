@@ -20,6 +20,7 @@
     "pages/order/submitCheck/index",
     "pages/order/myComplaint/index",
     "pages/order/screenshot/index",
+    "pages/order/catch/index",
     "pages/order/negotiated/index",
     "pages/order/details/index",
     "pages/msg/notice/index",

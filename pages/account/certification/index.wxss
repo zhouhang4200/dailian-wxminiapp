@@ -31,6 +31,10 @@ page {
     background-color: #1ec254;
 }
 
+.head-status-title{
+    flex: 1;
+}
+
 .fail-status {
     background-color: #F56C6C;
 }

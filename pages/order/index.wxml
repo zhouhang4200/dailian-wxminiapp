@@ -2,7 +2,7 @@
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
 <import src="../../lib/wxParse/wxParse.wxml"/>
 
-<view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
+<view animation="{{loadAnimationPage}}"  class="load-page {{isIpx ? 'iphonex-page':''}}   {{ !isModalOverlayHidden ? 'is-overlay':''}}">
     <view wx:for="{{asyncData.list}}" wx:key="{{index}}" class="row-item">
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-head">
             <text class="row-head_title">{{item.created_at}}</text>
@@ -93,7 +93,7 @@
 <none-result page-none-result="{{pageNoneResult}}"></none-result>
 
 <!-- modal Overlay -->
-<view animation="{{animationModalOverlay}}"
+<view catchtouchmove="move" animation="{{animationModalOverlay}}"
       hidden="{{isModalOverlayHidden}}"
       bindtransitionend="onModalOverlayToggleEnd"
       class="modal-overlay">

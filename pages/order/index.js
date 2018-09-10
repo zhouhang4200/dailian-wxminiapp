@@ -11,8 +11,7 @@ import {
   api_orderOperationAgreeConsult,
   api_orderOperationRejectComplain,
   api_cancelApplyComplete,
-  api_orderOperationRejectConsult,
-  api_orderOperationAnomaly
+  api_orderOperationRejectConsult
 } from "../../lib/api";
 
 Page({
@@ -425,7 +424,8 @@ Page({
       let navigateToUrls = [
         {title: '查看我的申诉', url: '/pages/order/myComplaint/index'},
         {title: '查看代练截图', url: '/pages/order/screenshot/index'},
-        {title: '查看/发送留言', url: '/pages/msg/leaveMessageList/details/index'}
+        {title: '查看/发送留言', url: '/pages/msg/leaveMessageList/details/index'},
+        {title: '提交异常', url: '/pages/order/catch/index'}
       ];
       //  代练中 不能显示提交异常
       if (status === 2) itemList.splice(3, 1);
@@ -436,25 +436,7 @@ Page({
         success: function (res) {
           const params = `?trade_no=${selectedTradeNo}&status=${status}`;
           const tapIndex = res.tapIndex;
-          const title = itemList[tapIndex];
-          // 提交异常
-          if (title.indexOf('异常') !== -1) {
-            wx.showLoading({title: "提交中", icon: "none"});
-            api_orderOperationAnomaly({
-              trade_no: selectedTradeNo
-            }).then(data => {
-              if (data.code) {
-                wx.hideLoading();
-                return wx.showToast({title: data.message, icon: 'none'})
-              }
-              more.updateOrderStatus(() => {
-                wx.showToast({title: '操作成功', icon: 'none'})
-              });
-            })
-          }
-          else {
-            wx.navigateTo({url: navigateToUrls[status !== 5 ? tapIndex + 1 : tapIndex].url + params})
-          }
+          wx.navigateTo({url: navigateToUrls[status !== 5 ? tapIndex + 1 : tapIndex].url + params})
         }
       })
     })

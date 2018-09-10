@@ -117,7 +117,7 @@ button::after {
 }
 
 .modal-content {
-  position: absolute;
+  position: fixed;
   z-index: 51;
   width: 508rpx;
   transform: translate(-50%, -50%);

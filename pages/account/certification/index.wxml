@@ -5,7 +5,7 @@
     <cover-view wx:if="{{checkInfo.title!==''}}" class="head-status {{ checkInfo.class }}">
         <cover-image src="/images/{{checkInfo.icon}}.png" mode="widthFix" lazy-load="false"
                      class="status-icon"></cover-image>
-        <cover-view>{{checkInfo.title}}</cover-view>
+        <cover-view class="head-status-title">{{checkInfo.title}}</cover-view>
     </cover-view>
     <form bindsubmit="onSubmit">
         <view class="row-item-group">

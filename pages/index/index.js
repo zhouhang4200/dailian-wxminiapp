@@ -52,6 +52,8 @@ Page({
     slideUpDownDirection: 'up', // 上推和下推方向
     animationSortModal: {},
 
+    isPageLoad: false, // 页面加载状态
+
     sortType: 'null',
     sortTypeList: [
       {
@@ -196,7 +198,12 @@ Page({
       ...opts
     };
     api_orderWait(params).then(data => {
-      this.updateReachBottomPullDownRefreshPageData({params, data})
+      this.updateReachBottomPullDownRefreshPageData({params, data});
+      if (!this.data.isPageLoad) {
+        this.setData({
+          isPageLoad: true
+        })
+      }
     });
   },
 
@@ -396,7 +403,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.data.isPageLoad && wx.startPullDownRefresh();
   },
 
   /**
