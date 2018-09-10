@@ -73,7 +73,7 @@ Page({
     const validate = this.formValidate(formData);
     const {identity_card_back, identity_card_front, identity_card_hand} = this.data;
     if (validate) {
-      wx.showLoading({title:'加载中',icon:'none'});
+      wx.showLoading({title: '加载中', icon: 'none'});
       Promise.all([
         identity_card_back.indexOf('.38sd.') !== -1 ? Promise.resolve(identity_card_back) : Utils.files.uploadFile(identity_card_back),
         identity_card_front.indexOf('.38sd.') !== -1 ? Promise.resolve(identity_card_front) : Utils.files.uploadFile(identity_card_front),
@@ -90,13 +90,13 @@ Page({
           identity_card_hand,
         };
         api_certificationProfile(submitData).then(data => {
-          wx.hideLoading();
-          this.setData({
-            status: 1,
-            checkInfo: this.getCheckInfo(1),
-            submitData,
-          });
+          if(data.code){
+            wx.hideLoading();
+            wx.showToast({title:data.message,icon:'none'});
+            return false;
+          }
           wx.showToast({title: '操作成功', icon: 'none'})
+          this.initFetch()
         })
       })
     }
@@ -177,12 +177,12 @@ Page({
       this.setData({
         ...this.data,
         ...data,
-        checkInfo: this.getCheckInfo(data.status)
+        checkInfo: this.getCheckInfo(data.status, data.remark)
       }, () => this.pageEnd())
     })
   },
 
-  getCheckInfo: function (status) {
+  getCheckInfo: function (status, remark) {
     const dataCheckInfo = this.data.checkInfo;
     const checkInfo = {
       1: {
@@ -201,7 +201,7 @@ Page({
         icon: 'err'
       }
     };
-    return status ? checkInfo[status] : dataCheckInfo
+    return status ? {...checkInfo[status], title: remark} : dataCheckInfo
   },
 
   /**
