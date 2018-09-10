@@ -311,8 +311,10 @@ Page({
       }, () => {
         if (this.data.countDownTime === 1) {
           clearInterval(intervalSuccess)
-          // 关闭弹窗，之后执行关闭弹窗回调
-          this.modalOverlayToggle();
+          setTimeout(()=> {
+            // 关闭弹窗，之后执行关闭弹窗回调
+            this.modalOverlayToggle();
+          },1000)
         }
       })
     }, 1000)
