@@ -1,5 +1,6 @@
 // pages/account/password/index.js
 import Utils from '../../../lib/utils'
+import Encrypt from '../../../lib/encrypt'
 import {
   api_findLoginPassword,
   api_updateLoginPassword,
@@ -7,8 +8,7 @@ import {
   api_updatePayPassword,
   api_settingPayPassword,
   api_sendFindLoginPasswordPhoneCode,
-  api_sendFindPayPasswordPhoneCode,
-  api_profile
+  api_sendFindPayPasswordPhoneCode
 } from '../../../lib/api'
 
 Page({
@@ -64,7 +64,7 @@ Page({
       wx.showLoading({title: '加载中', icon: 'none'});
       api_findLoginPassword({
         phone,
-        new_password,
+        new_password:Encrypt(new_password),
         verification_code
       }).then(data => {
         wx.hideLoading();
@@ -119,8 +119,8 @@ Page({
     if (isValidateForm()) {
       wx.showLoading({title: '加载中', icon: 'none'});
       api_updateLoginPassword({
-        old_password,
-        new_password
+        old_password:Encrypt(old_password),
+        new_password:Encrypt(new_password)
       }).then(data => {
         wx.hideLoading();
         if (data.code) {
@@ -173,7 +173,7 @@ Page({
     if (isValidateForm()) {
       wx.showLoading({title: '加载中', icon: 'none'});
       api_findPayPassword({
-        new_pay_password,
+        new_pay_password:Encrypt(new_pay_password),
         verification_code
       }).then(data => {
         wx.hideLoading();
@@ -225,8 +225,8 @@ Page({
     if (isValidateForm()) {
       wx.showLoading({title: '加载中', icon: 'none'});
       api_updatePayPassword({
-        old_pay_password,
-        new_pay_password
+        old_pay_password:Encrypt(old_pay_password),
+        new_pay_password:Encrypt(new_pay_password)
       }).then(data => {
         wx.hideLoading();
         if (data.code) {
@@ -267,7 +267,7 @@ Page({
     if (isValidateForm()) {
       wx.showLoading({title: '加载中', icon: 'none'});
       api_settingPayPassword({
-        pay_password
+        pay_password:Encrypt(pay_password)
       }).then(data => {
         wx.hideLoading();
         if (data.code) {

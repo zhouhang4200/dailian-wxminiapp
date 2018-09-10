@@ -1,11 +1,13 @@
 // pages/goodsDetail/index.js
 
 import Utils from '../../../lib/utils'
+import Encrypt from "../../../lib/encrypt"
 import {
   api_orderWaitDetail,
   api_operationOrder,
   api_profile
 } from '../../../lib/api'
+
 
 // 倒计时清除
 let intervalSuccess = '';
@@ -184,7 +186,7 @@ Page({
     this.modalOverlayToggle();
     wx.showLoading({title: '提交中', icon: 'none'});
     this.onOrderSubmitAsync({
-      pay_password,
+      pay_password:Encrypt(pay_password),
     }).then(data => {
       wx.hideLoading();
       if (data.code) {
@@ -211,8 +213,8 @@ Page({
     this.modalOverlayToggle();
     wx.showLoading({title: '提交中', icon: 'none'});
     this.onOrderSubmitAsync({
-      pay_password,
-      take_order_password
+      pay_password:Encrypt(pay_password),
+      take_order_password:Encrypt(take_order_password)
     }).then(data => {
       wx.hideLoading();
       if (data.code) {

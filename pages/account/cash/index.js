@@ -1,6 +1,7 @@
 // pages/account/capital/cash/index.js
 
 import Utils from '../../../lib/utils'
+import Encrypt from '../../../lib/encrypt'
 import {
   api_cash,
   api_profile,
@@ -98,7 +99,7 @@ Page({
     this.modalOverlayToggle();
     wx.showLoading({title: '加载中', icon: 'none'});
     api_cash({
-      pay_password,
+      pay_password:Encrypt(pay_password),
       alipay_account,
       alipay_name,
       amount: this.data.amount

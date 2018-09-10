@@ -1,5 +1,6 @@
 // pages/account/api_login/index.js
 import Utils from '../../../lib/utils'
+import Encrypt from '../../../lib/encrypt'
 
 import {
   api_login
@@ -23,7 +24,10 @@ Page({
     const validate = this.formValidate(formData);
     if (validate) {
       wx.showLoading({title: '登录中', icon: 'none'});
-      api_login(formData).then(data => {
+      api_login({
+        ...formData,
+        password:Encrypt(formData.password)
+      }).then(data => {
         wx.hideLoading();
         if (data.code) {
           return wx.showToast({title: data.message, icon: 'none'})
