@@ -2,7 +2,8 @@
 
 import Utils from '../../../lib/utils'
 import {
-  api_getMessageList
+  api_getMessageList,
+  api_getMessageReaded
 } from '../../../lib/api'
 
 Page({
@@ -22,10 +23,19 @@ Page({
   },
 
   initFetch: function () {
-    api_getMessageList().then(list => {
+    api_getMessageList().then(data => {
+      if (data.code) {
+        wx.showToast({title: data.message, icon: 'none'})
+        return false;
+      }
+      api_getMessageReaded().then(data => {
+
+      })
       this.setData({
-        list
-      }, () => this.pageEnd())
+        list: data
+      }, () => {
+        this.pageEnd()
+      })
     })
   },
 

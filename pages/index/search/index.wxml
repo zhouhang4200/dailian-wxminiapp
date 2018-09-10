@@ -5,7 +5,7 @@
 <view class="head-top head-top-fixed">
     <view class="search-form">
         <view class="form">
-            <input bindconfirm="onInputSearch" confirm-type="search" focus="{{true}}" placeholder="搜索"
+            <input bindconfirm="onInputSearch" confirm-type="search" focus="{{true}}" placeholder="输入关键字查询"
                    class="form-input"/>
         </view>
     </view>
