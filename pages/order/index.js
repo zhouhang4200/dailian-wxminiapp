@@ -169,14 +169,11 @@ Page({
         if (!data.code) {
           const status = data.status;
           if (selectOrderData.status !== status) {
-            this.data.asyncData.list.splice(selectedTradeNoIndex, 1, {
-              ...selectOrderData,
-              status
-            })
+            this.data.asyncData[selectedTradeNoIndex]=data;
+            this.setData({
+              'asyncData.list': this.data.asyncData.list
+            });
           }
-          this.setData({
-            'asyncData.list': this.data.asyncData.list
-          });
           wx.hideLoading();
           callBack && callBack();
         }

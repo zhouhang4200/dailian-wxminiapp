@@ -4,6 +4,7 @@
     "none-result": "/components/none-result/index",
     "reach-bottom": "/components/reach-bottom/index"
   },
+  "backgroundColor": "#198cff",
   "onReachBottomDistance": 160,
   "enablePullDownRefresh": true
 }

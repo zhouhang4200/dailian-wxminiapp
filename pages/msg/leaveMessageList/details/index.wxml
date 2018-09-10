@@ -1,6 +1,6 @@
 <!--pages/msg/leaveMessageList/details/index.wxml-->
-<view animation="{{loadAnimationPage}}">
-    <block wx:for="{{list}}" wx:key="{{index}}" wx:for-index="{{index}}">
+<scroll-view id="J_ScrollView" animation="{{loadAnimationPage}}" scroll-top="{{scrollTop}}" scroll-into-view="{{scrollIntoView}}" class="page-scroll-view">
+    <view id="msg_row_{{index}}" wx:for="{{list}}" wx:key="{{index}}" wx:for-index="{{index}}" scroll-with-animation="true">
         <text class="histime">{{item.time}}</text>
         <view class="msg-row {{item.initiator===2 ? 'right-row':'left-row'}} ">
             <image lazy-load="{{true}}" mode='scaleToFill' class="user-icon" src="{{item.avatar}}"></image>
@@ -8,8 +8,9 @@
                 <text>{{item.content}}</text>
             </view>
         </view>
-    </block>
-</view>
-<view class="msg-form">
-    <input placeholder="请输入聊天内容..." class="msg-input" />
+    </view>
+</scroll-view>
+<view id="J_MsgForm" class="msg-form">
+    <textarea bindfocus="onContentFocus" bindblur="onContentBlur" cursor-spacing="18" bindinput="onContentInput" placeholder="请输入聊天内容..." bindblur="bindTextAreaBlur" class="msg-input" auto-height />
+    <view bindtap="onSendMsg" class="submit-btn-primary send-msg-btn {{content.length===0 ? 'disabled':''}}">发送</view>
 </view>

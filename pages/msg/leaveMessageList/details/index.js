@@ -2,7 +2,8 @@
 
 import Utils from '../../../../lib/utils'
 import {
-  api_getOrderOperationGetMessage
+  api_getOrderOperationGetMessage,
+  api_sendOrderOperationGetMessage
 } from '../../../../lib/api'
 
 Page({
@@ -15,17 +16,77 @@ Page({
 
     ...Utils.page.data,
 
+    content: '',
+
+    scrollIntoView: '',
+
+    scrollTop: 0,
+    scrollInitBottom: '120rpx',
+
     list: []
   },
 
   initFetch: function () {
+    this.setData({
+      trade_no: this.options.trade_no
+    })
     api_getOrderOperationGetMessage({
       trade_no: this.options.trade_no
-    }).then(list => {
-      this.setData({list}, () => this.pageEnd());
-      if (!list.length) {
+    }).then(data => {
+      if (data.code) {
+        wx.showToast({title: data.message, icon: 'none'})
+        return false;
+      }
+      this.setData({
+        list: data,
+        scrollIntoView: 'msg_row_' + (data.list.length - 1)
+      }, () => this.pageEnd());
+      if (!data.length) {
         wx.showToast({title: '暂无留言', icon: 'none'})
       }
+    })
+  },
+
+  onContentFocus: function (e) {
+    wx.createSelectorQuery().select('#J_ScrollView').boundingClientRect(function(rect){
+      // rect.id      // 节点的ID
+      // rect.dataset // 节点的dataset
+      // rect.left    // 节点的左边界坐标
+      // rect.right   // 节点的右边界坐标
+      // rect.top     // 节点的上边界坐标
+      // rect.bottom  // 节点的下边界坐标
+      // rect.width   // 节点的宽度
+      // rect.height  // 节点的高度
+    }).exec()
+  },
+
+  onContentBlur: function (e) {
+
+  },
+
+  onContentInput: function (e) {
+    this.setData({
+      content: e.detail.value
+    })
+  },
+
+  onSendMsg: function () {
+    const {content, trade_no} = this.data;
+    if (content.length === 0) {
+      return false;
+    }
+    api_sendOrderOperationGetMessage({
+      trade_no,
+      content
+    }).then(data => {
+      if (data.code) {
+        wx.showToast({title: data.message, icon: 'none'});
+        return false;
+      }
+      this.list.push(data);
+      this.setData({
+        list: this.data.list
+      })
     })
   },
 

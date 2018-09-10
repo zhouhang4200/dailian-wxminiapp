@@ -4,5 +4,6 @@
   "usingComponents": {
     "reach-bottom": "/components/reach-bottom/index"
   },
+  "backgroundColor": "#198cff",
   "enablePullDownRefresh": true
 }

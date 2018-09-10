@@ -319,6 +319,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.pageLoad();
     const setting = {
       find_login: {
         title: '找回登录密码',
@@ -358,7 +359,6 @@ Page({
         title
       });
     }
-    this.pageLoad();
   },
 
   // 获取用户最新手机号
@@ -367,9 +367,11 @@ Page({
       if (data) {
         this.setData({
           phone: data.phone
-        })
+        }, () => this.pageEnd())
       }
-      this.pageEnd();
+      else{
+        this.pageEnd()
+      }
     })
   },
 
