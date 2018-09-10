@@ -33,7 +33,7 @@ Page({
     serviceCharge: 0,
     amount: 0,
 
-    isAmountFocus: false,
+    form: {},
 
     info: {
       tips: '',
@@ -48,17 +48,14 @@ Page({
     })
   },
 
-  loadPageTransitionEnd: function () {
-    this.setData({
-      isAmountFocus: true
-    })
-  },
-
   onSubmit: function (e) {
     const formData = e.detail.value;
     const validate = this.isValidate(formData);
     if (validate) {
       wx.showLoading({icon: 'none', title: '加载中'});
+      this.setData({
+        form: formData
+      })
       api_profile().then(data => {
         wx.hideLoading();
         const isSettingPayPassword = data.pay_password === 1;
@@ -83,7 +80,8 @@ Page({
    *  提交 设置支付密码
    */
   onSettingPassword: function () {
-    // 设置完成之后，回来直接提交
+    // 设置完成之后，回来再提交
+    this.modalOverlayToggle();
     wx.navigateTo({
       url: '/pages/account/password/index?action=setting_pay'
     })
@@ -92,6 +90,7 @@ Page({
    * 提交输入的支付密码开始提现
    */
   onPayPassword: function () {
+    const {alipay_account, alipay_name} = this.data.form;
     const pay_password = this.data.pay_password;
     if (pay_password.length < 6) {
       return wx.showToast({title: '请输入完整的支付密码', icon: 'none'});
@@ -100,6 +99,8 @@ Page({
     wx.showLoading({title: '加载中', icon: 'none'});
     api_cash({
       pay_password,
+      alipay_account,
+      alipay_name,
       amount: this.data.amount
     }).then(data => {
       if (data.code) {
@@ -203,14 +204,21 @@ Page({
    * 表单验证
    */
   isValidate: function (formData) {
-    const {amount} = formData;
+    const {alipay_name, alipay_account, amount} = formData;
+    const ValidateKeys = {
+      alipay_account,
+      alipay_name,
+      amount
+    }
     const {min_amount, rate, balance} = this.data.info;
     const sys_max_amount_actual = balance - (balance * rate);
     const requiredValidate = {
+      alipay_account: '请输入支付宝姓名',
+      alipay_name: '请输入提现金额',
       amount: '请输入提现金额'
     };
-    for (let key in formData) {
-      if (formData[key] === '') {
+    for (let key in ValidateKeys) {
+      if (ValidateKeys[key] === '') {
         wx.showToast({title: requiredValidate[key], icon: 'none'});
         return false;
       }

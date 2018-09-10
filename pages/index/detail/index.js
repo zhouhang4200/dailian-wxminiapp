@@ -235,7 +235,6 @@ Page({
     wx.navigateTo({
       url: '/pages/account/password/index?action=' + action
     });
-    // this.setPageShowInterruptAction('onReceiveSubmit');
   },
 
   /**

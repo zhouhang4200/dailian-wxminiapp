@@ -8,3 +8,42 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.row-item-group {
+    margin-bottom: 13rpx;
+}
+
+.row-item {
+    background-color: #fff;
+    padding-left: 30rpx;
+}
+
+.row-item .row-bd {
+    display: flex;
+    padding-right: 30rpx;
+    height: 100rpx;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.row-item .title {
+    font-size: 31rpx;
+    /*font-weight: bold;*/
+    color: #000;
+    display: block;
+}
+
+.row-item input,.row-item .input-value {
+    flex: 1;
+    /*font-weight: bold;*/
+    text-align: right;
+    padding-left: 20rpx;
+    font-size: 31rpx;
+    color: #000;
+}
+
+.row-item .input-placeholder {
+    color: #c7c7cd;
+    font-weight: bold;
+}

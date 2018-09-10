@@ -14,7 +14,7 @@
         <view class="goods-item_tag-row">
             <view class="goods-item_tag goods-item_tag-official">官方</view>
             <view wx:if="{{item.private===1}}" class="goods-item_tag">私有</view>
-            <view wx:if="{{item.top===1}}" class="goods-item_tag">顶</view>
+            <view wx:if="{{item.top===1}}" class="goods-item_tag goods-item_tag-top">顶</view>
         </view>
     </view>
 </navigator>

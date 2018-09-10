@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/account/cash/index",
     "pages/msg/leaveMessageList/details/index",
     "pages/order/index",
     "pages/account/index",
     "pages/account/setting/index",
     "pages/account/capital/list/index",
-    "pages/account/cash/index",
     "pages/account/login/index",
     "pages/account/profile/index",
     "pages/account/help/index",

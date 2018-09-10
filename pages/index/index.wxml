@@ -1,7 +1,7 @@
 <!--pages/home/index.wxml-->
 <!--顶部-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
-<view bindtransitionend="slideUpDownAnimationTransitionEnd" class="head-top {{isHeadTopFixed ? 'head-top-fixed':''}}" animation="{{animationSlideUpDown}}">
+<view bindtransitionend="slideUpDownAnimationTransitionEnd" class="head-top" animation="{{animationSlideUpDown}}">
     <!--搜索栏-->
     <navigator hover-class="none" class="search-form"
                url="/pages/index/search/index">
@@ -23,7 +23,7 @@
 </view>
 <!--商品列表-->
 <view animation="{{animationSlideUpDown}}"
-      class="index-page {{isHeadTopFixed ? 'index-page-fixed':''}}  {{ !isModalOverlayHidden ? 'is-overlay':''}} {{isIpx ? 'iphonex-page':''}}">
+      class="index-page  {{ !isModalOverlayHidden ? 'is-overlay':''}} {{isIpx ? 'iphonex-page':''}}">
     <!--单个商品-->
     <goods-item list="{{asyncData.list}}"></goods-item>
     <!--底部加载更多-->

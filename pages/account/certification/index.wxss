@@ -43,17 +43,6 @@ page {
     margin-bottom: 13rpx;
 }
 
-.fixed-status-disabled {
-    padding-top: 65rpx;
-}
-
-.fixed-status-bottom {
-    padding-bottom: 124rpx;
-}
-.fixed-status-bottom.iphonex-page{
-    padding-bottom: 192rpx;
-}
-
 .row-item {
     background-color: #fff;
     padding-left: 30rpx;
@@ -87,6 +76,18 @@ page {
 .row-item .input-placeholder {
     color: #c7c7cd;
     font-weight: bold;
+}
+
+.fixed-status-disabled {
+    padding-top: 65rpx;
+}
+
+.fixed-status-bottom {
+    padding-bottom: 124rpx;
+}
+
+.fixed-status-bottom.iphonex-page{
+    padding-bottom: 192rpx;
 }
 
 .upload-row {

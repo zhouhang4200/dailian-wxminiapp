@@ -69,6 +69,11 @@
     margin-right: 10rpx;
 }
 
+.goods-item_tag-top{
+    background-color: #f6d000;
+    color:#222
+}
+
 .goods-item_tag-official {
     background-image: linear-gradient(45deg, #009cff 0%, #0086ff 100%), linear-gradient(#198cff, #198cff);
     background-blend-mode: normal, normal;

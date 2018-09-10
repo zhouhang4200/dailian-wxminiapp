@@ -1,6 +1,6 @@
 <!--pages/certification/index.wxml-->
 <!--实名认证审核状态-->
-<view bindtransitionend="loadPageTransitionEnd"  animation="{{loadAnimationPage}}"
+<view animation="{{loadAnimationPage}}"
       class="load-page {{ status==4 ? 'fixed-status-bottom': status<3 ? 'fixed-status-disabled':'fixed-status-bottom fixed-status-disabled'}} {{isIpx ? 'iphonex-page':''}}">
     <cover-view wx:if="{{checkInfo.title!==''}}" class="head-status {{ checkInfo.class }}">
         <cover-image src="/images/{{checkInfo.icon}}.png" mode="widthFix" lazy-load="false"
@@ -12,8 +12,7 @@
             <view class="row-item">
                 <view class="row-bd">
                     <text class="title">姓名</text>
-                    <input disabled="{{status<3}}" value="{{real_name}}" name="real_name" placeholder="请输入你的真实姓名"
-                           focus="{{isRealNameFocus}}"/>
+                    <input disabled="{{status<3}}" value="{{real_name}}" name="real_name" placeholder="请输入你的真实姓名"/>
                 </view>
             </view>
             <view class="row-item">
@@ -47,8 +46,7 @@
                 <text>上传身份证反面（头像）</text>
             </view>
             <block wx:if="{{identity_card_back}}">
-                <image src="{{identity_card_back}}" mode="widthFix" class="img-full-max upload-card-img"
-                       lazy-load="false"></image>
+                <image data-key="identity_card_back" bindtap="chooseImageCard" src="{{identity_card_back}}" mode="widthFix" class="img-full-max upload-card-img" lazy-load="false"></image>
             </block>
             <block wx:if="{{!identity_card_back && status>2 }}">
                 <view data-key="identity_card_back" bindtap="chooseImageCard" class="upload-item">
@@ -64,7 +62,7 @@
                 <text>上传身份证正面（国徽）</text>
             </view>
             <block wx:if="{{identity_card_front}}">
-                <image src="{{identity_card_front}}" mode="widthFix" class="img-full-max upload-card-img"
+                <image bindtap="chooseImageCard" data-key="identity_card_front" src="{{identity_card_front}}" mode="widthFix" class="img-full-max upload-card-img"
                        lazy-load="false"></image>
             </block>
             <block wx:if="{{!identity_card_front && status>2 }}">
@@ -81,7 +79,7 @@
                 <text>上传手持身份证正面（头像）</text>
             </view>
             <block wx:if="{{identity_card_hand}}">
-                <image src="{{identity_card_hand}}" mode="widthFix" class="img-full-max upload-card-img"
+                <image bindtap="chooseImageCard" data-key="identity_card_hand" src="{{identity_card_hand}}" mode="widthFix" class="img-full-max upload-card-img"
                        lazy-load="false"></image>
             </block>
             <block wx:if="{{!identity_card_hand && status>2 }}">

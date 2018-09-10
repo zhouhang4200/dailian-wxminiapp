@@ -21,8 +21,6 @@ Page({
 
     chooseImgKey: '',
 
-    isRealNameFocus: false,
-
     checkInfo: {
       title: '',
       class: '',
@@ -37,12 +35,6 @@ Page({
     identity_card_back: '',
     identity_card_front: '',
     identity_card_hand: '',
-  },
-
-  loadPageTransitionEnd: function () {
-    this.setData({
-      isRealNameFocus: true
-    })
   },
 
   /**
@@ -90,13 +82,17 @@ Page({
           identity_card_hand,
         };
         api_certificationProfile(submitData).then(data => {
-          if(data.code){
+          if (data.code) {
             wx.hideLoading();
-            wx.showToast({title:data.message,icon:'none'});
+            wx.showToast({title: data.message, icon: 'none'});
             return false;
           }
+          this.setData({
+            status: 1,
+            checkInfo: this.getCheckInfo(1),
+            submitData,
+          });
           wx.showToast({title: '操作成功', icon: 'none'})
-          this.initFetch()
         })
       })
     }
@@ -165,6 +161,10 @@ Page({
   },
 
   chooseImageCard: function (e) {
+    const status = this.data.status
+    if (status < 3) {
+      return false;
+    }
     const chooseImgKey = e.currentTarget.dataset.key;
     this.setData({
       chooseImgKey
@@ -197,11 +197,11 @@ Page({
       },
       3: {
         class: 'fail-status',
-        title: '认证审核不通过，请重新提交',
+        title: '',
         icon: 'err'
       }
     };
-    return status ? {...checkInfo[status], title: remark} : dataCheckInfo
+    return status ? {...checkInfo[status], title: status === 3 ? remark : checkInfo[status].title} : dataCheckInfo
   },
 
   /**
