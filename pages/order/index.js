@@ -170,8 +170,8 @@ Page({
         if (!data.code) {
           const status = data.status;
           if (selectOrderData.status !== status) {
-            debugger;
-            this.data.asyncData[selectedTradeNoIndex]={
+            this.data.asyncData.list[selectedTradeNoIndex] = {
+              ...this.data.asyncData.list[selectedTradeNoIndex],
               ...data
             };
             this.setData({
