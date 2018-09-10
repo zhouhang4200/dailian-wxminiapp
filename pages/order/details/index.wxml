@@ -135,7 +135,7 @@
         </view>
         <view class="row-info">
             <text>QQ</text>
-            <text class="right">{{info.player_qq}}</text>
+            <text class="right">{{info.parent_user_qq}}</text>
         </view>
     </view>
 </view>
