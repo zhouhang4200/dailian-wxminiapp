@@ -39,7 +39,7 @@ Page({
       }
       this.setData({
         list: data,
-        scrollIntoView: 'msg_row_' + (data.list.length - 1)
+        scrollIntoView: data.length !== 0 ? 'msg_row_' + (data.length - 1) : 0
       }, () => this.pageEnd());
       if (!data.length) {
         wx.showToast({title: '暂无留言', icon: 'none'})
@@ -48,15 +48,8 @@ Page({
   },
 
   onContentFocus: function (e) {
-    wx.createSelectorQuery().select('#J_ScrollView').boundingClientRect(function(rect){
-      // rect.id      // 节点的ID
-      // rect.dataset // 节点的dataset
-      // rect.left    // 节点的左边界坐标
-      // rect.right   // 节点的右边界坐标
-      // rect.top     // 节点的上边界坐标
-      // rect.bottom  // 节点的下边界坐标
-      // rect.width   // 节点的宽度
-      // rect.height  // 节点的高度
+    wx.createSelectorQuery().select('#J_ScrollView').boundingClientRect(function (rect) {
+
     }).exec()
   },
 
@@ -83,9 +76,10 @@ Page({
         wx.showToast({title: data.message, icon: 'none'});
         return false;
       }
-      this.list.push(data);
+      this.data.list.push(data);
       this.setData({
-        list: this.data.list
+        list: this.data.list,
+        content: ''
       })
     })
   },
