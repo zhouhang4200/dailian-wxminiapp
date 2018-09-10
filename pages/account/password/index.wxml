@@ -50,10 +50,10 @@
                    type="number"/>
         </view>
         <view class="form-item">
-            <input placeholder="请输入新支付密码" type="number" maxlength="6" name="new_pay_password" password="{{true}}"/>
+            <input placeholder="请输入新支付密码" name="new_pay_password" password="{{true}}"/>
         </view>
         <view class="form-item">
-            <input placeholder="请再次输入新密码" type="number" maxlength="6" name="confirm_password" password="{{true}}"/>
+            <input placeholder="请再次输入新密码" name="confirm_password" password="{{true}}"/>
         </view>
         <view class="form-item send-wrap">
             <input placeholder="验证码" class="verification-code-input" name="verification_code"/>
@@ -67,11 +67,11 @@
     <!--修改支付密码-->
     <form wx:if="{{type==='update_pay'}}" bindsubmit="onUpdatePayPassword">
         <view class="form-item">
-            <input placeholder="请输入旧支付密码" type="number" maxlength="6" focus="{{true}}" name="old_pay_password"
+            <input placeholder="请输入旧支付密码" focus="{{true}}" name="old_pay_password"
                    password="{{true}}"/>
         </view>
         <view class="form-item">
-            <input placeholder="请输入新支付密码" type="number" maxlength="6" name="new_pay_password" password="{{true}}"/>
+            <input placeholder="请输入新支付密码" name="new_pay_password" password="{{true}}"/>
         </view>
         <view class="form-item">
             <input placeholder="请再次输入新密码" type="number" maxlength="6" name="confirm_password" password="{{true}}"/>
@@ -88,11 +88,11 @@
     <!--设置支付密码-->
     <form wx:if="{{type==='setting_pay'}}" bindsubmit="onSettingPayPassword">
         <view class="form-item">
-            <input placeholder="请输入支付密码" type="number" maxlength="6" focus="{{true}}" name="pay_password"
+            <input placeholder="请输入支付密码" focus="{{true}}" name="pay_password"
                    password="{{true}}"/>
         </view>
         <view class="form-item">
-            <input placeholder="请再次输入新密码" type="number" maxlength="6" name="confirm_password" password="{{true}}"/>
+            <input placeholder="请再次输入新密码" name="confirm_password" password="{{true}}"/>
         </view>
         <view class="login-submit-wrap">
             <button formType="submit" class="submit-btn primary-btn">确定</button>

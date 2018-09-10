@@ -51,7 +51,7 @@ Page({
 
   initFetch() {
     api_orderWaitDetail({trade_no: this.options.trade_no}).then(info => {
-      if(!info.code){
+      if (!info.code) {
         this.setData({info}, () => {
           this.pageEnd();
         })
@@ -179,23 +179,27 @@ Page({
    * 提交输入的支付密码
    */
   onPayPassword: function () {
-    const pay_password = this.data.pay_password;
-    if (pay_password.length < 6) {
-      return wx.showToast({title: '请输入完整的支付密码', icon: 'none', duration: 3000});
-    }
     this.modalOverlayToggle();
+    const pay_password = this.data.pay_password;
+    // if (pay_password.length < 6) {
+    //   return wx.showToast({title: '请输入完整的支付密码', icon: 'none', duration: 2000});
+    // }
     wx.showLoading({title: '提交中', icon: 'none'});
-    this.onOrderSubmitAsync({
-      pay_password:Encrypt(pay_password),
-    }).then(data => {
-      wx.hideLoading();
-      if (data.code) {
-        wx.showToast({title: data.message, icon: 'none', duration: 3000});
-        this.setPayPasswordModal();
-      }
-      else {
-        this.setOrderSuccessModal();
-      }
+    this.modalOverlayToggleEndInterval(()=>{
+      this.onOrderSubmitAsync({
+        pay_password: Encrypt(pay_password),
+      }).then(data => {
+        wx.hideLoading();
+        if(data.code){
+          if (data.code === 4002) {
+            this.setPayPasswordModal()
+          }
+          wx.showToast({title: data.message, icon: 'none',});
+        }
+        else {
+          this.setOrderSuccessModal();
+        }
+      })
     })
   },
 
@@ -205,20 +209,20 @@ Page({
   onOrderPassword: function () {
     const {pay_password, take_order_password} = this.data;
     if (!take_order_password.length) {
-      return wx.showToast({title: '请输入订单密码', icon: 'none', duration: 3000});
+      return wx.showToast({title: '请输入订单密码', icon: 'none',});
     }
     if (pay_password.length < 6) {
-      return wx.showToast({title: '请输入支付密码', icon: 'none', duration: 3000});
+      return wx.showToast({title: '请输入支付密码', icon: 'none',});
     }
     this.modalOverlayToggle();
     wx.showLoading({title: '提交中', icon: 'none'});
     this.onOrderSubmitAsync({
-      pay_password:Encrypt(pay_password),
-      take_order_password:Encrypt(take_order_password)
+      pay_password: Encrypt(pay_password),
+      take_order_password: Encrypt(take_order_password)
     }).then(data => {
       wx.hideLoading();
       if (data.code) {
-        wx.showToast({title: data.message, icon: 'none', duration: 3000});
+        wx.showToast({title: data.message, icon: 'none',});
         this.setOrderAndPayPasswordModal();
       }
       else {
@@ -313,10 +317,10 @@ Page({
       }, () => {
         if (this.data.countDownTime === 1) {
           clearInterval(intervalSuccess)
-          setTimeout(()=> {
+          setTimeout(() => {
             // 关闭弹窗，之后执行关闭弹窗回调
             this.modalOverlayToggle();
-          },1000)
+          }, 1000)
         }
       })
     }, 1000)

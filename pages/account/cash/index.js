@@ -93,29 +93,31 @@ Page({
   onPayPassword: function () {
     const {alipay_account, alipay_name} = this.data.form;
     const pay_password = this.data.pay_password;
-    if (pay_password.length < 6) {
-      return wx.showToast({title: '请输入完整的支付密码', icon: 'none'});
-    }
-    this.modalOverlayToggle();
-    wx.showLoading({title: '加载中', icon: 'none'});
-    api_cash({
-      pay_password:Encrypt(pay_password),
-      alipay_account,
-      alipay_name,
-      amount: this.data.amount
-    }).then(data => {
-      if (data.code) {
-        return wx.showToast({title: data.message, icon: 'none'});
-      }
-      wx.showModal({
-        showCancel: false,
-        content: '操作成功',
-        success: function (res) {
-          if (res.confirm) {
-            wx.navigateBack();
-          }
+    // if (pay_password.length < 6) {
+    //   return wx.showToast({title: '请输入完整的支付密码', icon: 'none'});
+    // }
+    this.modalOverlayToggleEndInterval(()=>{
+      this.modalOverlayToggle();
+      wx.showLoading({title: '加载中', icon: 'none'});
+      api_cash({
+        pay_password:Encrypt(pay_password),
+        alipay_account,
+        alipay_name,
+        amount: this.data.amount
+      }).then(data => {
+        if (data.code) {
+          return wx.showToast({title: data.message, icon: 'none'});
         }
-      });
+        wx.showModal({
+          showCancel: false,
+          content: '操作成功',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateBack();
+            }
+          }
+        });
+      })
     })
   },
 

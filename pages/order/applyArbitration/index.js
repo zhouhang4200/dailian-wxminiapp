@@ -35,7 +35,7 @@ Page({
         }).then(data => {
           wx.hideLoading();
           if (data.code) {
-            return wx.showToast({title: data.message, icon: 'none', duration: 3000})
+            return wx.showToast({title: data.message, icon: 'none', duration: 2000})
           }
           wx.showModal({
             showCancel: false,
@@ -70,11 +70,11 @@ Page({
    */
   isValidateForm: function (formData) {
     if (!formData.reason.length) {
-      wx.showToast({title: '请填写原因及要求', icon: 'none', duration: 3000});
+      wx.showToast({title: '请填写原因及要求', icon: 'none', duration: 2000});
       return false;
     }
     if (!this.data.images.length) {
-      wx.showToast({title: '请上传截图', icon: 'none', duration: 3000});
+      wx.showToast({title: '请上传截图', icon: 'none', duration: 2000});
       return false;
     }
     return true

@@ -51,22 +51,32 @@
     <!--输入支付密码-->
     <view hidden="{{isPayPasswordHidden}}" class="modal-bd form-modal">
         <view class="modal-title">请输入支付密码</view>
+
         <view class="password-input">
-            <view class="pay-password-input">
-                <input cursor-spacing="120" type="number" value="{{pay_password}}" focus="{{payPasswordFocus}}"
-                       bindinput="onInputPayPassword"
-                       class="pay-password-input" maxlength="6" password="{{true}}"/>
-            </view>
-            <view bindtap="setPayPasswordFocus" class="password-sigle-wrap">
-                <view class="bl-0 password-sigle {{payPasswordLength>0 ? 'password-sigle-show':''}}"></view>
-                <view class="password-sigle {{payPasswordLength>1 ? 'password-sigle-show':''}}"></view>
-                <view class="password-sigle {{payPasswordLength>2 ? 'password-sigle-show':''}}"></view>
-                <view class="password-sigle {{payPasswordLength>3 ? 'password-sigle-show':''}}"></view>
-                <view class="password-sigle {{payPasswordLength>4 ? 'password-sigle-show':''}}"></view>
-                <view class="password-sigle {{payPasswordLength>5 ? 'password-sigle-show':''}}"></view>
-            </view>
+            <input cursor-spacing="130"
+                   value="{{pay_password}}"
+                   data-key="pay_password"
+                   bindinput="onInputPayPassword"
+                   focus="{{payPasswordFocus}}"
+                   placeholder="请输入支付密码" password="{{true}}"/>
         </view>
-        <navigator url="/pages/account/password/index?action=find_pay" class="forget-link" hover-class="none">忘记密码</navigator>
+
+        <!--<view class="password-input">-->
+        <!--<view class="pay-password-input">-->
+        <!--<input cursor-spacing="120" type="number" value="{{pay_password}}" focus="{{payPasswordFocus}}"-->
+        <!--bindinput="onInputPayPassword"-->
+        <!--class="pay-password-input" maxlength="6" password="{{true}}"/>-->
+        <!--</view>-->
+        <!--<view bindtap="setPayPasswordFocus" class="password-sigle-wrap">-->
+        <!--<view class="bl-0 password-sigle {{payPasswordLength>0 ? 'password-sigle-show':''}}"></view>-->
+        <!--<view class="password-sigle {{payPasswordLength>1 ? 'password-sigle-show':''}}"></view>-->
+        <!--<view class="password-sigle {{payPasswordLength>2 ? 'password-sigle-show':''}}"></view>-->
+        <!--<view class="password-sigle {{payPasswordLength>3 ? 'password-sigle-show':''}}"></view>-->
+        <!--<view class="password-sigle {{payPasswordLength>4 ? 'password-sigle-show':''}}"></view>-->
+        <!--<view class="password-sigle {{payPasswordLength>5 ? 'password-sigle-show':''}}"></view>-->
+        <!--</view>-->
+        <!--</view>-->
+        <view bindtap="onSettingPassword" data-action="find_pay" class="forget-link">忘记密码</view>
     </view>
 
     <view class="modal-footer">
