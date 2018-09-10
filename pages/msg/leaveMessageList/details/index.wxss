@@ -3,10 +3,10 @@ page {
     background-color: #f8f8f8;
 }
 
-.page-scroll-view{
+.page-scroll-view {
     height: 100%;
     position: absolute;
-    left:0;
+    left: 0;
 }
 
 .histime {
@@ -59,13 +59,14 @@ page {
 .msg-form {
     background-color: #f8f8f8;
     padding: 15rpx;
-    left:0;
-    bottom:0;
+    left: 0;
+    bottom: 0;
     box-sizing: border-box;
     position: fixed;
     width: 100%;
 }
-.msg-form_bd{
+
+.msg-form_bd {
     box-shadow: 0px 7px 13px 1px rgba(237, 242, 247, 0.6);
     display: flex;
     align-items: center;
@@ -79,10 +80,11 @@ page {
     border-radius: 14rpx;
 }
 
-.input-placeholder{
-    color:#999;
+.input-placeholder {
+    color: #999;
 }
-.send-msg-btn{
+
+.send-msg-btn {
     margin: 0;
     margin-left: 10rpx;
     width: 140rpx;
@@ -94,6 +96,11 @@ page {
     border-radius: 14rpx;
     text-align: center;
 }
-.disabled{
+
+.disabled {
     background-color: #ccc;
+}
+
+.fixed-iphonex-bottom-space {
+    background-color: #f8f8f8;
 }

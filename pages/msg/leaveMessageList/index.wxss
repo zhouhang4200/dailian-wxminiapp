@@ -46,3 +46,7 @@ page {
     text-align: center;
     color: #198cff;
 }
+
+.fixed-iphonex-bottom-space{
+    background-color: #f8f8f8;
+}

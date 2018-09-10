@@ -1,27 +1,24 @@
 <!--pages/msg/index.wxml-->
-<view class="{{isIpx ? 'iphonex-page':''}}">
-    <navigator class="link-navigation is-large" url="/pages/msg/notice/index">
-        <view class="link-bd">
-            <view class="icon">
-                <image src="/images/POF0.png" mode="scaleToFill" lazy-load="false"></image>
-            </view>
-            <view class="title">
-                <text>公告中心</text>
-            </view>
+<navigator class="link-navigation is-large" url="/pages/msg/notice/index">
+    <view class="link-bd">
+        <view class="icon">
+            <image src="/images/POF0.png" mode="scaleToFill" lazy-load="false"></image>
         </view>
-    </navigator>
-    <navigator wx:if="{{isLogin}}" class="link-navigation is-large" url="/pages/msg/leaveMessageList/index">
-        <view class="link-bd">
-            <view class="icon">
-                <image src="/images/PdsL.png" mode="scaleToFill" lazy-load="false"></image>
-            </view>
-            <view class="title">
-                <text>留言消息</text>
-            </view>
-            <view wx:if="{{count!==0}}" class="total-tag">
-                <text>{{count}}</text>
-            </view>
+        <view class="title">
+            <text>公告中心</text>
         </view>
-    </navigator>
-</view>
-<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
+    </view>
+</navigator>
+<navigator wx:if="{{isLogin}}" class="link-navigation is-large" url="/pages/msg/leaveMessageList/index">
+    <view class="link-bd">
+        <view class="icon">
+            <image src="/images/PdsL.png" mode="scaleToFill" lazy-load="false"></image>
+        </view>
+        <view class="title">
+            <text>留言消息</text>
+        </view>
+        <view wx:if="{{count!==0}}" class="total-tag">
+            <text>{{count}}</text>
+        </view>
+    </view>
+</navigator>

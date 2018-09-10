@@ -86,11 +86,11 @@
             </view>
         </view>
     </view>
+    <!--底部加载更多-->
+    <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
+    <!--没有内容-->
+    <none-result page-none-result="{{pageNoneResult}}"></none-result>
 </view>
-<!--底部加载更多-->
-<reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
-<!--没有内容-->
-<none-result page-none-result="{{pageNoneResult}}"></none-result>
 
 <!-- modal Overlay -->
 <view catchtouchmove="move" animation="{{animationModalOverlay}}"
@@ -114,4 +114,4 @@
           <view data-action="{{actionName}}" bindtap="{{actionName}}" class="btn primary">确定</view>
       </view>
 </view>
-<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space bottom-space-gray"></view>

@@ -1,5 +1,6 @@
 <!--pages/msg/leaveMessageList/details/index.wxml-->
-<view animation="{{loadAnimationPage}}" >
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
+<view animation="{{loadAnimationPage}}" class="{{isIpx ? 'iphonex-page':''}}">
     <scroll-view id="J_ScrollView"
                  scroll-y
                  scroll-top="{{scrollTop}}"
@@ -15,7 +16,7 @@
             </view>
         </view>
     </scroll-view>
-    <view id="J_MsgForm" class="msg-form">
+    <view id="J_MsgForm" class="msg-form  {{isIpx ? 'fixed-iphonex-bottom':''}}" >
         <view class="msg-form_bd">
             <input bindconfirm="onSendMsg" confirm-type="send" focus="{{isInputFocus}}" bindfocus="onContentFocus" value="{{content}}" bindblur="onContentBlur" cursor-spacing="18" bindinput="onContentInput" bindfocus="onContentFocus" placeholder="请输入聊天内容..." bindblur="bindTextAreaBlur" class="msg-input" auto-height />
             <view bindtap="onSendMsg" class="submit-btn-primary send-msg-btn {{content.length===0 ? 'disabled':''}}">发送</view>

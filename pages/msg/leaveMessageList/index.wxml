@@ -17,4 +17,4 @@
     <!--没有内容-->
     <none-result page-none-result="{{pageNoneResult}}"></none-result>
 </view>
-<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>
+<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space bottom-space-gray"></view>

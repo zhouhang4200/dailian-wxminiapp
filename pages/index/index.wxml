@@ -26,7 +26,7 @@
 </view>
 <!--商品列表-->
 <view animation="{{animationSlideUpDown}}"
-      class="index-page  {{ !isModalOverlayHidden ? 'is-overlay':''}} {{isIpx ? 'iphonex-page':''}}">
+      class="index-page  {{ !isModalOverlayHidden ? 'is-overlay':''}}">
     <!--单个商品-->
     <goods-item list="{{asyncData.list}}"></goods-item>
 </view>
@@ -112,5 +112,3 @@
         </block>
     </view>
 </view>
-<!--iphonex空白站位符-->
-<view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>

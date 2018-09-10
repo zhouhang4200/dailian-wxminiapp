@@ -6,6 +6,8 @@ import {
   api_sendOrderOperationGetMessage
 } from '../../../../lib/api'
 
+let isIpx = Utils.globalData().isIpx
+
 Page({
   ...Utils.page.action,
 
@@ -22,8 +24,8 @@ Page({
     scrollIntoView: '',
 
     scrollTop: 0,
-    scrollInitBottom: '150rpx',
-    scrollBottom: '150rpx',
+    scrollInitBottom: isIpx ? '218rpx' : '150rpx',
+    scrollBottom: isIpx ? '218rpx' : '150rpx',
     isInputFocus: false,
 
     list: []
@@ -73,12 +75,11 @@ Page({
   // 设置聊天内容列表视图距离底部的距离
   snsScrollViewListBottom: function (size) {
     let bottom = (size || this.data.scrollInitBottom) + '';
-    let iphoneXBottom = '68rpx';  //iphonex 固定底部高度 dp2  68rpx,  空白间距 dp2 20rpx
     const pixelRatio = this.data.ratio;
     // 无 rpx 单位证明是用原来的单位
     bottom = bottom.indexOf('rpx') !== -1 ? bottom : bottom / pixelRatio;
     if (this.data.isIpx) {
-      bottom = Math.floor(parseInt(bottom) + parseInt(iphoneXBottom)) + 'rpx'
+      bottom = Math.floor(parseInt(bottom) + parseInt('68rpx')) + 'rpx'
     }
     this.setData({
       scrollBottom: bottom + 'rpx',
