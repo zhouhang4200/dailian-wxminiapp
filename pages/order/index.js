@@ -428,7 +428,7 @@ Page({
         {title: '提交异常', url: '/pages/order/catch/index'}
       ];
       //  代练中 不能显示提交异常
-      if (status === 2) itemList.splice(3, 1);
+      if (status !== 2) itemList.splice(3, 1);
       //  非 仲裁中  不能存在查看我的申诉选项
       if (status !== 5) itemList.splice(0, 1);
       wx.showActionSheet({

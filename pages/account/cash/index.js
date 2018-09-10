@@ -93,20 +93,35 @@ Page({
   onPayPassword: function () {
     const {alipay_account, alipay_name} = this.data.form;
     const pay_password = this.data.pay_password;
+    this.modalOverlayToggle();
+    wx.showLoading({title: '加载中', icon: 'none'});
     // if (pay_password.length < 6) {
     //   return wx.showToast({title: '请输入完整的支付密码', icon: 'none'});
     // }
     this.modalOverlayToggleEndInterval(()=>{
-      this.modalOverlayToggle();
-      wx.showLoading({title: '加载中', icon: 'none'});
       api_cash({
         pay_password:Encrypt(pay_password),
         alipay_account,
         alipay_name,
         amount: this.data.amount
       }).then(data => {
-        if (data.code) {
-          return wx.showToast({title: data.message, icon: 'none'});
+        if(data.code){
+          if (data.code === 4002) {
+            this.setPayPasswordModal()
+          }
+          if (data.code === 3005) {
+            wx.showModal({
+              content: '您未进行实名认证，请先申请实名认证后再提现，是否申请实名认证？',
+              success: function(res) {
+                if (res.confirm) {
+                  wx.navigateTo({
+                    url:'/pages/account/certification/index'
+                  })
+                }
+              }
+            })
+          }
+          return wx.showToast({title: data.message, icon: 'none',});
         }
         wx.showModal({
           showCancel: false,

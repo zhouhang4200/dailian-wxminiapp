@@ -74,7 +74,7 @@
             <input placeholder="请输入新支付密码" name="new_pay_password" password="{{true}}"/>
         </view>
         <view class="form-item">
-            <input placeholder="请再次输入新密码" type="number" maxlength="6" name="confirm_password" password="{{true}}"/>
+            <input placeholder="请再次输入新密码" name="confirm_password" password="{{true}}"/>
         </view>
         <div class="action-type">
             <label class="action-left"></label>

@@ -173,6 +173,7 @@ Page({
     if (isValidateForm()) {
       wx.showLoading({title: '加载中', icon: 'none'});
       api_findPayPassword({
+        phone:this.data.phone,
         new_pay_password:Encrypt(new_pay_password),
         verification_code
       }).then(data => {
