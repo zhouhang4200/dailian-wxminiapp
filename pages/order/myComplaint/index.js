@@ -45,7 +45,7 @@ Page({
       trade_no: this.options.trade_no
     }).then(info => {
       if (info.code) {
-        wx.showToast({title: info.message, icon: 'none'});
+        wx.showToast({title: info.message, icon: 'none', duration: 3000});
         return false;
       }
       this.setData({
@@ -88,7 +88,7 @@ Page({
     wx.showLoading({title: '加载中', icon: 'none'});
     const content = e.detail.value.content;
     if (!content.length) {
-      wx.showToast({title: '请填写内容', icon: 'none'});
+      wx.showToast({title: '请填写内容', icon: 'none', duration: 3000});
       return false;
     }
     api_orderOperationSendComplainMessage({
@@ -97,10 +97,10 @@ Page({
       trade_no: this.options.trade_no
     }).then(data => {
       if (data.code) {
-        wx.showToast({title: data.message, icon: 'none'});
+        wx.showToast({title: data.message, icon: 'none', duration: 3000});
         return false;
       }
-      wx.showToast({title: '提交成功', icon: 'none'});
+      wx.showToast({title: '提交成功', icon: 'none', duration: 3000});
       this.setData({
         tabName: 'tab1',
         image: '',

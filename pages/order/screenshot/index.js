@@ -31,7 +31,7 @@ Page({
           images: data
         }, () => this.pageEnd())
       }
-      wx.showToast({title: data.message, icon: 'none'})
+      wx.showToast({title: data.message, icon: 'none', duration: 3000})
     })
   },
 

@@ -30,7 +30,7 @@ Page({
       }).then(data => {
         wx.hideLoading();
         if (data.code) {
-          return wx.showToast({title: data.message, icon: 'none'})
+          return wx.showToast({title: data.message, icon: 'none', duration: 3000})
         }
         wx.showModal({
           showCancel: false,
@@ -55,17 +55,17 @@ Page({
       reason: '请输入协商原因'
     };
     if (amount * 100 > orderPrice * 100 && amount * 100) {
-      wx.showToast({title: '代练费用不能大于订单金额', icon: 'none'});
+      wx.showToast({title: '代练费用不能大于订单金额', icon: 'none', duration: 3000});
       return false;
     }
     for (let key in formData) {
       if (formData[key] === '') {
-        wx.showToast({title: requiredValidate[key], icon: 'none'});
+        wx.showToast({title: requiredValidate[key], icon: 'none', duration: 3000});
         return false;
       }
     }
     if (deposit * 100 > totalDeposit * 100) {
-      wx.showToast({title: '赔偿保证金不能大于总保证金', icon: 'none'});
+      wx.showToast({title: '赔偿保证金不能大于总保证金', icon: 'none', duration: 3000});
       return false;
     }
     return true

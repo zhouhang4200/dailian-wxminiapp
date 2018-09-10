@@ -181,7 +181,7 @@ Page({
   onPayPassword: function () {
     const pay_password = this.data.pay_password;
     if (pay_password.length < 6) {
-      return wx.showToast({title: '请输入完整的支付密码', icon: 'none'});
+      return wx.showToast({title: '请输入完整的支付密码', icon: 'none', duration: 3000});
     }
     this.modalOverlayToggle();
     wx.showLoading({title: '提交中', icon: 'none'});
@@ -190,7 +190,7 @@ Page({
     }).then(data => {
       wx.hideLoading();
       if (data.code) {
-        wx.showToast({title: data.message, icon: 'none'});
+        wx.showToast({title: data.message, icon: 'none', duration: 3000});
         this.setPayPasswordModal();
       }
       else {
@@ -205,10 +205,10 @@ Page({
   onOrderPassword: function () {
     const {pay_password, take_order_password} = this.data;
     if (!take_order_password.length) {
-      return wx.showToast({title: '请输入订单密码', icon: 'none'});
+      return wx.showToast({title: '请输入订单密码', icon: 'none', duration: 3000});
     }
     if (pay_password.length < 6) {
-      return wx.showToast({title: '请输入支付密码', icon: 'none'});
+      return wx.showToast({title: '请输入支付密码', icon: 'none', duration: 3000});
     }
     this.modalOverlayToggle();
     wx.showLoading({title: '提交中', icon: 'none'});
@@ -218,7 +218,7 @@ Page({
     }).then(data => {
       wx.hideLoading();
       if (data.code) {
-        wx.showToast({title: data.message, icon: 'none'});
+        wx.showToast({title: data.message, icon: 'none', duration: 3000});
         this.setOrderAndPayPasswordModal();
       }
       else {
