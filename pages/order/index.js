@@ -29,6 +29,7 @@ Page({
     ...Utils.modal.data,
     ...Utils.globalData(),
     ...Utils.reachBottomPullDownRefresh.data,
+    ...Utils.pageNoneResultData,
 
     selectedTradeNo: '',
     selectedTradeNoIndex: '',

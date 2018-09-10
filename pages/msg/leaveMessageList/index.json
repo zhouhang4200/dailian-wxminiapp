@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "留言消息"
+  "navigationBarTitleText": "留言消息",
+  "usingComponents": {
+    "none-result": "/components/none-result/index"
+  }
 }

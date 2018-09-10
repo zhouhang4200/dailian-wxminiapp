@@ -14,6 +14,7 @@
         </view>
         <view class="details-btn">查看详情</view>
     </navigator>
-    <view wx:if="{{!list.length}}" class="none-result">没有更多了</view>
+    <!--没有内容-->
+    <none-result page-none-result="{{pageNoneResult}}"></none-result>
 </view>
 <view wx:if="{{isIpx}}" class="fixed-iphonex-bottom-space"></view>

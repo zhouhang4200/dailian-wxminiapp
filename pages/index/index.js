@@ -38,13 +38,9 @@ Page({
     ...Utils.page.data,
     ...Utils.globalData(),
     ...Utils.reachBottomPullDownRefresh.data,
+    ...Utils.pageNoneResultData,
 
     showSkeleton: true,
-
-    pageNoneResult: {
-      isHidden: true,
-      title: '暂时没有内容呢',
-    },
 
     isModalOverlayHidden: true,
     animationModalOverlay: {},
@@ -200,10 +196,6 @@ Page({
       ...opts
     };
     api_orderWait(params).then(data => {
-      data = {
-        list: [],
-        total: 0
-      }
       this.updateReachBottomPullDownRefreshPageData({params, data})
     });
   },

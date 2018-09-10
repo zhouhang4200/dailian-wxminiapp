@@ -16,6 +16,7 @@ Page({
   data: {
 
     ...Utils.page.data,
+    ...Utils.pageNoneResultData,
     ...Utils.globalData(),
 
     list: []
@@ -29,12 +30,14 @@ Page({
         return false;
       }
       api_getMessageReaded().then(data => {
-
       })
       this.setData({
         list: data
       }, () => {
-        this.pageEnd()
+        this.pageEnd();
+        this.setData({
+          'pageNoneResult.isHidden': data.length !== 0
+        })
       })
     })
   },

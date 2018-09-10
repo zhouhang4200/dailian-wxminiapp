@@ -29,7 +29,7 @@
 </view>
 <!--底部加载更多-->
 <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
-<!--底部加载更多-->
+<!--没有内容-->
 <none-result page-none-result="{{pageNoneResult}}"></none-result>
 <!-- modal Overlay -->
 <view catchtouchmove="move"
