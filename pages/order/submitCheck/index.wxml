@@ -3,7 +3,7 @@
 <view class="{{isIpx ? 'iphonex-page':''}}">
     <form bindsubmit="onValidateForm" class="apply-arbitration">
         <view class="module-item img-list-wrap top-head-item">
-            <text class="module-title">证据截图</text>
+            <text class="module-title">代练截图</text>
             <view class="img-list">
                 <view wx:key="{{index}}" wx:for="{{images}}" class="screenshot">
                     <view class="screenshot-img-wrap">

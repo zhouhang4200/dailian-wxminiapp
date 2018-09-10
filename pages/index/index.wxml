@@ -26,12 +26,13 @@
       class="index-page  {{ !isModalOverlayHidden ? 'is-overlay':''}} {{isIpx ? 'iphonex-page':''}}">
     <!--单个商品-->
     <goods-item list="{{asyncData.list}}"></goods-item>
-    <!--底部加载更多-->
-    <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
 </view>
+<!--底部加载更多-->
+<reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
 <!-- modal Overlay -->
 <view catchtouchmove="move"
-      data-sort="{{sortType}}"
+      data-solay -->
+<viepe}}"
       bindtap="slideUpDownAnimationToggle"
       hidden="{{isModalOverlayHidden}}"
       bindtransitionend="modalOverlayTransitionEnd"
