@@ -26,7 +26,7 @@ Page({
     const validate = this.formValidate();
     const {phone, password} = this.data;
     if (validate) {
-      wx.showLoading({title: '登录中', icon: 'none'});
+      wx.showLoading({title: '登录中', icon: 'none', mask: true});
       api_login({
         phone,
         password: Encrypt(password)
@@ -92,16 +92,16 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.setData({
-      isPhoneFocus: true
-    })
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      isPhoneFocus: true
+    })
   },
 
   /**

@@ -85,7 +85,7 @@ Page({
    * 提交补充留言数据
    */
   onSubmitComplain: function (e) {
-    wx.showLoading({title: '加载中', icon: 'none'});
+    wx.showLoading({title: '加载中', icon: 'none',});
     const content = e.detail.value.content;
     if (!content.length) {
       wx.showToast({title: '请填写内容', icon: 'none', duration: 2000});

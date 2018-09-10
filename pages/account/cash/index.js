@@ -95,9 +95,9 @@ Page({
     const pay_password = this.data.pay_password;
     this.modalOverlayToggle();
     wx.showLoading({title: '加载中', icon: 'none'});
-    // if (pay_password.length < 6) {
-    //   return wx.showToast({title: '请输入完整的支付密码', icon: 'none'});
-    // }
+    if (!pay_password.length) {
+      return wx.showToast({title: '请输入支付密码', icon: 'none'});
+    }
     this.modalOverlayToggleEndInterval(()=>{
       api_cash({
         pay_password:Encrypt(pay_password),

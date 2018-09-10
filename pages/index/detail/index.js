@@ -138,11 +138,21 @@ Page({
    * 支付密码弹窗
    */
   setPayPasswordModal: function () {
-    this.setData({
-      modalKey: 'isPayPasswordHidden',
-      isPayPasswordHidden: false,
-      actionName: 'onPayPassword'
-    }, () => this.modalOverlayToggle())
+    wx.showModal({
+      content: '您未设置支付密码，是否去设置支付密码？',
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/account/password/index?action=setting_pay'
+          });
+        }
+      }
+    })
+    // this.setData({
+    //   modalKey: 'isPayPasswordHidden',
+    //   isPayPasswordHidden: false,
+    //   actionName: 'onPayPassword'
+    // }, () => this.modalOverlayToggle())
   },
 
   /**
@@ -181,16 +191,16 @@ Page({
   onPayPassword: function () {
     this.modalOverlayToggle();
     const pay_password = this.data.pay_password;
-    // if (pay_password.length < 6) {
-    //   return wx.showToast({title: '请输入完整的支付密码', icon: 'none', duration: 2000});
-    // }
+    if (!pay_password.length) {
+      return wx.showToast({title: '请输入支付密码', icon: 'none', duration: 2000});
+    }
     wx.showLoading({title: '提交中', icon: 'none'});
-    this.modalOverlayToggleEndInterval(()=>{
+    this.modalOverlayToggleEndInterval(() => {
       this.onOrderSubmitAsync({
         pay_password: Encrypt(pay_password),
       }).then(data => {
         wx.hideLoading();
-        if(data.code){
+        if (data.code) {
           if (data.code === 4002) {
             this.setPayPasswordModal()
           }
