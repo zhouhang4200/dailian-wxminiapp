@@ -12,18 +12,17 @@ Page({
    */
 
   ...Utils.reachBottom.action,
+  ...Utils.page.action,
+  ...Utils.reachBottomPullDownRefresh.action,
 
   data: {
 
-    ...Utils.reachBottom.data,
+    ...Utils.reachBottomPullDownRefresh.data,
+    ...Utils.pageNoneResultData,
+    ...Utils.page.data,
 
     isCancelHidden: true,
-    reachEndInfo: {
-      isHidden: true,
-      isMore: true,
-      isFail: false,
-      isLoading: false
-    },
+
     asyncData: {
       list: [],
       total: 0
@@ -40,10 +39,11 @@ Page({
    * @param
    */
   onInputSearch: function (e) {
-    wx.showLoading({title: '加载中',icon:'none'});
+    wx.showLoading({title: '搜索中', icon: 'none'});
     this.setData({
       'searchForm.page': 1,
       'searchForm.keyword': e.detail.value,
+      'pageNoneResult.isHidden': true,
       asyncData: {
         list: [],
         totalRows: 0
@@ -62,23 +62,24 @@ Page({
       ...opts
     };
     api_orderWait(params).then(data => {
-      let {
-        asyncData
-      } = this.data;
-      this.setData({
-        asyncData: {
-          total: data.total,
-          list: asyncData.list.concat(data.list)
-        },
-        'searchForm.page': params.page,
-        isCancelHidden: false
-      }, () => {
+      this.updateReachBottomPullDownRefreshPageData({params, data}, () => {
         wx.hideLoading();
-        this.setReachEndInfo();
-        if (this.data.asyncData.total === 0) {
-          wx.showToast({title: '暂无记录', icon: 'none'})
-        }
+        this.setData({isCancelHidden: false})
       })
+      // let {
+      //   asyncData
+      // } = this.data;
+      // this.setData({
+      //   asyncData: {
+      //     total: data.total,
+      //     list: asyncData.list.concat(data.list)
+      //   },
+      //   'searchForm.page': params.page,
+      //   isCancelHidden: false
+      // }, () => {
+      //   wx.hideLoading();
+      //   this.setReachEndInfo();
+      // })
     });
   },
   /**

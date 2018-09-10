@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "goods-item": "/components/goods/index",
-    "reach-bottom": "/components/reach-bottom/index"
+    "reach-bottom": "/components/reach-bottom/index",
+    "none-result": "/components/none-result/index"
   },
   "navigationBarTitleText": "搜索"
 }

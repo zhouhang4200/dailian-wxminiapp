@@ -16,5 +16,7 @@
     <goods-item list="{{asyncData.list}}"></goods-item>
     <!--底部加载更多-->
     <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
+    <!--没有内容-->
+    <none-result page-none-result="{{pageNoneResult}}"></none-result>
 </view>
 
