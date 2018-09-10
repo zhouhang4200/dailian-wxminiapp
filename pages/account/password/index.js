@@ -24,7 +24,8 @@ Page({
     ...Utils.page.data,
     action: '',
     type: '',
-    phone: ''
+    phone: '',
+    firstPasswordFocus: false
   },
 
   /**
@@ -64,7 +65,7 @@ Page({
       wx.showLoading({title: '加载中', icon: 'none'});
       api_findLoginPassword({
         phone,
-        new_password:Encrypt(new_password),
+        new_password: Encrypt(new_password),
         verification_code
       }).then(data => {
         wx.hideLoading();
@@ -119,8 +120,8 @@ Page({
     if (isValidateForm()) {
       wx.showLoading({title: '加载中', icon: 'none'});
       api_updateLoginPassword({
-        old_password:Encrypt(old_password),
-        new_password:Encrypt(new_password)
+        old_password: Encrypt(old_password),
+        new_password: Encrypt(new_password)
       }).then(data => {
         wx.hideLoading();
         if (data.code) {
@@ -173,8 +174,8 @@ Page({
     if (isValidateForm()) {
       wx.showLoading({title: '加载中', icon: 'none'});
       api_findPayPassword({
-        phone:this.data.phone,
-        new_pay_password:Encrypt(new_pay_password),
+        phone: this.data.phone,
+        new_pay_password: Encrypt(new_pay_password),
         verification_code
       }).then(data => {
         wx.hideLoading();
@@ -226,8 +227,8 @@ Page({
     if (isValidateForm()) {
       wx.showLoading({title: '加载中', icon: 'none'});
       api_updatePayPassword({
-        old_pay_password:Encrypt(old_pay_password),
-        new_pay_password:Encrypt(new_pay_password)
+        old_pay_password: Encrypt(old_pay_password),
+        new_pay_password: Encrypt(new_pay_password)
       }).then(data => {
         wx.hideLoading();
         if (data.code) {
@@ -268,7 +269,7 @@ Page({
     if (isValidateForm()) {
       wx.showLoading({title: '加载中', icon: 'none'});
       api_settingPayPassword({
-        pay_password:Encrypt(pay_password)
+        pay_password: Encrypt(pay_password)
       }).then(data => {
         wx.hideLoading();
         if (data.code) {
@@ -370,9 +371,18 @@ Page({
           phone: data.phone
         }, () => this.pageEnd())
       }
-      else{
+      else {
         this.pageEnd()
       }
+    })
+  },
+
+  /**
+   * 页面加载结束
+   */
+  loadAnimationPageTransitionEnd: function () {
+    this.setData({
+      firstPasswordFocus: true
     })
   },
 

@@ -1,13 +1,15 @@
 <!--pages/account/password/index.wxml-->
-<view animation="{{loadAnimationPage}}" class="load-page">
+<view bindtransitionend="loadAnimationPageTransitionEnd" animation="{{loadAnimationPage}}" class="load-page">
     <!--找回登录密码-->
     <form wx:if="{{type==='find_login'}}" bindsubmit="onFindLoginPassword">
         <view wx:if="{{!isLogin}}" class="form-item">
-            <input placeholder="请输入手机号码" focus="{{true}}" maxlength="11" bindinput="onPhoneInput" maxlength="11"
+            <input placeholder="请输入手机号码" focus="{{firstPasswordFocus}}" maxlength="11" bindinput="onPhoneInput"
+                   maxlength="11"
                    type="number" name="phone"/>
         </view>
         <view class="form-item">
-            <input placeholder="请输入新登录密码" name="new_password" password="{{true}}"/>
+            <input placeholder="请输入新登录密码" focus="{{ isLogin ? firstPasswordFocus: false}}" name="new_password"
+                   password="{{true}}"/>
         </view>
         <view class="form-item">
             <input placeholder="请再次输入新密码" name="confirm_password" password="{{true}}"/>
@@ -26,7 +28,7 @@
     <!--修改登录密码-->
     <form wx:if="{{type==='update_login'}}" bindsubmit="onUpdateLoginPassword">
         <view class="form-item">
-            <input placeholder="请输入旧登录密码" focus="{{true}}" name="old_password" password="{{true}}"/>
+            <input placeholder="请输入旧登录密码" focus="{{firstPasswordFocus}}" name="old_password" password="{{true}}"/>
         </view>
         <view class="form-item">
             <input placeholder="请输入新登录密码" name="new_password" password="{{true}}"/>
@@ -36,7 +38,9 @@
         </view>
         <div class="action-type">
             <label class="action-left"></label>
-            <navigator hover-class="none" url="/pages/account/password/index?action=find_login" class="forget-pwd  full-item">忘记登录密码</navigator>
+            <navigator hover-class="none" url="/pages/account/password/index?action=find_login"
+                       class="forget-pwd  full-item">忘记登录密码
+            </navigator>
         </div>
         <view class="login-submit-wrap">
             <button formType="submit" class="submit-btn primary-btn">确定</button>
@@ -46,11 +50,11 @@
     <!--找回支付密码-->
     <form wx:if="{{type==='find_pay'}}" bindsubmit="onFindPayPassword">
         <view wx:if="{{!isLogin}}" class="form-item">
-            <input placeholder="请输入手机号码" focus="{{true}}" maxlength="11" bindinput="onPhoneInput" name="phone"
+            <input placeholder="请输入手机号码" focus="{{firstPasswordFocus}}" maxlength="11" bindinput="onPhoneInput" name="phone"
                    type="number"/>
         </view>
         <view class="form-item">
-            <input placeholder="请输入新支付密码" name="new_pay_password" password="{{true}}"/>
+            <input placeholder="请输入新支付密码" focus="{{ isLogin ? firstPasswordFocus: false}}" name="new_pay_password" password="{{true}}"/>
         </view>
         <view class="form-item">
             <input placeholder="请再次输入新密码" name="confirm_password" password="{{true}}"/>
@@ -67,7 +71,7 @@
     <!--修改支付密码-->
     <form wx:if="{{type==='update_pay'}}" bindsubmit="onUpdatePayPassword">
         <view class="form-item">
-            <input placeholder="请输入旧支付密码" focus="{{true}}" name="old_pay_password"
+            <input placeholder="请输入旧支付密码"  focus="{{firstPasswordFocus}}" name="old_pay_password"
                    password="{{true}}"/>
         </view>
         <view class="form-item">
@@ -78,7 +82,9 @@
         </view>
         <div class="action-type">
             <label class="action-left"></label>
-            <navigator url="/pages/account/password/index?action=find_pay" hover-class="none" class="forget-pwd  full-item">忘记支付密码</navigator>
+            <navigator url="/pages/account/password/index?action=find_pay" hover-class="none"
+                       class="forget-pwd  full-item">忘记支付密码
+            </navigator>
         </div>
         <view class="login-submit-wrap">
             <button formType="submit" class="submit-btn primary-btn">确定</button>
@@ -88,7 +94,7 @@
     <!--设置支付密码-->
     <form wx:if="{{type==='setting_pay'}}" bindsubmit="onSettingPayPassword">
         <view class="form-item">
-            <input placeholder="请输入支付密码" focus="{{true}}" name="pay_password"
+            <input placeholder="请输入支付密码"  focus="{{firstPasswordFocus}}" name="pay_password"
                    password="{{true}}"/>
         </view>
         <view class="form-item">
