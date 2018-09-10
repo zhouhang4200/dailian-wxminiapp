@@ -4,7 +4,7 @@
     <scroll-view id="J_ScrollView"
                  scroll-y
                  scroll-top="{{scrollTop}}"
-                 style="bottom: {{scrollBottom}}"
+                 style="padding-bottom: {{scrollBottom}}"
                  class="page-scroll-view">
         <view wx:for="{{list}}" wx:key="{{index}}">
             <text class="histime">{{item.time}}</text>

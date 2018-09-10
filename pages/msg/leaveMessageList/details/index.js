@@ -45,11 +45,7 @@ Page({
       this.setData({
           list: data,
           scrollTop: 100000
-        }, this.pageEnd
-      );
-      if (!data.length) {
-        wx.showToast({title: '暂无留言', icon: 'none'})
-      }
+        }, this.pageEnd);
     })
   },
 
