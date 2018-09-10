@@ -104,9 +104,9 @@ Page({
     },
     payload: {  // 存储历史记录的选择值。在用户选择然后关闭遮罩之后是否进行筛选查询。
       amount: 0,
-      game_id: '',
-      region_id: '',
-      server_id: ''
+      game_id: 0,
+      region_id: 0,
+      server_id: 0
     }
   },
 
@@ -148,13 +148,22 @@ Page({
    */
   onSortGameOption: function (e) {
     const {value, index, sortindex, name} = e.currentTarget.dataset;
-    const isCurrent = value === this.data.searchForm.game_id;
     const gameList = this.data.gameList;
     this.setSelectedSortTitle(sortindex, name);
-    if (!isCurrent) {
+    if (value === 0) {
+      this.setData({
+        regionList: [],
+        serverList: [],
+        'searchForm.game_id': 0,
+        'searchForm.region_id': '',
+        'searchForm.server_id': ''
+      }, this.slideUpDownAnimationToggle);
+    }
+    else {
       this.setData({
         'searchForm.game_id': value,
-        regionList: [{id: 0, name: '全部'}].concat(gameList[index].regions),
+        'searchForm.region_id': '',
+        regionList: value === '' ? [] : [{id: 0, name: '全部'}].concat(gameList[index].regions),
         serverList: [],
       });
     }
@@ -165,28 +174,20 @@ Page({
    */
   onSortGameRegion: function (e) {
     const {value, index, sortindex, name} = e.currentTarget.dataset;
-    const isCurrent = value === this.data.searchForm.region_id;
-    if (value === 0 || isCurrent) {
-      this.setSelectedSortTitle(sortindex, name);
-      this.slideUpDownAnimationToggle();
-      return false;
+    this.setSelectedSortTitle(sortindex, name);
+    if (value === 0) {
+      this.setData({
+        serverList: [],
+        'searchForm.region_id': value,
+        'searchForm.server_id': '',
+      }, this.slideUpDownAnimationToggle);
     }
-    if (!isCurrent) {
+    else {
       this.setData({
         'searchForm.region_id': value,
         serverList: this.data.regionList[index].servers,
       });
     }
-  },
-
-  /**
-   * 动画参数配置
-   */
-  getDialogCreateAnimation: function () {
-    return wx.createAnimation({
-      duration: platform === 'ios' ? 330 : 250,
-      timingFunction: platform === 'ios' ? 'ease-in-out' : 'linear',
-    });
   },
 
   /**
@@ -367,7 +368,7 @@ Page({
           }
         }
         this.setData({
-          gameList: [{id: '', name: '全部'}].concat(games),
+          gameList: [{id: 0, name: '全部'}].concat(games),
           regionList: [],
           serverList: []
         });
