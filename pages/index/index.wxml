@@ -11,7 +11,7 @@
     </navigator>
     <!--排序栏-->
     <view class="sort-container">
-        <view wx:key="{{item.id}}" wx:for="{{sortTypeList}}" bindtap="onSortItem" data-sort="{{item.type}}"
+        <view wx:key="{{index}}" wx:for="{{sortTypeList}}" bindtap="onSortItem" data-sort="{{item.type}}"
               class="sort-item {{item.type===sortType ? 'is-selected':''}}">
             <text class="ellipsis goods-title"
                   wx:if="{{(item.type==='price' || item.type==='area')  && item.title==='全部'}}">{{item.alias}}
