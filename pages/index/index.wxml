@@ -29,10 +29,11 @@
 </view>
 <!--底部加载更多-->
 <reach-bottom reach-end-info="{{reachEndInfo}}"></reach-bottom>
+<!--底部加载更多-->
+<none-result page-none-result="{{pageNoneResult}}"></none-result>
 <!-- modal Overlay -->
 <view catchtouchmove="move"
-      data-solay -->
-<viepe}}"
+      data-sort="{{sortType}}"
       bindtap="slideUpDownAnimationToggle"
       hidden="{{isModalOverlayHidden}}"
       bindtransitionend="modalOverlayTransitionEnd"

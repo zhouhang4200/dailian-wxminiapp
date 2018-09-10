@@ -1,12 +1,12 @@
 /* components/reach-bottom/index.wxss */
 .none-page {
-    background-color: #fff;
-    flex: 1;
+   padding-top: 200rpx;
 }
 
 .none-icon {
-    width: 267rpx;
+    width: 217rpx;
     display: block;
+    margin: 0 auto;
     height: 169rpx;
 }
 

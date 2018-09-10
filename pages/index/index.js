@@ -41,6 +41,11 @@ Page({
 
     showSkeleton: true,
 
+    pageNoneResult: {
+      isHidden: true,
+      title: '暂时没有内容呢',
+    },
+
     isModalOverlayHidden: true,
     animationModalOverlay: {},
 
@@ -195,6 +200,10 @@ Page({
       ...opts
     };
     api_orderWait(params).then(data => {
+      data = {
+        list: [],
+        total: 0
+      }
       this.updateReachBottomPullDownRefreshPageData({params, data})
     });
   },
@@ -297,6 +306,7 @@ Page({
       wx.showLoading({title: '筛选中', icon: 'none'});
       this.setData({
         'searchForm.page': 1,
+        'pageNoneResult.isHidden': true,
         asyncData: {
           list: [],
           totalRows: 0
