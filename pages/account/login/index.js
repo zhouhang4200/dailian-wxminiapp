@@ -13,20 +13,23 @@ Page({
    */
   data: {
     url: '',
-    isPasswordFocus: false
+    password: '',
+    phone: '',
+    isPasswordFocus: false,
+    isPhoneFocus: false
   },
 
   /**
    * 提交登录
    */
   onSubmitLogin: function (e) {
-    const formData = e.detail.value;
-    const validate = this.formValidate(formData);
+    const validate = this.formValidate();
+    const {phone, password} = this.data;
     if (validate) {
       wx.showLoading({title: '登录中', icon: 'none'});
       api_login({
-        ...formData,
-        password:Encrypt(formData.password)
+        phone,
+        password: Encrypt(password)
       }).then(data => {
         wx.hideLoading();
         if (data.code) {
@@ -44,17 +47,23 @@ Page({
    * 手机号输入
    */
   onPhoneInput: function (e) {
-    if (e.detail.value.length === 11) {
-      this.setData({isPasswordFocus: true})
-    }
+    this.setData({
+      phone: e.detail.value,
+      isPasswordFocus: e.detail.value.length === 11
+    })
+  },
+
+  onPasswordInput: function (e) {
+    this.setData({password: e.detail.value})
   },
 
   /**
    *  表单验证
    * @param formData {object} 表单数据
    */
-  formValidate: function (formData) {
-    const {phone, password} = formData;
+  formValidate: function () {
+    const {phone, password} = this.data;
+    let formData = {phone, password}
     const requiredValidate = {
       phone: '请输入手机号码',
       password: '请输入密码',
@@ -83,7 +92,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.setData({
+      isPhoneFocus: true
+    })
   },
 
   /**

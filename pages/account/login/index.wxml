@@ -1,12 +1,22 @@
 <!--pages/account/api_login/index.wxml-->
 <form bindsubmit="onSubmitLogin">
     <view class="form-item">
-        <input focus="{{true}}" bindinput="onPhoneInput" name="phone" placeholder="请输入手机号码" maxlength="11"
+        <input focus="{{true}}"
+               bindinput="onPhoneInput"
+               name="phone"
+               placeholder="请输入手机号码"
+               maxlength="11"
+               confirm-type="next"
                type="number"/>
     </view>
     <view class="form-item">
-        <input confirm-type="done" focus="{{isPasswordFocus}}" name="password" placeholder="请输入登录密码"
-               password="{{true}}"/>
+        <input  bindconfirm="onSubmitLogin"
+                confirm-type="next"
+                bindinput="onPasswordInput"
+                focus="{{isPasswordFocus}}"
+                name="password"
+                placeholder="请输入登录密码"
+                password="{{true}}"/>
     </view>
     <view class="action-type">
         <label class="action-left">

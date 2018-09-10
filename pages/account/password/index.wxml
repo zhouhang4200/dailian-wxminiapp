@@ -1,5 +1,7 @@
 <!--pages/account/password/index.wxml-->
-<view bindtransitionend="loadAnimationPageTransitionEnd" animation="{{loadAnimationPage}}" class="load-page">
+<view bindtransitionend="loadAnimationPageTransitionEnd"
+      animation="{{loadAnimationPage}}"
+      class="load-page">
     <!--找回登录密码-->
     <form wx:if="{{type==='find_login'}}" bindsubmit="onFindLoginPassword">
         <view wx:if="{{!isLogin}}" class="form-item">

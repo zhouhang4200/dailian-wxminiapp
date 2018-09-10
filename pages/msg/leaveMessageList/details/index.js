@@ -15,13 +15,16 @@ Page({
   data: {
 
     ...Utils.page.data,
+    ...Utils.globalData(),
 
     content: '',
 
     scrollIntoView: '',
 
-    scrollTop: 1000000,
-    scrollInitBottom: '120rpx',
+    scrollTop: 0,
+    scrollInitBottom: '150rpx',
+    scrollBottom: '150rpx',
+    isInputFocus: false,
 
     list: []
   },
@@ -38,23 +41,60 @@ Page({
         return false;
       }
       this.setData({
-        list: data,
-        scrollIntoView: data.length !== 0 ? 'msg_row_' + (data.length - 1) : 0
-      }, () => this.pageEnd());
+          list: data,
+          scrollTop: 100000
+        }, this.pageEnd
+      );
       if (!data.length) {
         wx.showToast({title: '暂无留言', icon: 'none'})
       }
     })
   },
 
-  onContentFocus: function (e) {
-    wx.createSelectorQuery().select('#J_ScrollView').boundingClientRect(function (rect) {
-
+  /**
+   * 键盘显示
+   * @param plusHeight
+   */
+  keyBoardShow: function (plusHeight = 0) {
+    // 需要更改滚动视图的bottom高度
+    wx.createSelectorQuery().select('#J_MsgForm').boundingClientRect(rect => {
+      this.snsScrollViewListBottom(rect.height + plusHeight + 20)
     }).exec()
   },
 
-  onContentBlur: function (e) {
+  /**
+   * 键盘显示
+   */
+  keyBoardHide: function () {
+    // 需要更改滚动视图的bottom高度
+    this.snsScrollViewListBottom()
+  },
 
+  // 设置聊天内容列表视图距离底部的距离
+  snsScrollViewListBottom: function (size) {
+    let bottom = (size || this.data.scrollInitBottom) + '';
+    let iphoneXBottom = '68rpx';  //iphonex 固定底部高度 dp2  68rpx,  空白间距 dp2 20rpx
+    const pixelRatio = this.data.ratio;
+    // 无 rpx 单位证明是用原来的单位
+    bottom = bottom.indexOf('rpx') !== -1 ? bottom : bottom / pixelRatio;
+    if (this.data.isIpx) {
+      bottom = Math.floor(parseInt(bottom) + parseInt(iphoneXBottom)) + 'rpx'
+    }
+    this.setData({
+      scrollBottom: bottom + 'rpx',
+      scrollTop: this.data.scrollTop + 10
+    })
+  },
+
+  onContentFocus: function (e) {
+    this.keyBoardShow(e.detail.height);
+  },
+
+  onContentBlur: function (e) {
+    this.setData({
+      scrollBottom: this.data.scrollInitBottom,
+      scrollTop: this.data.scrollTop + 10
+    })
   },
 
   onContentInput: function (e) {
@@ -66,6 +106,7 @@ Page({
   onSendMsg: function () {
     const {content, trade_no} = this.data;
     if (content.length === 0) {
+      wx.showToast({title: '请输入内容', icon: 'none'});
       return false;
     }
     api_sendOrderOperationGetMessage({
@@ -80,9 +121,11 @@ Page({
       this.setData({
         list: this.data.list,
         content: ''
-      }, () => this.setData({
-        scrollIntoView: 'msg_row_' + (data.length - 1)
-      }))
+      }, () => {
+        this.setData({
+          scrollTop: this.data.scrollTop + 10
+        })
+      })
     })
   },
 

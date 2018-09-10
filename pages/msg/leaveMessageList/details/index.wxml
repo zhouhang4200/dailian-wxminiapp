@@ -1,18 +1,24 @@
 <!--pages/msg/leaveMessageList/details/index.wxml-->
-<scroll-view id="J_ScrollView" animation="{{loadAnimationPage}}" scroll-top="{{scrollTop}}" scroll-into-view="{{scrollIntoView}}" class="page-scroll-view">
-    <view id="msg_row_{{index}}" wx:for="{{list}}" wx:key="{{index}}" wx:for-index="{{index}}" scroll-with-animation="true">
-        <text class="histime">{{item.time}}</text>
-        <view class="msg-row {{item.initiator===2 ? 'right-row':'left-row'}} ">
-            <image lazy-load="{{true}}" mode='scaleToFill' class="user-icon" src="{{item.avatar}}"></image>
-            <view class="msg-content">
-                <text>{{item.content}}</text>
+<view animation="{{loadAnimationPage}}" >
+    <scroll-view id="J_ScrollView"
+                 scroll-y
+                 scroll-top="{{scrollTop}}"
+                 style="bottom: {{scrollBottom}}"
+                 class="page-scroll-view">
+        <view wx:for="{{list}}" wx:key="{{index}}">
+            <text class="histime">{{item.time}}</text>
+            <view class="msg-row {{item.initiator===2 ? 'right-row':'left-row'}} ">
+                <image lazy-load="{{true}}" mode='scaleToFill' class="user-icon" src="{{item.avatar}}"></image>
+                <view class="msg-content">
+                    <text>{{item.content}}</text>
+                </view>
             </view>
         </view>
-    </view>
+    </scroll-view>
     <view id="J_MsgForm" class="msg-form">
         <view class="msg-form_bd">
-            <input bindfocus="onContentFocus" value="{{content}}" bindblur="onContentBlur" cursor-spacing="18" bindinput="onContentInput" placeholder="请输入聊天内容..." bindblur="bindTextAreaBlur" class="msg-input" auto-height />
+            <input bindconfirm="onSendMsg" confirm-type="send" focus="{{isInputFocus}}" bindfocus="onContentFocus" value="{{content}}" bindblur="onContentBlur" cursor-spacing="18" bindinput="onContentInput" bindfocus="onContentFocus" placeholder="请输入聊天内容..." bindblur="bindTextAreaBlur" class="msg-input" auto-height />
             <view bindtap="onSendMsg" class="submit-btn-primary send-msg-btn {{content.length===0 ? 'disabled':''}}">发送</view>
         </view>
     </view>
-</scroll-view>
+</view>

@@ -1,7 +1,10 @@
 <!--pages/home/index.wxml-->
 <!--顶部-->
 <wxs src="../../lib/utils.wxs" module="utils"></wxs>
-<view bindtransitionend="slideUpDownAnimationTransitionEnd" class="head-top" animation="{{animationSlideUpDown}}">
+<view bindtransitionend="slideUpDownAnimationTransitionEnd"
+      class="head-top"
+      animation="{{animationSlideUpDown}}"
+>
     <!--搜索栏-->
     <navigator hover-class="none" class="search-form"
                url="/pages/index/search/index">

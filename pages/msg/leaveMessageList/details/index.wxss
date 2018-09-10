@@ -2,8 +2,11 @@
 page {
     background-color: #f8f8f8;
 }
+
 .page-scroll-view{
-    padding-bottom: 130rpx;
+    height: 100%;
+    position: absolute;
+    left:0;
 }
 
 .histime {

@@ -14,6 +14,7 @@ Page({
   data: {
     ...Utils.page.data,
     ...Utils.globalData(),
+    isLogin: false,
     count: 0
   },
 
@@ -21,7 +22,8 @@ Page({
     Utils.tabBarBadgeMsg().then(data => {
       if (!data.code) {
         this.setData({
-          count: data.count
+          count: data.count,
+          isLogin: true
         }, () => this.pageEnd());
       }
     });
