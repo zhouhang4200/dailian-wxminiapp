@@ -9,10 +9,10 @@
             </view>
         </view>
     </view>
-</scroll-view>
-<view id="J_MsgForm" class="msg-form">
-    <view class="msg-form_bd">
-        <textarea bindfocus="onContentFocus" value="{{content}}" bindblur="onContentBlur" cursor-spacing="18" bindinput="onContentInput" placeholder="请输入聊天内容..." bindblur="bindTextAreaBlur" class="msg-input" auto-height />
-        <view bindtap="onSendMsg" class="submit-btn-primary send-msg-btn {{content.length===0 ? 'disabled':''}}">发送</view>
+    <view id="J_MsgForm" class="msg-form">
+        <view class="msg-form_bd">
+            <input bindfocus="onContentFocus" value="{{content}}" bindblur="onContentBlur" cursor-spacing="18" bindinput="onContentInput" placeholder="请输入聊天内容..." bindblur="bindTextAreaBlur" class="msg-input" auto-height />
+            <view bindtap="onSendMsg" class="submit-btn-primary send-msg-btn {{content.length===0 ? 'disabled':''}}">发送</view>
+        </view>
     </view>
-</view>
+</scroll-view>
