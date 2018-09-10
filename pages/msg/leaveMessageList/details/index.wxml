@@ -11,6 +11,8 @@
     </view>
 </scroll-view>
 <view id="J_MsgForm" class="msg-form">
-    <textarea bindfocus="onContentFocus" value="{{content}}" bindblur="onContentBlur" cursor-spacing="18" bindinput="onContentInput" placeholder="请输入聊天内容..." bindblur="bindTextAreaBlur" class="msg-input" auto-height />
-    <view bindtap="onSendMsg" class="submit-btn-primary send-msg-btn {{content.length===0 ? 'disabled':''}}">发送</view>
+    <view class="msg-form_bd">
+        <textarea bindfocus="onContentFocus" value="{{content}}" bindblur="onContentBlur" cursor-spacing="18" bindinput="onContentInput" placeholder="请输入聊天内容..." bindblur="bindTextAreaBlur" class="msg-input" auto-height />
+        <view bindtap="onSendMsg" class="submit-btn-primary send-msg-btn {{content.length===0 ? 'disabled':''}}">发送</view>
+    </view>
 </view>

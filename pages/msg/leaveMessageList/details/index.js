@@ -20,7 +20,7 @@ Page({
 
     scrollIntoView: '',
 
-    scrollTop: 0,
+    scrollTop: 1000000,
     scrollInitBottom: '120rpx',
 
     list: []
@@ -80,7 +80,9 @@ Page({
       this.setData({
         list: this.data.list,
         content: ''
-      })
+      }, () => this.setData({
+        scrollIntoView: 'msg_row_' + (data.length - 1)
+      }))
     })
   },
 
