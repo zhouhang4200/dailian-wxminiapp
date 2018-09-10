@@ -127,17 +127,11 @@ Page({
    * 是否设置支付密码弹窗
    */
   settingPayPasswordModal: function () {
-    this.setData({
-      modalKey: 'isSettingPasswordHidden',
-      isSettingPasswordHidden: false,
-      actionName: 'onSettingPassword'
-    }, () => this.modalOverlayToggle())
-  },
-
-  /**
-   * 支付密码弹窗
-   */
-  setPayPasswordModal: function () {
+    // this.setData({
+    //   modalKey: 'isSettingPasswordHidden',
+    //   isSettingPasswordHidden: false,
+    //   actionName: 'onSettingPassword'
+    // }, () => this.modalOverlayToggle())
     wx.showModal({
       content: '您未设置支付密码，是否去设置支付密码？',
       success: function (res) {
@@ -148,11 +142,17 @@ Page({
         }
       }
     })
-    // this.setData({
-    //   modalKey: 'isPayPasswordHidden',
-    //   isPayPasswordHidden: false,
-    //   actionName: 'onPayPassword'
-    // }, () => this.modalOverlayToggle())
+  },
+
+  /**
+   * 支付密码弹窗
+   */
+  setPayPasswordModal: function () {
+    this.setData({
+      modalKey: 'isPayPasswordHidden',
+      isPayPasswordHidden: false,
+      actionName: 'onPayPassword'
+    }, () => this.modalOverlayToggle())
   },
 
   /**

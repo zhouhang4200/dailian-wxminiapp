@@ -150,11 +150,22 @@ Page({
    * 是否设置支付密码弹窗
    */
   settingPayPasswordModal: function () {
-    this.setData({
-      modalKey: 'isSettingPasswordHidden',
-      isSettingPasswordHidden: false,
-      actionName: 'onSettingPassword'
-    }, () => this.modalOverlayToggle())
+    // this.setData({
+    //   modalKey: 'isSettingPasswordHidden',
+    //   isSettingPasswordHidden: false,
+    //   actionName: 'onSettingPassword'
+    // }, () => this.modalOverlayToggle())
+
+    wx.showModal({
+      content: '您未设置支付密码，是否去设置支付密码？',
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/account/password/index?action=setting_pay'
+          });
+        }
+      }
+    })
   },
 
   /**
