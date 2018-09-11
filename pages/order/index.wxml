@@ -5,7 +5,7 @@
 <view animation="{{loadAnimationPage}}"  class="load-page {{isIpx ? 'iphonex-page':''}}   {{ !isModalOverlayHidden ? 'is-overlay':''}}">
     <view wx:for="{{asyncData.list}}" wx:key="{{index}}" class="row-item">
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-head">
-            <text class="row-head_title">{{item.created_at}}</text>
+            <text class="row-head_title">{{item.take_at}}</text>
             <text class="row-head_date">{{utils.orderStatusFormatTitle(item.status)}}</text>
         </navigator>
         <navigator url="/pages/order/details/index?trade_no={{item.trade_no}}" hover-class="none" class="row-detail">
