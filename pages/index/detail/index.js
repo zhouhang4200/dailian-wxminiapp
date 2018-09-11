@@ -11,6 +11,7 @@ import {
 
 // 倒计时清除
 let intervalSuccess = '';
+let timtoutSuccess = '';
 
 Page({
 
@@ -267,7 +268,9 @@ Page({
    * 订单提交成功，开始自动跳转
    */
   onOrderSuccess: function () {
-    this.modalOverlayToggle();
+    clearInterval(intervalSuccess)
+    clearTimeout(timtoutSuccess);
+    this.redirectToOrderDetails();
   },
 
   /**
@@ -309,10 +312,14 @@ Page({
         this.setData({
           countDownTime: 3
         })
-        clearInterval(intervalSuccess);
-        this.redirectToOrderDetails();
       }
     });
+  },
+
+  cancelModalOverlay: function () {
+    clearInterval(intervalSuccess)
+    clearTimeout(timtoutSuccess);
+    this.modalOverlayToggle()
   },
 
   /**
@@ -327,9 +334,8 @@ Page({
       }, () => {
         if (this.data.countDownTime === 1) {
           clearInterval(intervalSuccess)
-          setTimeout(() => {
-            // 关闭弹窗，之后执行关闭弹窗回调
-            this.modalOverlayToggle();
+          timtoutSuccess = setTimeout(() => {
+            this.redirectToOrderDetails();
           }, 1000)
         }
       })

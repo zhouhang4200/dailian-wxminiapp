@@ -130,7 +130,7 @@
     </view>
 
     <view class="modal-footer">
-        <view bindtap="modalOverlayToggle" class="btn line">取消</view>
+        <view bindtap="cancelModalOverlay" class="btn line">取消</view>
         <view data-action="{{actionName}}" bindtap="onModalSubmit" class="btn primary">确定</view>
     </view>
 </view>
