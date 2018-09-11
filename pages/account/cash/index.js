@@ -121,7 +121,7 @@ Page({
               }
             })
           }
-          return wx.showToast({title: data.message, icon: 'none',});
+          return false
         }
         wx.showModal({
           showCancel: false,
