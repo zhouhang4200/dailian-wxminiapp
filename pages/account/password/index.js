@@ -78,9 +78,7 @@ Page({
           success: function (res) {
             if (res.confirm) {
               wx.removeStorageSync('token');
-              wx.redirectTo({
-                url: '/pages/account/login/index'
-              })
+              wx.navigateBack();
             }
           }
         });
@@ -133,9 +131,7 @@ Page({
           success: function (res) {
             if (res.confirm) {
               wx.removeStorageSync('token');
-              wx.redirectTo({
-                url: '/pages/account/login/index'
-              })
+              wx.navigateBack();
             }
           }
         });
