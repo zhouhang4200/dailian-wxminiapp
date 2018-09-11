@@ -417,10 +417,9 @@ Page({
    * 更多操作
    */
   onMoreAction: function (e) {
-    var more = this;
     this.setSelectedInfo(e, () => {
       const {selectedTradeNo, status} = this.data;
-      let itemList = ['查看我的申诉', '查看/上传截图', '查看/发送留言', '提交异常']
+      let itemList = ['查看我的申诉', '查看代练截图', '查看/发送留言', '提交异常']
       let navigateToUrls = [
         {title: '查看我的申诉', url: '/pages/order/myComplaint/index'},
         {title: '查看代练截图', url: '/pages/order/screenshot/index'},
