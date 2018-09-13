@@ -1,8 +1,5 @@
 // pages/msg/index.js
 import Utils from '../../lib/utils'
-import {
-  api_totalMsg
-} from '../../lib/api'
 
 Page({
 
