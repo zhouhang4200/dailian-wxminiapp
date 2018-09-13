@@ -35,6 +35,11 @@ Page({
       ...opts
     };
     api_financeFlows(params).then(data => {
+      // 无权限进行查看
+      if (data.code === 1005) {
+        wx.showToast({title: data.message, icon: 'none'})
+        return false;
+      }
       this.updateReachBottomPullDownRefreshPageData({params, data});
     })
   },
