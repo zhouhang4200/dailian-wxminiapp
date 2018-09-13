@@ -18,7 +18,10 @@
             <view class="row-item">
                 <view class="row-bd">
                     <text class="title">开户银行卡号</text>
-                    <input disabled="{{status<3}}" bindblur="onCardBlur" value="{{bank_card}}" bindinput="onCardInput"
+                    <input disabled="{{status<3}}"
+                           bindblur="onCardBlur"
+                           value="{{bank_card}}"
+                           bindinput="onCardInput"
                            name="bank_card" placeholder="请输入您的银行卡号" type="number"/>
                 </view>
             </view>

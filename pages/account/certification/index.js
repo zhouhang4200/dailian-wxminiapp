@@ -44,11 +44,11 @@ Page({
   onCardInput: function (e) {
     const bank_card = e.detail.value;
     this.setData({
-      'info.bank_card': Utils.format.bank_card(e.detail.value)
+      'bank_card': Utils.format.bank_card(e.detail.value)
     });
     BankCardInfo.getBankBin(bank_card.replace(/ /g, '')).then(data => {
       this.setData({
-        'info.bank_name': data.bankName
+        'bank_name': data.bankName
       })
     }, err => {
 
@@ -67,9 +67,9 @@ Page({
     if (validate) {
       wx.showLoading({title: '加载中', icon: 'none'});
       Promise.all([
-        identity_card_back.indexOf('.38sd.') !== -1 ? Promise.resolve(identity_card_back) : Utils.files.uploadFile(identity_card_back),
-        identity_card_front.indexOf('.38sd.') !== -1 ? Promise.resolve(identity_card_front) : Utils.files.uploadFile(identity_card_front),
-        identity_card_hand.indexOf('.38sd.') !== -1 ? Promise.resolve(identity_card_hand) : Utils.files.uploadFile(identity_card_hand),
+        Utils.files.uploadFile(identity_card_back),
+        Utils.files.uploadFile(identity_card_front),
+        Utils.files.uploadFile(identity_card_hand),
       ]).then(result => {
         const [identity_card_back, identity_card_front, identity_card_hand] = result;
         const submitData = {
@@ -177,6 +177,7 @@ Page({
       this.setData({
         ...this.data,
         ...data,
+        'bank_card': Utils.format.bank_card(data.bank_card),
         checkInfo: this.getCheckInfo(data.status, data.remark)
       }, () => this.pageEnd())
     })
