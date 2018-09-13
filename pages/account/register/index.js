@@ -1,5 +1,6 @@
 // pages/account/password/index.js
 import Utils from '../../../lib/utils'
+import Encrypt from '../../../lib/encrypt'
 import {
   api_sendRegisterPhoneCode,
   api_register
@@ -61,7 +62,7 @@ Page({
       wx.showLoading({title: '注册中', icon: 'none'});
       api_register({
         phone: formData.phone,
-        password: formData.password,
+        password: Encrypt(formData.password),
         verification_code: formData.verification_code
       }).then(data => {
         wx.hideLoading();
