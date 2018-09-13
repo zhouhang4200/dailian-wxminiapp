@@ -87,6 +87,7 @@ Page({
       url: '/pages/account/password/index?action=setting_pay'
     })
   },
+
   /**
    * 提交输入的支付密码开始提现
    */
@@ -98,24 +99,24 @@ Page({
     if (!pay_password.length) {
       return wx.showToast({title: '请输入支付密码', icon: 'none'});
     }
-    this.modalOverlayToggleEndInterval(()=>{
+    this.modalOverlayToggleEndInterval(() => {
       api_cash({
-        pay_password:Encrypt(pay_password),
+        pay_password: Encrypt(pay_password),
         alipay_account,
         alipay_name,
         amount: this.data.amount
       }).then(data => {
-        if(data.code){
+        if (data.code) {
           if (data.code === 4002) {
             this.setPayPasswordModal()
           }
           if (data.code === 3005) {
             wx.showModal({
               content: '您未进行实名认证，请先申请实名认证后再提现，是否申请实名认证？',
-              success: function(res) {
+              success: function (res) {
                 if (res.confirm) {
                   wx.navigateTo({
-                    url:'/pages/account/certification/index'
+                    url: '/pages/account/certification/index'
                   })
                 }
               }
@@ -135,7 +136,6 @@ Page({
       })
     })
   },
-
 
   /**
    * 设置支付密码焦点

@@ -16,6 +16,7 @@ Page({
 
     ...Utils.page.data,
     ...Utils.globalData(),
+    ...Utils.pageNoneResultData,
     ...Utils.reachBottomPullDownRefresh.data,
 
     asyncData: {

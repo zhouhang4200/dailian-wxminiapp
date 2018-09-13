@@ -1,35 +1,37 @@
 <!--pages/account/capital/cash/index.wxml-->
 <wxs src="../../../lib/utils.wxs" module="utils"></wxs>
-<form bindsubmit="onSubmit"  animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
-    <text class="remark-title">{{info.tips}}</text>
-    <view class="row-item-group">
-        <view class="row-item">
-            <view class="row-bd">
-                <text class="title">支付宝姓名</text>
-                <input name="alipay_account" placeholder="请输入姓名"/>
+<view  animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
+    <form bindsubmit="onSubmit">
+        <text class="remark-title">{{info.tips}}</text>
+        <view class="row-item-group">
+            <view class="row-item">
+                <view class="row-bd">
+                    <text class="title">支付宝姓名</text>
+                    <input name="alipay_account" placeholder="请输入姓名"/>
+                </view>
+            </view>
+            <view class="row-item">
+                <view class="row-bd">
+                    <text class="title">支付宝账号</text>
+                    <input name="alipay_name" placeholder="请输入账号"/>
+                </view>
             </view>
         </view>
-        <view class="row-item">
-            <view class="row-bd">
-                <text class="title">支付宝账号</text>
-                <input name="alipay_name" placeholder="请输入账号"/>
-            </view>
+        <!--alipay_account alipay_name-->
+        <view class="pay-title">
+            <text>提现金额（收取{{info.rate*100+'%'}}手续费）</text>
+            <text hidden="{{serviceCharge===0}}">手续费 {{ utils.sumPrice([serviceCharge]) }}</text>
         </view>
-    </view>
-    <!--alipay_account alipay_name-->
-    <view class="pay-title">
-        <text>提现金额（收取{{info.rate*100+'%'}}手续费）</text>
-        <text hidden="{{serviceCharge===0}}">手续费 {{ utils.sumPrice([serviceCharge]) }}</text>
-    </view>
-    <view class="pay-money">
-        <image src="/images/rmb.png" class="symbol-icon" mode="widthFix" lazy-load="false"></image>
-        <input name="amount" bindinput="onAmountInput" confirm-type="done" type="digit" class="price-input"/>
-    </view>
-    <text class="remark-title bb-0">可用余额 {{utils.sumPrice([info.balance])}}</text>
-    <button formType="submit" class="submit-btn">
-        <text class="btn-title">提交</text>
-    </button>
-</form>
+        <view class="pay-money">
+            <image src="/images/rmb.png" class="symbol-icon" mode="widthFix" lazy-load="false"></image>
+            <input name="amount" bindinput="onAmountInput" confirm-type="done" type="digit" class="price-input"/>
+        </view>
+        <text class="remark-title bb-0">可用余额 {{utils.sumPrice([info.balance])}}</text>
+        <button formType="submit" class="submit-btn">
+            <text class="btn-title">提交</text>
+        </button>
+    </form>
+</view>
 
 <!-- modal Overlay -->
 <view animation="{{animationModalOverlay}}"

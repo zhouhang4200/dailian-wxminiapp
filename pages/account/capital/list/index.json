@@ -2,6 +2,7 @@
   "navigationBarTitleText": "资金明细",
   "onReachBottomDistance": 160,
   "usingComponents": {
-    "reach-bottom": "/components/reach-bottom/index"
+    "reach-bottom": "/components/reach-bottom/index",
+    "none-result": "/components/none-result/index"
   }
 }

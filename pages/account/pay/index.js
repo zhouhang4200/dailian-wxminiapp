@@ -21,12 +21,6 @@ Page({
 
   },
 
-  loadPageTransitionEnd: function () {
-    this.setData({
-      isAmountFocus: true
-    })
-  },
-
   onSubmit: function (e) {
     const amount = e.detail.value.amount;
     if (amount < (ENVIROMENT === 'developer' ? 0 : 1)) {
