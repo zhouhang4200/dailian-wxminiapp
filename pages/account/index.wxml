@@ -12,7 +12,7 @@
                     <text class="remark">{{userInfo.phone}}</text>
                 </view>
             </navigator>
-            <view class="money-info">
+            <view wx:if="{{userInfo.env===2}}" class="money-info">
                 <view class="row-item">
                     <text class="size">{{ utils.sumPrice([userInfo.balance,userInfo.frozen]) }}</text>
                     <text class="remark">账户余额(元)</text>
@@ -27,7 +27,7 @@
                 </view>
             </view>
         </view>
-        <navigator class="link-navigation" url="/pages/account/capital/index">
+        <navigator wx:if="{{userInfo.env===2}}" class="link-navigation" url="/pages/account/capital/index">
             <view class="link-bd">
                 <view class="left-icon">
                     <image class="left-icon_image" src="/images/icon_5.png" mode="scaleToFill" lazy-load="false"></image>

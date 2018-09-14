@@ -1,19 +1,17 @@
 <!--pages/msg/leaveMessageList/index.wxml-->
 <view animation="{{loadAnimationPage}}" class="load-page {{isIpx ? 'iphonex-page':''}}">
-    <navigator wx:for="{{list}}"
+    <view wx:for="{{list}}"
                class="row-item"
-               wx:key="{{index}}"
-               url="/pages/msg/leaveMessageList/details/index?trade_no={{item.game_leveling_order_trade_no}}"
-               hover-class="none">
-        <view class="row-head">
+               wx:key="{{index}}">
+        <navigator hover-class="none" url="/pages/msg/leaveMessageList/details/index?trade_no={{item.game_leveling_order_trade_no}}" class="row-head">
             <view class="title">{{item.type===1 ? '仲裁留言':'普通留言'}}</view>
             <view class="date">{{item.created_at}}</view>
-        </view>
-        <view class="details-content">
+        </navigator>
+        <navigator hover-class="none" url="/pages/msg/leaveMessageList/details/index?trade_no={{item.game_leveling_order_trade_no}}"  class="details-content">
             <text>{{item.content}}</text>
-        </view>
+        </navigator>
         <view class="details-btn">查看详情</view>
-    </navigator>
+    </view>
     <!--没有内容-->
     <none-result page-none-result="{{pageNoneResult}}"></none-result>
 </view>
