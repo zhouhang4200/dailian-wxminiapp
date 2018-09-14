@@ -257,11 +257,11 @@ Page({
       return false;
     }
     if (amount < min_amount) {
-      wx.showToast({title: `最小提现金额${min_amount}元`, icon: 'none'});
+      wx.showToast({title: '最小提现金额'+min_amount+'元', icon: 'none'});
       return false;
     }
     if (amount > balance) {
-      wx.showToast({title: `当前最大可提现金额${balance}元`, icon: 'none'});
+      wx.showToast({title: '当前最大可提现金额'+balance+'元', icon: 'none'});
       return false;
     }
     return true

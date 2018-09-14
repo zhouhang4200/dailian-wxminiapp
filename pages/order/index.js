@@ -89,7 +89,7 @@ Page({
   onSubmitCheck: function (e) {
     this.setSelectedInfo(e, () => {
       wx.navigateTo({
-        url: `/pages/order/submitCheck/index?trade_no=${this.data.selectedTradeNo}`
+        url: '/pages/order/submitCheck/index?trade_no=' + this.data.selectedTradeNo
       })
     });
   },
@@ -433,7 +433,7 @@ Page({
       wx.showActionSheet({
         itemList,
         success: function (res) {
-          const params = `?trade_no=${selectedTradeNo}&status=${status}`;
+          const params = '?trade_no=' + selectedTradeNo + '&status=' + status;
           const tapIndex = res.tapIndex;
           wx.navigateTo({url: navigateToUrls[status !== 5 ? tapIndex + 1 : tapIndex].url + params})
         }
