@@ -174,6 +174,9 @@ Page({
 
   initFetch: function () {
     api_certificationDetail().then(data => {
+      if (data.code) {
+        return this.pageEnd()
+      }
       this.setData({
         ...this.data,
         ...data,
