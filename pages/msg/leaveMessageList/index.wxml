@@ -3,7 +3,7 @@
     <view wx:for="{{list}}"
                class="row-item"
                wx:key="{{index}}">
-        <navigator hover-class="none" url="/pages/msg/leaveMessageList/details/index?trade_no={{item.game_leveling_order_trade_no}}" class="row-head">
+        <navigator hover-class="none" url="/pages/order/details/index?trade_no={{item.game_leveling_order_trade_no}}" class="row-head">
             <view class="title">{{item.type===1 ? '仲裁留言':'普通留言'}}</view>
             <view class="date">{{item.created_at}}</view>
         </navigator>
