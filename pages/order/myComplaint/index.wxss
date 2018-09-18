@@ -115,10 +115,16 @@ page {
     padding: 0 29rpx;
 }
 
+.user-icon-img_wrap{
+    width: 80rpx;
+    height: 80rpx;
+    padding-right: 20rpx;
+}
 .user-icon-img {
-    width: 66rpx;
-    height: 66rpx;
-    border-radius: 33rpx;
+    width: 80rpx;
+    height: 80rpx;
+    display: block;
+    border-radius: 40rpx;
 }
 
 .user-upload-img{
@@ -126,8 +132,8 @@ page {
 }
 
 .details-wrap {
-    margin-left: 16rpx;
     flex: 1;
+    /*padding-left: 20rpx;*/
     padding-bottom: 35rpx;
     border-bottom: 1rpx solid #eee;
 }

@@ -44,7 +44,9 @@
                     <view class="message-content">
                         <block wx:if="{{info.messages.length}}">
                             <view wx:key="{{index}}" wx:for="{{info.messages}}" class="row-item">
-                                <image src="{{item.avatar}}" class="user-icon-img" mode="aspectFit" lazy-load="true"></image>
+                                <view class="user-icon-img_wrap">
+                                    <image src="{{item.avatar}}" class="user-icon-img" mode="scaleToFill" lazy-load="true"></image>
+                                </view>
                                 <view class="details-wrap">
                                     <text class="nick-name">{{item.name}}</text>
                                     <text class="date">{{item.created_at}}</text>
