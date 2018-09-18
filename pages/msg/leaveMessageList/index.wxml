@@ -7,10 +7,12 @@
             <view class="title">{{item.type===1 ? '仲裁留言':'普通留言'}}</view>
             <view class="date">{{item.created_at}}</view>
         </navigator>
-        <navigator hover-class="none" url="/pages/msg/leaveMessageList/details/index?trade_no={{item.game_leveling_order_trade_no}}"  class="details-content">
+        <navigator hover-class="none" url="/pages/order/details/index?trade_no={{item.game_leveling_order_trade_no}}"  class="details-content">
             <text>{{item.content}}</text>
         </navigator>
-        <view class="details-btn">查看留言</view>
+        <navigator class="details-btn" hover-class="none" url="/pages/msg/leaveMessageList/details/index?trade_no={{item.game_leveling_order_trade_no}}">
+            查看留言
+        </navigator>
     </view>
     <!--没有内容-->
     <none-result page-none-result="{{pageNoneResult}}"></none-result>
